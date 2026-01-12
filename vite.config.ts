@@ -20,15 +20,8 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
-            ui: ['lucide-react']
-          }
-        }
-      }
-    }
+      chunkSizeWarningLimit: 1000
+    },
+    base: '/'
   };
 });
