@@ -13,7 +13,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <span className="inline-block py-1.5 px-4 border border-lux-text/10 rounded-full text-[8.5px] md:text-[9.5px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-lux-muted bg-white/40 backdrop-blur-md px-[0.3em]">
-            Student-Led Innovation • Professional Results
+          Using Stats • for Better Changes.
           </span>
         </motion.div>
 

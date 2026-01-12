@@ -11,7 +11,7 @@ const TEAM = [
         edu: "IIT Madras + Makaut",
         icon: Code,
         color: "bg-blue-500",
-        image: "/images/team-1.png"
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
     },
     {
         id: 1,
@@ -21,7 +21,7 @@ const TEAM = [
         edu: "IIT Madras + Makaut",
         icon: TrendingUp,
         color: "bg-purple-500",
-        image: "/images/team-2.png"
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
     },
     {
         id: 2,
@@ -31,7 +31,7 @@ const TEAM = [
         edu: "IIT Madras + WBUT",
         icon: Briefcase,
         color: "bg-teal-500",
-        image: "/images/team-1.png" // Using team-1 as a fallback/example if team-3 isn't there
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
     }
 ];
 

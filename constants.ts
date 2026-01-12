@@ -51,7 +51,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     problem: 'Outdated digital presence reducing Linsanity deal flow.',
     solution: 'React/Three.js immersive platform.',
     impact: '+240% Inbound Leads',
-    image: '/images/event-1.png'
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: 'p2',
@@ -59,7 +59,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     problem: 'High CPA on Meta Ads.',
     solution: 'AI-driven audience segmentation + Creative testing.',
     impact: '3.5x ROAS in 4 weeks',
-    image: '/images/event-2.png'
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop'
   },
   {
     id: 'p3',
@@ -118,7 +118,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '2026-01-08',
     category: 'AI & Machine Learning',
     readTime: '8 min',
-    image: '/images/event-1.png',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop',
     featured: true
   },
   {
@@ -131,7 +131,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '2026-01-05',
     category: 'Design & UX',
     readTime: '6 min',
-    image: '/images/event-2.png',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop',
     featured: true
   },
   {
