@@ -1,9 +1,14 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export const generateStrategy = async (businessType: string): Promise<string> => {
   try {
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      console.warn("Gemini API Key is missing");
+      return "Focus on proprietary data aggregation to create a moat against competitors.";
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
     const model = 'gemini-3-flash-preview';
     const prompt = `
       You are a digital strategist for KaizenStat, an agency run by IIT Madras Data Science scholars.

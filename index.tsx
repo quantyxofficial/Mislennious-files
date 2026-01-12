@@ -39,6 +39,33 @@ const AppWrapper = () => {
   );
 };
 
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-[#e0e5ec] text-lux-text p-4 text-center">
+          <div>
+            <h1 className="text-2xl font-serif mb-4">Something went wrong.</h1>
+            <p className="text-sm opacity-60">Please try refreshing the page.</p>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
@@ -47,6 +74,8 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <AppWrapper />
+    <ErrorBoundary>
+      <AppWrapper />
+    </ErrorBoundary>
   </React.StrictMode>
 );
