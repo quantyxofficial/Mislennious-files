@@ -1,0 +1,52 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const AppWrapper = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-[#e0e5ec] flex items-center justify-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+              className="font-serif text-3xl text-lux-text italic tracking-wide"
+            >
+              KaizenStat.
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {!loading && <RouterProvider router={router} />}
+    </>
+  );
+};
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <AppWrapper />
+  </React.StrictMode>
+);
