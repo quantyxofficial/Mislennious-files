@@ -1,0 +1,13 @@
+{
+  "topic": "Excel",
+  "description": "excel Study Material",
+  "chapters": [
+    {
+      "id": "01-intro",
+      "title": "Introduction to Excel",
+      "description": "",
+      "file": "01-intro.md",
+      "order": 1
+    }
+  ]
+}

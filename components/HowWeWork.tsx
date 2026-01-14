@@ -33,7 +33,7 @@ export const HowWeWork: React.FC = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-gradient-to-br from-purple-50/80 to-blue-50/80 backdrop-blur-xl border border-purple-100/60 rounded-[3rem] p-10"
+                        className="bg-gradient-to-br from-purple-50/80 to-blue-50/80 backdrop-blur-lg border border-purple-100/60 rounded-[3rem] p-10"
                     >
                         <div className="flex items-center gap-3 mb-6">
                             <Users className="w-8 h-8 text-purple-600" />
@@ -73,7 +73,7 @@ export const HowWeWork: React.FC = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-gradient-to-br from-emerald-50/80 to-teal-50/80 backdrop-blur-xl border border-emerald-100/60 rounded-[3rem] p-10"
+                        className="bg-gradient-to-br from-emerald-50/80 to-teal-50/80 backdrop-blur-lg border border-emerald-100/60 rounded-[3rem] p-10"
                     >
                         <div className="flex items-center gap-3 mb-6">
                             <Target className="w-8 h-8 text-emerald-600" />
@@ -114,7 +114,7 @@ export const HowWeWork: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-center bg-white/60 backdrop-blur-xl border border-white/60 rounded-3xl p-12"
+                    className="text-center bg-white/60 backdrop-blur-lg border border-white/60 rounded-3xl p-12"
                 >
                     <ArrowUpRight className="w-12 h-12 mx-auto mb-6 text-lux-text" />
                     <h3 className="font-serif text-3xl font-medium text-lux-text mb-4">

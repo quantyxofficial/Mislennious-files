@@ -35,34 +35,20 @@ export const NewsletterForm: React.FC = () => {
         setFormState({ ...formState, status: 'loading', message: '' });
 
         try {
-            // TODO: Replace with your actual form submission endpoint
-            // Options:
-            // 1. Formspree: https://formspree.io/f/YOUR_FORM_ID
-            // 2. EmailJS: https://api.emailjs.com/api/v1.0/email/send
-            // 3. Your own backend API
+            // Simulated API call
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: formState.email }),
+            // Success simulation
+            setFormState({
+                email: '',
+                status: 'success',
+                message: 'Thanks for subscribing! Check your inbox for confirmation.'
             });
 
-            if (response.ok) {
-                setFormState({
-                    email: '',
-                    status: 'success',
-                    message: 'Thanks for subscribing! Check your inbox for confirmation.'
-                });
-
-                // Reset success message after 5 seconds
-                setTimeout(() => {
-                    setFormState(prev => ({ ...prev, status: 'idle', message: '' }));
-                }, 5000);
-            } else {
-                throw new Error('Submission failed');
-            }
+            // Reset success message after 5 seconds
+            setTimeout(() => {
+                setFormState(prev => ({ ...prev, status: 'idle', message: '' }));
+            }, 5000);
         } catch (error) {
             setFormState({
                 ...formState,
@@ -112,8 +98,8 @@ export const NewsletterForm: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className={`flex items-center gap-2 text-sm p-3 rounded-2xl ${formState.status === 'success'
-                            ? 'bg-green-50 text-green-700'
-                            : 'bg-red-50 text-red-700'
+                        ? 'bg-green-50 text-green-700'
+                        : 'bg-red-50 text-red-700'
                         }`}
                 >
                     {formState.status === 'success' ? (

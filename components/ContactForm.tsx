@@ -58,43 +58,24 @@ export const ContactForm: React.FC = () => {
         setFormState({ ...formState, status: 'loading', errorMessage: '' });
 
         try {
-            // TODO: Replace with your actual form submission endpoint
-            // Options:
-            // 1.Formspree: https://formspree.io/f/YOUR_FORM_ID
-            // 2. EmailJS: https://api.emailjs.com/api/v1.0/email/send
-            // 3. Formsphere for WhatsApp: Configure with your number
-            // 4. Your own backend API
+            // Simulated API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: formState.name,
-                    email: formState.email,
-                    company: formState.company,
-                    message: formState.message,
-                }),
+            // Success simulation
+            setFormState({
+                name: '',
+                email: '',
+                company: '',
+                message: '',
+                status: 'success',
+                errorMessage: ''
             });
 
-            if (response.ok) {
-                setFormState({
-                    name: '',
-                    email: '',
-                    company: '',
-                    message: '',
-                    status: 'success',
-                    errorMessage: ''
-                });
+            // Reset success message after 8 seconds
+            setTimeout(() => {
+                setFormState(prev => ({ ...prev, status: 'idle' }));
+            }, 8000);
 
-                // Reset success message after 8 seconds
-                setTimeout(() => {
-                    setFormState(prev => ({ ...prev, status: 'idle' }));
-                }, 8000);
-            } else {
-                throw new Error('Submission failed');
-            }
         } catch (error) {
             setFormState({
                 ...formState,

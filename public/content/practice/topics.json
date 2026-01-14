@@ -1,0 +1,56 @@
+[
+  {
+    "id": "deep-learning",
+    "title": "Deep Learning",
+    "description": "Neural Networks, Backpropagation & architecture.",
+    "icon": "🧠",
+    "color": "from-violet-500 to-fuchsia-600",
+    "count": 1,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "excel",
+    "title": "Excel",
+    "description": "Master spreadsheets, formulas, and VBA for business intelligence.",
+    "icon": "📈",
+    "color": "from-green-500 to-emerald-700",
+    "count": 1,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "machine-learning",
+    "title": "Machine Learning",
+    "description": "Supervised, Unsupervised & Reinforcement Learning.",
+    "icon": "🤖",
+    "color": "from-blue-500 to-indigo-600",
+    "count": 1,
+    "hasStudyMaterial": false
+  },
+  {
+    "id": "matplotlib",
+    "title": "Matplotlib",
+    "description": "matplotlib practice problems",
+    "icon": "📚",
+    "color": "from-gray-500 to-gray-700",
+    "count": 0,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "numpy",
+    "title": "Numpy",
+    "description": "numpy practice problems",
+    "icon": "📚",
+    "color": "from-gray-500 to-gray-700",
+    "count": 0,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "pandas",
+    "title": "Pandas",
+    "description": "pandas practice problems",
+    "icon": "📚",
+    "color": "from-gray-500 to-gray-700",
+    "count": 0,
+    "hasStudyMaterial": true
+  }
+]

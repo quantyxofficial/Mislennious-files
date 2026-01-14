@@ -12,8 +12,8 @@ export const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="inline-block py-1.5 px-4 border border-lux-text/10 rounded-full text-[8.5px] md:text-[9.5px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-lux-muted bg-white/40 backdrop-blur-md px-[0.3em]">
-          Using Stats • for Better Changes.
+          <span className="inline-block py-2 px-6 border border-lux-text/10 rounded-full text-[11px] md:text-[12px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-lux-muted bg-white/40 backdrop-blur-md">
+            Stats • for Better Changes
           </span>
         </motion.div>
 
@@ -62,14 +62,14 @@ export const Hero: React.FC = () => {
                 window.scrollTo({ top: elementPosition - navbarHeight, behavior: 'smooth' });
               }
             }}
-            className="w-full md:w-auto px-10 py-4 bg-lux-text text-white font-semibold text-xs tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
+            className="w-full md:w-auto px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
             data-hover
           >
             Start Your Project
           </button>
           <button
             onClick={() => window.open('https://discord.gg/kaizenstat', '_blank')}
-            className="w-full md:w-auto px-10 py-4 bg-transparent border border-lux-text/20 text-lux-text font-semibold text-xs tracking-[0.2em] uppercase hover:bg-lux-text hover:text-white transition-all rounded-full"
+            className="w-full md:w-auto px-10 py-4 bg-transparent border border-lux-text/20 text-lux-text font-semibold text-sm tracking-[0.2em] uppercase hover:bg-lux-text hover:text-white transition-all rounded-full"
             data-hover
           >
             Join Community
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-lux-muted/40"
       >
-        <span className="text-[9px] uppercase tracking-[0.3em] font-semibold pr-[-0.3em] mr-[-0.3em]">Scroll</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold pr-[-0.3em] mr-[-0.3em]">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-lux-text/0 via-lux-text/20 to-lux-text/0"></div>
       </motion.div>
     </section>

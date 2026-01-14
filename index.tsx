@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component, ReactNode } from 'react';
+import React, { useState, useEffect, Component, ReactNode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
@@ -34,7 +34,11 @@ const AppWrapper = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {!loading && <RouterProvider router={router} />}
+      {!loading && (
+        <Suspense fallback={<div className="min-h-screen bg-[#F0F4F8]" />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      )}
     </>
   );
 };

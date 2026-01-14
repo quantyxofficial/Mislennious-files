@@ -1,15 +1,25 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './Layout';
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Events } from './pages/Events';
-import { ServiceDetail } from './pages/ServiceDetail';
-import { Portfolio } from './pages/Portfolio';
-import { BlogListing } from './pages/BlogListing';
-import { BlogPost } from './pages/BlogPost';
-import { Careers } from './pages/Careers';
-import { Privacy } from './pages/Privacy';
-import { Terms } from './pages/Terms';
+
+// Lazy load all route components for code splitting
+const PracticeHome = lazy(() => import('./pages/PracticeHome').then(m => ({ default: m.PracticeHome })));
+const AgencyHome = lazy(() => import('./pages/AgencyHome').then(m => ({ default: m.AgencyHome })));
+const PracticeList = lazy(() => import('./pages/PracticeList').then(m => ({ default: m.PracticeList })));
+const PracticeProblem = lazy(() => import('./pages/PracticeProblem').then(m => ({ default: m.PracticeProblem })));
+const StudyMaterials = lazy(() => import('./pages/StudyMaterials').then(m => ({ default: m.StudyMaterials })));
+const StudyChapter = lazy(() => import('./pages/StudyChapter').then(m => ({ default: m.StudyChapter })));
+const CertificateExam = lazy(() => import('./pages/CertificateExam').then(m => ({ default: m.CertificateExam })));
+const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
+const Events = lazy(() => import('./pages/Events').then(m => ({ default: m.Events })));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail').then(m => ({ default: m.ServiceDetail })));
+const Portfolio = lazy(() => import('./pages/Portfolio').then(m => ({ default: m.Portfolio })));
+const BlogListing = lazy(() => import('./pages/BlogListing').then(m => ({ default: m.BlogListing })));
+const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
+const Careers = lazy(() => import('./pages/Careers').then(m => ({ default: m.Careers })));
+const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Privacy })));
+const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
+const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 
 export const router = createBrowserRouter([
     {
@@ -18,7 +28,31 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: <PracticeHome />,
+            },
+            {
+                path: 'agency',
+                element: <AgencyHome />,
+            },
+            {
+                path: 'practice/:topic',
+                element: <PracticeList />,
+            },
+            {
+                path: 'practice/:topic/:problemId',
+                element: <PracticeProblem />,
+            },
+            {
+                path: 'study/:topic',
+                element: <StudyMaterials />,
+            },
+            {
+                path: 'study/:topic/:chapterId',
+                element: <StudyChapter />,
+            },
+            {
+                path: 'exam/:topic',
+                element: <CertificateExam />,
             },
             {
                 path: 'about',
@@ -55,6 +89,10 @@ export const router = createBrowserRouter([
             {
                 path: 'terms',
                 element: <Terms />,
+            },
+            {
+                path: '*',
+                element: <NotFound />,
             },
         ],
     },

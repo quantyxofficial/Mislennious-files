@@ -20,7 +20,18 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
-      chunkSizeWarningLimit: 1000
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+            'framer-motion': ['framer-motion'],
+            'markdown': ['react-markdown', 'react-syntax-highlighter'],
+          },
+        },
+      },
+
+      cssMinify: true,
     },
     base: '/'
   };

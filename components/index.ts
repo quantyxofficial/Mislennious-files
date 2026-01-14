@@ -13,7 +13,7 @@ export * from './ContactForm';
 export * from './NewsletterForm';
 export * from './CustomCursor';
 export * from './GeminiStrategist';
-export * from './ProjectInquiry';
+// export * from './ProjectInquiry'; // Removed
 export * from './VerticalMarquee';
 export * from './HowWeWorkPreview';
 export * from './Community';

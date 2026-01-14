@@ -1,0 +1,11 @@
+{
+  "topic": "Deep Learning",
+  "problems": [
+    {
+      "id": "dl-intro-01",
+      "file": "01-intro.md",
+      "difficulty": "Basic",
+      "title": "Neural Network Basics"
+    }
+  ]
+}

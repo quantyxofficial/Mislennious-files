@@ -6,7 +6,7 @@ export const CustomCursor: React.FC = () => {
   const [isClicking, setIsClicking] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   // Motion values for raw mouse position
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -23,9 +23,15 @@ export const CustomCursor: React.FC = () => {
 
     setIsVisible(true);
 
+    // Throttle mouse movement for better performance
+    let rafId: number;
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        cursorX.set(e.clientX);
+        cursorY.set(e.clientY);
+        rafId = 0;
+      });
     };
 
     const handleMouseDown = () => setIsClicking(true);
@@ -33,13 +39,13 @@ export const CustomCursor: React.FC = () => {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      
+
       // Check if target is interactive
-      const isInteractive = 
-        target.tagName === 'BUTTON' || 
-        target.tagName === 'A' || 
-        target.closest('a') || 
-        target.closest('button') || 
+      const isInteractive =
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'A' ||
+        target.closest('a') ||
+        target.closest('button') ||
         target.closest('[data-hover]') ||
         target.tagName === 'INPUT' ||
         target.classList.contains('cursor-pointer');
@@ -50,7 +56,7 @@ export const CustomCursor: React.FC = () => {
       // Checks if the hovered element or its parents have specific dark classes or IDs (like the footer)
       const contactSection = target.closest('#contact');
       const darkElement = target.closest('.bg-lux-text') || target.closest('.bg-black') || window.getComputedStyle(target).backgroundColor === 'rgb(28, 25, 23)';
-      
+
       if (contactSection || darkElement) {
         setIsDark(true);
       } else {
@@ -77,13 +83,13 @@ export const CustomCursor: React.FC = () => {
   // Light Mode (Default): Solid Black Dot, Grey Ring
   // Dark Mode (Footer): Solid White Dot, White Ring
   const dotColor = isDark ? '#FFFFFF' : '#000000';
-  
+
   // Hover State
   // Light Mode: Black Border, Transparent Fill
   // Dark Mode: White Border, Transparent Fill
   const ringBorderColor = isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)';
   const ringActiveBorder = isDark ? '#FFFFFF' : '#000000';
-  
+
   return (
     <>
       {/* Main Cursor Dot - Solid Color (No Mix Blend) */}
@@ -95,6 +101,7 @@ export const CustomCursor: React.FC = () => {
           translateX: '-50%',
           translateY: '-50%',
           backgroundColor: dotColor,
+          willChange: 'transform',
         }}
         animate={{
           scale: isClicking ? 0.8 : (isHovering ? 0 : 1), // Dot hides smoothly on hover
@@ -102,7 +109,7 @@ export const CustomCursor: React.FC = () => {
         }}
         transition={{ duration: 0.2 }}
       />
-      
+
       {/* Outer Ring - Dynamic */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 border rounded-full pointer-events-none z-[99998]"
@@ -111,6 +118,7 @@ export const CustomCursor: React.FC = () => {
           y: cursorYSpring,
           translateX: '-50%',
           translateY: '-50%',
+          willChange: 'transform',
         }}
         animate={{
           scale: isClicking ? 0.9 : (isHovering ? 2 : 1),

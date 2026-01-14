@@ -7,7 +7,7 @@ export const CommunityPreview: React.FC = () => {
     return (
         <section className="py-20 px-6 lg:px-24 relative z-10 overflow-hidden">
             {/* Subtle Aurora Background Overlay */}
-            <div className="absolute top-0 left-1/4 w-[50%] h-full bg-gradient-to-b from-purple-500/5 via-blue-500/5 to-transparent blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-[50%] h-full bg-gradient-to-b from-purple-500/5 via-blue-500/5 to-transparent blur-[60px] pointer-events-none" />
 
             <div className="max-w-[1400px] mx-auto">
                 {/* Sleek Header Section */}
@@ -52,7 +52,7 @@ export const CommunityPreview: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="md:col-span-6 lg:col-span-7 row-span-3 bg-white/40 backdrop-blur-3xl border border-white/60 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] p-10 flex flex-col justify-between group overflow-hidden"
+                        className="md:col-span-6 lg:col-span-7 row-span-3 bg-white/40 backdrop-blur-lg border border-white/60 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] p-10 flex flex-col justify-between group overflow-hidden"
                     >
                         <div className="relative z-10">
                             <div className="w-12 h-12 bg-lux-text text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-500">

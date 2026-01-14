@@ -7,6 +7,7 @@ export const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isCompanyOpen, setIsCompanyOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -95,23 +96,23 @@ export const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center gap-8">
             <Link
               to="/"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
+              className={`text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                 }`}
               data-hover
             >
-              Home
+              Practice
               <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                 }`} />
             </Link>
 
             <Link
-              to="/about"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/about' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
+              to="/agency"
+              className={`text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/agency' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                 }`}
               data-hover
             >
-              About
-              <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/about' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+              Agency
+              <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/agency' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                 }`} />
             </Link>
 
@@ -121,12 +122,12 @@ export const Navbar: React.FC = () => {
               onMouseLeave={() => setIsServicesOpen(false)}
             >
               <button
-                className={`flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname.startsWith('/services') ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
+                className={`flex items-center gap-1 text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname.startsWith('/services') ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                   }`}
                 data-hover
               >
                 Services
-                <ChevronDown className="w-3 h-3" />
+                <ChevronDown className="w-4 h-4" />
                 <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname.startsWith('/services') ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                   }`} />
               </button>
@@ -138,7 +139,7 @@ export const Navbar: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-4 w-56 bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl overflow-hidden"
+                    className="absolute top-full left-0 mt-4 w-60 bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl overflow-hidden z-[210]"
                   >
                     {services.map((service) => (
                       <Link
@@ -158,7 +159,7 @@ export const Navbar: React.FC = () => {
 
             <Link
               to="/portfolio"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/portfolio' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
+              className={`text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/portfolio' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                 }`}
               data-hover
             >
@@ -167,45 +168,59 @@ export const Navbar: React.FC = () => {
                 }`} />
             </Link>
 
-            <Link
-              to="/blog"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/blog' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
-                }`}
-              data-hover
+            {/* COMPANY DROPDOWN: Consolidating About, Blog, Events, Careers */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsCompanyOpen(true)}
+              onMouseLeave={() => setIsCompanyOpen(false)}
             >
-              Blog
-              <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/blog' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
-                }`} />
-            </Link>
+              <button
+                className={`flex items-center gap-1 text-[13px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${['/about', '/blog', '/events', '/careers'].some(path => location.pathname.startsWith(path)) ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
+                  }`}
+                data-hover
+              >
+                Company
+                <ChevronDown className="w-4 h-4" />
+                <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${['/about', '/blog', '/events', '/careers'].some(path => location.pathname.startsWith(path)) ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+                  }`} />
+              </button>
 
-            <Link
-              to="/events"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/events' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
-                }`}
-              data-hover
-            >
-              Events
-              <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/events' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
-                }`} />
-            </Link>
-
-            <Link
-              to="/careers"
-              className={`text-[11px] font-bold uppercase tracking-[0.15em] transition-colors duration-300 relative group ${location.pathname === '/careers' ? 'text-lux-text' : 'text-lux-muted/80 hover:text-lux-text'
-                }`}
-              data-hover
-            >
-              Careers
-              <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/careers' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
-                }`} />
-            </Link>
+              <AnimatePresence>
+                {isCompanyOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full right-0 mt-4 w-48 bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl overflow-hidden"
+                  >
+                    {[
+                      { path: '/about', label: 'About' },
+                      { path: '/blog', label: 'Blog' },
+                      { path: '/events', label: 'Events' },
+                      { path: '/careers', label: 'Careers' }
+                    ].map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`block px-5 py-3 text-sm transition-colors ${location.pathname.startsWith(item.path) ? 'bg-lux-text/10 text-lux-text' : 'text-lux-text hover:bg-lux-text/10'
+                          }`}
+                        data-hover
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
             {isHomePage ? (
               <button
                 onClick={() => scrollToSection('contact')}
-                className="hidden lg:block px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-lux-text text-white hover:bg-black hover:scale-105 transition-all duration-300 shadow-xl shadow-black/5"
+                className="hidden lg:block px-6 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-[0.15em] bg-lux-text text-white hover:bg-black hover:scale-105 transition-all duration-300 shadow-xl shadow-black/5"
                 data-hover
               >
                 Start Project
@@ -213,7 +228,7 @@ export const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/#contact"
-                className="hidden lg:block px-7 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] bg-lux-text text-white hover:bg-black hover:scale-105 transition-all duration-300 shadow-xl shadow-black/5"
+                className="hidden lg:block px-6 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-[0.15em] bg-lux-text text-white hover:bg-black hover:scale-105 transition-all duration-300 shadow-xl shadow-black/10"
                 data-hover
               >
                 Start Project
@@ -245,7 +260,14 @@ export const Navbar: React.FC = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
               >
-                Home
+                Practice
+              </Link>
+              <Link
+                to="/agency"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
+              >
+                Agency
               </Link>
               <Link
                 to="/about"

@@ -1,0 +1,97 @@
+{
+  "topic": "Numpy",
+  "description": "numpy Study Material",
+  "chapters": [
+    {
+      "id": "intro-to-numpy",
+      "title": "Introduction to NumPy",
+      "description": "Learn what NumPy is, why it's essential for data science, and how it differs from standard Python lists.",
+      "file": "01-intro.md",
+      "order": 1
+    },
+    {
+      "id": "installing-numpy",
+      "title": "Installing and Importing NumPy",
+      "description": "Step-by-step guide to setting up NumPy in your environment and your first program.",
+      "file": "02-install.md",
+      "order": 2
+    },
+    {
+      "id": "numpy-ndarray",
+      "title": "NumPy Arrays (ndarray)",
+      "description": "Explore the ndarray object, creation methods, attributes, and how it compares to Python lists.",
+      "file": "03-ndarray.md",
+      "order": 3
+    },
+    {
+      "id": "indexing-slicing",
+      "title": "Array Indexing and Slicing",
+      "description": "Master the art of selecting specific elements or subsets of data from your NumPy arrays.",
+      "file": "04-indexing.md",
+      "order": 4
+    },
+    {
+      "id": "shape-manipulation",
+      "title": "Array Shape Manipulation",
+      "description": "Learn how to change the dimensions and structure of your arrays without changing the data.",
+      "file": "05-shape.md",
+      "order": 5
+    },
+    {
+      "id": "numpy-dtypes",
+      "title": "NumPy Data Types (dtype)",
+      "description": "Understand the different data types available in NumPy and how to control memory usage with precision.",
+      "file": "06-dtype.md",
+      "order": 6
+    },
+    {
+      "id": "math-operations",
+      "title": "Mathematical Operations in NumPy",
+      "description": "Learn about vectorized arithmetic, universal functions (ufuncs), and the powerful concept of broadcasting.",
+      "file": "07-math.md",
+      "order": 7
+    },
+    {
+      "id": "stats-functions",
+      "title": "Statistical Functions in NumPy",
+      "description": "Use NumPy to perform essential statistical analysis on your datasets with ease.",
+      "file": "08-stats.md",
+      "order": 8
+    },
+    {
+      "id": "linear-algebra",
+      "title": "Linear Algebra using NumPy",
+      "description": "Dive into the world of vectors and matrices. Essential for understanding Machine Learning algorithms.",
+      "file": "09-linalg.md",
+      "order": 9
+    },
+    {
+      "id": "random-module",
+      "title": "Random Module in NumPy",
+      "description": "Learn how to generate random data, work with probability distributions, and ensure reproducibility with seeds.",
+      "file": "10-random.md",
+      "order": 10
+    },
+    {
+      "id": "file-handling",
+      "title": "File Handling with NumPy",
+      "description": "Learn how to save your processed data to disk and load it back into memory efficiently.",
+      "file": "11-file-handling.md",
+      "order": 11
+    },
+    {
+      "id": "performance-optimization",
+      "title": "Performance Optimization in NumPy",
+      "description": "Understand why NumPy is fast and how to write code that takes full advantage of its efficiency.",
+      "file": "12-performance.md",
+      "order": 12
+    },
+    {
+      "id": "best-practices-errors",
+      "title": "NumPy Best Practices & Common Errors",
+      "description": "Tips to write cleaner code and a guide to understanding common error messages you'll encounter.",
+      "file": "13-best-practices.md",
+      "order": 13
+    }
+  ]
+}

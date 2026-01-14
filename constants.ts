@@ -13,34 +13,28 @@ import { ServiceItem, CaseStudy, Testimonial, MarqueeItem } from './types';
 
 export const SERVICES: ServiceItem[] = [
   {
-    id: 'web',
-    title: 'Web Development',
-    description: 'High-performance, SEO-optimized, scalable architectures tailored for luxury interaction.',
+    id: 'numpy',
+    title: 'NumPy',
+    description: 'The fundamental package for scientific computing with Python.',
     icon: Code,
   },
   {
-    id: 'data',
-    title: 'Data Analytics',
-    description: 'Bespoke dashboards and decision intelligence to visualize your hidden revenue.',
+    id: 'pandas',
+    title: 'Pandas',
+    description: 'Data manipulation and analysis structures for real-world data.',
+    icon: Database,
+  },
+  {
+    id: 'matplotlib',
+    title: 'Matplotlib',
+    description: 'Comprehensive library for creating static, animated, and interactive visualizations.',
     icon: BarChart3,
   },
   {
-    id: 'ai',
-    title: 'AI / ML Solutions',
-    description: 'Automation, NLP, and predictive modeling to scale operations without headcount.',
-    icon: Cpu,
-  },
-  {
-    id: 'ads',
-    title: 'Growth Marketing',
-    description: 'Meta & Google campaigns engineered for ROI, not just impressions.',
-    icon: Megaphone,
-  },
-  {
-    id: 'design',
-    title: 'Visual Storytelling',
-    description: 'High-CTR thumbnail design and brand assets that command attention.',
-    icon: Image,
+    id: 'excel',
+    title: 'Excel',
+    description: 'Master spreadsheets, formulas, and VBA for business intelligence.',
+    icon: Terminal,
   }
 ];
 

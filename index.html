@@ -50,107 +50,18 @@
     gtag('js', new Date());
     gtag('config', 'GA_MEASUREMENT_ID');
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preconnect to external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://esm.sh">
+  
+  <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@200;300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Cormorant Garamond"', 'serif'],
-            sans: ['"Manrope"', 'sans-serif'],
-          },
-          colors: {
-            lux: {
-              cream: '#FAFAF9',
-              stone: '#E7E5E4',
-              text: '#1C1917',
-              muted: '#78716C',
-              white: '#FFFFFF',
-              glass: 'rgba(255, 255, 255, 0.4)',
-              glassBorder: 'rgba(255, 255, 255, 0.4)',
-              accent: '#A8A29E',
-            }
-          },
-          borderRadius: {
-            '4xl': '2.5rem',
-            '5xl': '3.5rem',
-          },
-          animation: {
-            'marquee-horizontal': 'marquee-horizontal 60s linear infinite',
-            'noise': 'noise 0.25s steps(4) infinite',
-          },
-          keyframes: {
-            'marquee-horizontal': {
-              '0%': { transform: 'translateX(0)' },
-              '100%': { transform: 'translateX(-50%)' },
-            },
-            'noise': {
-              '0%': { transform: 'translate(0, 0)' },
-              '10%': { transform: 'translate(-5%, -5%)' },
-              '20%': { transform: 'translate(-10%, 5%)' },
-              '30%': { transform: 'translate(5%, -10%)' },
-              '40%': { transform: 'translate(-5%, 15%)' },
-              '50%': { transform: 'translate(-10%, 5%)' },
-              '60%': { transform: 'translate(15%, 0)' },
-              '70%': { transform: 'translate(0, 10%)' },
-              '80%': { transform: 'translate(-15%, 0)' },
-              '90%': { transform: 'translate(10%, 5%)' },
-              '100%': { transform: 'translate(0, 0)' }
-            }
-          }
-        },
-      },
-    }
-  </script>
-  <style>
-    body {
-      background-color: #FAFAF9;
-      color: #1C1917;
-      overflow-x: hidden;
-      /* Prevent horizontal scrollbar on body */
-    }
 
-    /* Only hide cursor on non-touch devices */
-    @media (hover: hover) and (pointer: fine) {
-      body {
-        cursor: none;
-      }
-    }
-
-    /* Lightweight Noise overlay with Jitter */
-    .noise-bg {
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      pointer-events: none;
-      z-index: 50;
-      opacity: 0.05;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      animation: noise 0.25s steps(4) infinite;
-      mix-blend-mode: multiply;
-    }
-
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    ::selection {
-      background: #1C1917;
-      color: #FAFAF9;
-    }
-  </style>
+  <!-- Import Maps for React/Framer Motion -->
   <script type="importmap">
 {
   "imports": {
@@ -162,7 +73,9 @@
     "@google/genai": "https://esm.sh/@google/genai@^1.35.0"
   }
 }
-</script>
+  </script>
+
+  <!-- Optimized CSS -->
   <link rel="stylesheet" href="/index.css">
 </head>
 
