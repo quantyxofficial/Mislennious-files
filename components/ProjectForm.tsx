@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FORMSPREE_ENDPOINT } from '../constants';
 
 interface ProjectFormProps {
     serviceName?: string;
@@ -17,7 +18,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ serviceName = 'General
 
         try {
             const formData = new FormData(e.currentTarget);
-            const response = await fetch('https://formspree.io/f/mgoovkrz', {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
                 body: formData,
                 headers: {

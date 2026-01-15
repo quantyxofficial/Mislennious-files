@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { FORMSPREE_ENDPOINT } from '../constants';
 
 interface FormState {
     email: string;
@@ -35,20 +36,37 @@ export const NewsletterForm: React.FC = () => {
         setFormState({ ...formState, status: 'loading', message: '' });
 
         try {
-            // Simulated API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const formData = new FormData();
+            formData.append('email', formState.email);
+            formData.append('form_type', 'newsletter');
 
-            // Success simulation
-            setFormState({
-                email: '',
-                status: 'success',
-                message: 'Thanks for subscribing! Check your inbox for confirmation.'
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             });
 
-            // Reset success message after 5 seconds
-            setTimeout(() => {
-                setFormState(prev => ({ ...prev, status: 'idle', message: '' }));
-            }, 5000);
+            if (response.ok) {
+                setFormState({
+                    email: '',
+                    status: 'success',
+                    message: 'Thanks for subscribing! Check your inbox for confirmation.'
+                });
+
+                // Reset success message after 5 seconds
+                setTimeout(() => {
+                    setFormState(prev => ({ ...prev, status: 'idle', message: '' }));
+                }, 5000);
+            } else {
+                setFormState({
+                    ...formState,
+                    status: 'error',
+                    message: 'Something went wrong. Please try again later.'
+                });
+            }
+
         } catch (error) {
             setFormState({
                 ...formState,

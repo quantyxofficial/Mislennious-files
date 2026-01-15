@@ -18,6 +18,8 @@ import {
 import { ServiceItem, CaseStudy, Testimonial, MarqueeItem } from './types';
 
 // Services Data
+export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgoovkrz';
+
 export const SERVICES = [
   {
     id: 'eda',
@@ -181,66 +183,21 @@ export const BLOG_POSTS: BlogPost[] = [
 
 export const CAREER_POSITIONS: CareerPosition[] = [
   {
-    id: 'c1',
-    title: 'Senior Full-Stack Developer',
-    department: 'Engineering',
-    location: 'Remote / Hybrid (India)',
-    type: 'Full-time',
-    description: 'Join our engineering team to build cutting-edge web applications using modern frameworks and cloud technologies.',
+    id: 'c4',
+    title: 'Tech/Data Science Blogger',
+    department: 'Content',
+    location: 'Remote',
+    type: 'Part-time',
+    description: 'Share your knowledge and passion for technology and data science with our growing community.',
     responsibilities: [
-      'Architect and develop scalable web applications using React, Node.js, and cloud platforms',
-      'Collaborate with design and product teams to deliver exceptional user experiences',
-      'Mentor junior developers and contribute to technical documentation',
-      'Participate in code reviews and maintain high code quality standards'
+      'Write engaging blog posts about the latest tech trends and data science concepts',
+      'Create tutorials and guides for our student community',
+      'Collaborate with the dev team to document technical achievements'
     ],
     requirements: [
-      '4+ years of experience in full-stack development',
-      'Expertise in React, TypeScript, Node.js, and modern web technologies',
-      'Strong understanding of cloud platforms (AWS, GCP, or Azure)',
-      'Experience with CI/CD pipelines and DevOps practices',
-      'Excellent problem-solving and communication skills'
-    ]
-  },
-  {
-    id: 'c2',
-    title: 'Data Scientist',
-    department: 'Analytics',
-    location: 'Remote / Hybrid (India)',
-    type: 'Full-time',
-    description: 'Work with cutting-edge data science techniques to solve complex business problems and drive insights for our clients.',
-    responsibilities: [
-      'Develop predictive models and machine learning solutions',
-      'Analyze large datasets to extract actionable insights',
-      'Create data visualizations and dashboards for stakeholders',
-      'Collaborate with engineering teams to deploy ML models to production'
-    ],
-    requirements: [
-      '3+ years of experience in data science or analytics',
-      'Strong proficiency in Python, R, and SQL',
-      'Experience with ML frameworks (TensorFlow, PyTorch, scikit-learn)',
-      'Knowledge of statistical analysis and A/B testing',
-      "Master's degree in Computer Science, Statistics, or related field preferred"
-    ]
-  },
-  {
-    id: 'c3',
-    title: 'UI/UX Designer',
-    department: 'Design',
-    location: 'Remote / Hybrid (India)',
-    type: 'Full-time',
-    description: 'Create beautiful, intuitive interfaces that delight users and drive business results.',
-    responsibilities: [
-      'Design user interfaces for web and mobile applications',
-      'Conduct user research and usability testing',
-      'Create wireframes, prototypes, and high-fidelity mockups',
-      'Collaborate with developers to ensure design implementation quality'
-    ],
-    requirements: [
-      '3+ years of UI/UX design experience',
-      'Proficiency in Figma, Adobe Creative Suite, and prototyping tools',
-      'Strong portfolio showcasing diverse design work',
-      'Understanding of design systems and component libraries',
-      'Excellent visual design and typography skills'
+      'Passion for writing and technology',
+      'Basic understanding of Data Science or Web Development concepts',
+      'Excellent written communication skills'
     ]
   }
 ];

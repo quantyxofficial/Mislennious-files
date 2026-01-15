@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Code, Briefcase, TrendingUp, ArrowRight } from 'lucide-react';
+import { GraduationCap, Code, Briefcase, TrendingUp, ArrowRight, Linkedin } from 'lucide-react';
 
 const TEAM = [
     {
@@ -9,6 +9,7 @@ const TEAM = [
         role: "Lead Engineer & Architect",
         bio: "Focused on high-performance pipelines. Turns raw data into actionable growth engines with engineering precision.",
         edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/masuddar-rahaman/",
         icon: Code,
         color: "bg-blue-500",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
@@ -19,6 +20,7 @@ const TEAM = [
         role: "Head of Strategy",
         bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
         edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",
         icon: TrendingUp,
         color: "bg-purple-500",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
@@ -29,6 +31,7 @@ const TEAM = [
         role: "Data Scientist",
         bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
         edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
         icon: Briefcase,
         color: "bg-teal-500",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
@@ -124,9 +127,20 @@ export const Team: React.FC = () => {
                                         "{TEAM[activeId].bio}"
                                     </p>
 
-                                    <div className="flex items-center gap-3 text-lux-muted/80 bg-white/30 p-4 rounded-xl inline-flex backdrop-blur-sm border border-white/20">
-                                        <GraduationCap className="w-5 h-5" />
-                                        <span className="text-xs md:text-sm font-medium tracking-wide">{TEAM[activeId].edu}</span>
+                                    <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-3 text-lux-muted/80 bg-white/30 p-4 rounded-xl inline-flex backdrop-blur-sm border border-white/20">
+                                            <GraduationCap className="w-5 h-5" />
+                                            <span className="text-xs md:text-sm font-medium tracking-wide">{TEAM[activeId].edu}</span>
+                                        </div>
+
+                                        <a
+                                            href={TEAM[activeId].linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="p-4 bg-white/30 rounded-xl hover:bg-white/50 hover:text-blue-600 transition-all border border-white/20 backdrop-blur-sm group/linkedin"
+                                        >
+                                            <Linkedin className="w-5 h-5 text-lux-muted/80 group-hover/linkedin:text-blue-600 transition-colors" />
+                                        </a>
                                     </div>
                                 </div>
                             </motion.div>

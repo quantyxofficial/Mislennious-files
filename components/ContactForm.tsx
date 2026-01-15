@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { FORMSPREE_ENDPOINT } from '../constants';
 
 interface ContactFormData {
     name: string;
@@ -58,23 +59,41 @@ export const ContactForm: React.FC = () => {
         setFormState({ ...formState, status: 'loading', errorMessage: '' });
 
         try {
-            // Simulated API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            const formData = new FormData();
+            formData.append('name', formState.name);
+            formData.append('email', formState.email);
+            formData.append('company', formState.company);
+            formData.append('message', formState.message);
 
-            // Success simulation
-            setFormState({
-                name: '',
-                email: '',
-                company: '',
-                message: '',
-                status: 'success',
-                errorMessage: ''
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
             });
 
-            // Reset success message after 8 seconds
-            setTimeout(() => {
-                setFormState(prev => ({ ...prev, status: 'idle' }));
-            }, 8000);
+            if (response.ok) {
+                setFormState({
+                    name: '',
+                    email: '',
+                    company: '',
+                    message: '',
+                    status: 'success',
+                    errorMessage: ''
+                });
+
+                // Reset success message after 8 seconds
+                setTimeout(() => {
+                    setFormState(prev => ({ ...prev, status: 'idle' }));
+                }, 8000);
+            } else {
+                setFormState({
+                    ...formState,
+                    status: 'error',
+                    errorMessage: 'Failed to send message. Please try again or contact us directly.'
+                });
+            }
 
         } catch (error) {
             setFormState({

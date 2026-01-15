@@ -1,221 +1,172 @@
 import React from 'react';
+
 import { motion } from 'framer-motion';
-import { Users, Target, Zap, Award, TrendingUp, Clock } from 'lucide-react';
-import { HowWeWork } from '../components/HowWeWork';
+import { Users, Target, Award, TrendingUp, Clock } from 'lucide-react';
 
 export const About: React.FC = () => {
+
     const stats = [
-        { label: 'Projects Delivered', value: '150+', icon: Target },
-        { label: 'Client Satisfaction', value: '98%', icon: Award },
-        { label: 'Years of Excellence', value: '5+', icon: TrendingUp },
+        { label: 'Personal Projects', value: '12+', icon: Target },
+        { label: 'Hackathons Won', value: '10+', icon: Award },
+        { label: 'Academic Year', value: '3rd', icon: TrendingUp },
         { label: 'Response Time', value: '<24hr', icon: Clock }
     ];
 
     const values = [
         {
-            title: 'Data-Driven',
-            description: 'Every decision backed by analytics and measurable outcomes'
+            title: 'Fresh Perspective',
+            description: 'Unburdened by legacy thinking, we bring raw energy and modern tech stacks.'
         },
         {
-            title: 'Excellence First',
-            description: 'We don\'t ship until it meets our uncompromising standards'
+            title: 'Cross-Functional',
+            description: 'Where complex backend logic meets strategic business planning.'
         },
         {
             title: 'Transparent',
-            description: 'Clear communication, honest timelines, no surprises'
+            description: 'Clear communication, honest timelines, no corporate jargon.'
         },
         {
-            title: 'Innovative',
-            description: 'Constantly learning and implementing cutting-edge solutions'
+            title: 'Ambitious',
+            description: 'We are students today, but we are building the industry leaders of tomorrow.'
         }
     ];
 
     const milestones = [
-        { year: '2019', event: 'Founded by Data Science scholars' },
-        { year: '2020', event: 'Launched AI/ML practice, served first SaaS clients' },
-        { year: '2022', event: 'Expanded to 20+ team members, opened Mumbai office' },
-        { year: '2024', event: 'Crossed $5M in client revenue generated' },
-        { year: '2025', event: 'Named "Top Digital Agency" by StartupIndia' }
+        { year: '2023', event: 'Team Formation in Campus Dorms' },
+        { year: '2024', event: 'Building Individual Portfolios & Skills' },
+        { year: '2025', event: 'Winning Campus Hackathons' },
+        { year: '2026', event: 'KaizenStat Agency Official Launch' } // Changed "Jan 2026" to "2026" for consistency in style, but event implies Jan launch
     ];
 
     return (
-        <div className="min-h-screen">
-            {/* Hero Section */}
-            <section className="relative min-h-[60vh] flex items-center justify-center px-6 md:px-12 pt-32 pb-20">
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="inline-block py-2 px-6 border border-lux-text/10 rounded-full text-xs font-bold tracking-[0.3em] uppercase text-lux-muted bg-white/40 backdrop-blur-md mb-8"
-                    >
-                        About KaizenStat
-                    </motion.span>
+        <div className="min-h-screen relative overflow-hidden">
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="font-serif text-5xl md:text-7xl lg:text-8xl text-lux-text mb-8 leading-tight"
-                    >
-                        Student-Led. <br />
-                        <span className="italic font-light text-lux-muted">Professionally Delivered.</span>
-                    </motion.h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-xl text-lux-muted leading-relaxed max-w-3xl mx-auto"
-                    >
-                        We're a unique agency run by students from top institutes, organizing hackathons and building communities
-                        for brand awareness—while our professional team delivers exceptional Web Development, AI/ML, and Data Analytics services to clients.
-                    </motion.p>
-                </div>
+            {/* COMPACT HERO */}
+            <section className="relative pt-32 pb-16 px-6 md:px-0 flex flex-col items-center justify-center text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="inline-block py-1.5 px-4 border border-lux-text/10 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-lux-muted bg-white/40 backdrop-blur-md mb-6"
+                >
+                    Est. Jan 2026
+                </motion.div>
+
+                <motion.h1
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1, duration: 0.8 }}
+                    className="font-serif text-4xl md:text-6xl text-lux-text mb-6 leading-tight max-w-4xl"
+                >
+                    3rd Year Tech. <br />
+                    <span className="italic text-lux-muted font-light">1st Year Strategy.</span>
+                </motion.h1>
+
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.8 }}
+                    className="text-lg text-lux-muted max-w-2xl font-light leading-relaxed"
+                >
+                    We are a fusion of IT & CSE tech wizards and BBA strategic minds, building our legacy one project at a time.
+                </motion.p>
             </section>
 
-            {/* How We Work Section - Full Detail */}
-            <HowWeWork />
-
-            {/* Stats Section */}
-            <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32">
-                <div className="max-w-[1400px] mx-auto">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* COMPACT STATS */}
+            <section className="px-6 md:px-12 lg:px-24 pb-16">
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {stats.map((stat, index) => (
                             <motion.div
                                 key={stat.label}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
-                                className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl text-center"
+                                transition={{ delay: index * 0.05, duration: 0.5 }}
+                                className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm text-center hover:border-gray-200 transition-colors"
                             >
-                                <stat.icon className="w-8 h-8 mx-auto mb-4 text-lux-text" />
-                                <div className="font-serif text-4xl md:text-5xl text-lux-text mb-2">{stat.value}</div>
-                                <div className="text-sm text-lux-muted">{stat.label}</div>
+                                <stat.icon className="w-5 h-5 mx-auto mb-3 text-lux-text/70" />
+                                <div className="font-serif text-2xl md:text-3xl text-lux-text mb-1">{stat.value}</div>
+                                <div className="text-[10px] md:text-xs text-lux-muted uppercase tracking-wider">{stat.label}</div>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Our Story Section */}
-            <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32">
-                <div className="max-w-[1200px] mx-auto">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className="font-serif text-4xl md:text-6xl text-lux-text mb-6">Our Story</h2>
-                            <div className="space-y-4 text-lux-muted leading-relaxed">
-                                <p>
-                                    KaizenStat was born from a simple observation: most agencies are either creatively brilliant
-                                    but technically weak, or technically strong but creatively bland.
-                                </p>
-                                <p>
-                                    We set out to build something different. A team where Data Scientists collaborate with Designers.
-                                    Where ML Engineers work alongside Brand Strategists. Where analytics and aesthetics coexist.
-                                </p>
-                                <p>
-                                    Today, we're proud to work with startups and enterprises who value both form and function,
-                                    helping them build digital products that are as beautiful as they are intelligent.
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="aspect-square rounded-[3rem] bg-gradient-to-br from-blue-100/60 to-purple-100/60 border border-white/60 backdrop-blur-xl p-12 flex items-center justify-center">
-                                <Users className="w-32 h-32 text-lux-text/20" />
-                            </div>
-                        </motion.div>
-                    </div>
+            {/* STORY & IMAGE - Side by Side but tight */}
+            <section className="px-6 md:px-12 lg:px-24 py-16 bg-gray-50/50">
+                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="font-serif text-3xl md:text-4xl text-lux-text mb-6">Our Narrative</h2>
+                        <div className="space-y-4 text-lux-muted/90 leading-relaxed text-sm md:text-base">
+                            <p>
+                                We represent the next generation of digital builders. While our peers are waiting for graduation to start, we are starting now.
+                            </p>
+                            <p>
+                                By combining the technical prowess of 3rd-year Engineering students with the fresh business acumen of 1st-year Management students, we offer a unique blend of innovation and strategy.
+                            </p>
+                            <p>
+                                We don't have decades of history, but we have the hunger to prove ourselves with every line of code and every pixel.
+                            </p>
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="relative"
+                    >
+                        <div className="aspect-video md:aspect-square rounded-[2rem] bg-white border border-gray-100 p-8 flex items-center justify-center shadow-sm">
+                            <Users className="w-24 h-24 text-lux-text/10" />
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* Values Section */}
-            <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32 bg-gradient-to-b from-transparent via-white/30 to-transparent">
-                <div className="max-w-[1400px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="font-serif text-4xl md:text-6xl text-lux-text mb-6">Our Values</h2>
-                        <p className="text-lux-muted text-lg max-w-2xl mx-auto">
-                            The principles that guide every project, every decision, every line of code
-                        </p>
+            {/* VALUES & TIMELINE GRID */}
+            <section className="px-6 md:px-12 lg:px-24 py-20">
+                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
+
+                    {/* Values */}
+                    <div>
+                        <h2 className="font-serif text-3xl text-lux-text mb-8 text-center lg:text-left">Our Values</h2>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            {values.map((value, index) => (
+                                <div key={value.title} className="p-5 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors bg-white">
+                                    <h4 className="font-bold text-sm text-lux-text mb-2">{value.title}</h4>
+                                    <p className="text-xs text-lux-muted leading-relaxed">{value.description}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {values.map((value, index) => (
-                            <motion.div
-                                key={value.title}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
-                                className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl"
-                            >
-                                <h3 className="font-serif text-2xl text-lux-text mb-3">{value.title}</h3>
-                                <p className="text-sm text-lux-muted leading-relaxed">{value.description}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Timeline Section */}
-            <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32">
-                <div className="max-w-[1000px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="font-serif text-4xl md:text-6xl text-lux-text mb-6">Our Journey</h2>
-                        <p className="text-lux-muted text-lg">Milestones that shaped who we are today</p>
-                    </div>
-
-                    <div className="space-y-6">
-                        {milestones.map((milestone, index) => (
-                            <motion.div
-                                key={milestone.year}
-                                initial={{ opacity: 0, x: -30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.6 }}
-                                className="flex gap-8 items-start p-6 rounded-2xl bg-white/40 border border-white/50 backdrop-blur-xl hover:bg-white/60 transition-all"
-                            >
-                                <div className="flex-shrink-0">
-                                    <div className="w-20 h-20 rounded-2xl bg-lux-text text-white flex items-center justify-center">
-                                        <span className="font-serif text-lg">{milestone.year}</span>
+                    {/* Timeline */}
+                    <div>
+                        <h2 className="font-serif text-3xl text-lux-text mb-8 text-center lg:text-left">Journey So Far</h2>
+                        <div className="space-y-6 md:pl-8 border-l border-gray-100 md:border-none">
+                            {milestones.map((milestone, index) => (
+                                <div key={index} className="flex gap-4 items-start pl-4 md:pl-0">
+                                    <div className="w-12 h-12 shrink-0 rounded-full bg-lux-text/5 text-lux-text flex items-center justify-center font-serif text-xs font-bold">
+                                        {milestone.year}
+                                    </div>
+                                    <div className="pt-2">
+                                        <p className="text-sm text-lux-text/80">{milestone.event}</p>
                                     </div>
                                 </div>
-                                <div className="flex-1 pt-3">
-                                    <p className="text-lux-text leading-relaxed">{milestone.event}</p>
-                                </div>
-                            </motion.div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32">
-                <div className="max-w-4xl mx-auto text-center p-16 rounded-[3rem] bg-gradient-to-br from-blue-100/40 to-purple-100/40 border border-white/60 backdrop-blur-xl">
-                    <Zap className="w-16 h-16 mx-auto mb-6 text-lux-text" />
-                    <h2 className="font-serif text-4xl md:text-5xl text-lux-text mb-6">
-                        Ready to work with us?
-                    </h2>
-                    <p className="text-lux-muted text-lg mb-8 max-w-2xl mx-auto">
-                        Let's build something extraordinary together. Book a strategy call and discover how we can transform your vision into reality.
-                    </p>
-                    <button className="px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full shadow-2xl hover:shadow-3xl hover:-translate-y-1" data-hover>
-                        Book Strategy Call
-                    </button>
-                </div>
-            </section>
+
+
         </div>
     );
 };
