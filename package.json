@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run update-content && vite",
-    "build": "vite build",
+    "build": "npm run update-content && vite build",
     "preview": "vite preview",
     "update-content": "node scripts/generate-manifest.js"
   },
