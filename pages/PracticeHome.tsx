@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ProblemOfTheDay } from '../components/practice/ProblemOfTheDay';
 import { loadTopics, TopicMetadata } from '../utils/contentLoader';
-
-const learningPaths = [
-    { title: 'Data Science 101', count: '10 Modules', icon: '🎓' },
-    { title: 'Machine Learning A-Z', count: '24 Modules', icon: '🤖' },
-    { title: 'Interview Prep', count: '50 Questions', icon: '💼' }
-];
+import { Trophy, BookOpen, ArrowRight, Code2, Sparkles, Award } from 'lucide-react';
 
 export const PracticeHome: React.FC = () => {
     const [topics, setTopics] = useState<TopicMetadata[]>([]);
@@ -20,141 +15,139 @@ export const PracticeHome: React.FC = () => {
 
     return (
         <HelmetProvider>
-            <div className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 font-sans min-h-screen">
+            {/* Transparent background to show global Layout aurora */}
+            <div className="min-h-screen pt-24 pb-12 px-6 md:px-12 relative overflow-hidden font-sans">
                 <Helmet>
                     <title>Practice | KaizenStat</title>
-                    <meta name="description" content="Master data science, machine learning, and analytics with our curated practice problems and study materials." />
+                    <meta name="description" content="Master data science, machine learning, and analytics." />
                 </Helmet>
 
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col lg:flex-row gap-8">
+                <div className="max-w-7xl mx-auto relative z-10">
 
-                        {/* LEFT COLUMN - MAIN CONTENT */}
-                        <div className="flex-1">
-                            <div className="mb-10">
-                                <motion.h1
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="text-4xl md:text-5xl font-serif text-lux-text mb-2"
-                                >
-                                    <span className="italic text-lux-muted/40">Welcome back,</span> Scholar.
-                                </motion.h1>
-                                <p className="text-lux-muted font-light">Continue your journey to data mastery.</p>
-                            </div>
+                    {/* Header Section */}
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-lux-muted/10 pb-6">
+                        <div>
+                            <span className="inline-block py-1 px-4 border border-lux-text/10 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-lux-muted mb-3 bg-white/50 backdrop-blur-sm shadow-sm">
+                                KaizenStat Academy
+                            </span>
+                            <h1 className="text-5xl md:text-6xl font-serif text-lux-text leading-[0.9] tracking-tight">
+                                Curriculum.
+                            </h1>
+                        </div>
+                        <p className="text-lux-muted max-w-md text-sm leading-relaxed font-light">
+                            A curated collection of data science modules designed for mastering technical interviews and core concepts.
+                        </p>
+                    </div>
 
-                            {/* TOPIC GRID */}
-                            <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lux-muted mb-6">Practice Topics</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                                {topics.map((topic) => (
-                                    <div
+                    <div className="grid lg:grid-cols-12 gap-8 items-start">
+
+                        {/* LEFT COLUMN: Modules (8 cols) */}
+                        <div className="lg:col-span-8 space-y-8">
+
+                            {/* Topic Grid - Compact 3 Columns */}
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {topics.map((topic, idx) => (
+                                    <motion.div
                                         key={topic.id}
-                                        className="p-6 bg-white/70 backdrop-blur-md border border-white/40 rounded-3xl transition-all duration-300 shadow-sm hover:shadow-md"
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: idx * 0.05 }}
+                                        className="group bg-white/40 backdrop-blur-md border border-white/60 rounded-[2rem] p-5 hover:bg-white hover:shadow-xl hover:shadow-stone-200/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
                                     >
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div className="text-3xl">{topic.icon}</div>
-                                            <span className="px-2 py-1 bg-white/50 rounded-lg text-[10px] uppercase font-bold tracking-wider text-lux-muted">
-                                                {topic.count} Qs
-                                            </span>
-                                        </div>
-                                        <h3 className="text-xl font-serif text-lux-text mb-1">{topic.title}</h3>
-                                        <p className="text-lux-muted text-sm font-light mb-4">{topic.description}</p>
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                        <div className="flex gap-2">
-                                            {topic.hasStudyMaterial ? (
-                                                <Link
-                                                    to={`/study/${topic.id}`}
-                                                    className="flex-1 py-2.5 px-4 bg-white/50 hover:bg-white border border-white/60 rounded-xl text-[10px] font-bold uppercase tracking-[0.15em] text-lux-text transition-all text-center group"
-                                                >
-                                                    📚 Study
-                                                </Link>
-                                            ) : (
-                                                <div className="flex-1 py-2.5 px-4 bg-white/20 border border-white/20 rounded-xl text-[10px] font-bold uppercase tracking-[0.15em] text-lux-muted/40 text-center cursor-not-allowed">
-                                                    Coming Soon
+                                        <div className="relative z-10">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div className="w-10 h-10 rounded-2xl bg-white border border-lux-text/5 flex items-center justify-center text-xl shadow-sm text-lux-text group-hover:scale-110 transition-transform duration-500">
+                                                    {topic.icon}
                                                 </div>
-                                            )}
-                                            <Link
-                                                to={`/practice/${topic.id}`}
-                                                className="flex-1 py-2.5 px-4 bg-lux-text hover:bg-black text-white rounded-xl text-[10px] font-bold uppercase tracking-[0.15em] transition-all text-center"
-                                            >
-                                                ⚡ Practice
-                                            </Link>
+                                                <span className="bg-white/60 backdrop-blur-sm text-lux-muted text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border border-lux-text/5">
+                                                    {topic.count} Qs
+                                                </span>
+                                            </div>
+
+                                            <h3 className="text-lg font-serif text-lux-text mb-2 group-hover:text-black transition-colors">{topic.title}</h3>
+                                            <p className="text-lux-muted text-xs leading-relaxed mb-6 h-auto min-h-[3rem] font-light">
+                                                {topic.description}
+                                            </p>
+
+                                            <div className="flex flex-col gap-2.5 pt-4">
+                                                <Link
+                                                    to={`/practice/${topic.id}`}
+                                                    className="w-full h-10 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest bg-lux-text text-lux-cream rounded-full hover:bg-black transition-all shadow-md shadow-lux-text/10 hover:shadow-lux-text/20 hover:scale-[1.02] active:scale-95"
+                                                >
+                                                    MCQ Practice <Sparkles className="w-3 h-3" />
+                                                </Link>
+                                                {topic.hasStudyMaterial ? (
+                                                    <Link
+                                                        to={`/study/${topic.id}`}
+                                                        className="w-full h-10 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-lux-text bg-white border border-lux-text/10 rounded-full hover:bg-lux-text hover:text-white hover:border-lux-text transition-all duration-300 group/btn"
+                                                    >
+                                                        View Course <BookOpen className="w-3 h-3 opacity-50 group-hover/btn:opacity-100 transition-opacity" />
+                                                    </Link>
+                                                ) : (
+                                                    <div className="w-full h-10 flex items-center justify-center text-[9px] font-bold uppercase tracking-widest text-lux-muted/40 cursor-not-allowed border border-dashed border-lux-text/5 rounded-full">
+                                                        Course Coming Soon
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
 
-                            {/* GET CERTIFIED SECTION */}
-                            <div className="mb-12">
-                                <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lux-muted mb-6">🏆 Get Certified</h2>
-                                <div className="bg-gradient-to-br from-amber-50 via-white to-amber-100 border border-amber-200 rounded-3xl p-6">
-                                    <p className="text-lux-muted text-sm mb-4">Score 90% or higher on our certification exams and receive a downloadable digital certificate with your name!</p>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        <Link
-                                            to="/exam/numpy"
-                                            className="flex items-center justify-between p-4 bg-white/80 rounded-2xl border border-amber-200 hover:border-amber-400 transition-colors group"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-2xl">🔢</span>
-                                                <span className="font-serif text-lux-text">NumPy Certification</span>
+                            {/* Premium Free Certificate Section */}
+                            <div className="relative overflow-hidden rounded-[2.5rem] p-1 bg-gradient-to-br from-[#c89b3c] via-[#f0cf85] to-[#c89b3c] shadow-xl group hover:shadow-2xl transition-shadow duration-500">
+                                <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+                                <div className="relative bg-white/95 backdrop-blur-xl rounded-[2.3rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 border border-white/50">
+
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/20 rounded-full blur-[80px] pointer-events-none group-hover:bg-amber-400/30 transition-colors duration-700" />
+
+                                    <div className="flex-1 relative z-10">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-100 to-white border border-amber-200 flex items-center justify-center text-amber-700 shadow-sm">
+                                                <Award className="w-4 h-4" />
                                             </div>
-                                            <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-lg group-hover:bg-amber-200 transition-colors">Take Exam →</span>
+                                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-700 to-amber-900 text-[10px] font-black uppercase tracking-widest">
+                                                Premium Free Certificate
+                                            </span>
+                                        </div>
+                                        <h3 className="text-3xl font-serif text-lux-text mb-2">Get Industry Recognized.</h3>
+                                        <p className="text-lux-muted text-sm max-w-lg font-light leading-relaxed">
+                                            Complete the curriculum and pass the standardized assessment with 90%+ score to earn your verifiable credential.
+                                        </p>
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row gap-3 relative z-10 min-w-fit">
+                                        <Link to="/exam/numpy" className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:shadow-lg hover:shadow-amber-500/30 transition-all hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                                            Start NumPy Exam
                                         </Link>
-                                        <Link
-                                            to="/exam/deep-learning"
-                                            className="flex items-center justify-between p-4 bg-white/80 rounded-2xl border border-amber-200 hover:border-amber-400 transition-colors group"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-2xl">🧠</span>
-                                                <span className="font-serif text-lux-text">Deep Learning Certification</span>
-                                            </div>
-                                            <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-lg group-hover:bg-amber-200 transition-colors">Take Exam →</span>
+                                        <Link to="/exam/deep-learning" className="px-6 py-3 bg-white border border-amber-200 text-amber-900 text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-amber-50 hover:border-amber-300 transition-all text-center flex items-center justify-center gap-2">
+                                            Deep Learning
                                         </Link>
                                     </div>
                                 </div>
                             </div>
-
-                            {/* CURATED PATHS */}
-                            <div className="mb-12 relative opacity-70 cursor-not-allowed">
-                                <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/10 backdrop-blur-[1px] rounded-3xl">
-                                    <span className="px-4 py-2 bg-stone-800 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20">Coming Soon</span>
-                                </div>
-                                <div className="flex items-center justify-between mb-6 pointer-events-none">
-                                    <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lux-muted">Curated Paths</h2>
-                                    <button className="text-[10px] font-bold uppercase tracking-[0.1em] text-lux-text hover:text-lux-muted">View All</button>
-                                </div>
-                                <div className="space-y-3 pointer-events-none">
-                                    {learningPaths.map((path, idx) => (
-                                        <div key={idx} className="flex items-center p-4 bg-white/20 backdrop-blur-sm border border-white/40 rounded-2xl hover:bg-white/40 transition-colors cursor-pointer group">
-                                            <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center text-xl mr-4 group-hover:scale-110 transition-transform">
-                                                {path.icon}
-                                            </div>
-                                            <div className="flex-1">
-                                                <h4 className="font-serif text-lg text-lux-text">{path.title}</h4>
-                                                <span className="text-xs text-lux-muted">{path.count}</span>
-                                            </div>
-                                            <div className="w-8 h-8 rounded-full border border-lux-text/10 flex items-center justify-center text-lux-text/40 group-hover:bg-lux-text group-hover:text-white transition-all">
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
                         </div>
 
-                        {/* RIGHT COLUMN - SIDEBAR */}
-                        <div className="w-full lg:w-96 space-y-8">
+                        {/* RIGHT COLUMN: Sidebar (4 cols) */}
+                        <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
                             <ProblemOfTheDay />
 
-                            <div className="bg-lux-text rounded-3xl p-8 text-white text-center relative overflow-hidden">
-                                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_50%,_white_0%,_transparent_50%)]" />
-                                <h3 className="font-serif text-2xl mb-2 relative z-10">KaizenStat Agency</h3>
-                                <p className="text-white/60 text-sm font-light mb-6 relative z-10">Need professional data solutions or custom dev?</p>
+                            {/* Agency Promo - Editorial */}
+                            <div className="bg-lux-text rounded-[2.5rem] p-8 text-white relative overflow-hidden group">
+                                <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors duration-700" />
+
+                                <Code2 className="w-8 h-8 text-white/80 mb-6" />
+                                <h3 className="font-serif text-2xl mb-2 text-white">Need Custom<br />Solutions?</h3>
+                                <p className="text-white/60 text-sm mb-8 leading-relaxed font-light">
+                                    Our agency team builds enterprise-grade data solutions for businesses worldwide.
+                                </p>
                                 <Link
                                     to="/agency"
-                                    className="inline-block px-6 py-3 bg-white text-lux-text rounded-full text-[10px] font-bold uppercase tracking-[0.2em] relative z-10 hover:scale-105 transition-transform"
+                                    className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white border-b border-white/30 pb-1 hover:border-white transition-all"
                                 >
-                                    Visit Agency
+                                    Visit Agency <ArrowRight className="w-3 h-3" />
                                 </Link>
                             </div>
                         </div>
