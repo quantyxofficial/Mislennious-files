@@ -12,7 +12,7 @@ const TEAM = [
         linkedin: "https://www.linkedin.com/in/masuddar-rahaman/",
         icon: Code,
         color: "bg-blue-500",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+        image: "/team/Masuddar_Rahaman.jpeg"
     },
     {
         id: 1,
@@ -23,7 +23,7 @@ const TEAM = [
         linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",
         icon: TrendingUp,
         color: "bg-purple-500",
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
+        image: "/team/Kriti_Sharma.jpeg"
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ const TEAM = [
         linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
         icon: Briefcase,
         color: "bg-teal-500",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
+        image: "/team/Abhishikta_Dutta.jpeg"
     }
 ];
 
