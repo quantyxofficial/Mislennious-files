@@ -60,7 +60,7 @@ export const CommunityPreview: React.FC = () => {
                             </div>
                             <h3 className="font-serif text-3xl md:text-4xl text-lux-text font-medium mb-4 leading-tight">A global network of <br /><span className="italic font-light text-lux-muted">500+ Innovators.</span></h3>
                             <p className="text-lux-muted/80 max-w-sm text-sm leading-relaxed font-light">
-                                Join an elite collective of creators from IIT Madras & MAKAUT shaping the next digital frontier.
+                                Join an elite collective of creators shaping the next digital frontier.
                             </p>
                         </div>
 

@@ -7,7 +7,7 @@ export const Events: React.FC = () => {
         {
             title: 'TechHack 2026',
             date: 'March 15-17, 2026',
-            location: 'IIT Madras Campus',
+            location: 'Campus Venue',
             type: 'Hackathon',
             participants: '200+',
             prizes: '₹2L+',
@@ -94,7 +94,7 @@ export const Events: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-xl text-lux-muted leading-relaxed max-w-2xl mx-auto"
                     >
-                        Join us for hackathons, workshops, and tech events that bring together the brightest minds from IIT Madras, MAKAUT, and beyond.
+                        Join us for hackathons, workshops, and tech events that bring together the brightest minds from across the country.
                     </motion.p>
                 </div>
             </section>

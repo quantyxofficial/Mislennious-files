@@ -23,7 +23,7 @@ export const Community: React.FC = () => {
         },
         {
             title: 'Networking',
-            description: 'Connect with fellow students, alumni, and industry experts from IIT Madras & MAKAUT.',
+            description: 'Connect with fellow students, alumni, and industry experts from top institutes.',
             icon: Users
         },
         {

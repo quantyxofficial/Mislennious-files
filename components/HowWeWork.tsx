@@ -40,7 +40,7 @@ export const HowWeWork: React.FC = () => {
                             <h3 className="font-serif text-3xl font-medium text-lux-text">Student Community</h3>
                         </div>
                         <p className="text-lux-muted mb-8 leading-relaxed">
-                            Students from IIT Madras & MAKAUT lead our community initiatives, organizing hackathons and events to build brand awareness.
+                            Students from top institutes lead our community initiatives, organizing hackathons and events to build brand awareness.
                         </p>
                         <div className="space-y-4">
                             <div className="flex items-start gap-3">

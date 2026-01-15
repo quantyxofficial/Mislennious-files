@@ -20,6 +20,7 @@ const Careers = lazy(() => import('./pages/Careers').then(m => ({ default: m.Car
 const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+const StartProject = lazy(() => import('./pages/StartProject').then(m => ({ default: m.StartProject })));
 
 export const router = createBrowserRouter([
     {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
             {
                 path: 'terms',
                 element: <Terms />,
+            },
+            {
+                path: 'start-project',
+                element: <StartProject />,
             },
             {
                 path: '*',

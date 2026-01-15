@@ -54,14 +54,7 @@ export const Hero: React.FC = () => {
           className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center pt-4 md:pt-8 w-full md:w-auto mx-auto"
         >
           <button
-            onClick={() => {
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                const navbarHeight = 100;
-                const elementPosition = contactSection.getBoundingClientRect().top + window.scrollY;
-                window.scrollTo({ top: elementPosition - navbarHeight, behavior: 'smooth' });
-              }
-            }}
+            onClick={() => window.location.href = '/start-project'}
             className="w-full md:w-auto px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
             data-hover
           >

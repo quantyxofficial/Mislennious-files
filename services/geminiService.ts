@@ -11,7 +11,7 @@ export const generateStrategy = async (businessType: string): Promise<string> =>
     const ai = new GoogleGenAI({ apiKey });
     const model = 'gemini-3-flash-preview';
     const prompt = `
-      You are a digital strategist for KaizenStat, an agency run by IIT Madras Data Science scholars.
+      You are a digital strategist for KaizenStat, an agency run by Data Science scholars.
       The user runs a business in the "${businessType}" niche.
       
       Provide a SINGLE, high-impact strategy tip (max 50 words) on how they can use AI or Data Analytics to scale. 

@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { SERVICES } from '../constants';
-import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar: React.FC = () => {
     const [isVisible, setIsVisible] = useState(true);
@@ -213,7 +212,6 @@ export const Navbar: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-2 pl-4 border-l border-gray-200/50 ml-4">
-                        <ThemeToggle />
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                             className="lg:hidden relative z-50 p-2 text-lux-text hover:bg-black/5 rounded-full transition-colors"

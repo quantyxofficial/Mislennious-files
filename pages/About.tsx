@@ -31,7 +31,7 @@ export const About: React.FC = () => {
     ];
 
     const milestones = [
-        { year: '2019', event: 'Founded by IIT Madras Data Science scholars' },
+        { year: '2019', event: 'Founded by Data Science scholars' },
         { year: '2020', event: 'Launched AI/ML practice, served first SaaS clients' },
         { year: '2022', event: 'Expanded to 20+ team members, opened Mumbai office' },
         { year: '2024', event: 'Crossed $5M in client revenue generated' },
@@ -68,7 +68,7 @@ export const About: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-xl text-lux-muted leading-relaxed max-w-3xl mx-auto"
                     >
-                        We're a unique agency run by students from IIT Madras and MAKAUT, organizing hackathons and building communities
+                        We're a unique agency run by students from top institutes, organizing hackathons and building communities
                         for brand awareness—while our professional team delivers exceptional Web Development, AI/ML, and Data Analytics services to clients.
                     </motion.p>
                 </div>

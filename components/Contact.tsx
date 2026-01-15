@@ -26,7 +26,7 @@ export const Contact: React.FC = () => {
                             <h3 className="font-serif text-3xl text-white">KaizenStat.</h3>
                         </Link>
                         <p className="text-stone-300 text-base leading-relaxed">
-                            An elite digital agency led by Data Science scholars from IIT Madras & MAKAUT.
+                            An elite digital agency led by Data Science scholars.
                             Bridging Engineering precision with Creative intelligence.
                         </p>
                         <div className="flex gap-3">

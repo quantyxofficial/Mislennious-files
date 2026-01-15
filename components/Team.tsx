@@ -8,7 +8,7 @@ const TEAM = [
         name: "Masuddar Rahaman",
         role: "Lead Engineer & Architect",
         bio: "Focused on high-performance pipelines. Turns raw data into actionable growth engines with engineering precision.",
-        edu: "IIT Madras + Makaut",
+        edu: "Top Institutes",
         icon: Code,
         color: "bg-blue-500",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
@@ -18,7 +18,7 @@ const TEAM = [
         name: "Kriti Sharma",
         role: "Head of Strategy",
         bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
-        edu: "IIT Madras + Makaut",
+        edu: "Top Institutes",
         icon: TrendingUp,
         color: "bg-purple-500",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
@@ -28,7 +28,7 @@ const TEAM = [
         name: "Abhishikta Dutta",
         role: "Data Scientist",
         bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
-        edu: "IIT Madras + WBUT",
+        edu: "Top Institutes",
         icon: Briefcase,
         color: "bg-teal-500",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
@@ -107,7 +107,7 @@ export const Team: React.FC = () => {
                                             />
                                         </div>
                                         <div className="px-3 py-2 md:px-4 md:py-2 rounded-full border border-lux-text/10 bg-white/30 backdrop-blur-sm text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold">
-                                            IIT Madras Data Collective
+                                            Data Science Collective
                                         </div>
                                     </div>
 
