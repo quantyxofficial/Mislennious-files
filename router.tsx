@@ -12,7 +12,7 @@ const StudyChapter = lazy(() => import('./pages/StudyChapter').then(m => ({ defa
 const CertificateExam = lazy(() => import('./pages/CertificateExam').then(m => ({ default: m.CertificateExam })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
 const Events = lazy(() => import('./pages/Events').then(m => ({ default: m.Events })));
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail').then(m => ({ default: m.ServiceDetail })));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail.tsx').then(m => ({ default: m.ServiceDetail })));
 const Portfolio = lazy(() => import('./pages/Portfolio').then(m => ({ default: m.Portfolio })));
 const BlogListing = lazy(() => import('./pages/BlogListing').then(m => ({ default: m.BlogListing })));
 const BlogPost = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));

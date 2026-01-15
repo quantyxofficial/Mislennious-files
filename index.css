@@ -7,7 +7,8 @@ body {
   background-color: #FAFAF9;
   color: #1C1917;
   overflow-x: hidden;
-  font-size: 16px; /* Explicit base size */
+  font-size: 16px;
+  /* Explicit base size */
 }
 
 /* Cursor Reset */

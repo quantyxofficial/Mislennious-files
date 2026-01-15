@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { EXTENDED_CASE_STUDIES } from '../constants';
 import { Filter } from 'lucide-react';
+import { ProjectForm } from '../components/ProjectForm';
 
 export const Portfolio: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const location = useLocation();
 
     const categories = ['All', ...Array.from(new Set(EXTENDED_CASE_STUDIES.map(cs => cs.category)))];
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const categoryParam = searchParams.get('category');
+
+        if (categoryParam && categories.includes(categoryParam)) {
+            setSelectedCategory(categoryParam);
+        }
+    }, [location.search]);
 
     const filteredProjects = selectedCategory === 'All'
         ? EXTENDED_CASE_STUDIES
@@ -14,6 +27,38 @@ export const Portfolio: React.FC = () => {
 
     return (
         <div className="min-h-screen">
+            {/* Modal Overlay for Contact Form */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[250] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md"
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-white rounded-[2rem] p-8 max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+                        >
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="absolute top-6 right-6 text-lux-muted hover:text-black transition-colors z-10"
+                            >
+                                ✕
+                            </button>
+                            <ProjectForm
+                                serviceName={`Portfolio Inquiry (${selectedCategory})`}
+                                onClose={() => setIsModalOpen(false)}
+                            />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Hero Section */}
             <section className="relative min-h-[60vh] flex items-center justify-center px-6 md:px-12 pt-32 pb-20">
                 <div className="max-w-4xl mx-auto text-center">
@@ -60,8 +105,8 @@ export const Portfolio: React.FC = () => {
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category
-                                        ? 'bg-lux-text text-white'
-                                        : 'bg-white/50 border border-white/60 text-lux-text hover:bg-white/70'
+                                    ? 'bg-lux-text text-white'
+                                    : 'bg-white/50 border border-white/60 text-lux-text hover:bg-white/70'
                                     }`}
                                 data-hover
                             >
@@ -130,7 +175,11 @@ export const Portfolio: React.FC = () => {
                     <p className="text-lux-muted text-lg mb-8">
                         Let's discuss how we can help you achieve your business goals with data-driven solutions.
                     </p>
-                    <button className="px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full shadow-2xl" data-hover>
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full shadow-2xl"
+                        data-hover
+                    >
                         Start Your Project
                     </button>
                 </div>

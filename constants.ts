@@ -7,35 +7,60 @@ import {
   Terminal,
   Database,
   Search,
-  Zap
+  Zap,
+  FileSpreadsheet,
+  Globe,
+  TrendingUp,
+  Palette,
+  Brain,
+  BarChart
 } from 'lucide-react';
 import { ServiceItem, CaseStudy, Testimonial, MarqueeItem } from './types';
 
-export const SERVICES: ServiceItem[] = [
+// Services Data
+export const SERVICES = [
   {
-    id: 'numpy',
-    title: 'NumPy',
-    description: 'The fundamental package for scientific computing with Python.',
-    icon: Code,
-  },
-  {
-    id: 'pandas',
-    title: 'Pandas',
-    description: 'Data manipulation and analysis structures for real-world data.',
+    id: 'eda',
+    title: 'Exploratory Data Analysis',
+    description: 'Uncovering patterns, spotting anomalies, and checking assumptions with detailed statistical summaries and graphical representations.',
     icon: Database,
   },
   {
-    id: 'matplotlib',
-    title: 'Matplotlib',
-    description: 'Comprehensive library for creating static, animated, and interactive visualizations.',
+    id: 'viz',
+    title: 'Data Visualization',
+    description: 'Transforming complex datasets into intuitive, interactive dashboards that drive decision-making.',
     icon: BarChart3,
   },
   {
     id: 'excel',
-    title: 'Excel',
-    description: 'Master spreadsheets, formulas, and VBA for business intelligence.',
-    icon: Terminal,
-  }
+    title: 'Excel Solutions',
+    description: 'Advanced spreadsheet modeling, automation, and reporting to streamline business operations.',
+    icon: FileSpreadsheet,
+  },
+  {
+    id: 'web',
+    title: 'Web Development',
+    description: 'Building high-performance, scalable web applications with modern frameworks and responsive design.',
+    icon: Globe,
+  },
+  {
+    id: 'growth',
+    title: 'Growth Marketing',
+    description: 'Data-driven strategies to accelerate user acquisition, retention, and revenue growth.',
+    icon: TrendingUp,
+  },
+  {
+    id: 'design',
+    title: 'YT Thumbnail & Poster Making',
+    description: 'High-converting visual assets designed to maximize click-through rates and brand engagement.',
+    icon: Palette,
+  },
+  {
+    id: 'ai',
+    title: 'AI / ML Solutions',
+    description: 'Custom machine learning models and AI integration to automate processes and predict trends.',
+    icon: Brain,
+  },
 ];
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -231,45 +256,63 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       'React, Next.js, and TypeScript development',
       'Progressive Web Apps (PWA)',
       'API development and integration',
-      'Cloud deployment and DevOps',
       'Performance optimization and SEO',
       'Responsive and accessible design'
     ],
-    process: [
-      { step: 'Discovery', description: 'We analyze your requirements and define technical architecture' },
-      { step: 'Design', description: 'Create wireframes, mockups, and interactive prototypes' },
-      { step: 'Development', description: 'Build your application using modern frameworks and best practices' },
-      { step: 'Testing', description: 'Rigorous QA testing across devices and browsers' },
-      { step: 'Deployment', description: 'Launch to production with CI/CD pipelines' },
-      { step: 'Support', description: 'Ongoing maintenance, updates, and optimization' }
-    ],
-    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Vite', 'AWS', 'Vercel'],
+    process: [],
+    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Vercel'],
     caseStudies: ['p1']
   },
   {
-    id: 'data',
-    title: 'Data Analytics',
+    id: 'viz',
+    title: 'Data Visualization',
     subtitle: 'Transform Data into Actionable Insights',
     description: 'Turn your raw data into strategic advantages. We build custom analytics solutions, interactive dashboards, and business intelligence systems that help you make data-driven decisions.',
     icon: BarChart3,
     features: [
       'Custom dashboard development',
-      'Predictive analytics and forecasting',
-      'Data pipeline architecture',
       'Real-time analytics',
       'KPI tracking and visualization',
-      'A/B testing and experimentation'
+      'Interactive executive reports',
+      'Data storytelling'
     ],
-    process: [
-      { step: 'Data Audit', description: 'Assess your current data infrastructure and identify opportunities' },
-      { step: 'Strategy', description: 'Define metrics, KPIs, and analytics framework' },
-      { step: 'Implementation', description: 'Build data pipelines and analytics infrastructure' },
-      { step: 'Visualization', description: 'Create intuitive dashboards and reporting tools' },
-      { step: 'Training', description: 'Empower your team to leverage data insights' },
-      { step: 'Optimization', description: 'Continuous improvement and refinement' }
+    process: [],
+    technologies: ['Tableau', 'Power BI', 'D3.js', 'Looker'],
+    caseStudies: ['p5']
+  },
+  {
+    id: 'eda',
+    title: 'Exploratory Data Analysis',
+    subtitle: 'Uncover Hidden Patterns & Anomalies',
+    description: 'Before modeling comes understanding. We dive deep into your data structure, identifying trends, outliers, and key drivers that inform your entire data strategy.',
+    icon: Database,
+    features: [
+      'Statistical profiling & summary',
+      'Missing data imputation',
+      'Correlation analysis',
+      'Hypothesis testing',
+      'Data quality assessment'
     ],
-    technologies: ['Python', 'Tableau', 'Power BI', 'SQL', 'BigQuery', 'Snowflake', 'Apache Airflow'],
-    caseStudies: ['p3']
+    process: [],
+    technologies: ['Python', 'Pandas', 'NumPy', 'Jupyter', 'R'],
+    caseStudies: ['p5']
+  },
+  {
+    id: 'excel',
+    title: 'Excel Solutions',
+    subtitle: 'Automate Hours of Manual Work',
+    description: 'Stop wasting time on manual copy-pasting. We create robust, automated Excel models and VBA macros that turn days of reporting into a single button click.',
+    icon: FileSpreadsheet,
+    features: [
+      'Advanced financial modeling',
+      'VBA / Macro automation',
+      'Custom formula development',
+      'Dashboard creation in Excel',
+      'Error checking & validation'
+    ],
+    process: [],
+    technologies: ['Excel', 'VBA', 'Power Query', 'Office Scripts'],
+    caseStudies: ['p4']
   },
   {
     id: 'ai',
@@ -280,71 +323,47 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     features: [
       'Custom ML model development',
       'Natural Language Processing (NLP)',
-      'Computer Vision applications',
+      'Predictive maintenance',
       'Recommendation systems',
-      'Chatbots and conversational AI',
-      'Model deployment and MLOps'
+      'Chatbots and conversational AI'
     ],
-    process: [
-      { step: 'Problem Definition', description: 'Identify use cases and success metrics' },
-      { step: 'Data Preparation', description: 'Collect, clean, and prepare training data' },
-      { step: 'Model Development', description: 'Train and fine-tune ML models' },
-      { step: 'Validation', description: 'Test model performance and accuracy' },
-      { step: 'Deployment', description: 'Deploy models to production with monitoring' },
-      { step: 'Iteration', description: 'Continuously improve model performance' }
-    ],
-    technologies: ['TensorFlow', 'PyTorch', 'OpenAI', 'Gemini AI', 'scikit-learn', 'Hugging Face', 'Docker', 'Kubernetes'],
+    process: [],
+    technologies: ['TensorFlow', 'PyTorch', 'OpenAI', 'Gemini', 'scikit-learn'],
     caseStudies: ['p3']
   },
   {
-    id: 'ads',
+    id: 'growth',
     title: 'Growth Marketing',
     subtitle: 'Performance Marketing That Delivers ROI',
     description: 'We engineer data-driven marketing campaigns on Meta and Google platforms that are optimized for conversions, not just clicks. Every dollar is tracked, tested, and optimized.',
-    icon: Megaphone,
+    icon: TrendingUp,
     features: [
       'Meta (Facebook/Instagram) Ads',
-      'Google Ads and Search marketing',
-      'Audience segmentation and targeting',
-      'Creative testing and optimization',
-      'Conversion rate optimization',
-      'Analytics and attribution modeling'
+      'Google Ads & Search Marketing',
+      'Audience segmentation',
+      'Conversion Rate Optimization (CRO)',
+      'Attribution modeling'
     ],
-    process: [
-      { step: 'Audit', description: 'Analyze current marketing performance and opportunities' },
-      { step: 'Strategy', description: 'Define targeting, messaging, and channel mix' },
-      { step: 'Creative', description: 'Develop high-converting ad creatives' },
-      { step: 'Launch', description: 'Deploy campaigns with proper tracking' },
-      { step: 'Optimize', description: 'A/B test and refine for maximum ROI' },
-      { step: 'Scale', description: 'Expand winning campaigns profitably' }
-    ],
-    technologies: ['Meta Ads Manager', 'Google Ads', 'Google Analytics', 'Looker Studio', 'Hotjar', 'Segment'],
+    process: [],
+    technologies: ['Meta Ads', 'Google Ads', 'GA4', 'GTM'],
     caseStudies: ['p2']
   },
   {
     id: 'design',
-    title: 'Visual Storytelling',
-    subtitle: 'Design That Captures Attention and Drives Action',
-    description: 'From brand identity to digital assets, we create visually stunning designs that tell your story and command attention in crowded markets.',
-    icon: Image,
+    title: 'Design & Creative',
+    subtitle: 'Design That Captures Attention',
+    description: 'From brand identity to high-CTR YouTube thumbnails, we create visually stunning designs that tell your story and command attention in crowded markets.',
+    icon: Palette,
     features: [
-      'Brand identity and logo design',
-      'UI/UX design',
-      'Marketing collateral',
+      'Brand identity & Logo design',
+      'High-CTR YouTube Thumbnails',
       'Social media graphics',
-      'Thumbnail design for high CTR',
-      'Motion graphics and animation'
+      'Marketing collateral',
+      'UI/UX Design'
     ],
-    process: [
-      { step: 'Brand Discovery', description: 'Understand your brand values and target audience' },
-      { step: 'Concept', description: 'Develop creative concepts and mood boards' },
-      { step: 'Design', description: 'Create high-fidelity designs and assets' },
-      { step: 'Feedback', description: 'Iterate based on your input' },
-      { step: 'Delivery', description: 'Provide final files and brand guidelines' },
-      { step: 'Support', description: 'Ongoing design support as needed' }
-    ],
-    technologies: ['Figma', 'Adobe Creative Suite', 'After Effects', 'Blender', 'Procreate'],
-    caseStudies: ['p1', 'p2']
+    process: [],
+    technologies: ['Figma', 'Photoshop', 'Illustrator', 'After Effects'],
+    caseStudies: ['p6']
   }
 ];
 
@@ -369,6 +388,42 @@ export const EXTENDED_CASE_STUDIES: ExtendedCaseStudy[] = [
     tags: ['Machine Learning', 'Predictive Analytics'],
     year: '2024',
     description: 'Nebula SaaS needed to reduce churn. We built a custom ML model that predicts churn risk with high accuracy, enabling proactive customer success interventions.'
+  },
+  {
+    id: 'p4',
+    client: 'FinCorp Global',
+    problem: 'Manual reporting in Excel was taking 40+ hours/week.',
+    solution: 'Automated Excel Dashboards & VBA Macros',
+    impact: 'Reduced reporting time by 90%',
+    image: 'https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=2070&auto=format&fit=crop',
+    category: 'Data & Analytics',
+    tags: ['Excel', 'VBA', 'Automation'],
+    year: '2024',
+    description: 'We automated complex financial reporting workflows using advanced Excel models and VBA macros, saving the finance team hundreds of hours annually.'
+  },
+  {
+    id: 'p5',
+    client: 'StreamLine Logistics',
+    problem: 'Supply chain bottlenecks were invisible in raw data.',
+    solution: 'Interactive Power BI Visualization Suite',
+    impact: '15% efficiency gain in 3 months',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop',
+    category: 'Data & Analytics',
+    tags: ['Power BI', 'Visualization', 'EDA'],
+    year: '2024',
+    description: 'Developed a comprehensive Power BI dashboard suite that visualized real-time supply chain data, allowing management to instantly identify and resolve bottlenecks.'
+  },
+  {
+    id: 'p6',
+    client: 'Urban Wear',
+    problem: 'Low CTR on social media campaigns.',
+    solution: 'High-contrast, kinetic typography design system',
+    impact: '4x increase in CTR',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop',
+    category: 'Design & Creative',
+    tags: ['Graphic Design', 'Social Media', 'Branding'],
+    year: '2025',
+    description: 'Revamped the brand\'s social media visual identity with a high-energy kinetic typography system that significantly boosted engagement and click-through rates.'
   }
 ];
 

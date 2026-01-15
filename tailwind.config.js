@@ -5,6 +5,7 @@ export default {
         "./index.tsx",
         "./{pages,components,services,utils}/**/*.{js,ts,jsx,tsx}",
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             fontSize: {

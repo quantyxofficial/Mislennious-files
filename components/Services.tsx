@@ -34,91 +34,37 @@ export const Services: React.FC = () => {
             - AI (8) + Design (4) = 12 (Row 2 filled)
             Total rows: 2.
         */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 lg:grid-flow-dense">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 lg:gap-6">
           {SERVICES.map((service, index) => {
-            const isAI = service.id === 'ai'; // 'ai' no longer exists but keeping logic safe
+            // First 4 items = Row 1 (3 cols each), Next 3 items = Row 2 (4 cols each)
+            const colSpan = index < 4 ? 'lg:col-span-3' : 'lg:col-span-4';
 
             return (
-              <Link to={`/study/${service.id}`} key={service.id} className="contents">
+              <Link to={`/services/${service.id}`} key={service.id} className={`${colSpan} md:col-span-1`}>
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-                  transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-                  className={`group relative overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/40 backdrop-blur-lg shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:bg-white/60 transition-all duration-500 will-change-transform cursor-pointer
-                    ${isAI
-                      ? 'lg:col-span-8 md:col-span-2 min-h-[360px] flex flex-col justify-center p-8 md:p-10 lg:p-14'
-                      : 'lg:col-span-6 md:col-span-1 p-8 md:p-10 flex flex-col justify-between min-h-[300px] md:min-h-[360px]'
-                    }
-                `}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ delay: index * 0.05, duration: 0.6 }}
+                  className={`group relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/40 backdrop-blur-lg shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 cursor-pointer flex flex-col justify-between p-6 min-h-[200px]`}
                   data-hover
                 >
-                  {/* Background Decor - Reduced complexity for performance */}
-                  <div className={`absolute top-0 right-0 rounded-full blur-[30px] transition-transform duration-700 pointer-events-none 
-                    ${isAI ? 'w-[400px] h-[400px] bg-gradient-to-br from-purple-100/50 to-blue-100/50 -translate-y-1/2 translate-x-1/4' : 'w-48 h-48 bg-gradient-to-br from-white/60 to-transparent translate-x-12 -translate-y-12 group-hover:scale-110'}
-                `} />
+                  {/* Background Decor */}
+                  <div className={`absolute -right-4 -top-4 w-32 h-32 bg-gradient-to-br from-white/60 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
 
-                  {isAI && (
-                    <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-                      {/* Subtle animated mesh for AI card */}
-                      <div className="absolute top-1/2 left-0 w-full h-full bg-gradient-to-t from-indigo-50/30 to-transparent" />
-                      <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-200/20 rounded-full blur-[40px]" />
-                    </div>
-                  )}
-
-                  {/* Content Container */}
-                  <div className={`relative z-10 w-full h-full ${isAI ? 'flex flex-col lg:flex-row items-center gap-10 lg:gap-16' : 'flex flex-col justify-between'}`}>
-
-                    {/* Icon Section */}
-                    <div className={`shrink-0 ${isAI ? '' : 'mb-6'}`}>
-                      <div className={`
-                            flex items-center justify-center rounded-2xl border border-white/50 shadow-sm transition-all duration-500 group-hover:bg-lux-text group-hover:border-lux-text
-                            ${isAI ? 'w-20 h-20 lg:w-24 lg:h-24 bg-white/60' : 'w-14 h-14 bg-white/80'}
-                        `}>
-                        <service.icon className={`transition-colors duration-500 group-hover:text-white text-lux-text ${isAI ? 'w-8 h-8 lg:w-10 lg:h-10' : 'w-6 h-6'}`} />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/60 border border-white/50 flex items-center justify-center text-lux-text shadow-sm group-hover:bg-lux-text group-hover:text-white transition-colors duration-300">
+                        <service.icon className="w-5 h-5" />
                       </div>
+                      <span className="opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-lux-text text-xl">→</span>
                     </div>
 
-                    {/* Text Section */}
-                    <div className={`flex-1 ${isAI ? 'text-center lg:text-left' : ''}`}>
-                      <h3 className={`font-serif text-lux-text transition-transform duration-300 group-hover:translate-x-1 ${isAI ? 'text-3xl lg:text-4xl mb-4' : 'text-2xl mb-3'}`}>
-                        {service.title}
-                      </h3>
-
-                      <p className={`text-lux-text/70 leading-relaxed font-medium transition-colors duration-300 group-hover:text-lux-text/90 ${isAI ? 'text-lg max-w-xl' : 'text-sm'}`}>
-                        {service.description}
-                      </p>
-
-                      {/* Extra Chips for AI Card - Horizontal Layout */}
-                      {isAI && (
-                        <div className="mt-6 flex flex-wrap gap-2 justify-center lg:justify-start">
-                          {['Generative AI', 'Predictive Modeling', 'Automation'].map((tag) => (
-                            <span key={tag} className="px-3 py-1 rounded-full border border-lux-text/5 bg-white/50 backdrop-blur-md text-[10px] font-bold uppercase tracking-wider text-lux-text/60">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                    <div>
+                      <h3 className="font-serif text-xl text-lux-text mb-2 leading-tight group-hover:translate-x-1 transition-transform">{service.title}</h3>
+                      <p className="text-xs text-lux-text/60 leading-relaxed line-clamp-2">{service.description}</p>
                     </div>
-
-                    {/* Arrow Button for AI Card */}
-                    {isAI && (
-                      <div className="hidden lg:flex shrink-0 self-center">
-                        <div className="w-14 h-14 rounded-full border border-lux-text/10 flex items-center justify-center bg-white/40 backdrop-blur-md group-hover:bg-lux-text group-hover:border-lux-text transition-all duration-500 shadow-sm">
-                          <span className="text-xl text-lux-text group-hover:text-white transition-colors">→</span>
-                        </div>
-                      </div>
-                    )}
                   </div>
-
-                  {/* Standard Arrow (Bottom Right) for non-AI cards */}
-                  {!isAI && (
-                    <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-500">
-                      <div className="w-8 h-8 rounded-full border border-lux-text/20 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-                        <span className="text-lux-text text-lg">→</span>
-                      </div>
-                    </div>
-                  )}
 
                 </motion.div>
               </Link>

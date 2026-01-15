@@ -114,12 +114,15 @@ export const PracticeHome: React.FC = () => {
                             </div>
 
                             {/* CURATED PATHS */}
-                            <div className="mb-12">
-                                <div className="flex items-center justify-between mb-6">
+                            <div className="mb-12 relative opacity-70 cursor-not-allowed">
+                                <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/10 backdrop-blur-[1px] rounded-3xl">
+                                    <span className="px-4 py-2 bg-stone-800 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20">Coming Soon</span>
+                                </div>
+                                <div className="flex items-center justify-between mb-6 pointer-events-none">
                                     <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lux-muted">Curated Paths</h2>
                                     <button className="text-[10px] font-bold uppercase tracking-[0.1em] text-lux-text hover:text-lux-muted">View All</button>
                                 </div>
-                                <div className="space-y-3">
+                                <div className="space-y-3 pointer-events-none">
                                     {learningPaths.map((path, idx) => (
                                         <div key={idx} className="flex items-center p-4 bg-white/20 backdrop-blur-sm border border-white/40 rounded-2xl hover:bg-white/40 transition-colors cursor-pointer group">
                                             <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center text-xl mr-4 group-hover:scale-110 transition-transform">
@@ -137,22 +140,6 @@ export const PracticeHome: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* RECENT DISCUSSIONS (Mock) */}
-                            <div className="mb-12">
-                                <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lux-muted mb-6">Community Buzz</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="p-5 bg-white/10 border border-white/20 rounded-2xl hover:border-lux-text/20 transition-colors">
-                                        <span className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 mb-2 block">Interview Exp</span>
-                                        <h4 className="font-serif text-lg mb-2">Google Data Science Interview - L4</h4>
-                                        <p className="text-xs text-lux-muted">"They asked mostly about A/B testing and SQL windows..."</p>
-                                    </div>
-                                    <div className="p-5 bg-white/10 border border-white/20 rounded-2xl hover:border-lux-text/20 transition-colors">
-                                        <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 mb-2 block">Pandas</span>
-                                        <h4 className="font-serif text-lg mb-2">Efficient way to merge 10GB DataFrames?</h4>
-                                        <p className="text-xs text-lux-muted">"Is it better to use Dask or just chunking..."</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         {/* RIGHT COLUMN - SIDEBAR */}

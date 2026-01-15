@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { ScrollManager } from './components/ScrollManager';
 
 import { Navbar } from './components/Navbar';
 import { Contact } from './components/Contact';
 
 export const Layout: React.FC = () => {
-    const location = useLocation();
-
-    // Scroll to top on route change
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location.pathname]);
-
     return (
         <>
             {/* Mac OS Style "Aurora" Mesh Gradient Background + Dynamic Grid Effect */}
@@ -64,6 +58,8 @@ export const Layout: React.FC = () => {
                 {/* Use Contact footer for all pages */}
                 <Contact />
 
+                {/* Persistent Scroll Manager: Handles async updates and back button restoration */}
+                <ScrollManager />
 
             </div>
         </>
