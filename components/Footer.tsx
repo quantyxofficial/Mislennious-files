@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             />
 
             <div className="max-w-[1400px] mx-auto px-6 lg:px-24 py-16 lg:py-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
                     {/* Company Info */}
                     <div className="space-y-6">
                         <Link to="/" className="inline-block">
@@ -54,21 +54,26 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
 
+                    {/* Courses */}
+                    <div>
+                        <h4 className="font-serif text-xl text-white mb-6">Courses</h4>
+                        <ul className="space-y-3">
+                            <li><Link to="/study/deep-learning" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Deep Learning</Link></li>
+                            <li><Link to="/study/machine-learning" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Machine Learning</Link></li>
+                            <li><Link to="/study/numpy" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>NumPy</Link></li>
+                            <li><Link to="/study/pandas" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Pandas</Link></li>
+                            <li><Link to="/study/matplotlib" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Matplotlib</Link></li>
+                            <li><Link to="/study/excel" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Excel for Data Science</Link></li>
+                        </ul>
+                    </div>
+
                     {/* Services */}
                     <div>
                         <h4 className="font-serif text-xl text-white mb-6">Services</h4>
                         <ul className="space-y-3">
-                            {/* Active Services */}
                             <li><Link to="/services/eda" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Exploratory Data Analysis</Link></li>
-                            <li><Link to="/services/design" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>YT Thumbnail & Poster Making</Link></li>
-
-                            {/* Commented out inactive services
+                            <li><Link to="/services/design" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>YT Thumbnail Design</Link></li>
                             <li><Link to="/services/web" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Web Development</Link></li>
-                            <li><Link to="/services/data" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Data Analytics</Link></li>
-                            <li><Link to="/services/ai" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>AI / ML Solutions</Link></li>
-                            <li><Link to="/services/ads" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Growth Marketing</Link></li>
-                            <li><Link to="/services/design" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Visual Design</Link></li>
-                            */}
                         </ul>
                     </div>
 

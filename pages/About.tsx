@@ -40,8 +40,26 @@ export const About: React.FC = () => {
 
 
             {/* STORY & IMAGE - Side by Side but tight */}
-            <section className="px-6 md:px-12 lg:px-24 pt-32 pb-16 bg-gray-50/50">
-                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            {/* STORY & IMAGE - Side by Side but tight */}
+            <section className="px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-16 bg-gray-50/50">
+                <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    {/* Image First on Mobile for better engagement */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="relative order-first md:order-last"
+                    >
+                        <div className="aspect-video md:aspect-square rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm relative group">
+                            <div className="absolute inset-0 bg-lux-text/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                            <img
+                                src="/assets/team-narrative.jpg"
+                                alt="KaizenStat Team"
+                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                            />
+                        </div>
+                    </motion.div>
+
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -60,27 +78,17 @@ export const About: React.FC = () => {
                             </p>
                         </div>
                     </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="relative"
-                    >
-                        <div className="aspect-video md:aspect-square rounded-[2rem] bg-white border border-gray-100 p-8 flex items-center justify-center shadow-sm">
-                            <Users className="w-24 h-24 text-lux-text/10" />
-                        </div>
-                    </motion.div>
                 </div>
             </section>
 
             {/* VALUES & TIMELINE GRID */}
-            <section className="px-6 md:px-12 lg:px-24 py-20">
-                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24">
+            <section className="px-6 md:px-12 lg:px-24 py-12 md:py-20">
+                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24">
 
                     {/* Values */}
                     <div>
-                        <h2 className="font-serif text-3xl text-lux-text mb-8 text-center lg:text-left">Our Values</h2>
-                        <div className="grid sm:grid-cols-2 gap-4">
+                        <h2 className="font-serif text-3xl text-lux-text mb-6 md:mb-8 text-left">Our Values</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {values.map((value, index) => (
                                 <div key={value.title} className="p-5 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors bg-white">
                                     <h4 className="font-bold text-sm text-lux-text mb-2">{value.title}</h4>
@@ -92,15 +100,18 @@ export const About: React.FC = () => {
 
                     {/* Timeline */}
                     <div>
-                        <h2 className="font-serif text-3xl text-lux-text mb-8 text-center lg:text-left">Journey So Far</h2>
-                        <div className="space-y-6 md:pl-8 border-l border-gray-100 md:border-none">
+                        <h2 className="font-serif text-3xl text-lux-text mb-6 md:mb-8 text-left mt-8 lg:mt-0">Journey So Far</h2>
+                        <div className="space-y-6 md:pl-8 lg:border-l border-gray-100 relative">
+                            {/* Mobile Vertical Line */}
+                            <div className="absolute left-[1.35rem] top-4 bottom-4 w-px bg-gray-100 md:hidden" />
+
                             {milestones.map((milestone, index) => (
-                                <div key={index} className="flex gap-4 items-start pl-4 md:pl-0">
-                                    <div className="w-12 h-12 shrink-0 rounded-full bg-lux-text/5 text-lux-text flex items-center justify-center font-serif text-xs font-bold">
+                                <div key={index} className="flex gap-4 items-start pl-0 relative z-10">
+                                    <div className="w-11 h-11 shrink-0 rounded-full bg-white border border-gray-100 text-lux-text flex items-center justify-center font-serif text-[10px] font-bold shadow-sm">
                                         {milestone.year}
                                     </div>
                                     <div className="pt-2">
-                                        <p className="text-sm text-lux-text/80">{milestone.event}</p>
+                                        <p className="text-sm text-lux-text/80 font-medium">{milestone.event}</p>
                                     </div>
                                 </div>
                             ))}
