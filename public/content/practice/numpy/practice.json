@@ -1,4 +1,125 @@
 {
   "topic": "Numpy",
-  "problems": []
+  "problems": [
+    {
+      "id": "np-01",
+      "file": "01-basics.md",
+      "difficulty": "Basic",
+      "title": "NumPy vs Lists"
+    },
+    {
+      "id": "np-02",
+      "file": "02-import.md",
+      "difficulty": "Basic",
+      "title": "Correct Import"
+    },
+    {
+      "id": "np-03",
+      "file": "03-creation.md",
+      "difficulty": "Basic",
+      "title": "Creating Arrays"
+    },
+    {
+      "id": "np-04",
+      "file": "04-shape.md",
+      "difficulty": "Basic",
+      "title": "Inspecting Shape"
+    },
+    {
+      "id": "np-05",
+      "file": "05-dtype.md",
+      "difficulty": "Basic",
+      "title": "Data Types"
+    },
+    {
+      "id": "np-06",
+      "file": "06-math.md",
+      "difficulty": "Basic",
+      "title": "Vector Addition"
+    },
+    {
+      "id": "np-07",
+      "file": "07-zeros.md",
+      "difficulty": "Basic",
+      "title": "Initializing Zeros"
+    },
+    {
+      "id": "np-08",
+      "file": "08-access.md",
+      "difficulty": "Basic",
+      "title": "Accessing Elements"
+    },
+    {
+      "id": "np-09",
+      "file": "09-slicing.md",
+      "difficulty": "Medium",
+      "title": "Array Slicing"
+    },
+    {
+      "id": "np-10",
+      "file": "10-reshape.md",
+      "difficulty": "Medium",
+      "title": "Reshaping Dimensions"
+    },
+    {
+      "id": "np-11",
+      "file": "11-broadcast-basic.md",
+      "difficulty": "Medium",
+      "title": "Broadcasting Basics"
+    },
+    {
+      "id": "np-12",
+      "file": "12-axis.md",
+      "difficulty": "Medium",
+      "title": "Understanding Axis"
+    },
+    {
+      "id": "np-13",
+      "file": "13-masking.md",
+      "difficulty": "Medium",
+      "title": "Boolean Masking"
+    },
+    {
+      "id": "np-14",
+      "file": "14-stats.md",
+      "difficulty": "Medium",
+      "title": "Statistical Operations"
+    },
+    {
+      "id": "np-15",
+      "file": "15-generators.md",
+      "difficulty": "Medium",
+      "title": "Arange vs Linspace"
+    },
+    {
+      "id": "np-16",
+      "file": "16-broadcast-adv.md",
+      "difficulty": "Hard",
+      "title": "Advanced Broadcasting"
+    },
+    {
+      "id": "np-17",
+      "file": "17-matmul.md",
+      "difficulty": "Hard",
+      "title": "Matrix Multiplication"
+    },
+    {
+      "id": "np-18",
+      "file": "18-fancy.md",
+      "difficulty": "Hard",
+      "title": "Fancy Indexing"
+    },
+    {
+      "id": "np-19",
+      "file": "19-stacking.md",
+      "difficulty": "Hard",
+      "title": "Stacking Arrays"
+    },
+    {
+      "id": "np-20",
+      "file": "20-memory.md",
+      "difficulty": "Hard",
+      "title": "Memory Optimization"
+    }
+  ]
 }

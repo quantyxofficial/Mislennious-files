@@ -1,97 +1,76 @@
 {
   "topic": "Numpy",
-  "description": "numpy Study Material",
+  "description": "Master high-performance numerical computing in Python.",
   "chapters": [
     {
-      "id": "intro-to-numpy",
-      "title": "Introduction to NumPy",
-      "description": "Learn what NumPy is, why it's essential for data science, and how it differs from standard Python lists.",
-      "file": "01-intro.md",
+      "id": "array-revolution",
+      "title": "The Array Revolution",
+      "description": "Discover why NumPy arrays are the heartbeat of modern AI and Data Science.",
+      "file": "01-revolution.md",
       "order": 1
     },
     {
-      "id": "installing-numpy",
-      "title": "Installing and Importing NumPy",
-      "description": "Step-by-step guide to setting up NumPy in your environment and your first program.",
-      "file": "02-install.md",
+      "id": "anatomy-array",
+      "title": "Anatomy of an Array",
+      "description": "Learn to build and visualize 1D, 2D, and 3D data structures from scratch.",
+      "file": "02-anatomy.md",
       "order": 2
     },
     {
-      "id": "numpy-ndarray",
-      "title": "NumPy Arrays (ndarray)",
-      "description": "Explore the ndarray object, creation methods, attributes, and how it compares to Python lists.",
-      "file": "03-ndarray.md",
+      "id": "slicing-surgeon",
+      "title": "The Slicing Surgeon",
+      "description": "Extract exactly the data you need with surgical precision using indexing and slicing.",
+      "file": "03-slicing.md",
       "order": 3
     },
     {
-      "id": "indexing-slicing",
-      "title": "Array Indexing and Slicing",
-      "description": "Master the art of selecting specific elements or subsets of data from your NumPy arrays.",
-      "file": "04-indexing.md",
+      "id": "shape-shifter",
+      "title": "Shape Shifter",
+      "description": "Master dimensions: Reshape, Flatten, and Transpose arrays to fit any model.",
+      "file": "04-shape.md",
       "order": 4
     },
     {
-      "id": "shape-manipulation",
-      "title": "Array Shape Manipulation",
-      "description": "Learn how to change the dimensions and structure of your arrays without changing the data.",
-      "file": "05-shape.md",
+      "id": "math-at-scale",
+      "title": "Mathematics at Scale",
+      "description": "Unlock the power of Broadcasting to perform math on millions of numbers instantly.",
+      "file": "05-math.md",
       "order": 5
     },
     {
-      "id": "numpy-dtypes",
-      "title": "NumPy Data Types (dtype)",
-      "description": "Understand the different data types available in NumPy and how to control memory usage with precision.",
-      "file": "06-dtype.md",
+      "id": "statistical-insights",
+      "title": "Statistical Insights",
+      "description": "Derive meaning from chaos: Mean, Median, Deviation, and Percentiles.",
+      "file": "06-stats.md",
       "order": 6
     },
     {
-      "id": "math-operations",
-      "title": "Mathematical Operations in NumPy",
-      "description": "Learn about vectorized arithmetic, universal functions (ufuncs), and the powerful concept of broadcasting.",
-      "file": "07-math.md",
+      "id": "linear-algebra",
+      "title": "Linear Algebra Magic",
+      "description": "The engine of Machine Learning: Dot products and Matrix multiplication simplified.",
+      "file": "07-linalg.md",
       "order": 7
     },
     {
-      "id": "stats-functions",
-      "title": "Statistical Functions in NumPy",
-      "description": "Use NumPy to perform essential statistical analysis on your datasets with ease.",
-      "file": "08-stats.md",
+      "id": "randomness",
+      "title": "Randomness & Probability",
+      "description": "Simulate reality by generating synthetic data and probability distributions.",
+      "file": "08-random.md",
       "order": 8
     },
     {
-      "id": "linear-algebra",
-      "title": "Linear Algebra using NumPy",
-      "description": "Dive into the world of vectors and matrices. Essential for understanding Machine Learning algorithms.",
-      "file": "09-linalg.md",
+      "id": "file-mastery",
+      "title": "File I/O Mastery",
+      "description": "Save your work: Efficiently load and store massive datasets.",
+      "file": "09-files.md",
       "order": 9
     },
     {
-      "id": "random-module",
-      "title": "Random Module in NumPy",
-      "description": "Learn how to generate random data, work with probability distributions, and ensure reproducibility with seeds.",
-      "file": "10-random.md",
+      "id": "capstone",
+      "title": "Capstone: Finance Analysis",
+      "description": "Apply everything you've learned to analyze a real-world stock market dataset.",
+      "file": "10-capstone.md",
       "order": 10
-    },
-    {
-      "id": "file-handling",
-      "title": "File Handling with NumPy",
-      "description": "Learn how to save your processed data to disk and load it back into memory efficiently.",
-      "file": "11-file-handling.md",
-      "order": 11
-    },
-    {
-      "id": "performance-optimization",
-      "title": "Performance Optimization in NumPy",
-      "description": "Understand why NumPy is fast and how to write code that takes full advantage of its efficiency.",
-      "file": "12-performance.md",
-      "order": 12
-    },
-    {
-      "id": "best-practices-errors",
-      "title": "NumPy Best Practices & Common Errors",
-      "description": "Tips to write cleaner code and a guide to understanding common error messages you'll encounter.",
-      "file": "13-best-practices.md",
-      "order": 13
     }
   ]
 }

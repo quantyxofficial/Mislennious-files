@@ -1,10 +1,11 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ScrollManager } from './components/ScrollManager';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
 export const Layout: React.FC = () => {
+    const location = useLocation();
     return (
         <>
             {/* Mac OS Style "Aurora" Mesh Gradient Background + Dynamic Grid Effect */}
@@ -54,8 +55,8 @@ export const Layout: React.FC = () => {
                     </main>
                 </div>
 
-                {/* Global Footer */}
-                <Footer />
+                {/* Global Footer - Hidden ONLY on detailed Study/Practice content pages (not lists) */}
+                {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && <Footer />}
 
                 {/* Persistent Scroll Manager: Handles async updates and back button restoration */}
                 <ScrollManager />

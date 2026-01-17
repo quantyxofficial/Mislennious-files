@@ -2,10 +2,124 @@
   "topic": "Deep Learning",
   "problems": [
     {
-      "id": "dl-intro-01",
-      "file": "01-intro.md",
+      "id": "dl-01",
+      "file": "01-neuron.md",
       "difficulty": "Basic",
-      "title": "Neural Network Basics"
+      "title": "The Neuron"
+    },
+    {
+      "id": "dl-02",
+      "file": "02-input.md",
+      "difficulty": "Basic",
+      "title": "Input Layer"
+    },
+    {
+      "id": "dl-03",
+      "file": "03-hidden.md",
+      "difficulty": "Basic",
+      "title": "Hidden Layer"
+    },
+    {
+      "id": "dl-04",
+      "file": "04-output.md",
+      "difficulty": "Basic",
+      "title": "Output Layer"
+    },
+    {
+      "id": "dl-05",
+      "file": "05-activation.md",
+      "difficulty": "Basic",
+      "title": "Activation Function"
+    },
+    {
+      "id": "dl-06",
+      "file": "06-epoch.md",
+      "difficulty": "Basic",
+      "title": "Epoch Definition"
+    },
+    {
+      "id": "dl-07",
+      "file": "07-loss.md",
+      "difficulty": "Basic",
+      "title": "Loss Function"
+    },
+    {
+      "id": "dl-08",
+      "file": "08-framework.md",
+      "difficulty": "Basic",
+      "title": "Keras vs TensorFlow"
+    },
+    {
+      "id": "dl-09",
+      "file": "09-relu.md",
+      "difficulty": "Medium",
+      "title": "ReLU Logic"
+    },
+    {
+      "id": "dl-10",
+      "file": "10-backprop.md",
+      "difficulty": "Medium",
+      "title": "Backpropagation"
+    },
+    {
+      "id": "dl-11",
+      "file": "11-optimizer.md",
+      "difficulty": "Medium",
+      "title": "The Optimizer"
+    },
+    {
+      "id": "dl-12",
+      "file": "12-conv.md",
+      "difficulty": "Medium",
+      "title": "Convolution"
+    },
+    {
+      "id": "dl-13",
+      "file": "13-pooling.md",
+      "difficulty": "Medium",
+      "title": "Pooling"
+    },
+    {
+      "id": "dl-14",
+      "file": "14-dropout.md",
+      "difficulty": "Medium",
+      "title": "Dropout"
+    },
+    {
+      "id": "dl-15",
+      "file": "15-batch.md",
+      "difficulty": "Medium",
+      "title": "Batch Size"
+    },
+    {
+      "id": "dl-16",
+      "file": "16-vanishing.md",
+      "difficulty": "Hard",
+      "title": "Vanishing Gradient"
+    },
+    {
+      "id": "dl-17",
+      "file": "17-softmax.md",
+      "difficulty": "Hard",
+      "title": "Softmax Probability"
+    },
+    {
+      "id": "dl-18",
+      "file": "18-rnn.md",
+      "difficulty": "Hard",
+      "title": "RNN Memory"
+    },
+    {
+      "id": "dl-19",
+      "file": "19-transfer.md",
+      "difficulty": "Hard",
+      "title": "Transfer Learning"
+    },
+    {
+      "id": "dl-20",
+      "file": "20-params.md",
+      "difficulty": "Hard",
+      "title": "Parameter Calculation"
     }
   ]
 }

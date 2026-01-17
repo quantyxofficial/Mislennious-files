@@ -1,13 +1,76 @@
 {
   "topic": "Pandas",
-  "description": "pandas Study Material",
+  "description": "Master data manipulation and analysis.",
   "chapters": [
     {
-      "id": "01-basics",
-      "title": "Introduction to Pandas",
-      "description": "",
-      "file": "01-basics.md",
+      "id": "excel-killer",
+      "title": "Pandas: The Excel Killer",
+      "description": "Why Pandas is the industry standard for data manipulation.",
+      "file": "01-intro.md",
       "order": 1
+    },
+    {
+      "id": "loading-data",
+      "title": "Loading Data",
+      "description": "Read anything: CSVs, Excel files, JSON, and databases.",
+      "file": "02-loading.md",
+      "order": 2
+    },
+    {
+      "id": "inspection",
+      "title": "Inspection Gadget",
+      "description": "Understand your dataset instantly with head, info, and describe.",
+      "file": "03-inspection.md",
+      "order": 3
+    },
+    {
+      "id": "selecting",
+      "title": "Selecting Data",
+      "description": "The battle of loc vs iloc: How to grab exactly what you need.",
+      "file": "04-selection.md",
+      "order": 4
+    },
+    {
+      "id": "filtering",
+      "title": "Filtering & Queries",
+      "description": "Extract specific rows using boolean logic and queries.",
+      "file": "05-filtering.md",
+      "order": 5
+    },
+    {
+      "id": "cleaning",
+      "title": "Cleaning Up",
+      "description": "Handle missing values (NaN) and remove duplicates like a pro.",
+      "file": "06-cleaning.md",
+      "order": 6
+    },
+    {
+      "id": "feature-engineering",
+      "title": "Feature Engineering",
+      "description": "Create new columns and transform data using map and apply.",
+      "file": "07-features.md",
+      "order": 7
+    },
+    {
+      "id": "grouping",
+      "title": "Grouping Power",
+      "description": "Split-Apply-Combine: The art of aggregation with GroupBy.",
+      "file": "08-grouping.md",
+      "order": 8
+    },
+    {
+      "id": "merging",
+      "title": "Merging Worlds",
+      "description": "Combine multiple datasets: Concat, Merge, and Join explained.",
+      "file": "09-merging.md",
+      "order": 9
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone: Real Estate",
+      "description": "Analyze housing prices, clean dirty data, and find the best deals.",
+      "file": "10-capstone.md",
+      "order": 10
     }
   ]
 }

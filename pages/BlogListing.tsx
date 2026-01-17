@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BLOG_POSTS } from '../constants';
+import { loadBlogPosts, BlogPost } from '../utils/contentLoader';
 import { Search, Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export const BlogListing: React.FC = () => {
+    const [posts, setPosts] = useState<BlogPost[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [loading, setLoading] = useState(true);
 
-    const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map(post => post.category)))];
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const data = await loadBlogPosts();
+            setPosts(data);
+            setLoading(false);
+        };
+        fetchPosts();
+    }, []);
+
+    const categories = ['All', ...Array.from(new Set(posts.map(post => post.category)))];
 
     const filteredPosts = selectedCategory === 'All'
-        ? BLOG_POSTS
-        : BLOG_POSTS.filter(post => post.category === selectedCategory);
+        ? posts
+        : posts.filter(post => post.category === selectedCategory);
 
     const featuredPosts = filteredPosts.filter(post => post.featured);
 

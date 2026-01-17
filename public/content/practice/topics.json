@@ -1,56 +1,56 @@
 [
   {
-    "id": "deep-learning",
-    "title": "Deep Learning",
-    "description": "Neural Networks, Backpropagation & architecture.",
-    "icon": "🧠",
-    "color": "from-violet-500 to-fuchsia-600",
-    "count": 1,
-    "hasStudyMaterial": true
-  },
-  {
-    "id": "excel",
-    "title": "Excel",
-    "description": "Master spreadsheets, formulas, and VBA for business intelligence.",
-    "icon": "📈",
-    "color": "from-green-500 to-emerald-700",
-    "count": 1,
-    "hasStudyMaterial": true
-  },
-  {
-    "id": "machine-learning",
-    "title": "Machine Learning",
-    "description": "Supervised, Unsupervised & Reinforcement Learning.",
-    "icon": "🤖",
-    "color": "from-blue-500 to-indigo-600",
-    "count": 1,
-    "hasStudyMaterial": false
-  },
-  {
-    "id": "matplotlib",
-    "title": "Matplotlib",
-    "description": "matplotlib practice problems",
-    "icon": "📚",
-    "color": "from-gray-500 to-gray-700",
-    "count": 0,
-    "hasStudyMaterial": true
-  },
-  {
     "id": "numpy",
-    "title": "Numpy",
-    "description": "numpy practice problems",
-    "icon": "📚",
-    "color": "from-gray-500 to-gray-700",
-    "count": 0,
+    "title": "NumPy",
+    "description": "Master Arrays, Vectorization, and Linear Algebra.",
+    "icon": "🔢",
+    "color": "from-blue-500 to-cyan-600",
+    "count": 20,
     "hasStudyMaterial": true
   },
   {
     "id": "pandas",
     "title": "Pandas",
-    "description": "pandas practice problems",
-    "icon": "📚",
-    "color": "from-gray-500 to-gray-700",
-    "count": 0,
+    "description": "Data Analysis, Manipulation, and Cleaning.",
+    "icon": "🐼",
+    "color": "from-indigo-500 to-purple-600",
+    "count": 20,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "matplotlib",
+    "title": "Matplotlib",
+    "description": "Data Visualization, Plots, and Charts.",
+    "icon": "📊",
+    "color": "from-orange-500 to-red-600",
+    "count": 20,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "excel",
+    "title": "Excel",
+    "description": "Formulas, Pivot Tables, and Business Intelligence.",
+    "icon": "📈",
+    "color": "from-green-500 to-emerald-700",
+    "count": 20,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "machine-learning",
+    "title": "Machine Learning",
+    "description": "Regression, Classification, and Scikit-Learn.",
+    "icon": "🤖",
+    "color": "from-blue-600 to-indigo-700",
+    "count": 20,
+    "hasStudyMaterial": true
+  },
+  {
+    "id": "deep-learning",
+    "title": "Deep Learning",
+    "description": "Neural Networks, CNNs, and TensorFlow/Keras.",
+    "icon": "🧠",
+    "color": "from-violet-600 to-fuchsia-700",
+    "count": 20,
     "hasStudyMaterial": true
   }
 ]

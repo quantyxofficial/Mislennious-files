@@ -1,0 +1,68 @@
+[
+    {
+        "id": "blog-01-start-data-science-career",
+        "file": "blog-01-start-data-science-career.md",
+        "title": "How to Start a Data Science Career as a Student",
+        "category": "Career Guide",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=80",
+        "readTime": "8 min",
+        "author": "KaizenStat Team",
+        "featured": true
+    },
+    {
+        "id": "blog-02-python-skills-professionals",
+        "file": "blog-02-python-skills-professionals.md",
+        "title": "Essential Python Skills Every Tech Professional Should Master",
+        "category": "Skills Development",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=1200&q=80",
+        "readTime": "10 min",
+        "author": "KaizenStat Team",
+        "featured": true
+    },
+    {
+        "id": "blog-03-data-science-portfolio",
+        "file": "blog-03-data-science-portfolio.md",
+        "title": "Building a Data Science Portfolio That Gets You Hired",
+        "category": "Career Development",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+        "readTime": "12 min",
+        "author": "KaizenStat Team",
+        "featured": true
+    },
+    {
+        "id": "blog-04-ai-tools-2026",
+        "file": "blog-04-ai-tools-2026.md",
+        "title": "AI Tools Transforming Work in 2026",
+        "category": "Technology Trends",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+        "readTime": "7 min",
+        "author": "KaizenStat Team",
+        "featured": false
+    },
+    {
+        "id": "blog-05-outages-reliability",
+        "file": "blog-05-outages-reliability.md",
+        "title": "Understanding System Reliability: Lessons from Outages",
+        "category": "Systems Engineering",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+        "readTime": "9 min",
+        "author": "KaizenStat Team",
+        "featured": false
+    },
+    {
+        "id": "blog-06-exam-data-strategy",
+        "file": "blog-06-exam-data-strategy.md",
+        "title": "Data-Driven Strategy for Competitive Exams",
+        "category": "Education Strategy",
+        "date": "2026-01-17",
+        "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80",
+        "readTime": "6 min",
+        "author": "KaizenStat Team",
+        "featured": false
+    }
+]

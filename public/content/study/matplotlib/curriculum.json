@@ -1,13 +1,76 @@
 {
   "topic": "Matplotlib",
-  "description": "matplotlib Study Material",
+  "description": "Master data visualization in Python.",
   "chapters": [
     {
-      "id": "01-basics",
-      "title": "Introduction to Matplotlib",
-      "description": "",
-      "file": "01-basics.md",
+      "id": "intro",
+      "title": "The Canvas",
+      "description": "Understanding the Figure and Axes: The philosophy of plotting.",
+      "file": "01-canvas.md",
       "order": 1
+    },
+    {
+      "id": "basic",
+      "title": "Basic Plots",
+      "description": "The big three: Line, Scatter, and Bar charts.",
+      "file": "02-basic.md",
+      "order": 2
+    },
+    {
+      "id": "styling",
+      "title": "Styling Masterclass",
+      "description": "Make it beautiful: Colors, Markers, Linestyles, and Themes.",
+      "file": "03-styling.md",
+      "order": 3
+    },
+    {
+      "id": "subplots",
+      "title": "Subplots & Grids",
+      "description": "Display multiple plots in a single figure like a dashboard.",
+      "file": "04-subplots.md",
+      "order": 4
+    },
+    {
+      "id": "distribution",
+      "title": "Distributions (Hist & Box)",
+      "description": "visualize the spread of data: Histograms and Boxplots.",
+      "file": "05-distribution.md",
+      "order": 5
+    },
+    {
+      "id": "proportions",
+      "title": "Proportions (Pie & Donut)",
+      "description": "Visualize parts of a whole effectively.",
+      "file": "06-pie.md",
+      "order": 6
+    },
+    {
+      "id": "matrices",
+      "title": "Heatmaps & Matrices",
+      "description": "Visualizing 2D data and correlations with color.",
+      "file": "07-heatmap.md",
+      "order": 7
+    },
+    {
+      "id": "annotations",
+      "title": "Annotations & Text",
+      "description": "Add text, arrows, and shapes to tell a story.",
+      "file": "08-annotate.md",
+      "order": 8
+    },
+    {
+      "id": "3d-plots",
+      "title": "The Third Dimension",
+      "description": "Introduction to 3D plotting with `mplot3d`.",
+      "file": "09-3d.md",
+      "order": 9
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone: Dashboard",
+      "description": "Combine everything into a professional financial dashboard.",
+      "file": "10-capstone.md",
+      "order": 10
     }
   ]
 }

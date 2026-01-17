@@ -1,4 +1,125 @@
 {
   "topic": "Pandas",
-  "problems": []
+  "problems": [
+    {
+      "id": "pd-01",
+      "file": "01-vs-excel.md",
+      "difficulty": "Basic",
+      "title": "Pandas vs Excel"
+    },
+    {
+      "id": "pd-02",
+      "file": "02-structure.md",
+      "difficulty": "Basic",
+      "title": "Series vs DataFrame"
+    },
+    {
+      "id": "pd-03",
+      "file": "03-read.md",
+      "difficulty": "Basic",
+      "title": "Reading Files"
+    },
+    {
+      "id": "pd-04",
+      "file": "04-head.md",
+      "difficulty": "Basic",
+      "title": "Inspecting Top Rows"
+    },
+    {
+      "id": "pd-05",
+      "file": "05-info.md",
+      "difficulty": "Basic",
+      "title": "Checking Data Types"
+    },
+    {
+      "id": "pd-06",
+      "file": "06-select.md",
+      "difficulty": "Basic",
+      "title": "Selecting Columns"
+    },
+    {
+      "id": "pd-07",
+      "file": "07-shape.md",
+      "difficulty": "Basic",
+      "title": "Checking Dimensions"
+    },
+    {
+      "id": "pd-08",
+      "file": "08-fillna.md",
+      "difficulty": "Basic",
+      "title": "Handling Missing Data"
+    },
+    {
+      "id": "pd-09",
+      "file": "09-loc-iloc.md",
+      "difficulty": "Medium",
+      "title": "loc vs iloc"
+    },
+    {
+      "id": "pd-10",
+      "file": "10-filter.md",
+      "difficulty": "Medium",
+      "title": "Boolean Indexing"
+    },
+    {
+      "id": "pd-11",
+      "file": "11-query.md",
+      "difficulty": "Medium",
+      "title": "Query Syntax"
+    },
+    {
+      "id": "pd-12",
+      "file": "12-groupby.md",
+      "difficulty": "Medium",
+      "title": "GroupBy Aggregation"
+    },
+    {
+      "id": "pd-13",
+      "file": "13-counts.md",
+      "difficulty": "Medium",
+      "title": "Counting Values"
+    },
+    {
+      "id": "pd-14",
+      "file": "14-duplicates.md",
+      "difficulty": "Medium",
+      "title": "Removing Duplicates"
+    },
+    {
+      "id": "pd-15",
+      "file": "15-apply.md",
+      "difficulty": "Medium",
+      "title": "Using Apply"
+    },
+    {
+      "id": "pd-16",
+      "file": "16-merge.md",
+      "difficulty": "Hard",
+      "title": "Merging Datasets"
+    },
+    {
+      "id": "pd-17",
+      "file": "17-pivot.md",
+      "difficulty": "Hard",
+      "title": "Pivot Tables"
+    },
+    {
+      "id": "pd-18",
+      "file": "18-multiindex.md",
+      "difficulty": "Hard",
+      "title": "Multi-Index Selection"
+    },
+    {
+      "id": "pd-19",
+      "file": "19-memory.md",
+      "difficulty": "Hard",
+      "title": "Memory Optimization"
+    },
+    {
+      "id": "pd-20",
+      "file": "20-vectorization.md",
+      "difficulty": "Hard",
+      "title": "Vectorization vs Apply"
+    }
+  ]
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { loadPracticeProblems, Question, Topic } from '../utils/contentLoader';
+import { loadPracticeMetadata, QuestionSummary, Topic } from '../utils/contentLoader';
 import { CompanyTags } from '../components/practice/CompanyTags';
 import { ChevronLeft, ArrowRight, Award } from 'lucide-react';
 
@@ -10,7 +10,7 @@ export const PracticeList: React.FC = () => {
     const { topic } = useParams<{ topic: string }>();
     const normalizedTopicStr = topic ? topic.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : '';
 
-    const [questions, setQuestions] = useState<Question[]>([]);
+    const [questions, setQuestions] = useState<QuestionSummary[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ export const PracticeList: React.FC = () => {
             if (!topic) return;
             setLoading(true);
             try {
-                const problems = await loadPracticeProblems(topic as Topic);
+                const problems = await loadPracticeMetadata(topic as Topic);
                 setQuestions(problems);
             } catch (error) {
                 console.error('Error loading questions:', error);
@@ -42,7 +42,7 @@ export const PracticeList: React.FC = () => {
                     {/* Header */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
                         <div>
-                            <Link to="/practice" className="inline-flex items-center gap-2 text-xs font-semibold text-gray-500 hover:text-gray-900 mb-6 transition-colors">
+                            <Link to="/" className="inline-flex items-center gap-2 text-xs font-semibold text-gray-500 hover:text-gray-900 mb-6 transition-colors">
                                 <ChevronLeft className="w-3 h-3" /> Back to Curriculum
                             </Link>
                             <h1 className="text-3xl md:text-4xl font-serif text-gray-900 mb-2">

@@ -2,10 +2,124 @@
   "topic": "Excel",
   "problems": [
     {
-      "id": "ex-b-1",
-      "file": "ex-b-1.md",
+      "id": "xl-01",
+      "file": "01-workbook.md",
       "difficulty": "Basic",
-      "title": "Sum Function"
+      "title": "Workbook Concept"
+    },
+    {
+      "id": "xl-02",
+      "file": "02-formula.md",
+      "difficulty": "Basic",
+      "title": "Starting a Formula"
+    },
+    {
+      "id": "xl-03",
+      "file": "03-select.md",
+      "difficulty": "Basic",
+      "title": "Selection Shortcut"
+    },
+    {
+      "id": "xl-04",
+      "file": "04-sum.md",
+      "difficulty": "Basic",
+      "title": "SUM Functiom"
+    },
+    {
+      "id": "xl-05",
+      "file": "05-count.md",
+      "difficulty": "Basic",
+      "title": "COUNT vs COUNTA"
+    },
+    {
+      "id": "xl-06",
+      "file": "06-copy.md",
+      "difficulty": "Basic",
+      "title": "Copy Paste"
+    },
+    {
+      "id": "xl-07",
+      "file": "07-save.md",
+      "difficulty": "Basic",
+      "title": "Saving"
+    },
+    {
+      "id": "xl-08",
+      "file": "08-freeze.md",
+      "difficulty": "Basic",
+      "title": "Freeze Panes"
+    },
+    {
+      "id": "xl-09",
+      "file": "09-absolute.md",
+      "difficulty": "Medium",
+      "title": "Absolute References"
+    },
+    {
+      "id": "xl-10",
+      "file": "10-if.md",
+      "difficulty": "Medium",
+      "title": "IF Logic"
+    },
+    {
+      "id": "xl-11",
+      "file": "11-vlookup.md",
+      "difficulty": "Medium",
+      "title": "VLOOKUP Syntax"
+    },
+    {
+      "id": "xl-12",
+      "file": "12-duplicates.md",
+      "difficulty": "Medium",
+      "title": "Removing Duplicates"
+    },
+    {
+      "id": "xl-13",
+      "file": "13-cond-fmt.md",
+      "difficulty": "Medium",
+      "title": "Conditional Formatting"
+    },
+    {
+      "id": "xl-14",
+      "file": "14-text.md",
+      "difficulty": "Medium",
+      "title": "Text to Columns"
+    },
+    {
+      "id": "xl-15",
+      "file": "15-filter.md",
+      "difficulty": "Medium",
+      "title": "Filter Shortcut"
+    },
+    {
+      "id": "xl-16",
+      "file": "16-pivot.md",
+      "difficulty": "Hard",
+      "title": "Pivot Refresh"
+    },
+    {
+      "id": "xl-17",
+      "file": "17-xlookup.md",
+      "difficulty": "Hard",
+      "title": "XLOOKUP Power"
+    },
+    {
+      "id": "xl-18",
+      "file": "18-ifs.md",
+      "difficulty": "Hard",
+      "title": "IFS Function"
+    },
+    {
+      "id": "xl-19",
+      "file": "19-powerquery.md",
+      "difficulty": "Hard",
+      "title": "Power Query"
+    },
+    {
+      "id": "xl-20",
+      "file": "20-spill.md",
+      "difficulty": "Hard",
+      "title": "Dynamic Arrays"
     }
   ]
 }

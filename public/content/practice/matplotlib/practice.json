@@ -1,4 +1,125 @@
 {
   "topic": "Matplotlib",
-  "problems": []
+  "problems": [
+    {
+      "id": "mpl-01",
+      "file": "01-intro.md",
+      "difficulty": "Basic",
+      "title": "What is Matplotlib?"
+    },
+    {
+      "id": "mpl-02",
+      "file": "02-objects.md",
+      "difficulty": "Basic",
+      "title": "Figure vs Axes"
+    },
+    {
+      "id": "mpl-03",
+      "file": "03-show.md",
+      "difficulty": "Basic",
+      "title": "Displaying Plots"
+    },
+    {
+      "id": "mpl-04",
+      "file": "04-line.md",
+      "difficulty": "Basic",
+      "title": "Line Plot Syntax"
+    },
+    {
+      "id": "mpl-05",
+      "file": "05-scatter.md",
+      "difficulty": "Basic",
+      "title": "Scatter Plot Syntax"
+    },
+    {
+      "id": "mpl-06",
+      "file": "06-title.md",
+      "difficulty": "Basic",
+      "title": "Setting Titles"
+    },
+    {
+      "id": "mpl-07",
+      "file": "07-labels.md",
+      "difficulty": "Basic",
+      "title": "Axis Labels"
+    },
+    {
+      "id": "mpl-08",
+      "file": "08-save.md",
+      "difficulty": "Basic",
+      "title": "Saving Figures"
+    },
+    {
+      "id": "mpl-09",
+      "file": "09-legend.md",
+      "difficulty": "Medium",
+      "title": "Adding Legends"
+    },
+    {
+      "id": "mpl-10",
+      "file": "10-color.md",
+      "difficulty": "Medium",
+      "title": "Color Codes"
+    },
+    {
+      "id": "mpl-11",
+      "file": "11-subplots.md",
+      "difficulty": "Medium",
+      "title": "Creating Subplots"
+    },
+    {
+      "id": "mpl-12",
+      "file": "12-hist.md",
+      "difficulty": "Medium",
+      "title": "Histogram Bins"
+    },
+    {
+      "id": "mpl-13",
+      "file": "13-bar.md",
+      "difficulty": "Medium",
+      "title": "Horizontal Bars"
+    },
+    {
+      "id": "mpl-14",
+      "file": "14-grid.md",
+      "difficulty": "Medium",
+      "title": "Adding Grids"
+    },
+    {
+      "id": "mpl-15",
+      "file": "15-multiline.md",
+      "difficulty": "Medium",
+      "title": "Multiple Lines"
+    },
+    {
+      "id": "mpl-16",
+      "file": "16-sharex.md",
+      "difficulty": "Hard",
+      "title": "Sharing Axes"
+    },
+    {
+      "id": "mpl-17",
+      "file": "17-3d.md",
+      "difficulty": "Hard",
+      "title": "3D Plotting"
+    },
+    {
+      "id": "mpl-18",
+      "file": "18-imshow.md",
+      "difficulty": "Hard",
+      "title": "Image Show"
+    },
+    {
+      "id": "mpl-19",
+      "file": "19-oo.md",
+      "difficulty": "Hard",
+      "title": "OO Interface"
+    },
+    {
+      "id": "mpl-20",
+      "file": "20-annotate.md",
+      "difficulty": "Hard",
+      "title": "Annotations"
+    }
+  ]
 }

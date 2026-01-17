@@ -1,171 +1,224 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BLOG_POSTS } from '../constants';
-import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react';
+import { getBlogPost, BlogPost as BlogPostType } from '../utils/contentLoader';
+import { Calendar, Clock, ArrowLeft, Share2, List, ChevronRight } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 export const BlogPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
-    const post = BLOG_POSTS.find(p => p.id === postId);
+    const [post, setPost] = useState<BlogPostType | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [toc, setToc] = useState<{ id: string; text: string; level: number }[]>([]);
+    const [activeSection, setActiveSection] = useState<string>('');
+
+    useEffect(() => {
+        const fetchPost = async () => {
+            if (postId) {
+                const data = await getBlogPost(postId);
+                setPost(data);
+
+                // Generate TOC from markdown content
+                if (data?.content) {
+                    const lines = data.content.split('\n');
+                    const headers: { id: string; text: string; level: number }[] = [];
+                    lines.forEach(line => {
+                        const match = line.match(/^(#{2,3})\s+(.+)$/);
+                        if (match) {
+                            const level = match[1].length;
+                            const text = match[2];
+                            const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                            headers.push({ id, text, level });
+                        }
+                    });
+                    setToc(headers);
+                }
+
+                setLoading(false);
+            }
+        };
+        fetchPost();
+    }, [postId]);
+
+    // Handle scroll spy for active section
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = toc.map(item => document.getElementById(item.id));
+            const scrollPosition = window.scrollY + 150; // Offset
+
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const section = sections[i];
+                if (section && section.offsetTop <= scrollPosition) {
+                    setActiveSection(section.id);
+                    break;
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [toc]);
+
+    if (loading) return <div className="min-h-screen pt-32 text-center text-lux-text">Loading...</div>;
 
     if (!post) {
         return <Navigate to="/blog" replace />;
     }
 
-    const relatedPosts = BLOG_POSTS.filter(p => p.id !== postId && p.category === post.category).slice(0, 3);
+    const RelatedPostCard = ({ post }: { post: BlogPostType }) => (
+        <Link to={`/blog/${post.id}`} className="group block bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all">
+            <div className="aspect-video bg-gray-100 overflow-hidden">
+                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="p-4">
+                <h4 className="font-serif font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">{post.title}</h4>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Calendar className="w-3 h-3" />
+                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                </div>
+            </div>
+        </Link>
+    );
 
     return (
-        <div className="min-h-screen">
-            {/* Header */}
-            <section className="px-6 md:px-12 lg:px-24 pt-32 pb-12">
-                <div className="max-w-4xl mx-auto">
-                    <Link to="/blog" className="inline-flex items-center gap-2 text-lux-muted hover:text-lux-text transition-colors mb-8" data-hover>
-                        <ArrowLeft className="w-4 h-4" />
-                        Back to Insights
+        <div className="min-h-screen bg-[#F8F9FA]"> {/* Wikipedia-ish light gray background */}
+            {/* Header/Nav Spacer */}
+            <div className="h-20 bg-white border-b border-gray-200"></div>
+
+            <main className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-8">
+
+                {/* Breadcrumb / Back */}
+                <div className="mb-8">
+                    <Link to="/blog" className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors group">
+                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                        <span className="font-medium text-sm">Back to Insights</span>
                     </Link>
                 </div>
-            </section>
 
-            {/* Hero Section */}
-            <section className="px-6 md:px-12 lg:px-24 pb-12">
-                <div className="max-w-4xl mx-auto">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="inline-block px-3 py-1 rounded-full bg-lux-text/10 text-xs font-semibold text-lux-text mb-6"
-                    >
-                        {post.category}
-                    </motion.span>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="font-serif text-4xl md:text-6xl text-lux-text mb-6 leading-tight"
-                    >
-                        {post.title}
-                    </motion.h1>
+                    {/* LEFT: Main Content (8 cols) */}
+                    <article className="lg:col-span-8 bg-white p-6 md:p-10 lg:p-12 rounded-xl border border-gray-200 shadow-sm order-2 lg:order-1">
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="flex flex-wrap items-center gap-6 text-sm text-lux-muted mb-8"
-                    >
-                        <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        {/* Article Header */}
+                        <header className="mb-10 pb-8 border-b border-gray-100">
+                            <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold tracking-wide uppercase mb-4">
+                                {post.category}
+                            </span>
+                            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6">
+                                {post.title}
+                            </h1>
+                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-serif font-bold">
+                                        {post.author.charAt(0)}
+                                    </div>
+                                    <span className="font-medium text-gray-900">{post.author}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="w-4 h-4" />
+                                    <span>{new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <Clock className="w-4 h-4" />
+                                    <span>{post.readTime}</span>
+                                </div>
+                            </div>
+                        </header>
+
+                        {/* Hero Image */}
+                        <div className="mb-10 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+                            <img src={post.image} alt={post.title} className="w-full h-auto object-cover max-h-[500px]" />
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4" />
-                            {post.readTime}
-                        </div>
-                        <button className="flex items-center gap-2 hover:text-lux-text transition-colors" data-hover>
-                            <Share2 className="w-4 h-4" />
-                            Share
-                        </button>
-                    </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.6 }}
-                        className="aspect-video rounded-3xl bg-gradient-to-br from-blue-100/60 to-purple-100/60 overflow-hidden mb-12"
-                    >
-                        <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Content */}
-            <section className="px-6 md:px-12 lg:px-24 pb-20">
-                <div className="max-w-3xl mx-auto">
-                    <div className="prose prose-lg max-w-none">
-                        <p className="text-xl text-lux-muted leading-relaxed mb-8">{post.excerpt}</p>
-
-                        <div className="text-lux-text leading-relaxed space-y-6">
-                            <p>
-                                In today's rapidly evolving digital landscape, understanding the intersection of technology and business
-                                strategy has never been more critical. At KaizenStat, we've seen firsthand how the right approach can
-                                transform organizations from followers to leaders.
-                            </p>
-
-                            <p>
-                                This article explores the key principles and practical strategies that have helped our clients achieve
-                                measurable success in their respective markets. Whether you're a startup looking to scale or an enterprise
-                                seeking digital transformation, these insights will provide valuable guidance.
-                            </p>
-
-                            <h2 className="font-serif text-3xl text-lux-text mt-12 mb-4">The Foundation</h2>
-                            <p>
-                                Every successful project begins with a solid foundation. This means understanding not just the technical
-                                requirements, but also the business context, user needs, and market dynamics. Our approach combines
-                                rigorous data analysis with creative problem-solving to deliver solutions that truly move the needle.
-                            </p>
-
-                            <h2 className="font-serif text-3xl text-lux-text mt-12 mb-4">Key Takeaways</h2>
-                            <ul className="space-y-3 text-lux-text">
-                                <li>Data-driven decision making is no longer optional—it's essential</li>
-                                <li>User experience and technical excellence must work in harmony</li>
-                                <li>Continuous iteration beats perfect planning every time</li>
-                                <li>The right team composition matters more than individual genius</li>
+                        {/* Mobile TOC (Accordion styling) */}
+                        <div className="lg:hidden mb-10 bg-gray-50 rounded-lg p-5 border border-gray-200">
+                            <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                                <List className="w-4 h-4" /> Table of Contents
+                            </h3>
+                            <ul className="space-y-2 text-sm">
+                                {toc.map((item) => (
+                                    <li key={item.id} style={{ marginLeft: `${(item.level - 2) * 12}px` }}>
+                                        <a href={`#${item.id}`} className="text-blue-600 hover:underline block py-1">
+                                            {item.text}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
-
-                            <h2 className="font-serif text-3xl text-lux-text mt-12 mb-4">Looking Forward</h2>
-                            <p>
-                                As we continue to push the boundaries of what's possible with technology, one thing remains constant:
-                                the importance of staying focused on outcomes that matter. Whether that's revenue growth, user engagement,
-                                or operational efficiency, success comes from aligning technical capabilities with business objectives.
-                            </p>
                         </div>
-                    </div>
 
-                    {/* Author Info */}
-                    <div className="mt-16 p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl">
-                        <div className="flex items-center gap-6">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-100/60 to-purple-100/60 flex items-center justify-center flex-shrink-0">
-                                <span className="font-serif text-2xl text-lux-text">{post.author.charAt(0)}</span>
-                            </div>
-                            <div>
-                                <h4 className="font-serif text-2xl text-lux-text mb-1">{post.author}</h4>
-                                <p className="text-lux-muted">{post.authorRole}</p>
+                        {/* Markdown Content */}
+                        <div className="prose prose-lg max-w-none 
+                            prose-headings:font-serif prose-headings:text-gray-900 
+                            prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2
+                            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                            prose-p:text-gray-700 prose-p:leading-relaxed 
+                            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                            prose-strong:text-gray-900 prose-strong:font-semibold
+                            prose-ul:list-disc prose-ul:pl-5 prose-li:text-gray-700 prose-li:mb-2
+                            prose-img:rounded-lg prose-img:border prose-img:border-gray-200
+                            ">
+                            <ReactMarkdown
+                                components={{
+                                    h2: ({ node, ...props }) => {
+                                        const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
+                                        return <h2 id={id} {...props} />;
+                                    },
+                                    h3: ({ node, ...props }) => {
+                                        const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
+                                        return <h3 id={id} {...props} />;
+                                    }
+                                }}
+                            >
+                                {post.content}
+                            </ReactMarkdown>
+                        </div>
+                    </article>
+
+                    {/* RIGHT: Sidebar (TOC & Sticky) (4 cols) */}
+                    <aside className="lg:col-span-4 order-1 lg:order-2 space-y-8">
+
+                        {/* Desktop TOC */}
+                        <div className="hidden lg:block sticky top-32 p-6 bg-white rounded-xl border border-gray-200 shadow-sm max-h-[calc(100vh-160px)] overflow-y-auto">
+                            <h3 className="font-serif font-bold text-lg text-gray-900 mb-4 pb-4 border-b border-gray-100 flex items-center gap-2">
+                                <List className="w-4 h-4" /> Contents
+                            </h3>
+                            <nav>
+                                <ul className="space-y-1">
+                                    {toc.map((item) => (
+                                        <li key={item.id}>
+                                            <a
+                                                href={`#${item.id}`}
+                                                className={`block py-1.5 px-3 rounded-md text-sm transition-colors border-l-2 ${activeSection === item.id
+                                                        ? 'bg-blue-50 text-blue-700 border-blue-600 font-medium'
+                                                        : 'text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900'
+                                                    }`}
+                                                style={{ marginLeft: `${(item.level - 2) * 8}px` }}
+                                            >
+                                                {item.text}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </div>
+
+                        {/* Share / Actions Widget */}
+                        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                            <h3 className="font-serif font-bold text-gray-900 mb-4">Share this article</h3>
+                            <div className="flex gap-2">
+                                <button className="flex-1 py-2 px-4 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm transition-colors flex items-center justify-center gap-2">
+                                    Copy Link
+                                </button>
+                                <button className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
+                                    <Share2 className="w-5 h-5" />
+                                </button>
                             </div>
                         </div>
-                    </div>
+
+                    </aside>
                 </div>
-            </section>
-
-            {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-                <section className="px-6 md:px-12 lg:px-24 py-20 bg-gradient-to-b from-transparent via-white/30 to-transparent">
-                    <div className="max-w-[1400px] mx-auto">
-                        <h2 className="font-serif text-4xl text-lux-text mb-12 text-center">Related Articles</h2>
-
-                        <div className="grid md:grid-cols-3 gap-8">
-                            {relatedPosts.map((relatedPost) => (
-                                <Link
-                                    key={relatedPost.id}
-                                    to={`/blog/${relatedPost.id}`}
-                                    className="group block rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl overflow-hidden hover:bg-white/70 transition-all"
-                                    data-hover
-                                >
-                                    <div className="aspect-video bg-gradient-to-br from-blue-100/60 to-purple-100/60 overflow-hidden">
-                                        <img src={relatedPost.image} alt={relatedPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                    </div>
-                                    <div className="p-6">
-                                        <span className="px-3 py-1 rounded-full bg-lux-text/10 text-xs font-semibold text-lux-text mb-3 inline-block">
-                                            {relatedPost.category}
-                                        </span>
-                                        <h3 className="font-serif text-xl text-lux-text mb-2 line-clamp-2">{relatedPost.title}</h3>
-                                        <p className="text-sm text-lux-muted">{relatedPost.readTime}</p>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
+            </main>
         </div>
     );
 };

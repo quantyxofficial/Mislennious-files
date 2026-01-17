@@ -2,10 +2,124 @@
   "topic": "Machine Learning",
   "problems": [
     {
-      "id": "ml-intro-01",
-      "file": "01-intro.md",
+      "id": "ml-01",
+      "file": "01-supervised.md",
       "difficulty": "Basic",
-      "title": "Introduction to ML"
+      "title": "Supervised Learning"
+    },
+    {
+      "id": "ml-02",
+      "file": "02-regression.md",
+      "difficulty": "Basic",
+      "title": "Regression Definition"
+    },
+    {
+      "id": "ml-03",
+      "file": "03-classification.md",
+      "difficulty": "Basic",
+      "title": "Classification Definition"
+    },
+    {
+      "id": "ml-04",
+      "file": "04-training.md",
+      "difficulty": "Basic",
+      "title": "Training Data"
+    },
+    {
+      "id": "ml-05",
+      "file": "05-overfitting.md",
+      "difficulty": "Basic",
+      "title": "Overfitting"
+    },
+    {
+      "id": "ml-06",
+      "file": "06-fit.md",
+      "difficulty": "Basic",
+      "title": "The fit() Method"
+    },
+    {
+      "id": "ml-07",
+      "file": "07-predict.md",
+      "difficulty": "Basic",
+      "title": "The predict() Method"
+    },
+    {
+      "id": "ml-08",
+      "file": "08-target.md",
+      "difficulty": "Basic",
+      "title": "Target Variable"
+    },
+    {
+      "id": "ml-09",
+      "file": "09-split.md",
+      "difficulty": "Medium",
+      "title": "Train Test Split"
+    },
+    {
+      "id": "ml-10",
+      "file": "10-scaling.md",
+      "difficulty": "Medium",
+      "title": "Feature Scaling"
+    },
+    {
+      "id": "ml-11",
+      "file": "11-missing.md",
+      "difficulty": "Medium",
+      "title": "Handling Missing Data"
+    },
+    {
+      "id": "ml-12",
+      "file": "12-confusion.md",
+      "difficulty": "Medium",
+      "title": "Confusion Matrix"
+    },
+    {
+      "id": "ml-13",
+      "file": "13-kmeans.md",
+      "difficulty": "Medium",
+      "title": "K-Means K"
+    },
+    {
+      "id": "ml-14",
+      "file": "14-forest.md",
+      "difficulty": "Medium",
+      "title": "Random Forest Logic"
+    },
+    {
+      "id": "ml-15",
+      "file": "15-logistic.md",
+      "difficulty": "Medium",
+      "title": "Logistic Output"
+    },
+    {
+      "id": "ml-16",
+      "file": "16-precision.md",
+      "difficulty": "Hard",
+      "title": "Precision vs Recall"
+    },
+    {
+      "id": "ml-17",
+      "file": "17-r2.md",
+      "difficulty": "Hard",
+      "title": "R-Squared Metric"
+    },
+    {
+      "id": "ml-18",
+      "file": "18-encoding.md",
+      "difficulty": "Hard",
+      "title": "One-Hot Encoding"
+    },
+    {
+      "id": "ml-19",
+      "file": "19-hyperparam.md",
+      "difficulty": "Hard",
+      "title": "Hyperparameters"
+    },
+    {
+      "id": "ml-20",
+      "file": "20-cv.md",
+      "difficulty": "Hard",
+      "title": "Cross Validation"
     }
   ]
 }

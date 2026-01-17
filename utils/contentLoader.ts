@@ -161,8 +161,19 @@ interface PracticeManifest {
     problems: PracticeManifestItem[];
 }
 
+export interface QuestionSummary {
+    id: string;
+    topic: Topic;
+    difficulty: Difficulty;
+    title: string;
+    companyTags?: string[];
+    acceptanceRate?: number;
+}
+
+// ... existing Question interface ...
+
 /**
- * Load practice manifest for a topic
+ * Load practice manifest for a topic - Internal use
  */
 async function loadPracticeManifest(topic: Topic): Promise<PracticeManifest> {
     const topicLower = topic.toLowerCase().replace(/ /g, '-');
@@ -181,7 +192,50 @@ async function loadPracticeManifest(topic: Topic): Promise<PracticeManifest> {
 }
 
 /**
- * Load all practice problems for a specific topic and difficulty
+ * Load lightweight metadata for a topic (FAST - No markdown parsing)
+ */
+export async function loadPracticeMetadata(topic: Topic): Promise<QuestionSummary[]> {
+    const manifest = await loadPracticeManifest(topic);
+    return manifest.problems.map(p => ({
+        id: p.id,
+        topic: topic,
+        difficulty: p.difficulty,
+        title: p.title,
+        // Manifest doesn't currently have tags/acceptance, but we return structure for future
+    }));
+}
+
+/**
+ * Load a specific problem efficiently by Topic + ID
+ */
+export async function getProblem(topic: Topic, problemId: string): Promise<Question | null> {
+    // 1. Load manifest to find the file name
+    const manifest = await loadPracticeManifest(topic);
+    const item = manifest.problems.find(p => p.id === problemId);
+
+    if (!item) {
+        console.warn(`Problem ${problemId} not found in ${topic} manifest`);
+        return null;
+    }
+
+    // 2. Load the specific markdown file
+    const topicLower = topic.toLowerCase().replace(/ /g, '-');
+    const fullPath = `/content/practice/${topicLower}/${item.file}`;
+
+    try {
+        const problem = await loadProblem(fullPath);
+        // Ensure ID/Metadata matches manifest (manifest is source of truth for ID/Ordering)
+        problem.id = item.id;
+        return problem;
+    } catch (error) {
+        console.error(`Failed to load problem content: ${fullPath}`, error);
+        return null;
+    }
+}
+
+/**
+ * Legacy/Heavy: Load all practice problems with FULL content for a topic
+ * Use loadPracticeMetadata for lists instead.
  */
 export async function loadPracticeProblems(
     topic: Topic,
@@ -209,6 +263,8 @@ export async function loadPracticeProblems(
 
     return problems;
 }
+
+// ... existing code ...
 
 export interface TopicMetadata {
     id: string;
@@ -250,9 +306,11 @@ export async function loadAllPracticeProblems(): Promise<Question[]> {
 }
 
 /**
- * Get a specific problem by ID
+ * Get a specific problem by ID (Inefficient fallback, try to use getProblem(topic, id))
  */
 export async function getProblemById(id: string): Promise<Question | null> {
+    // Attempt to guess topic or scan all? Scanning all is slow but robust for ID-only lookup.
+    // For now, keep as scan-all but warn.
     const allProblems = await loadAllPracticeProblems();
     return allProblems.find(p => p.id === id) || null;
 }
@@ -298,6 +356,74 @@ export async function loadStudyMaterial(topic: Topic | string, fileName: string)
     } catch (error) {
         console.error(`Error loading study material from ${filePath}:`, error);
         throw error;
+    }
+}
+
+export interface BlogPost {
+    id: string;
+    title: string;
+    excerpt?: string;
+    content: string; // Full markdown content
+    author: string;
+    authorRole?: string;
+    date: string;
+    category: string;
+    readTime: string;
+    image: string;
+    featured?: boolean;
+}
+
+/**
+ * Load all blog posts from manifest
+ */
+export async function loadBlogPosts(): Promise<BlogPost[]> {
+    try {
+        const response = await fetch('/content/blogs/manifest.json');
+        if (!response.ok) return [];
+        const manifest = await response.json();
+
+        return manifest.map((item: any) => ({
+            ...item,
+            excerpt: item.description || "Click to read more...",
+            content: ""
+        }));
+    } catch (error) {
+        console.error("Failed to load blog manifest:", error);
+        return [];
+    }
+}
+
+/**
+ * Load a specific blog post by ID
+ */
+export async function getBlogPost(id: string): Promise<BlogPost | null> {
+    try {
+        const response = await fetch('/content/blogs/manifest.json');
+        const manifest = await response.json();
+        const item = manifest.find((p: any) => p.id === id);
+
+        if (!item) return null;
+
+        const contentRes = await fetch(`/content/blogs/${item.file}`);
+        const text = await contentRes.text();
+        const { data, content } = parseMarkdown(text);
+
+        return {
+            id: item.id,
+            title: data.title || item.title,
+            excerpt: data.description || item.description,
+            content: content,
+            author: data.author || item.author,
+            authorRole: "KaizenStat Team",
+            date: data.date || item.date,
+            category: data.category || item.category,
+            readTime: item.readTime || "5 min read",
+            image: item.image,
+            featured: item.featured
+        };
+    } catch (error) {
+        console.error(`Failed to load blog post ${id}:`, error);
+        return null;
     }
 }
 

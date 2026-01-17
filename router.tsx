@@ -7,6 +7,7 @@ const PracticeHome = lazy(() => import('./pages/PracticeHome').then(m => ({ defa
 const AgencyHome = lazy(() => import('./pages/AgencyHome').then(m => ({ default: m.AgencyHome })));
 const PracticeList = lazy(() => import('./pages/PracticeList').then(m => ({ default: m.PracticeList })));
 const PracticeProblem = lazy(() => import('./pages/PracticeProblem').then(m => ({ default: m.PracticeProblem })));
+const PracticeShell = lazy(() => import('./components/practice/PracticeShell').then(m => ({ default: m.PracticeShell })));
 const StudyMaterials = lazy(() => import('./pages/StudyMaterials').then(m => ({ default: m.StudyMaterials })));
 const StudyChapter = lazy(() => import('./pages/StudyChapter').then(m => ({ default: m.StudyChapter })));
 const CertificateExam = lazy(() => import('./pages/CertificateExam').then(m => ({ default: m.CertificateExam })));
@@ -36,11 +37,21 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'practice/:topic',
-                element: <PracticeList />,
-            },
-            {
-                path: 'practice/:topic/:problemId',
-                element: <PracticeProblem />,
+                children: [
+                    {
+                        index: true,
+                        element: <PracticeList />,
+                    },
+                    {
+                        element: <PracticeShell />,
+                        children: [
+                            {
+                                path: ':problemId',
+                                element: <PracticeProblem />,
+                            }
+                        ]
+                    }
+                ]
             },
             {
                 path: 'study/:topic',

@@ -1,13 +1,76 @@
 {
   "topic": "Excel",
-  "description": "excel Study Material",
+  "description": "Master spreadsheets, formulas, and data analysis.",
   "chapters": [
     {
-      "id": "01-intro",
-      "title": "Introduction to Excel",
-      "description": "",
-      "file": "01-intro.md",
+      "id": "interface",
+      "title": "The Interface",
+      "description": "Mastering the Ribbon, Quick Access Toolbar, and Workbook structure.",
+      "file": "01-interface.md",
       "order": 1
+    },
+    {
+      "id": "shortcuts",
+      "title": "Essential Shortcuts",
+      "description": "Stop using the mouse. Learn Ctrl+Arrows, Alt-codes, and F4.",
+      "file": "02-shortcuts.md",
+      "order": 2
+    },
+    {
+      "id": "core-formulas",
+      "title": "Core Formulas",
+      "description": "The big five: SUM, AVERAGE, COUNT, MIN, MAX.",
+      "file": "03-formulas.md",
+      "order": 3
+    },
+    {
+      "id": "logic",
+      "title": "Logical Functions",
+      "description": "Teaching Excel to think: IF, AND, OR, and Nested Layouts.",
+      "file": "04-logic.md",
+      "order": 4
+    },
+    {
+      "id": "lookup",
+      "title": "Lookup Magic",
+      "description": "The end of manual searching: VLOOKUP, INDEX-MATCH, and XLOOKUP.",
+      "file": "05-lookup.md",
+      "order": 5
+    },
+    {
+      "id": "text-date",
+      "title": "Text & Date",
+      "description": "Cleaning messy data with LEFT, RIGHT, TRIM, and DATE functions.",
+      "file": "06-text.md",
+      "order": 6
+    },
+    {
+      "id": "pivots",
+      "title": "Pivot Tables",
+      "description": "Summarize 100,000 rows in 5 seconds. Drag-and-drop analysis.",
+      "file": "07-pivots.md",
+      "order": 7
+    },
+    {
+      "id": "viz",
+      "title": "Data Visualization",
+      "description": "Beyond Pie Charts: Combo Charts, Sparklines, and Conditional Formatting.",
+      "file": "08-viz.md",
+      "order": 8
+    },
+    {
+      "id": "power-query",
+      "title": "Introduction to Power Query",
+      "description": "The hidden ETL tool inside Excel. Unpivot and Clean without macros.",
+      "file": "09-powerquery.md",
+      "order": 9
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone: Sales Dashboard",
+      "description": "Build a dynamic, interactive report for stakeholders.",
+      "file": "10-capstone.md",
+      "order": 10
     }
   ]
 }

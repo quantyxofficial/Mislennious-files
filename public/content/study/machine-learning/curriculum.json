@@ -1,0 +1,76 @@
+{
+    "topic": "Machine Learning",
+    "description": "Build predictive models with Scikit-Learn.",
+    "chapters": [
+        {
+            "id": "intro",
+            "title": "What is Machine Learning?",
+            "description": "Supervised, Unsupervised, and Reinforcement Learning explained.",
+            "file": "01-intro.md",
+            "order": 1
+        },
+        {
+            "id": "preprocessing",
+            "title": "Data Preprocessing",
+            "description": "Garbage in, Garbage out. Scaling, Splitting, and Encoding.",
+            "file": "02-preprocessing.md",
+            "order": 2
+        },
+        {
+            "id": "linear-regression",
+            "title": "Linear Regression",
+            "description": "Predicting the future (numbers). The Hello World of ML.",
+            "file": "03-linear.md",
+            "order": 3
+        },
+        {
+            "id": "logistic-regression",
+            "title": "Logistic Regression",
+            "description": "Classification: Is it a Cat or a Dog?",
+            "file": "04-logistic.md",
+            "order": 4
+        },
+        {
+            "id": "trees",
+            "title": "Decision Trees",
+            "description": "White-box models that mimic human decision making.",
+            "file": "05-trees.md",
+            "order": 5
+        },
+        {
+            "id": "forests",
+            "title": "Random Forests",
+            "description": "Ensemble Learning: Why 100 trees are better than 1.",
+            "file": "06-forests.md",
+            "order": 6
+        },
+        {
+            "id": "clustering",
+            "title": "K-Means Clustering",
+            "description": "Unsupervised Learning: Finding hidden groups in data.",
+            "file": "07-clustering.md",
+            "order": 7
+        },
+        {
+            "id": "evaluation",
+            "title": "Model Evaluation",
+            "description": "Beyond Accuracy: Precision, Recall, and F1-Score.",
+            "file": "08-evaluation.md",
+            "order": 8
+        },
+        {
+            "id": "tuning",
+            "title": "Hyperparameter Tuning",
+            "description": "GridSearch and RandomSearch to optimize your model.",
+            "file": "09-tuning.md",
+            "order": 9
+        },
+        {
+            "id": "capstone",
+            "title": "Capstone: Titanic",
+            "description": "Predicting survival on the Titanic: A complete project.",
+            "file": "10-capstone.md",
+            "order": 10
+        }
+    ]
+}
