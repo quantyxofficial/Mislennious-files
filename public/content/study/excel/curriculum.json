@@ -1,12 +1,19 @@
 {
   "topic": "Excel",
-  "description": "Master spreadsheets, formulas, and data analysis.",
+  "description": "excel Study Material",
   "chapters": [
     {
       "id": "interface",
       "title": "The Interface",
       "description": "Mastering the Ribbon, Quick Access Toolbar, and Workbook structure.",
       "file": "01-interface.md",
+      "order": 1
+    },
+    {
+      "id": "01-intro",
+      "title": "Introduction to Excel",
+      "description": "",
+      "file": "01-intro.md",
       "order": 1
     },
     {
@@ -19,21 +26,21 @@
     {
       "id": "core-formulas",
       "title": "Core Formulas",
-      "description": "The big five: SUM, AVERAGE, COUNT, MIN, MAX.",
+      "description": "The big five - SUM, AVERAGE, COUNT, MIN, MAX.",
       "file": "03-formulas.md",
       "order": 3
     },
     {
       "id": "logic",
       "title": "Logical Functions",
-      "description": "Teaching Excel to think: IF, AND, OR, and Nested Layouts.",
+      "description": "Teaching Excel to think - IF, AND, OR, and Nested Layouts.",
       "file": "04-logic.md",
       "order": 4
     },
     {
       "id": "lookup",
       "title": "Lookup Magic",
-      "description": "The end of manual searching: VLOOKUP, INDEX-MATCH, and XLOOKUP.",
+      "description": "The end of manual searching - VLOOKUP, INDEX-MATCH, and XLOOKUP.",
       "file": "05-lookup.md",
       "order": 5
     },
@@ -54,7 +61,7 @@
     {
       "id": "viz",
       "title": "Data Visualization",
-      "description": "Beyond Pie Charts: Combo Charts, Sparklines, and Conditional Formatting.",
+      "description": "Beyond Pie Charts - Combo Charts, Sparklines, and Conditional Formatting.",
       "file": "08-viz.md",
       "order": 8
     },

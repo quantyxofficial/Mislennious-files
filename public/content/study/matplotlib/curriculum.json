@@ -1,25 +1,32 @@
 {
   "topic": "Matplotlib",
-  "description": "Master data visualization in Python.",
+  "description": "matplotlib Study Material",
   "chapters": [
+    {
+      "id": "01-basics",
+      "title": "Introduction to Matplotlib",
+      "description": "",
+      "file": "01-basics.md",
+      "order": 1
+    },
     {
       "id": "intro",
       "title": "The Canvas",
-      "description": "Understanding the Figure and Axes: The philosophy of plotting.",
+      "description": "Understanding the Figure and Axes - The philosophy of plotting.",
       "file": "01-canvas.md",
       "order": 1
     },
     {
       "id": "basic",
       "title": "Basic Plots",
-      "description": "The big three: Line, Scatter, and Bar charts.",
+      "description": "The big three - Line, Scatter, and Bar charts.",
       "file": "02-basic.md",
       "order": 2
     },
     {
       "id": "styling",
       "title": "Styling Masterclass",
-      "description": "Make it beautiful: Colors, Markers, Linestyles, and Themes.",
+      "description": "Make it beautiful - Colors, Markers, Linestyles, and Themes.",
       "file": "03-styling.md",
       "order": 3
     },
@@ -33,7 +40,7 @@
     {
       "id": "distribution",
       "title": "Distributions (Hist & Box)",
-      "description": "visualize the spread of data: Histograms and Boxplots.",
+      "description": "Visualize the spread of data - Histograms and Boxplots.",
       "file": "05-distribution.md",
       "order": 5
     },
@@ -61,7 +68,7 @@
     {
       "id": "3d-plots",
       "title": "The Third Dimension",
-      "description": "Introduction to 3D plotting with `mplot3d`.",
+      "description": "Introduction to 3D plotting with mplot3d.",
       "file": "09-3d.md",
       "order": 9
     },

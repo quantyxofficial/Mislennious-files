@@ -2,6 +2,12 @@
   "topic": "Deep Learning",
   "problems": [
     {
+      "id": "dl-intro-01",
+      "file": "01-intro.md",
+      "difficulty": "Basic",
+      "title": "Neural Network Basics"
+    },
+    {
       "id": "dl-01",
       "file": "01-neuron.md",
       "difficulty": "Basic",
@@ -71,19 +77,19 @@
       "id": "dl-12",
       "file": "12-conv.md",
       "difficulty": "Medium",
-      "title": "Convolution"
+      "title": "Convolution Function"
     },
     {
       "id": "dl-13",
       "file": "13-pooling.md",
       "difficulty": "Medium",
-      "title": "Pooling"
+      "title": "Pooling Function"
     },
     {
       "id": "dl-14",
       "file": "14-dropout.md",
       "difficulty": "Medium",
-      "title": "Dropout"
+      "title": "Dropout Function"
     },
     {
       "id": "dl-15",

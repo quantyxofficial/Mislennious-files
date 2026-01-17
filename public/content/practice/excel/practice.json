@@ -23,7 +23,7 @@
       "id": "xl-04",
       "file": "04-sum.md",
       "difficulty": "Basic",
-      "title": "SUM Functiom"
+      "title": "SUM Function"
     },
     {
       "id": "xl-05",
@@ -120,6 +120,12 @@
       "file": "20-spill.md",
       "difficulty": "Hard",
       "title": "Dynamic Arrays"
+    },
+    {
+      "id": "ex-b-1",
+      "file": "ex-b-1.md",
+      "difficulty": "Basic",
+      "title": "Sum Function"
     }
   ]
 }

@@ -1,7 +1,14 @@
 {
   "topic": "Pandas",
-  "description": "Master data manipulation and analysis.",
+  "description": "pandas Study Material",
   "chapters": [
+    {
+      "id": "01-basics",
+      "title": "Introduction to Pandas",
+      "description": "",
+      "file": "01-basics.md",
+      "order": 1
+    },
     {
       "id": "excel-killer",
       "title": "Pandas: The Excel Killer",
@@ -12,7 +19,7 @@
     {
       "id": "loading-data",
       "title": "Loading Data",
-      "description": "Read anything: CSVs, Excel files, JSON, and databases.",
+      "description": "Read anything - CSVs, Excel files, JSON, and databases.",
       "file": "02-loading.md",
       "order": 2
     },
@@ -26,7 +33,7 @@
     {
       "id": "selecting",
       "title": "Selecting Data",
-      "description": "The battle of loc vs iloc: How to grab exactly what you need.",
+      "description": "The battle of loc vs iloc - How to grab exactly what you need.",
       "file": "04-selection.md",
       "order": 4
     },
@@ -54,14 +61,14 @@
     {
       "id": "grouping",
       "title": "Grouping Power",
-      "description": "Split-Apply-Combine: The art of aggregation with GroupBy.",
+      "description": "Split-Apply-Combine - The art of aggregation with GroupBy.",
       "file": "08-grouping.md",
       "order": 8
     },
     {
       "id": "merging",
       "title": "Merging Worlds",
-      "description": "Combine multiple datasets: Concat, Merge, and Join explained.",
+      "description": "Combine multiple datasets - Concat, Merge, and Join explained.",
       "file": "09-merging.md",
       "order": 9
     },

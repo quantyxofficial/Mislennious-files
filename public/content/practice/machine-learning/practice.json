@@ -2,6 +2,12 @@
   "topic": "Machine Learning",
   "problems": [
     {
+      "id": "ml-intro-01",
+      "file": "01-intro.md",
+      "difficulty": "Basic",
+      "title": "Introduction to ML"
+    },
+    {
       "id": "ml-01",
       "file": "01-supervised.md",
       "difficulty": "Basic",

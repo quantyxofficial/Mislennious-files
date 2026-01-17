@@ -1,25 +1,46 @@
 {
-  "topic": "Deep Learning",
-  "description": "Master Neural Networks and AI with TensorFlow/Keras.",
+  "topic": "Deep-learning",
+  "description": "deep-learning Study Material",
   "chapters": [
+    {
+      "id": "intro-to-deep-learning",
+      "title": "Introduction to Deep Learning",
+      "description": ">",
+      "file": "01-intro.md",
+      "order": 1
+    },
     {
       "id": "neural-nets",
       "title": "Neural Networks",
-      "description": "The biological inspiration: Neurons, Weights, and Biases.",
+      "description": "The biological inspiration - Neurons, Weights, and Biases.",
       "file": "01-neural-nets.md",
       "order": 1
     },
     {
       "id": "activation",
       "title": "Activation Functions",
-      "description": "Adding non-linearity: ReLU, Sigmoid, and Softmax explained.",
+      "description": "Adding non-linearity - ReLU, Sigmoid, and Softmax explained.",
       "file": "02-activation.md",
       "order": 2
     },
     {
+      "id": "math-foundations-dl",
+      "title": "Mathematical Foundations for Deep Learning",
+      "description": ">",
+      "file": "02-math-foundations.md",
+      "order": 2
+    },
+    {
+      "id": "python-numerical-dl",
+      "title": "Python & Numerical Computing for DL",
+      "description": ">",
+      "file": "03-python-numpy.md",
+      "order": 3
+    },
+    {
       "id": "training",
       "title": "Training & Backprop",
-      "description": "How networks learn: Loss Functions, Gradient Descent, and Backpropagation.",
+      "description": "How networks learn - Loss Functions, Gradient Descent, and Backpropagation.",
       "file": "03-training.md",
       "order": 3
     },
@@ -31,11 +52,32 @@
       "order": 4
     },
     {
+      "id": "machine-learning-refresher",
+      "title": "Machine Learning Refresher (Pre-DL)",
+      "description": ">",
+      "file": "04-ml-refresher.md",
+      "order": 4
+    },
+    {
       "id": "cnn",
       "title": "ConvNets (CNNs)",
-      "description": "Computer Vision: Filters, Kernels, and Feature Maps.",
+      "description": "Computer Vision - Filters, Kernels, and Feature Maps.",
       "file": "05-cnn.md",
       "order": 5
+    },
+    {
+      "id": "intro-neural-networks",
+      "title": "Introduction to Neural Networks",
+      "description": ">",
+      "file": "05-neural-networks.md",
+      "order": 5
+    },
+    {
+      "id": "activation-functions",
+      "title": "Activation Functions",
+      "description": ">",
+      "file": "06-activation-functions.md",
+      "order": 6
     },
     {
       "id": "pooling",
@@ -45,11 +87,25 @@
       "order": 6
     },
     {
+      "id": "loss-functions",
+      "title": "Loss Functions and Cost Optimization",
+      "description": ">",
+      "file": "07-loss-functions.md",
+      "order": 7
+    },
+    {
       "id": "rnn",
       "title": "RNNs & LSTMs",
-      "description": "Sequential Data: Teaching networks to have memory.",
+      "description": "Sequential Data - Teaching networks to have memory.",
       "file": "07-rnn.md",
       "order": 7
+    },
+    {
+      "id": "gradient-descent-optimization",
+      "title": "Gradient Descent and Optimization",
+      "description": ">",
+      "file": "08-optimization.md",
+      "order": 8
     },
     {
       "id": "regularization",
@@ -57,6 +113,13 @@
       "description": "Preventing overfitting with Dropout and Batch Normalization.",
       "file": "08-regularization.md",
       "order": 8
+    },
+    {
+      "id": "backpropagation-algorithm",
+      "title": "Backpropagation Algorithm",
+      "description": ">",
+      "file": "09-backpropagation.md",
+      "order": 9
     },
     {
       "id": "transfer-learning",
@@ -71,6 +134,111 @@
       "description": "Building a handwritten digit classifier from scratch.",
       "file": "10-capstone.md",
       "order": 10
+    },
+    {
+      "id": "deep-neural-networks",
+      "title": "Deep Neural Networks (DNNs)",
+      "description": ">",
+      "file": "10-deep-networks.md",
+      "order": 10
+    },
+    {
+      "id": "regularization-techniques",
+      "title": "Regularization Techniques",
+      "description": ">",
+      "file": "11-regularization.md",
+      "order": 11
+    },
+    {
+      "id": "intro-cnn",
+      "title": "Convolutional Neural Networks (CNNs)",
+      "description": ">",
+      "file": "12-cnn-intro.md",
+      "order": 12
+    },
+    {
+      "id": "cnn-architectures",
+      "title": "CNN Architectures",
+      "description": ">",
+      "file": "13-cnn-architectures.md",
+      "order": 13
+    },
+    {
+      "id": "intro-rnn",
+      "title": "Recurrent Neural Networks (RNNs)",
+      "description": ">",
+      "file": "14-rnn-intro.md",
+      "order": 14
+    },
+    {
+      "id": "advanced-rnn-variants",
+      "title": "Advanced RNN Variants (LSTM & GRU)",
+      "description": ">",
+      "file": "15-lstm-gru.md",
+      "order": 15
+    },
+    {
+      "id": "attention-transformers",
+      "title": "Attention Mechanism & Transformers",
+      "description": ">",
+      "file": "16-transformers.md",
+      "order": 16
+    },
+    {
+      "id": "dl-nlp",
+      "title": "Deep Learning for NLP",
+      "description": ">",
+      "file": "17-nlp.md",
+      "order": 17
+    },
+    {
+      "id": "dl-computer-vision",
+      "title": "Deep Learning for Computer Vision",
+      "description": ">",
+      "file": "18-computer-vision.md",
+      "order": 18
+    },
+    {
+      "id": "training-evaluation",
+      "title": "Model Training and Evaluation",
+      "description": ">",
+      "file": "19-evaluation.md",
+      "order": 19
+    },
+    {
+      "id": "dl-frameworks",
+      "title": "Deep Learning Frameworks",
+      "description": ">",
+      "file": "20-frameworks.md",
+      "order": 20
+    },
+    {
+      "id": "deployment-practical-dl",
+      "title": "Deployment and Practical Considerations",
+      "description": ">",
+      "file": "21-deployment.md",
+      "order": 21
+    },
+    {
+      "id": "advanced-dl-topics",
+      "title": "Advanced Topics (Autoencoders & GANs)",
+      "description": ">",
+      "file": "22-advanced-topics.md",
+      "order": 22
+    },
+    {
+      "id": "dl-case-studies-projects",
+      "title": "Case Studies & Projects",
+      "description": ">",
+      "file": "23-projects.md",
+      "order": 23
+    },
+    {
+      "id": "dl-revision-practice",
+      "title": "Revision, MCQs & Practice",
+      "description": ">",
+      "file": "24-practice.md",
+      "order": 24
     }
   ]
 }
