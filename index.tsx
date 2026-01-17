@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AIProvider } from './contexts/AIContext';
 
 const AppWrapper = () => {
   const [loading, setLoading] = useState(true);
@@ -35,9 +36,11 @@ const AppWrapper = () => {
         )}
       </AnimatePresence>
       {!loading && (
-        <Suspense fallback={<div className="min-h-screen bg-[#F0F4F8]" />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <AIProvider>
+          <Suspense fallback={<div className="min-h-screen bg-[#F0F4F8]" />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </AIProvider>
       )}
     </>
   );

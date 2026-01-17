@@ -47,7 +47,7 @@ export const Layout: React.FC = () => {
             </div>
 
             <div className="relative z-10 text-lux-text min-h-screen selection:bg-blue-500/30 selection:text-lux-text">
-                <Navbar />
+                {location.pathname !== '/kaizen-ai' && <Navbar />}
 
                 <div className="lg:pl-0">
                     <main className="relative z-10 w-full">
@@ -55,8 +55,8 @@ export const Layout: React.FC = () => {
                     </main>
                 </div>
 
-                {/* Global Footer - Hidden ONLY on detailed Study/Practice content pages (not lists) */}
-                {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && <Footer />}
+                {/* Global Footer - Hidden ONLY on detailed Study/Practice content pages (not lists) AND Kaizen AI */}
+                {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && location.pathname !== '/kaizen-ai' && <Footer />}
 
                 {/* Persistent Scroll Manager: Handles async updates and back button restoration */}
                 <ScrollManager />

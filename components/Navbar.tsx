@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import { SERVICES } from '../constants';
 
 export const Navbar: React.FC = () => {
@@ -108,6 +108,18 @@ export const Navbar: React.FC = () => {
                         >
                             Agency
                             <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/agency' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+                                }`} />
+                        </Link>
+
+                        <Link
+                            to="/kaizen-ai"
+                            className={`text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group flex items-center gap-1.5 ${location.pathname === '/kaizen-ai' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
+                                }`}
+                            data-hover
+                        >
+                            <Sparkles className="w-3.5 h-3.5" />
+                            Kaizen AI
+                            <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/kaizen-ai' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                                 }`} />
                         </Link>
 
@@ -245,6 +257,13 @@ export const Navbar: React.FC = () => {
                                 className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
                             >
                                 Agency
+                            </Link>
+                            <Link
+                                to="/kaizen-ai"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors flex items-center gap-2"
+                            >
+                                <Sparkles className="w-6 h-6" /> Kaizen AI
                             </Link>
                             <Link
                                 to="/about"
