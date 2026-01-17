@@ -6,7 +6,7 @@ const TEAM = [
     {
         id: 0,
         name: "Abhishikta Dutta",
-        role: "Founder and Technology & Product",
+        role: "[Founder] Technology & Product",
         bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
         edu: "Top Institutes",
         linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
@@ -17,7 +17,7 @@ const TEAM = [
     {
         id: 1,
         name: "Kriti Sharma",
-        role: "Founder and Operations & Strategy",
+        role: "[Founder] Operations & Strategy",
         bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
         edu: "Top Institutes",
         linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",

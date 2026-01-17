@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, MapPin, Phone } from 'lucide-react';
+import { Github, Linkedin, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import { NewsletterForm } from './NewsletterForm';
 
 export const Footer: React.FC = () => {
@@ -29,14 +29,14 @@ export const Footer: React.FC = () => {
                             Bridging Engineering precision with Creative intelligence.
                         </p>
                         <div className="flex gap-3">
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
+                            <a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
                                 <Github className="w-4 h-4" />
                             </a>
                             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
                                 <Linkedin className="w-4 h-4" />
                             </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
-                                <Twitter className="w-4 h-4" />
+                            <a href="https://www.instagram.com/kaizenstat_official/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
+                                <Instagram className="w-4 h-4" />
                             </a>
                         </div>
                     </div>

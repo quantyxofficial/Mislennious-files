@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
+import { CommunityModal } from './CommunityModal';
+
 export const Hero: React.FC = () => {
   const navigate = useNavigate();
+  const [showCommunityModal, setShowCommunityModal] = React.useState(false);
 
   return (
     <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden px-6 md:px-0 pt-32 md:pt-20">
@@ -69,7 +72,7 @@ export const Hero: React.FC = () => {
             Start Your Project
           </button>
           <button
-            onClick={() => window.open('https://discord.gg/kaizenstat', '_blank')}
+            onClick={() => setShowCommunityModal(true)}
             className="w-full md:w-auto px-10 py-4 bg-transparent border border-lux-text/20 text-lux-text font-semibold text-sm tracking-[0.2em] uppercase hover:bg-lux-text hover:text-white transition-all rounded-full"
             data-hover
           >
@@ -87,6 +90,11 @@ export const Hero: React.FC = () => {
         <span className="text-[10px] uppercase tracking-[0.3em] font-semibold pr-[-0.3em] mr-[-0.3em]">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-lux-text/0 via-lux-text/20 to-lux-text/0"></div>
       </motion.div>
+
+      <CommunityModal
+        isOpen={showCommunityModal}
+        onClose={() => setShowCommunityModal(false)}
+      />
     </section>
   );
 };

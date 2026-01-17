@@ -1,16 +1,11 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import { Users, Target, Award, TrendingUp, Clock } from 'lucide-react';
+import { Users } from 'lucide-react';
 
 export const About: React.FC = () => {
 
-    const stats = [
-        { label: 'Personal Projects', value: '12+', icon: Target },
-        { label: 'Hackathons Won', value: '10+', icon: Award },
-        { label: 'Academic Year', value: '3rd', icon: TrendingUp },
-        { label: 'Response Time', value: '<24hr', icon: Clock }
-    ];
+
 
     const values = [
         {
@@ -42,61 +37,10 @@ export const About: React.FC = () => {
         <div className="min-h-screen relative overflow-hidden">
 
 
-            {/* COMPACT HERO */}
-            <section className="relative pt-32 pb-16 px-6 md:px-0 flex flex-col items-center justify-center text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-block py-1.5 px-4 border border-lux-text/10 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-lux-muted bg-white/40 backdrop-blur-md mb-6"
-                >
-                    Est. Jan 2026
-                </motion.div>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1, duration: 0.8 }}
-                    className="font-serif text-4xl md:text-6xl text-lux-text mb-6 leading-tight max-w-4xl"
-                >
-                    3rd Year Tech. <br />
-                    <span className="italic text-lux-muted font-light">1st Year Strategy.</span>
-                </motion.h1>
-
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="text-lg text-lux-muted max-w-2xl font-light leading-relaxed"
-                >
-                    We are a fusion of IT & CSE tech wizards and BBA strategic minds, building our legacy one project at a time.
-                </motion.p>
-            </section>
-
-            {/* COMPACT STATS */}
-            <section className="px-6 md:px-12 lg:px-24 pb-16">
-                <div className="max-w-5xl mx-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {stats.map((stat, index) => (
-                            <motion.div
-                                key={stat.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05, duration: 0.5 }}
-                                className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm text-center hover:border-gray-200 transition-colors"
-                            >
-                                <stat.icon className="w-5 h-5 mx-auto mb-3 text-lux-text/70" />
-                                <div className="font-serif text-2xl md:text-3xl text-lux-text mb-1">{stat.value}</div>
-                                <div className="text-[10px] md:text-xs text-lux-muted uppercase tracking-wider">{stat.label}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* STORY & IMAGE - Side by Side but tight */}
-            <section className="px-6 md:px-12 lg:px-24 py-16 bg-gray-50/50">
+            <section className="px-6 md:px-12 lg:px-24 pt-32 pb-16 bg-gray-50/50">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
