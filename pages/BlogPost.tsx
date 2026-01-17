@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { getBlogPost, BlogPost as BlogPostType } from '../utils/contentLoader';
-import { Calendar, Clock, ArrowLeft, Share2, List, ChevronRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { Search, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 
 export const BlogPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
     const [post, setPost] = useState<BlogPostType | null>(null);
     const [loading, setLoading] = useState(true);
     const [toc, setToc] = useState<{ id: string; text: string; level: number }[]>([]);
-    const [activeSection, setActiveSection] = useState<string>('');
+    const [isTocOpen, setIsTocOpen] = useState(true);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -18,7 +17,6 @@ export const BlogPost: React.FC = () => {
                 const data = await getBlogPost(postId);
                 setPost(data);
 
-                // Generate TOC from markdown content
                 if (data?.content) {
                     const lines = data.content.split('\n');
                     const headers: { id: string; text: string; level: number }[] = [];
@@ -33,192 +31,252 @@ export const BlogPost: React.FC = () => {
                     });
                     setToc(headers);
                 }
-
                 setLoading(false);
             }
         };
         fetchPost();
     }, [postId]);
 
-    // Handle scroll spy for active section
-    useEffect(() => {
-        const handleScroll = () => {
-            const sections = toc.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + 150; // Offset
-
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = sections[i];
-                if (section && section.offsetTop <= scrollPosition) {
-                    setActiveSection(section.id);
-                    break;
-                }
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [toc]);
-
-    if (loading) return <div className="min-h-screen pt-32 text-center text-lux-text">Loading...</div>;
-
-    if (!post) {
-        return <Navigate to="/blog" replace />;
-    }
-
-    const RelatedPostCard = ({ post }: { post: BlogPostType }) => (
-        <Link to={`/blog/${post.id}`} className="group block bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-all">
-            <div className="aspect-video bg-gray-100 overflow-hidden">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            </div>
-            <div className="p-4">
-                <h4 className="font-serif font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">{post.title}</h4>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
-                    <Calendar className="w-3 h-3" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
-                </div>
-            </div>
-        </Link>
-    );
+    if (loading) return <div className="min-h-screen pt-20 text-center font-sans text-sm">Loading...</div>;
+    if (!post) return <Navigate to="/blog" replace />;
 
     return (
-        <div className="min-h-screen bg-[#F8F9FA]"> {/* Wikipedia-ish light gray background */}
-            {/* Header/Nav Spacer */}
-            <div className="h-20 bg-white border-b border-gray-200"></div>
+        <div className="min-h-screen bg-[#f6f6f6] font-sans text-[#202122] text-[14px] leading-[1.6]">
 
-            <main className="max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8 py-8">
+            {/* Wikipedia-style Header/Nav Simulation */}
+            <div className="bg-white h-12 border-b border-[#a7d7f9] flex items-center px-4 mb-6 shadow-sm">
+                <div className="font-serif font-bold text-xl mr-8 flex items-center gap-2 cursor-pointer" onClick={() => window.location.href = '/blog'}>
+                    <Globe className="w-6 h-6 text-gray-600" />
+                    <span>Wikipedia</span>
+                </div>
+                <div className="flex-1 max-w-xl hidden md:block">
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Search Wikipedia"
+                            className="w-full bg-[#f0f0f0] border border-[#a2a9b1] rounded px-3 py-1.5 focus:border-[#2962cc] focus:ring-1 focus:ring-[#2962cc] outline-none transition-all placeholder-gray-500"
+                        />
+                        <Search className="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-gray-500" />
+                    </div>
+                </div>
+                <div className="ml-auto text-xs flex gap-4 text-[#0645ad]">
+                    <span className="cursor-pointer hover:underline">Create account</span>
+                    <span className="cursor-pointer hover:underline">Log in</span>
+                </div>
+            </div>
 
-                {/* Breadcrumb / Back */}
-                <div className="mb-8">
-                    <Link to="/blog" className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors group">
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-medium text-sm">Back to Insights</span>
-                    </Link>
+            <div className="max-w-[1200px] mx-auto px-4 lg:px-0 flex gap-6">
+
+                {/* Left Sidebar (Classic Wiki Sidebar) - Visual Only */}
+                <div className="hidden lg:block w-40 flex-shrink-0 pt-2 text-xs text-[#0645ad] space-y-4">
+                    <div className="bg-gradient-to-br from-gray-100 to-transparent p-2 rounded text-center text-gray-900 font-serif font-bold text-lg mb-4 cursor-pointer" onClick={() => window.location.href = '/blog'}>
+                        <Globe className="w-16 h-16 mx-auto mb-2 text-gray-400" />
+                        The Free Encyclopedia
+                    </div>
+                    <div>
+                        <ul className="space-y-1.5 border-t border-gray-200 pt-2 text-gray-800">
+                            <li className="hover:underline cursor-pointer"><Link to="/blog">Main page</Link></li>
+                            <li className="hover:underline cursor-pointer">Contents</li>
+                            <li className="hover:underline cursor-pointer">Current events</li>
+                            <li className="hover:underline cursor-pointer">Random article</li>
+                            <li className="hover:underline cursor-pointer">About Wikipedia</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div className="text-gray-500 pb-1 border-b border-gray-200 mb-1 mt-4">Cotribute</div>
+                        <ul className="space-y-1.5 text-gray-800">
+                            <li className="hover:underline cursor-pointer">Help</li>
+                            <li className="hover:underline cursor-pointer">Learn to edit</li>
+                            <li className="hover:underline cursor-pointer">Community portal</li>
+                            <li className="hover:underline cursor-pointer">Recent changes</li>
+                            <li className="hover:underline cursor-pointer">Upload file</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                {/* Main Content Area */}
+                <div className="flex-1 min-w-0">
 
-                    {/* LEFT: Main Content (8 cols) */}
-                    <article className="lg:col-span-8 bg-white p-6 md:p-10 lg:p-12 rounded-xl border border-gray-200 shadow-sm order-2 lg:order-1">
+                    {/* Tabs */}
+                    <div className="flex items-end border-b border-[#a7d7f9] mb-[-1px] text-xs md:text-sm">
+                        <div className="flex">
+                            <div className="px-4 py-2 bg-white border border-[#a7d7f9] border-b-white font-medium rounded-t-sm z-10">
+                                Article
+                            </div>
+                            <div className="px-4 py-2 bg-gradient-to-b from-[#f6f6f6] to-[#f6f6f6] border border-transparent border-b-[#a7d7f9] text-[#0645ad] hover:bg-white cursor-pointer rounded-t-sm">
+                                Talk
+                            </div>
+                        </div>
+                        <div className="ml-auto flex">
+                            <div className="px-4 py-2 bg-white border border-[#a7d7f9] border-b-white font-medium rounded-t-sm z-10">
+                                Read
+                            </div>
+                            <div className="px-4 py-2 bg-gradient-to-b from-[#f6f6f6] to-[#f6f6f6] border border-transparent border-b-[#a7d7f9] text-[#0645ad] hover:bg-white cursor-pointer rounded-t-sm">
+                                Edit
+                            </div>
+                            <div className="px-4 py-2 bg-gradient-to-b from-[#f6f6f6] to-[#f6f6f6] border border-transparent border-b-[#a7d7f9] text-[#0645ad] hover:bg-white cursor-pointer rounded-t-sm">
+                                View history
+                            </div>
+                        </div>
+                    </div>
 
-                        {/* Article Header */}
-                        <header className="mb-10 pb-8 border-b border-gray-100">
-                            <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold tracking-wide uppercase mb-4">
-                                {post.category}
-                            </span>
-                            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6">
+                    {/* Article Content */}
+                    <div className="bg-white border border-[#a7d7f9] p-6 lg:p-8 min-h-[600px]">
+
+                        {/* Title */}
+                        <div className="border-b border-[#a2a9b1] mb-4 pb-1">
+                            <div className="italic text-sm text-[#54595d] mb-1">
+                                <Link to="/blog" className="hover:underline">KaizenStat</Link>
+                            </div>
+                            <h1 className="font-serif text-[1.8rem] leading-[1.3] text-black">
                                 {post.title}
                             </h1>
-                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-serif font-bold">
-                                        {post.author.charAt(0)}
-                                    </div>
-                                    <span className="font-medium text-gray-900">{post.author}</span>
+                        </div>
+
+                        <div className="text-sm text-[#54595d] mb-4">
+                            From Wikipedia, the free encyclopedia
+                        </div>
+
+                        {/* Relative container for content + floating infobox */}
+                        <div className="relative">
+
+                            {/* Infobox - Floated Right */}
+                            <div className="float-none md:float-right ml-0 md:ml-4 mb-4 w-full md:w-[300px] bg-[#f8f9fa] border border-[#a2a9b1] p-1 text-[88%] leading-[1.5]">
+                                <div className="bg-[#b0c4de] text-center p-2 font-bold font-serif mb-1">
+                                    {post.title}
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                <div className="mb-2 bg-white border border-[#a2a9b1]">
+                                    <img src={post.image} alt={post.title} className="w-full h-auto block" />
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4" />
-                                    <span>{post.readTime}</span>
-                                </div>
+                                <table className="w-full text-left border-collapse bg-[#f8f9fa] mt-1">
+                                    <tbody>
+                                        <tr>
+                                            <th className="pr-2 py-1 align-top font-bold text-gray-900 w-1/3">Author</th>
+                                            <td className="py-1">{post.author}</td>
+                                        </tr>
+                                        <tr>
+                                            <th className="pr-2 py-1 align-top font-bold text-gray-900">Role</th>
+                                            <td className="py-1">{post.authorRole}</td>
+                                        </tr>
+                                        <tr>
+                                            <th className="pr-2 py-1 align-top font-bold text-gray-900">Date published</th>
+                                            <td className="py-1">{new Date(post.date).toLocaleDateString()}</td>
+                                        </tr>
+                                        <tr>
+                                            <th className="pr-2 py-1 align-top font-bold text-gray-900">Category</th>
+                                            <td className="py-1">
+                                                <span className="text-[#0645ad] hover:underline cursor-pointer">{post.category}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th className="pr-2 py-1 align-top font-bold text-gray-900">Read time</th>
+                                            <td className="py-1">{post.readTime}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </header>
 
-                        {/* Hero Image */}
-                        <div className="mb-10 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
-                            <img src={post.image} alt={post.title} className="w-full h-auto object-cover max-h-[500px]" />
-                        </div>
+                            {/* Intro Text is rendered as part of markdown, unfortunately we can't easily split it. 
+                                Ideally, the first paragraph should be here. 
+                                We will assume the Markdown starts with text. 
+                            */}
 
-                        {/* Mobile TOC (Accordion styling) */}
-                        <div className="lg:hidden mb-10 bg-gray-50 rounded-lg p-5 border border-gray-200">
-                            <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                <List className="w-4 h-4" /> Table of Contents
-                            </h3>
-                            <ul className="space-y-2 text-sm">
-                                {toc.map((item) => (
-                                    <li key={item.id} style={{ marginLeft: `${(item.level - 2) * 12}px` }}>
-                                        <a href={`#${item.id}`} className="text-blue-600 hover:underline block py-1">
-                                            {item.text}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            {/* TOC Inline */}
+                            <div className="inline-block bg-[#f8f9fa] border border-[#a2a9b1] p-3 my-4 min-w-[300px] max-w-full clear-left lg:clear-none">
+                                <div className="text-center font-bold mb-2 flex items-center justify-center gap-2">
+                                    Contents
+                                    <button
+                                        onClick={() => setIsTocOpen(!isTocOpen)}
+                                        className="text-[xs] font-normal text-[#0645ad] hover:underline hover:bg-none bg-transparent border-none"
+                                    >
+                                        [{isTocOpen ? 'hide' : 'show'}]
+                                    </button>
+                                </div>
+                                {isTocOpen && (
+                                    <ul className="text-[13px]">
+                                        {toc.map((item, index) => (
+                                            <li key={index} style={{ marginLeft: `${(item.level - 2) * 1.5}em` }} className="mb-0.5">
+                                                <span className="text-[#202122] mr-1 font-bold">{item.level > 2 ? `${Math.floor(index / 3) + 1}.${index % 3 + 1}` : index + 1}</span>
+                                                <a href={`#${item.id}`} className="text-[#0645ad] hover:underline visited:text-[#0b0080]">
+                                                    {item.text}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
 
-                        {/* Markdown Content */}
-                        <div className="prose prose-lg max-w-none 
-                            prose-headings:font-serif prose-headings:text-gray-900 
-                            prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2
-                            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                            prose-p:text-gray-700 prose-p:leading-relaxed 
-                            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-                            prose-strong:text-gray-900 prose-strong:font-semibold
-                            prose-ul:list-disc prose-ul:pl-5 prose-li:text-gray-700 prose-li:mb-2
-                            prose-img:rounded-lg prose-img:border prose-img:border-gray-200
+                            {/* Main Markdown Content */}
+                            <div className="prose prose-sm max-w-none text-black
+                                prose-headings:font-serif prose-headings:font-normal prose-headings:border-b prose-headings:border-[#a2a9b1] prose-headings:pb-1 prose-headings:mb-4 prose-headings:mt-6
+                                prose-h1:text-[1.8em] prose-h2:text-[1.5em] prose-h3:text-[1.2em] prose-h4:text-[100%] prose-h4:font-bold
+                                prose-p:my-2 prose-p:leading-[1.6]
+                                prose-li:my-0.5
+                                prose-a:text-[#0645ad] prose-a:no-underline hover:prose-a:underline
+                                prose-img:border prose-img:border-[#a2a9b1] prose-img:bg-[#f8f9fa] prose-img:p-1
                             ">
-                            <ReactMarkdown
-                                components={{
-                                    h2: ({ node, ...props }) => {
-                                        const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
-                                        return <h2 id={id} {...props} />;
-                                    },
-                                    h3: ({ node, ...props }) => {
-                                        const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
-                                        return <h3 id={id} {...props} />;
-                                    }
-                                }}
-                            >
-                                {post.content}
-                            </ReactMarkdown>
-                        </div>
-                    </article>
-
-                    {/* RIGHT: Sidebar (TOC & Sticky) (4 cols) */}
-                    <aside className="lg:col-span-4 order-1 lg:order-2 space-y-8">
-
-                        {/* Desktop TOC */}
-                        <div className="hidden lg:block sticky top-32 p-6 bg-white rounded-xl border border-gray-200 shadow-sm max-h-[calc(100vh-160px)] overflow-y-auto">
-                            <h3 className="font-serif font-bold text-lg text-gray-900 mb-4 pb-4 border-b border-gray-100 flex items-center gap-2">
-                                <List className="w-4 h-4" /> Contents
-                            </h3>
-                            <nav>
-                                <ul className="space-y-1">
-                                    {toc.map((item) => (
-                                        <li key={item.id}>
-                                            <a
-                                                href={`#${item.id}`}
-                                                className={`block py-1.5 px-3 rounded-md text-sm transition-colors border-l-2 ${activeSection === item.id
-                                                        ? 'bg-blue-50 text-blue-700 border-blue-600 font-medium'
-                                                        : 'text-gray-600 hover:bg-gray-50 border-transparent hover:text-gray-900'
-                                                    }`}
-                                                style={{ marginLeft: `${(item.level - 2) * 8}px` }}
-                                            >
-                                                {item.text}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </nav>
-                        </div>
-
-                        {/* Share / Actions Widget */}
-                        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                            <h3 className="font-serif font-bold text-gray-900 mb-4">Share this article</h3>
-                            <div className="flex gap-2">
-                                <button className="flex-1 py-2 px-4 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-sm transition-colors flex items-center justify-center gap-2">
-                                    Copy Link
-                                </button>
-                                <button className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors">
-                                    <Share2 className="w-5 h-5" />
-                                </button>
+                                <ReactMarkdown
+                                    components={{
+                                        h1: ({ node, ...props }) => <h1 hidden {...props} />, // Hide H1 as we render it in the header
+                                        h2: ({ node, ...props }) => {
+                                            const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
+                                            return (
+                                                <div className="flex items-baseline group mt-8 mb-4 border-b border-[#a2a9b1] pb-1">
+                                                    <h2 id={id} className="font-serif text-[1.5em] font-normal m-0" {...props} />
+                                                    <span className="ml-auto text-sm text-[#0645ad] invisible group-hover:visible cursor-pointer select-none font-sans">
+                                                        [<span className="hover:underline">edit</span>]
+                                                    </span>
+                                                </div>
+                                            );
+                                        },
+                                        h3: ({ node, ...props }) => {
+                                            const id = props.children?.toString().toLowerCase().replace(/[^a-z0-9]+/g, '-') || '';
+                                            return (
+                                                <div className="flex items-baseline group mt-6 mb-3">
+                                                    <h3 id={id} className="font-serif text-[1.2em] font-bold m-0" {...props} />
+                                                    <span className="ml-4 text-sm text-[#0645ad] invisible group-hover:visible cursor-pointer select-none font-sans">
+                                                        [<span className="hover:underline">edit</span>]
+                                                    </span>
+                                                </div>
+                                            );
+                                        }
+                                    }}
+                                >
+                                    {post.content}
+                                </ReactMarkdown>
                             </div>
-                        </div>
 
-                    </aside>
+                            {/* Categories Box */}
+                            <div className="mt-12 bg-[#f8f9fa] border border-[#a2a9b1] p-3 text-[13px] rounded-sm">
+                                <div className="flex items-start gap-2">
+                                    <span className="font-bold whitespace-nowrap">Categories:</span>
+                                    <div className="flex flex-wrap gap-2 text-[#0645ad]">
+                                        <span className="hover:underline cursor-pointer">{post.category}</span>
+                                        <span className="text-[#202122] mx-1">|</span>
+                                        <span className="hover:underline cursor-pointer">Technology</span>
+                                        <span className="text-[#202122] mx-1">|</span>
+                                        <span className="hover:underline cursor-pointer">Education</span>
+                                        <span className="text-[#202122] mx-1">|</span>
+                                        <span className="hover:underline cursor-pointer">Guides</span>
+                                        <span className="text-[#202122] mx-1">|</span>
+                                        <span className="hover:underline cursor-pointer">KaizenStat Articles</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 text-xs text-[#54595d] flex justify-between">
+                                <span>This page was last edited on {new Date(post.date).toLocaleDateString()}, at 12:00 (UTC).</span>
+                                <div className="space-x-4 text-[#0645ad]">
+                                    <span className="hover:underline cursor-pointer">Privacy policy</span>
+                                    <span className="hover:underline cursor-pointer">About Wikipedia</span>
+                                    <span className="hover:underline cursor-pointer">Disclaimers</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };
