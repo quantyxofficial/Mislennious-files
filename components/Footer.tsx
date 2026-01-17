@@ -73,7 +73,6 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             <li><Link to="/services/eda" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Exploratory Data Analysis</Link></li>
                             <li><Link to="/services/design" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>YT Thumbnail Design</Link></li>
-                            <li><Link to="/services/web" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Web Development</Link></li>
                         </ul>
                     </div>
 
