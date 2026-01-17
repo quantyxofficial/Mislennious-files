@@ -32,24 +32,28 @@ export const SERVICES = [
     title: 'Data Visualization',
     description: 'Transforming complex datasets into intuitive, interactive dashboards that drive decision-making.',
     icon: BarChart3,
+    hidden: true
   },
   {
     id: 'excel',
     title: 'Excel Solutions',
     description: 'Advanced spreadsheet modeling, automation, and reporting to streamline business operations.',
     icon: FileSpreadsheet,
+    hidden: true
   },
   {
     id: 'web',
     title: 'Web Development',
     description: 'Building high-performance, scalable web applications with modern frameworks and responsive design.',
     icon: Globe,
+    hidden: true
   },
   {
     id: 'growth',
     title: 'Growth Marketing',
     description: 'Data-driven strategies to accelerate user acquisition, retention, and revenue growth.',
     icon: TrendingUp,
+    hidden: true
   },
   {
     id: 'design',
@@ -62,6 +66,7 @@ export const SERVICES = [
     title: 'AI / ML Solutions',
     description: 'Custom machine learning models and AI integration to automate processes and predict trends.',
     icon: Brain,
+    hidden: true
   },
 ];
 
@@ -207,35 +212,23 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     id: 'web',
     title: 'Web Development',
     subtitle: 'Build Fast, Scalable, and Beautiful Web Applications',
-    description: 'We craft high-performance web applications that combine stunning design with robust engineering. From single-page applications to complex enterprise systems, we deliver solutions that scale with your business.',
+    description: 'We craft high-performance, scalable web applications.',
     icon: Code,
-    features: [
-      'React, Next.js, and TypeScript development',
-      'Progressive Web Apps (PWA)',
-      'API development and integration',
-      'Performance optimization and SEO',
-      'Responsive and accessible design'
-    ],
+    features: [],
     process: [],
-    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Vercel'],
-    caseStudies: ['p1']
+    technologies: [],
+    caseStudies: []
   },
   {
     id: 'viz',
     title: 'Data Visualization',
     subtitle: 'Transform Data into Actionable Insights',
-    description: 'Turn your raw data into strategic advantages. We build custom analytics solutions, interactive dashboards, and business intelligence systems that help you make data-driven decisions.',
+    description: 'Turn your raw data into strategic advantages.',
     icon: BarChart3,
-    features: [
-      'Custom dashboard development',
-      'Real-time analytics',
-      'KPI tracking and visualization',
-      'Interactive executive reports',
-      'Data storytelling'
-    ],
+    features: [],
     process: [],
-    technologies: ['Tableau', 'Power BI', 'D3.js', 'Looker'],
-    caseStudies: ['p5']
+    technologies: [],
+    caseStudies: []
   },
   {
     id: 'eda',
@@ -250,7 +243,13 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       'Hypothesis testing',
       'Data quality assessment'
     ],
-    process: [],
+    process: [
+      { step: '01. Ingestion', description: 'We consolidate your raw datasets from multiple sources, handling formatting inconsistencies and type conversions.' },
+      { step: '02. Cleaning', description: 'Rigorous identification and treatment of missing values, duplicate records, and data anomalies.' },
+      { step: '03. Univariate Analysis', description: 'Examining the distribution of individual variables to understand central tendencies and spread.' },
+      { step: '04. Pattern Discovery', description: 'Using bivariate and multivariate techniques to uncover hidden correlations and causal relationships.' },
+      { step: '05. Insight Generation', description: 'Synthesizing findings into a comprehensive statistical report with actionable business recommendations.' }
+    ],
     technologies: ['Python', 'Pandas', 'NumPy', 'Jupyter', 'R'],
     caseStudies: ['p5']
   },
@@ -258,67 +257,55 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     id: 'excel',
     title: 'Excel Solutions',
     subtitle: 'Automate Hours of Manual Work',
-    description: 'Stop wasting time on manual copy-pasting. We create robust, automated Excel models and VBA macros that turn days of reporting into a single button click.',
+    description: 'Stop wasting time on manual copy-pasting.',
     icon: FileSpreadsheet,
-    features: [
-      'Advanced financial modeling',
-      'VBA / Macro automation',
-      'Custom formula development',
-      'Dashboard creation in Excel',
-      'Error checking & validation'
-    ],
+    features: [],
     process: [],
-    technologies: ['Excel', 'VBA', 'Power Query', 'Office Scripts'],
-    caseStudies: ['p4']
+    technologies: [],
+    caseStudies: []
   },
   {
     id: 'ai',
     title: 'AI / ML Solutions',
     subtitle: 'Harness the Power of Artificial Intelligence',
-    description: 'From natural language processing to computer vision, we develop custom AI solutions that automate processes, predict outcomes, and unlock new capabilities for your business.',
+    description: 'We develop custom AI solutions.',
     icon: Cpu,
-    features: [
-      'Custom ML model development',
-      'Natural Language Processing (NLP)',
-      'Predictive maintenance',
-      'Recommendation systems',
-      'Chatbots and conversational AI'
-    ],
+    features: [],
     process: [],
-    technologies: ['TensorFlow', 'PyTorch', 'OpenAI', 'Gemini', 'scikit-learn'],
-    caseStudies: ['p3']
+    technologies: [],
+    caseStudies: []
   },
   {
     id: 'growth',
     title: 'Growth Marketing',
     subtitle: 'Performance Marketing That Delivers ROI',
-    description: 'We engineer data-driven marketing campaigns on Meta and Google platforms that are optimized for conversions, not just clicks. Every dollar is tracked, tested, and optimized.',
+    description: 'We engineer data-driven marketing campaigns.',
     icon: TrendingUp,
-    features: [
-      'Meta (Facebook/Instagram) Ads',
-      'Google Ads & Search Marketing',
-      'Audience segmentation',
-      'Conversion Rate Optimization (CRO)',
-      'Attribution modeling'
-    ],
+    features: [],
     process: [],
-    technologies: ['Meta Ads', 'Google Ads', 'GA4', 'GTM'],
-    caseStudies: ['p2']
+    technologies: [],
+    caseStudies: []
   },
   {
     id: 'design',
-    title: 'Design & Creative',
-    subtitle: 'Design That Captures Attention',
+    title: 'YT Thumbnail & Poster Making',
+    subtitle: 'High-CTR Visual Assets for Maximum Engagement',
     description: 'From brand identity to high-CTR YouTube thumbnails, we create visually stunning designs that tell your story and command attention in crowded markets.',
     icon: Palette,
     features: [
-      'Brand identity & Logo design',
-      'High-CTR YouTube Thumbnails',
-      'Social media graphics',
-      'Marketing collateral',
-      'UI/UX Design'
+      'Competitor Visual Analysis',
+      'Pattern Interruption Design',
+      'A/B Testing Variants',
+      'Psychology-Driven Layouts',
+      'Brand Consistency'
     ],
-    process: [],
+    process: [
+      { step: '01. Research & Strategy', description: 'We analyze your niche, competitors, and top-performing videos to identify visual hooks that drive clicks.' },
+      { step: '02. Concept Sketching', description: 'Developing multiple low-fidelity drafts to establish the strongest composition and focal points.' },
+      { step: '03. High-Fidelity Design', description: 'Executing the selected concept with premium assets, professional color grading, and kinetic typography.' },
+      { step: '04. Variant Creation', description: 'Designing 2-3 alternate versions with different emotions or hooks for A/B testing.' },
+      { step: '05. Optimization', description: 'Final export and quality check, ensuring assets look perfect across all device sizes and themes.' }
+    ],
     technologies: ['Figma', 'Photoshop', 'Illustrator', 'After Effects'],
     caseStudies: ['p6']
   }

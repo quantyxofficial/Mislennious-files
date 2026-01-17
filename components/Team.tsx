@@ -5,6 +5,29 @@ import { GraduationCap, Code, Briefcase, TrendingUp, ArrowRight, Linkedin } from
 const TEAM = [
     {
         id: 0,
+        name: "Abhishikta Dutta",
+        role: "Founder and Technology & Product",
+        bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
+        edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
+        icon: Briefcase,
+        color: "bg-teal-500",
+        image: "/team/Abhishikta_Dutta.jpeg"
+    },
+    {
+        id: 1,
+        name: "Kriti Sharma",
+        role: "Founder and Operations & Strategy",
+        bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
+        edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",
+        icon: TrendingUp,
+        color: "bg-purple-500",
+        image: "/team/Kriti_Sharma.jpeg"
+    },
+    /* Hidden as per request
+    {
+        id: 2,
         name: "Masuddar Rahaman",
         role: "Lead Engineer & Architect",
         bio: "Focused on high-performance pipelines. Turns raw data into actionable growth engines with engineering precision.",
@@ -13,29 +36,8 @@ const TEAM = [
         icon: Code,
         color: "bg-blue-500",
         image: "/team/Masuddar_Rahaman.jpeg"
-    },
-    {
-        id: 1,
-        name: "Kriti Sharma",
-        role: "Head of Strategy",
-        bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
-        edu: "Top Institutes",
-        linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",
-        icon: TrendingUp,
-        color: "bg-purple-500",
-        image: "/team/Kriti_Sharma.jpeg"
-    },
-    {
-        id: 2,
-        name: "Abhishikta Dutta",
-        role: "Data Scientist",
-        bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
-        edu: "Top Institutes",
-        linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
-        icon: Briefcase,
-        color: "bg-teal-500",
-        image: "/team/Abhishikta_Dutta.jpeg"
     }
+    */
 ];
 
 export const Team: React.FC = () => {

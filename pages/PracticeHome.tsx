@@ -97,6 +97,7 @@ export const PracticeHome: React.FC = () => {
                             </div>
 
                             {/* Premium Free Certificate Section */}
+                            {/* Premium Free Certificate Section - Commented out as per user request (Pipeline feature/UI rework needed)
                             <div className="relative overflow-hidden rounded-[2.5rem] p-1 bg-gradient-to-br from-[#c89b3c] via-[#f0cf85] to-[#c89b3c] shadow-xl group hover:shadow-2xl transition-shadow duration-500">
                                 <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
                                 <div className="relative bg-white/95 backdrop-blur-xl rounded-[2.3rem] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8 border border-white/50">
@@ -128,6 +129,7 @@ export const PracticeHome: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
+                            */}
                         </div>
 
                         {/* RIGHT COLUMN: Sidebar (4 cols) */}

@@ -43,7 +43,7 @@ export const Navbar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [location.pathname]);
 
-    const services = SERVICES.map(s => ({ id: s.id, name: s.title }));
+    const services = SERVICES.filter(s => !s.hidden).map(s => ({ id: s.id, name: s.title }));
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);

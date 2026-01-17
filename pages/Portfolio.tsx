@@ -10,7 +10,9 @@ export const Portfolio: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const location = useLocation();
 
-    const categories = ['All', ...Array.from(new Set(EXTENDED_CASE_STUDIES.map(cs => cs.category)))];
+    const excludedCategories = ['Web Development', 'Growth Marketing', 'AI & ML'];
+    const categories = ['All', ...Array.from(new Set(EXTENDED_CASE_STUDIES.map(cs => cs.category)))]
+        .filter(c => !excludedCategories.includes(c));
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -59,61 +61,45 @@ export const Portfolio: React.FC = () => {
                 )}
             </AnimatePresence>
 
-            {/* Hero Section */}
-            <section className="relative min-h-[60vh] flex items-center justify-center px-6 md:px-12 pt-32 pb-20">
-                <div className="max-w-4xl mx-auto text-center">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+            {/* Compact Header & Filter Section */}
+            <section className="px-6 md:px-12 lg:px-24 pt-32 pb-10">
+                <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="inline-block py-2 px-6 border border-lux-text/10 rounded-full text-xs font-bold tracking-[0.3em] uppercase text-lux-muted bg-white/40 backdrop-blur-md mb-8"
                     >
-                        Our Work
-                    </motion.span>
+                        <h1 className="font-serif text-5xl md:text-7xl text-lux-text leading-none">
+                            Selected<br />
+                            <span className="text-lux-muted italic">Works.</span>
+                        </h1>
+                    </motion.div>
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="font-serif text-5xl md:text-7xl lg:text-8xl text-lux-text mb-8 leading-tight"
+                        className="flex flex-col gap-3"
                     >
-                        Portfolio &<br />
-                        <span className="italic font-light text-lux-muted">Case Studies</span>
-                    </motion.h1>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-xl text-lux-muted leading-relaxed max-w-2xl mx-auto"
-                    >
-                        Real results for real businesses. Here's how we've helped our clients achieve their goals.
-                    </motion.p>
-                </div>
-            </section>
-
-            {/* Filter Section */}
-            <section className="px-6 md:px-12 lg:px-24 pb-12">
-                <div className="max-w-[1400px] mx-auto">
-                    <div className="flex items-center gap-3 mb-4">
-                        <Filter className="w-5 h-5 text-lux-muted" />
-                        <span className="text-sm text-lux-muted font-medium">Filter by:</span>
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setSelectedCategory(category)}
-                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === category
-                                    ? 'bg-lux-text text-white'
-                                    : 'bg-white/50 border border-white/60 text-lux-text hover:bg-white/70'
-                                    }`}
-                                data-hover
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
+                        <div className="flex items-center gap-2 text-lux-muted mb-1">
+                            <Filter className="w-4 h-4" />
+                            <span className="text-xs font-medium uppercase tracking-wider">Filter by category</span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    onClick={() => setSelectedCategory(category)}
+                                    className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${selectedCategory === category
+                                        ? 'bg-lux-text text-white shadow-lg shadow-lux-text/20'
+                                        : 'bg-white/50 border border-lux-text/10 text-lux-muted hover:border-lux-text/30 hover:bg-white'
+                                        }`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 

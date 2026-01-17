@@ -5,6 +5,7 @@ export interface ServiceItem {
   title: string;
   description: string;
   icon: LucideIcon;
+  hidden?: boolean;
 }
 
 export interface CaseStudy {

@@ -51,10 +51,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ serviceName = 'General
                 <p className="text-lux-muted mb-8 max-w-sm mx-auto">
                     Thanks for reaching out! We'll review your details and get back to you within 24 hours.
                 </p>
-                <div className="p-4 bg-blue-50/50 rounded-2xl border border-blue-100 text-sm text-blue-900 mb-8 max-w-sm mx-auto">
-                    <span className="font-semibold block mb-1">Need immediate assistance?</span>
-                    Call us at <a href="tel:+919876543210" className="underline hover:text-blue-700">+91 987 654 3210</a>
-                </div>
+                {/* Removed Phone Assistance Block */}
                 {onClose && (
                     <button
                         onClick={onClose}
@@ -128,8 +125,8 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ serviceName = 'General
                     </button>
                 </div>
 
-                <p className="text-[10px] text-center text-lux-muted/60 mt-6">
-                    Prefer to talk? Call us directly at <a href="tel:+919876543210" className="underline hover:text-lux-text transition-colors">+91 987 654 3210</a>
+                <p className="text-[10px] text-center text-lux-muted/60 mt-6 md:hidden">
+                    {/* Spacer/Empty for mobile if needed, or just remove lines */}
                 </p>
             </form>
         </div>

@@ -6,7 +6,6 @@ export * from './Work';
 export * from './CommunityPreview';
 export * from './Testimonials';
 export * from './Team';
-export * from './Contact';
 export * from './Navbar';
 export * from './Footer';
 export * from './ContactForm';

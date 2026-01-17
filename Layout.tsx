@@ -1,9 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ScrollManager } from './components/ScrollManager';
-
 import { Navbar } from './components/Navbar';
-import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
 
 export const Layout: React.FC = () => {
     return (
@@ -55,8 +54,8 @@ export const Layout: React.FC = () => {
                     </main>
                 </div>
 
-                {/* Use Contact footer for all pages */}
-                <Contact />
+                {/* Global Footer */}
+                <Footer />
 
                 {/* Persistent Scroll Manager: Handles async updates and back button restoration */}
                 <ScrollManager />
