@@ -121,7 +121,7 @@ export const StudyChapter: React.FC = () => {
                                     onClick={() => navigateToChapter(chapter.id)}
                                     className={`w-full text-left group flex items-start gap-3 p-3 rounded-xl transition-all duration-200
                                         ${isActive
-                                            ? 'bg-lux-text text-white shadow-lg shadow-black/5'
+                                            ? 'bg-lux-text text-lux-cream shadow-lg shadow-black/5'
                                             : 'hover:bg-stone-50 text-lux-muted hover:text-lux-text'
                                         }
                                     `}

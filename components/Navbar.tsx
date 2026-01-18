@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
 import { SERVICES } from '../constants';
+import { useAI } from '../contexts/AIContext';
 
 export const Navbar: React.FC = () => {
+    const { theme, toggleTheme } = useAI();
     const [isVisible, setIsVisible] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -75,7 +77,7 @@ export const Navbar: React.FC = () => {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="fixed top-6 left-0 right-0 z-[200] flex justify-center pointer-events-none px-4 md:px-0"
             >
-                <div className="w-full max-w-[960px] bg-white/30 backdrop-blur-[60px] backdrop-saturate-150 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-full px-6 py-3 md:px-8 md:py-2.5 flex items-center justify-between pointer-events-auto transition-all duration-500 hover:bg-white/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:scale-[1.005]">
+                <div className="w-full max-w-[960px] bg-white/30 dark:bg-black/40 backdrop-blur-[60px] backdrop-saturate-150 border border-white/40 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-full px-6 py-3 md:px-8 md:py-2.5 flex items-center justify-between pointer-events-auto transition-all duration-500 hover:bg-white/40 dark:hover:bg-black/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] hover:scale-[1.005]">
 
                     <Link to="/" className="relative z-50 cursor-pointer group flex items-center gap-3">
                         <img
@@ -146,7 +148,7 @@ export const Navbar: React.FC = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 bg-white/95 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl overflow-hidden z-[210]"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 bg-white/95 dark:bg-black/90 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden z-[210]"
                                     >
                                         {services.map((service) => (
                                             <Link
@@ -199,7 +201,7 @@ export const Navbar: React.FC = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full right-0 mt-4 w-40 bg-white/90 backdrop-blur-xl border border-white/60 rounded-2xl shadow-xl overflow-hidden"
+                                        className="absolute top-full right-0 mt-4 w-40 bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden"
                                     >
                                         {[
                                             { path: '/about', label: 'About' },

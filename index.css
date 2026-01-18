@@ -3,12 +3,41 @@
 @tailwind utilities;
 
 /* Base Styles */
+/* Semantic Color System */
+:root {
+  /* Light Mode (Default) */
+  --bg-primary: #FAFAF9;
+  /* lux.cream */
+  --bg-secondary: #E7E5E4;
+  /* lux.stone */
+  --text-primary: #1C1917;
+  /* lux.text */
+  --text-secondary: #57534E;
+  /* lux.muted */
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.dark {
+  /* Dark Mode Overrides */
+  --bg-primary: #09090b;
+  /* Dark Zinc */
+  --bg-secondary: #18181b;
+  /* Surface */
+  --text-primary: #F2F2F2;
+  /* Off-white */
+  --text-secondary: #A1A1AA;
+  /* Muted Gray */
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
 body {
-  background-color: #FAFAF9;
-  color: #1C1917;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden;
   font-size: 16px;
-  /* Explicit base size */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Cursor Reset */

@@ -65,7 +65,6 @@ interface AIContextState {
     personalities: PersonalityOption[];
     models: ModelOption[];
     theme: 'light' | 'dark';
-    setTheme: (theme: 'light' | 'dark') => void;
     toggleTheme: () => void;
 }
 
@@ -251,10 +250,9 @@ export const AIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         const saved = localStorage.getItem(STORAGE_KEYS.skillLevel);
         return (saved as 'beginner' | 'intermediate' | 'advanced') || 'beginner';
     });
-    const [theme, setThemeState] = useState<'light' | 'dark'>(() => {
-        const saved = localStorage.getItem(STORAGE_KEYS.theme);
-        return (saved as 'light' | 'dark') || 'dark';
-    });
+
+    // Force light mode only
+    const theme = 'light';
 
     // Session State
     const [sessions, setSessions] = useState<Session[]>(() => {
@@ -282,7 +280,8 @@ export const AIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     useEffect(() => { localStorage.setItem(STORAGE_KEYS.personality, personality); }, [personality]);
     useEffect(() => { localStorage.setItem(STORAGE_KEYS.model, model); }, [model]);
     useEffect(() => { localStorage.setItem(STORAGE_KEYS.skillLevel, skillLevel); }, [skillLevel]);
-    useEffect(() => { localStorage.setItem(STORAGE_KEYS.theme, theme); }, [theme]);
+
+    // Theme is now always 'light' - no effect needed
 
     useEffect(() => {
         localStorage.setItem(STORAGE_KEYS.sessions, JSON.stringify(sessions));
@@ -395,8 +394,8 @@ export const AIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     };
     const setModel = (m: ModelType) => setModelState(m);
     const setSkillLevel = (level: 'beginner' | 'intermediate' | 'advanced') => setSkillLevelState(level);
-    const setTheme = (t: 'light' | 'dark') => setThemeState(t);
-    const toggleTheme = () => setThemeState(prev => prev === 'dark' ? 'light' : 'dark');
+    // Theme functions removed - light mode only
+    const toggleTheme = () => { }; // No-op
 
     return (
         <AIContext.Provider value={{
@@ -420,7 +419,7 @@ export const AIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
             personalities: PERSONALITIES,
             models: MODELS,
-            theme, setTheme, toggleTheme
+            theme, toggleTheme
         }}>
             {children}
         </AIContext.Provider>

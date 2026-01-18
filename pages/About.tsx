@@ -41,7 +41,7 @@ export const About: React.FC = () => {
 
             {/* STORY & IMAGE - Side by Side but tight */}
             {/* STORY & IMAGE - Side by Side but tight */}
-            <section className="px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-16 bg-gray-50/50">
+            <section className="px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-16 bg-lux-stone/30">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     {/* Image First on Mobile for better engagement */}
                     <motion.div
@@ -90,7 +90,7 @@ export const About: React.FC = () => {
                         <h2 className="font-serif text-3xl text-lux-text mb-6 md:mb-8 text-left">Our Values</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {values.map((value, index) => (
-                                <div key={value.title} className="p-5 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors bg-white">
+                                <div key={value.title} className="p-5 rounded-xl border border-lux-text/5 hover:border-lux-text/20 transition-colors bg-lux-cream">
                                     <h4 className="font-bold text-sm text-lux-text mb-2">{value.title}</h4>
                                     <p className="text-xs text-lux-muted leading-relaxed">{value.description}</p>
                                 </div>
@@ -107,7 +107,7 @@ export const About: React.FC = () => {
 
                             {milestones.map((milestone, index) => (
                                 <div key={index} className="flex gap-4 items-start pl-0 relative z-10">
-                                    <div className="w-11 h-11 shrink-0 rounded-full bg-white border border-gray-100 text-lux-text flex items-center justify-center font-serif text-[10px] font-bold shadow-sm">
+                                    <div className="w-11 h-11 shrink-0 rounded-full bg-lux-cream border border-lux-text/10 text-lux-text flex items-center justify-center font-serif text-[10px] font-bold shadow-sm">
                                         {milestone.year}
                                     </div>
                                     <div className="pt-2">

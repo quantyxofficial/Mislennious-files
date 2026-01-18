@@ -98,7 +98,7 @@ export const Community: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="text-center bg-lux-text rounded-[3rem] p-12 md:p-16 text-white"
+                    className="text-center bg-lux-text rounded-[3rem] p-12 md:p-16 text-lux-cream"
                 >
                     <h3 className="font-serif text-4xl md:text-5xl font-medium mb-4">
                         Ready to Join?

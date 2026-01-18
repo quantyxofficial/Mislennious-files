@@ -117,7 +117,7 @@ export const KaizenAI: React.FC = () => {
     const isDark = theme === 'dark';
 
     return (
-        <div className={`flex h-screen overflow-hidden font-sans selection:bg-violet-500/30
+        <div className={`flex h-[100dvh] overflow-hidden font-sans selection:bg-violet-500/30
             ${isDark ? 'bg-[#09090b] text-gray-100' : 'bg-transparent text-gray-900'}
         `}>
             {/* Mobile Backdrop */}
@@ -290,9 +290,9 @@ export const KaizenAI: React.FC = () => {
                         {!sidebarOpen && (
                             <button
                                 onClick={() => setSidebarOpen(true)}
-                                className={`p-2 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                                className={`p-3 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
                             >
-                                <Menu className="w-5 h-5" />
+                                <Menu className="w-6 h-6" />
                             </button>
                         )}
 
@@ -382,9 +382,9 @@ export const KaizenAI: React.FC = () => {
                     <div className="flex items-center gap-2 md:hidden">
                         <button
                             onClick={() => createSession()}
-                            className={`p-2 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
+                            className={`p-3 rounded-lg transition-colors ${isDark ? 'hover:bg-white/10 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
                         >
-                            <Plus className="w-5 h-5" />
+                            <Plus className="w-6 h-6" />
                         </button>
                     </div>
                 </div>
@@ -563,7 +563,7 @@ export const KaizenAI: React.FC = () => {
                   INPUT AREA
                   =============================================
                 */}
-                <div className={`p-4 relative z-20
+                <div className={`p-4 relative z-20 pb-[max(1rem,env(safe-area-inset-bottom))]
                     ${isDark ? 'bg-[#09090b]' : 'bg-white'}
                 `}>
                     <div className="max-w-3xl mx-auto relative group">
@@ -581,7 +581,7 @@ export const KaizenAI: React.FC = () => {
                                 onChange={(e) => setInputValue(e.target.value)}
                                 onKeyDown={handleKeyPress}
                                 placeholder="Ask about Python, Data Science, or anything..."
-                                className={`flex-1 bg-transparent resize-none focus:outline-none py-1.5 max-h-32 min-h-[24px]
+                                className={`flex-1 bg-transparent resize-none focus:outline-none py-1.5 max-h-32 min-h-[24px] text-base md:text-sm
                                     ${isDark
                                         ? 'text-gray-100 placeholder:text-gray-500'
                                         : 'text-gray-900 placeholder:text-gray-400'}

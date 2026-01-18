@@ -20,13 +20,13 @@ export default {
             },
             colors: {
                 lux: {
-                    cream: '#FAFAF9',
-                    stone: '#E7E5E4',
-                    text: '#1C1917',
-                    muted: '#57534E', // Darker for better contrast
+                    cream: 'var(--bg-primary)',
+                    stone: 'var(--bg-secondary)',
+                    text: 'var(--text-primary)',
+                    muted: 'var(--text-secondary)', // Darker for better contrast
                     white: '#FFFFFF',
-                    glass: 'rgba(255, 255, 255, 0.4)',
-                    glassBorder: 'rgba(255, 255, 255, 0.4)',
+                    glass: 'var(--glass-bg)',
+                    glassBorder: 'var(--glass-border)',
                     accent: '#78716C', // Darker accent
                 }
             },

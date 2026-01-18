@@ -44,7 +44,7 @@ export const Portfolio: React.FC = () => {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.95, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-white rounded-[2rem] p-8 max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+                            className="bg-lux-cream dark:bg-lux-secondary dark:border dark:border-white/10 rounded-[2rem] p-8 max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
                         >
                             <button
                                 onClick={() => setIsModalOpen(false)}
@@ -91,8 +91,8 @@ export const Portfolio: React.FC = () => {
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${selectedCategory === category
-                                        ? 'bg-lux-text text-white shadow-lg shadow-lux-text/20'
-                                        : 'bg-white/50 border border-lux-text/10 text-lux-muted hover:border-lux-text/30 hover:bg-white'
+                                        ? 'bg-lux-text text-lux-cream shadow-lg shadow-lux-text/20 transition-colors'
+                                        : 'bg-lux-glass border border-lux-glassBorder text-lux-muted hover:border-lux-text/30 hover:bg-lux-secondary'
                                         }`}
                                 >
                                     {category}
@@ -114,7 +114,7 @@ export const Portfolio: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 30 }}
                                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                                className="group rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl overflow-hidden hover:bg-white/70 transition-all cursor-pointer"
+                                className="group rounded-3xl bg-lux-glass border border-lux-glassBorder backdrop-blur-xl overflow-hidden hover:bg-lux-stroke/50 transition-all cursor-pointer"
                                 data-hover
                             >
                                 <div className="aspect-[4/3] bg-gradient-to-br from-blue-100/60 to-purple-100/60 overflow-hidden">
@@ -136,7 +136,7 @@ export const Portfolio: React.FC = () => {
 
                                     <div className="flex flex-wrap gap-2 mb-4">
                                         {project.tags.map((tag) => (
-                                            <span key={tag} className="px-2 py-1 rounded-md bg-white/60 text-xs text-lux-muted">
+                                            <span key={tag} className="px-2 py-1 rounded-md bg-lux-glass text-xs text-lux-muted">
                                                 {tag}
                                             </span>
                                         ))}
@@ -154,7 +154,7 @@ export const Portfolio: React.FC = () => {
 
             {/* CTA Section */}
             <section className="px-6 md:px-12 lg:px-24 py-20 md:py-32">
-                <div className="max-w-4xl mx-auto text-center p-16 rounded-[3rem] bg-gradient-to-br from-blue-100/40 to-purple-100/40 border border-white/60 backdrop-blur-xl">
+                <div className="max-w-4xl mx-auto text-center p-16 rounded-[3rem] bg-gradient-to-br from-blue-100/40 to-purple-100/40 dark:from-blue-900/10 dark:to-purple-900/10 border border-lux-glassBorder backdrop-blur-xl">
                     <h2 className="font-serif text-4xl md:text-5xl text-lux-text mb-6">
                         Want similar results?
                     </h2>
@@ -163,7 +163,7 @@ export const Portfolio: React.FC = () => {
                     </p>
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full shadow-2xl"
+                        className="px-10 py-4 bg-lux-text text-lux-cream font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full shadow-2xl"
                         data-hover
                     >
                         Start Your Project

@@ -55,15 +55,15 @@ export const Services: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ delay: index * 0.05, duration: 0.6 }}
-                  className={`group relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/40 backdrop-blur-lg shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 cursor-pointer flex flex-col justify-between p-6 min-h-[200px]`}
+                  className={`group relative overflow-hidden rounded-[2rem] border border-lux-glassBorder bg-lux-glass backdrop-blur-lg shadow-sm hover:shadow-lg hover:bg-lux-white/10 dark:shadow-[0_0_30px_-10px_rgba(139,92,246,0.15)] dark:hover:shadow-[0_0_60px_-5px_rgba(139,92,246,0.4)] transition-all duration-300 cursor-pointer flex flex-col justify-between p-6 min-h-[200px]`}
                   data-hover
                 >
                   {/* Background Decor */}
-                  <div className={`absolute -right-4 -top-4 w-32 h-32 bg-gradient-to-br from-white/60 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
+                  <div className={`absolute -right-4 -top-4 w-32 h-32 bg-gradient-to-br from-lux-white/20 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700 pointer-events-none`} />
 
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/60 border border-white/50 flex items-center justify-center text-lux-text shadow-sm group-hover:bg-lux-text group-hover:text-white transition-colors duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-lux-glass border border-lux-glassBorder flex items-center justify-center text-lux-text shadow-sm group-hover:bg-lux-text group-hover:text-lux-cream transition-colors duration-300">
                         <service.icon className="w-5 h-5" />
                       </div>
                       <span className="opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-lux-text text-xl">→</span>

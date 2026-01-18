@@ -28,7 +28,7 @@ export const ProblemOfTheDay: React.FC = () => {
     }
 
     return (
-        <div className="relative overflow-hidden bg-lux-text text-white rounded-3xl p-8 shadow-xl">
+        <div className="relative overflow-hidden bg-neutral-900 text-white rounded-3xl p-8 shadow-xl">
             {/* Subtle Gradient Overlay */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -48,7 +48,7 @@ export const ProblemOfTheDay: React.FC = () => {
                 <div className="flex items-center gap-4">
                     <Link
                         to={`/practice/${(dailyProblem.topic || '').toLowerCase()}/${dailyProblem.id}`}
-                        className="flex-1 py-3 bg-white text-lux-text rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] text-center hover:bg-lux-cream transition-colors shadow-lg"
+                        className="flex-1 py-3 bg-white text-black rounded-xl text-[10px] font-bold uppercase tracking-[0.2em] text-center hover:bg-lux-cream transition-colors shadow-lg"
                     >
                         Solve Now
                     </Link>

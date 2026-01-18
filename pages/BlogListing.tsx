@@ -58,7 +58,7 @@ export const BlogListing: React.FC = () => {
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
                                     className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${selectedCategory === category
-                                        ? 'bg-lux-text text-white shadow-lg shadow-lux-text/20'
+                                        ? 'bg-lux-text text-lux-cream shadow-lg shadow-lux-text/20'
                                         : 'bg-white/50 border border-lux-text/10 text-lux-muted hover:border-lux-text/30 hover:bg-white'
                                         }`}
                                 >

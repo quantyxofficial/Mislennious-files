@@ -35,7 +35,7 @@ export const CommunityPreview: React.FC = () => {
                     >
                         <Link
                             to="/events"
-                            className="group flex items-center gap-3 px-8 py-4 bg-white/40 backdrop-blur-md border border-lux-text/5 text-lux-text rounded-full hover:bg-lux-text hover:text-white transition-all duration-500 shadow-sm"
+                            className="group flex items-center gap-3 px-8 py-4 bg-white/40 backdrop-blur-md border border-lux-text/5 text-lux-text rounded-full hover:bg-lux-text hover:text-lux-cream transition-all duration-500 shadow-sm"
                             data-hover
                         >
                             <span className="font-bold tracking-[0.2em] text-[10px] uppercase">Explore Events</span>
@@ -55,7 +55,7 @@ export const CommunityPreview: React.FC = () => {
                         className="md:col-span-6 lg:col-span-7 row-span-3 bg-white/40 backdrop-blur-lg border border-white/60 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] rounded-[2.5rem] p-10 flex flex-col justify-between group overflow-hidden"
                     >
                         <div className="relative z-10">
-                            <div className="w-12 h-12 bg-lux-text text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                            <div className="w-12 h-12 bg-lux-text text-lux-cream rounded-2xl flex items-center justify-center mb-6 shadow-lg rotate-3 group-hover:rotate-0 transition-transform duration-500">
                                 <Users className="w-6 h-6" />
                             </div>
                             <h3 className="font-serif text-3xl md:text-4xl text-lux-text font-medium mb-4 leading-tight">A global network of <br /><span className="italic font-light text-lux-muted">500+ Innovators.</span></h3>

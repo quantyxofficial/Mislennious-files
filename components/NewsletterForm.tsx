@@ -95,7 +95,7 @@ export const NewsletterForm: React.FC = () => {
                 <button
                     type="submit"
                     disabled={formState.status === 'loading'}
-                    className="px-8 py-3 bg-lux-text text-white rounded-full text-sm font-semibold hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="px-8 py-3 bg-lux-text text-lux-cream rounded-full text-sm font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     data-hover
                     aria-label="Subscribe to newsletter"
                 >

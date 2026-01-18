@@ -109,7 +109,7 @@ export const CertificateExam: React.FC = () => {
                             <p className="text-lux-muted mb-6">This exam contains {questions.length} multiple-choice questions. You need {passingScore}% to pass.</p>
                             <button
                                 onClick={() => setExamState('in-progress')}
-                                className="px-8 py-3 bg-lux-text text-white rounded-full font-medium hover:bg-lux-text/90 transition-colors"
+                                className="px-8 py-3 bg-lux-text text-lux-cream rounded-full font-medium hover:bg-lux-text/90 transition-colors"
                             >
                                 Start Exam <ChevronRight className="inline w-4 h-4 ml-1" />
                             </button>
@@ -129,7 +129,7 @@ export const CertificateExam: React.FC = () => {
                                                 key={optIdx}
                                                 onClick={() => handleAnswerSelect(q.id, optIdx)}
                                                 className={`p-4 rounded-xl text-left border transition-all ${answers[q.id] === optIdx
-                                                    ? 'bg-lux-text text-white border-lux-text'
+                                                    ? 'bg-lux-text text-lux-cream border-lux-text'
                                                     : 'bg-white/50 border-stone-200 hover:border-stone-400 text-lux-text'
                                                     }`}
                                             >
@@ -145,7 +145,7 @@ export const CertificateExam: React.FC = () => {
                                     onClick={handleSubmit}
                                     disabled={!allAnswered}
                                     className={`px-10 py-4 rounded-full font-medium transition-all ${allAnswered
-                                        ? 'bg-lux-text text-white hover:bg-lux-text/90'
+                                        ? 'bg-lux-text text-lux-cream hover:bg-lux-text/90'
                                         : 'bg-stone-200 text-stone-400 cursor-not-allowed'
                                         }`}
                                 >
@@ -204,7 +204,7 @@ export const CertificateExam: React.FC = () => {
                                     <h2 className="text-3xl font-serif text-lux-text mb-2">Keep Practicing!</h2>
                                     <p className="text-lg text-lux-muted mb-1">You scored <span className="font-bold text-red-500">{score}%</span></p>
                                     <p className="text-lux-muted mb-8">You need {passingScore}% to pass. Review the material and try again.</p>
-                                    <button onClick={handleRetry} className="px-8 py-3 bg-lux-text text-white rounded-full font-medium hover:bg-lux-text/90 transition-colors">
+                                    <button onClick={handleRetry} className="px-8 py-3 bg-lux-text text-lux-cream rounded-full font-medium hover:bg-lux-text/90 transition-colors">
                                         <RotateCcw className="inline w-4 h-4 mr-2" /> Retry Exam
                                     </button>
                                 </>

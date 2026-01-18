@@ -4,64 +4,31 @@ import { ScrollManager } from './components/ScrollManager';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 
+import { BackgroundAurora } from './components/BackgroundAurora';
+
 export const Layout: React.FC = () => {
     const location = useLocation();
     return (
-        <>
-            {/* Mac OS Style "Aurora" Mesh Gradient Background + Dynamic Grid Effect */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F0F4F8]">
+        <div className="relative min-h-screen w-full overflow-x-hidden bg-lux-cream dark:bg-black transition-colors duration-500">
+            {/* Global Aurora Background */}
+            <BackgroundAurora />
 
-                {/* Deep Atmospheric Base */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/50 via-purple-50/30 to-white" />
-
-                {/* Optimized CSS-Native Aurora Orbs - GPU Accelerated
-                    Reduced blur from 80px to 60px for better fill-rate performance.
-                    Reduced opacity for better text visibility.
-                */}
-                <div
-                    className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-blue-500/40 rounded-full blur-[60px] gpu-accelerated animate-blob-blue"
-                />
-
-                <div
-                    className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] bg-purple-500/40 rounded-full blur-[60px] gpu-accelerated animate-blob-purple"
-                />
-
-                <div
-                    className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-teal-400/40 rounded-full blur-[60px] gpu-accelerated animate-blob-teal"
-                />
-
-                {/* Simplified GRID OVERLAY - Single Radial Mask for Performance */}
-                <div
-                    className="absolute inset-0 z-0 opacity-60"
-                    style={{
-                        backgroundImage: `
-               linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-               linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)
-             `,
-                        backgroundSize: '40px 40px',
-                        /* Replaced complex 3-part mask with single center-out fade - reduced vignette */
-                        maskImage: `radial-gradient(ellipse at center, black 60%, transparent 90%)`,
-                        WebkitMaskImage: `radial-gradient(ellipse at center, black 60%, transparent 90%)`,
-                    }}
-                />
-            </div>
-
-            <div className="relative z-10 text-lux-text min-h-screen selection:bg-blue-500/30 selection:text-lux-text">
+            {/* Content Layer - Promoted to z-10 to sit above background */}
+            <div className="relative z-10">
                 {location.pathname !== '/kaizen-ai' && <Navbar />}
 
                 <div className="lg:pl-0">
-                    <main className="relative z-10 w-full">
+                    <main className="relative z-10 w-full min-h-screen">
                         <Outlet />
                     </main>
                 </div>
 
-                {/* Global Footer - Hidden ONLY on detailed Study/Practice content pages (not lists) AND Kaizen AI */}
+                {/* Global Footer */}
                 {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && location.pathname !== '/kaizen-ai' && <Footer />}
 
-                {/* Persistent Scroll Manager: Handles async updates and back button restoration */}
+                {/* Persistent Scroll Manager */}
                 <ScrollManager />
-
             </div>
-        </>
+        </div>
     );
 };

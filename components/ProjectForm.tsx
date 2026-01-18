@@ -113,7 +113,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = ({ serviceName = 'General
                     <button
                         type="submit"
                         disabled={formStatus === 'submitting'}
-                        className="w-full py-5 bg-lux-text text-white font-bold text-xs uppercase tracking-[0.2em] rounded-2xl hover:bg-black hover:scale-[1.01] active:scale-[0.99] transition-all shadow-lg shadow-gray-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                        className="w-full py-5 bg-lux-text text-lux-cream font-bold text-xs uppercase tracking-[0.2em] rounded-2xl hover:bg-black dark:hover:bg-white dark:hover:text-black hover:scale-[1.01] active:scale-[0.99] transition-all shadow-lg shadow-gray-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                     >
                         {formStatus === 'submitting' ? (
                             <>

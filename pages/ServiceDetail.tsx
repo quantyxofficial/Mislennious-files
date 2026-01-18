@@ -39,23 +39,23 @@ export const ServiceDetail: React.FC = () => {
     const paddingIndex = serviceIndex.toString().padStart(2, '0');
 
     return (
-        <div className="h-screen w-full bg-[#FDFDFD] overflow-hidden flex flex-col lg:flex-row">
+        <div className="h-screen w-full bg-lux-cream overflow-hidden flex flex-col lg:flex-row">
 
             {/* LEFT COLUMN: Visual Anchor (40%) */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="hidden lg:flex lg:w-[40%] bg-[#F5F5F7] relative flex-col justify-between p-12 border-r border-gray-200/50 h-full"
+                className="hidden lg:flex lg:w-[40%] bg-lux-stone/30 relative flex-col justify-between p-12 border-r border-lux-text/5 h-full"
             >
                 {/* Background Ambience */}
                 <div className="absolute top-[-20%] right-[-20%] w-[500px] h-[500px] bg-gradient-to-br from-blue-50/80 to-purple-50/80 rounded-full blur-[100px] pointer-events-none" />
 
                 {/* Top: Breadcrumb */}
                 <div className="relative z-10 flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] text-lux-muted uppercase">
-                    <Link to="/" className="hover:text-black transition-colors">Home</Link>
-                    <ChevronRight className="w-3 h-3 text-gray-400" />
-                    <span className="text-black">Services</span>
+                    <Link to="/" className="hover:text-lux-text transition-colors">Home</Link>
+                    <ChevronRight className="w-3 h-3 text-lux-text/40" />
+                    <span className="text-lux-text">Services</span>
                 </div>
 
                 {/* Middle: Title & Subtitle */}
@@ -69,8 +69,8 @@ export const ServiceDetail: React.FC = () => {
                         {paddingIndex} / SERVICE
                     </motion.span>
 
-                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-white flex items-center justify-center mb-8">
-                        <basicInfo.icon className="w-7 h-7 text-black stroke-[1.5]" />
+                    <div className="w-16 h-16 rounded-2xl bg-lux-glass shadow-sm border border-lux-glassBorder flex items-center justify-center mb-8">
+                        <basicInfo.icon className="w-7 h-7 text-lux-text stroke-[1.5]" />
                     </div>
 
                     <motion.h1
@@ -97,7 +97,7 @@ export const ServiceDetail: React.FC = () => {
 
                 {/* Bottom: Status */}
                 <div className="relative z-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/60 border border-black/5 backdrop-blur-sm">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-lux-glass border border-lux-text/5 backdrop-blur-sm">
                         <div className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                         <span className="text-[10px] font-bold text-lux-text/70 uppercase tracking-widest">Accepting Projects</span>
                     </div>
@@ -105,11 +105,11 @@ export const ServiceDetail: React.FC = () => {
             </motion.div>
 
             {/* RIGHT COLUMN: Content (60%) */}
-            <div className="w-full lg:w-[60%] bg-white h-full relative flex flex-col overflow-y-auto lg:overflow-hidden">
+            <div className="w-full lg:w-[60%] bg-lux-cream h-full relative flex flex-col overflow-y-auto lg:overflow-hidden">
                 {/* Mobile Header (Only visible on small screens) */}
                 <div className="lg:hidden p-6 pb-0 flex items-center justify-between">
                     <Link to="/" className="text-xs font-bold uppercase tracking-widest text-lux-muted">← Back</Link>
-                    <basicInfo.icon className="w-6 h-6 text-black" />
+                    <basicInfo.icon className="w-6 h-6 text-lux-text" />
                 </div>
                 <div className="lg:hidden px-6 pt-4">
                     <h1 className="font-serif text-3xl text-lux-text mb-2">{basicInfo.title}</h1>
@@ -161,7 +161,7 @@ export const ServiceDetail: React.FC = () => {
                                             </h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {technologies.slice(0, 6).map((tech) => (
-                                                    <span key={tech} className="px-3 py-1.5 bg-gray-50 border border-gray-100 rounded-md text-xs font-medium text-lux-text/70">
+                                                    <span key={tech} className="px-3 py-1.5 bg-lux-stone/50 border border-lux-text/5 rounded-md text-xs font-medium text-lux-text/70">
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -175,16 +175,16 @@ export const ServiceDetail: React.FC = () => {
                             <div className="mt-8 pt-8 border-t border-gray-100 flex flex-col sm:flex-row gap-4 shrink-0">
                                 <button
                                     onClick={() => setShowForm(true)}
-                                    className="h-12 px-8 bg-lux-text text-white text-xs font-bold uppercase tracking-[0.15em] hover:bg-black transition-all flex items-center justify-center gap-2 group w-full sm:w-auto"
+                                    className="h-12 px-8 bg-lux-text text-lux-cream text-xs font-bold uppercase tracking-[0.15em] hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all flex items-center justify-center gap-2 group w-full sm:w-auto"
                                 >
                                     Start Project <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                 </button>
 
                                 <Link
                                     to={`/portfolio?category=${encodeURIComponent(targetCategory)}`}
-                                    className="h-12 px-8 bg-white border border-gray-200 text-lux-text text-xs font-bold uppercase tracking-[0.15em] hover:bg-gray-50 transition-all flex items-center justify-center gap-2 group w-full sm:w-auto"
+                                    className="h-12 px-8 bg-lux-glass border border-lux-glassBorder text-lux-text text-xs font-bold uppercase tracking-[0.15em] hover:bg-lux-stone transition-all flex items-center justify-center gap-2 group w-full sm:w-auto"
                                 >
-                                    View Works <Layers className="w-3.5 h-3.5 text-lux-muted group-hover:text-black transition-colors" />
+                                    View Works <Layers className="w-3.5 h-3.5 text-lux-muted group-hover:text-lux-text transition-colors" />
                                 </Link>
                             </div>
                         </motion.div>

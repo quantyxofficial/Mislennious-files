@@ -57,7 +57,7 @@ export const NotFound: React.FC = () => {
                 >
                     <Link
                         to="/"
-                        className="w-full sm:w-auto px-8 py-3 bg-lux-text text-white rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-black transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                        className="w-full sm:w-auto px-8 py-3 bg-lux-text text-lux-cream rounded-full text-sm font-semibold tracking-wider uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                     >
                         <Home className="w-4 h-4" />
                         Back Home

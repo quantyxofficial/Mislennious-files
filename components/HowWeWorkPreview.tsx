@@ -68,7 +68,7 @@ export const HowWeWorkPreview: React.FC = () => {
                         <div className="text-center">
                             <Link
                                 to="/about"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-lux-text text-white font-semibold text-xs tracking-wider uppercase rounded-full hover:bg-black transition-all"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-lux-text text-lux-cream font-semibold text-xs tracking-wider uppercase rounded-full hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all"
                                 data-hover
                             >
                                 Learn Our Story

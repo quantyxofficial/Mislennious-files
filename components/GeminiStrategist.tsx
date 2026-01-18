@@ -21,7 +21,7 @@ export const GeminiStrategist: React.FC = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex items-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 bg-lux-text/90 backdrop-blur-md text-white rounded-full text-xs md:text-sm font-bold shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 group border border-white/10"
+        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60] flex items-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 bg-lux-text/90 backdrop-blur-md text-lux-cream rounded-full text-xs md:text-sm font-bold shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 group border border-white/10"
         data-hover
       >
         <Sparkles className="w-4 h-4 text-white/80 group-hover:rotate-12 transition-transform" />
@@ -48,7 +48,7 @@ export const GeminiStrategist: React.FC = () => {
                   <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-lux-text/50" />
                   KaizenStat Intelligence
                 </h3>
-                <button 
+                <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 md:p-3 hover:bg-white/40 rounded-full transition-colors"
                 >
@@ -74,7 +74,7 @@ export const GeminiStrategist: React.FC = () => {
                       <button
                         onClick={handleGenerate}
                         disabled={loading || !input}
-                        className="absolute right-2 top-2 bottom-2 md:right-3 md:top-3 md:bottom-3 bg-lux-text text-white px-4 md:px-5 rounded-lg font-medium text-sm hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-2"
+                        className="absolute right-2 top-2 bottom-2 md:right-3 md:top-3 md:bottom-3 bg-lux-text text-lux-cream px-4 md:px-5 rounded-lg font-medium text-sm hover:bg-black dark:hover:bg-white dark:hover:text-black transition-colors disabled:opacity-50 flex items-center gap-2"
                         data-hover
                       >
                         {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}

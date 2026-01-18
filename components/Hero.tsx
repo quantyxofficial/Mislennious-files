@@ -66,14 +66,14 @@ export const Hero: React.FC = () => {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="w-full md:w-auto px-10 py-4 bg-lux-text text-white font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
+            className="w-full md:w-auto px-10 py-4 bg-lux-text text-lux-cream font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
             data-hover
           >
             Start Your Project
           </button>
           <button
             onClick={() => setShowCommunityModal(true)}
-            className="w-full md:w-auto px-10 py-4 bg-transparent border border-lux-text/20 text-lux-text font-semibold text-sm tracking-[0.2em] uppercase hover:bg-lux-text hover:text-white transition-all rounded-full"
+            className="w-full md:w-auto px-10 py-4 bg-transparent border border-lux-text/20 text-lux-text font-semibold text-sm tracking-[0.2em] uppercase hover:bg-lux-text hover:text-lux-cream transition-all rounded-full"
             data-hover
           >
             Join Community

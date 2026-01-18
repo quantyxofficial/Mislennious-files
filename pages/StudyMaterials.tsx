@@ -85,7 +85,7 @@ export const StudyMaterials: React.FC = () => {
                             </div>
 
                             <div className="relative z-10">
-                                <span className="inline-block px-3 py-1 rounded-full bg-stone-100 text-lux-muted text-[10px] font-bold uppercase tracking-widest mb-6 group-hover:bg-lux-text group-hover:text-white transition-colors duration-300">
+                                <span className="inline-block px-3 py-1 rounded-full bg-stone-100 text-lux-muted text-[10px] font-bold uppercase tracking-widest mb-6 group-hover:bg-lux-text group-hover:text-lux-cream transition-colors duration-300">
                                     Chapter {(index + 1).toString().padStart(2, '0')}
                                 </span>
                                 <h3 className="text-2xl font-serif text-lux-text mb-3 group-hover:translate-x-1 transition-transform duration-300">{chapter.title}</h3>
@@ -107,7 +107,7 @@ export const StudyMaterials: React.FC = () => {
                             <p className="text-lux-muted mb-6">Apply what you've learned in our interactive practice environment.</p>
                             <Link
                                 to={`/practice/${topic}`}
-                                className="inline-flex items-center gap-2 px-8 py-4 bg-lux-text hover:bg-black text-white font-bold uppercase tracking-[0.2em] text-[11px] rounded-full transition-all duration-300 shadow-xl shadow-black/5 hover:-translate-y-1"
+                                className="inline-flex items-center gap-2 px-8 py-4 bg-lux-text hover:bg-black text-lux-cream font-bold uppercase tracking-[0.2em] text-[11px] rounded-full transition-all duration-300 shadow-xl shadow-black/5 hover:-translate-y-1"
                             >
                                 Solve {normalizedTopic} Problems
                             </Link>

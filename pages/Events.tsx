@@ -75,7 +75,7 @@ export const Events: React.FC = () => {
                     >
                         <button
                             onClick={() => setShowCommunityModal(true)}
-                            className="group flex items-center gap-3 px-8 py-4 bg-lux-text text-white font-semibold text-xs tracking-[0.15em] uppercase hover:bg-black transition-all rounded-full"
+                            className="group flex items-center gap-3 px-8 py-4 bg-lux-text text-lux-cream font-semibold text-xs tracking-[0.15em] uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full"
                         >
                             <Users className="w-4 h-4" />
                             Join Community

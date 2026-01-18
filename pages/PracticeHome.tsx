@@ -27,7 +27,7 @@ export const PracticeHome: React.FC = () => {
                     {/* Header Section */}
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-lux-muted/10 pb-6">
                         <div>
-                            <span className="inline-block py-1 px-4 border border-lux-text/10 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-lux-muted mb-3 bg-white/50 backdrop-blur-sm shadow-sm">
+                            <span className="inline-block py-1 px-4 border border-lux-text/10 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase text-lux-muted mb-3 bg-lux-glass backdrop-blur-sm shadow-sm">
                                 KaizenStat Academy
                             </span>
                             <h1 className="text-5xl md:text-6xl font-serif text-lux-text leading-[0.9] tracking-tight">
@@ -52,21 +52,21 @@ export const PracticeHome: React.FC = () => {
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: idx * 0.05 }}
-                                        className="group bg-white/40 backdrop-blur-md border border-white/60 rounded-[2rem] p-5 hover:bg-white hover:shadow-xl hover:shadow-stone-200/50 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                                        className="group bg-lux-glass backdrop-blur-md border border-lux-glassBorder rounded-[2rem] p-5 hover:bg-lux-stone hover:shadow-xl hover:shadow-stone-200/50 dark:hover:shadow-[0_0_40px_-10px_rgba(139,92,246,0.3)] transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
                                     >
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-br from-transparent to-lux-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                         <div className="relative z-10">
                                             <div className="flex justify-between items-start mb-4">
-                                                <div className="w-10 h-10 rounded-2xl bg-white border border-lux-text/5 flex items-center justify-center text-xl shadow-sm text-lux-text group-hover:scale-110 transition-transform duration-500">
+                                                <div className="w-10 h-10 rounded-2xl bg-lux-cream border border-lux-text/5 flex items-center justify-center text-xl shadow-sm text-lux-text group-hover:scale-110 transition-transform duration-500">
                                                     {topic.icon}
                                                 </div>
-                                                <span className="bg-white/60 backdrop-blur-sm text-lux-muted text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border border-lux-text/5">
+                                                <span className="bg-lux-glass backdrop-blur-sm text-lux-muted text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide border border-lux-text/5">
                                                     {topic.count} Qs
                                                 </span>
                                             </div>
 
-                                            <h3 className="text-lg font-serif text-lux-text mb-2 group-hover:text-black transition-colors">{topic.title}</h3>
+                                            <h3 className="text-lg font-serif text-lux-text mb-2 group-hover:text-lux-text transition-colors">{topic.title}</h3>
                                             <p className="text-lux-muted text-xs leading-relaxed mb-6 h-auto min-h-[3rem] font-light">
                                                 {topic.description}
                                             </p>
@@ -81,7 +81,7 @@ export const PracticeHome: React.FC = () => {
                                                 {topic.hasStudyMaterial ? (
                                                     <Link
                                                         to={`/study/${topic.id}`}
-                                                        className="w-full h-10 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-lux-text bg-white border border-lux-text/10 rounded-full hover:bg-lux-text hover:text-white hover:border-lux-text transition-all duration-300 group/btn"
+                                                        className="w-full h-10 flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-lux-text bg-lux-cream border border-lux-text/10 rounded-full hover:bg-lux-text hover:text-lux-white hover:border-lux-text transition-all duration-300 group/btn"
                                                     >
                                                         View Course <BookOpen className="w-3 h-3 opacity-50 group-hover/btn:opacity-100 transition-opacity" />
                                                     </Link>
@@ -137,7 +137,7 @@ export const PracticeHome: React.FC = () => {
                             <ProblemOfTheDay />
 
                             {/* Agency Promo - Editorial */}
-                            <div className="bg-lux-text rounded-[2.5rem] p-8 text-white relative overflow-hidden group">
+                            <div className="bg-neutral-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group">
                                 <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors duration-700" />
 
                                 <Code2 className="w-8 h-8 text-white/80 mb-6" />

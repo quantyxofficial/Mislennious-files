@@ -18,7 +18,7 @@ export const Testimonials: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-2 border border-lux-text/10 rounded-full bg-white/40 backdrop-blur-md mb-6"
+                        className="inline-flex items-center gap-2 px-4 py-2 border border-lux-text/10 rounded-full bg-lux-glass backdrop-blur-md mb-6"
                     >
                         <Sparkles className="w-3 h-3 text-amber-500" />
                         <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-lux-muted">Client Feedback</span>
@@ -41,7 +41,7 @@ export const Testimonials: React.FC = () => {
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className="relative group h-full"
                         >
-                            <div className="absolute inset-0 bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[3rem] transition-all duration-500 group-hover:bg-white/60 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] group-hover:-translate-y-2" />
+                            <div className="absolute inset-0 bg-lux-glass backdrop-blur-2xl border border-lux-glassBorder rounded-[3rem] transition-all duration-500 group-hover:bg-lux-white/10 group-hover:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] group-hover:-translate-y-2" />
                             <div className="relative p-10 md:p-12 flex flex-col h-full">
                                 <Quote className="w-10 h-10 text-lux-text/10 mb-8 group-hover:text-lux-text/20 transition-colors" />
                                 <p className="text-lux-text text-xl font-serif italic mb-10 leading-relaxed font-light flex-grow">
