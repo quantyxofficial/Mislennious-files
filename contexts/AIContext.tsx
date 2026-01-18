@@ -151,6 +151,12 @@ Your format:
 // Model Definitions - All available models
 export const MODELS: ModelOption[] = [
     {
+        id: 'deepseek-r1',
+        name: 'DeepSeek R1',
+        label: '🧠 DeepSeek R1',
+        description: 'Deep Reasoning'
+    },
+    {
         id: 'gemini',
         name: 'Gemini 2.0 Flash',
         label: '⚡ Gemini 2.0',
@@ -161,12 +167,6 @@ export const MODELS: ModelOption[] = [
         name: 'Gemma 3 4B',
         label: '🚀 Gemma 3 4B',
         description: 'Ultra Fast'
-    },
-    {
-        id: 'deepseek-r1',
-        name: 'DeepSeek R1',
-        label: '🧠 DeepSeek R1',
-        description: 'Deep Reasoning'
     },
     {
         id: 'gemini-flash',
@@ -245,7 +245,7 @@ export const AIProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     });
     const [model, setModelState] = useState<ModelType>(() => {
         const saved = localStorage.getItem(STORAGE_KEYS.model);
-        return (saved as ModelType) || 'gemini';
+        return (saved as ModelType) || 'deepseek-r1';
     });
     const [skillLevel, setSkillLevelState] = useState<'beginner' | 'intermediate' | 'advanced'>(() => {
         const saved = localStorage.getItem(STORAGE_KEYS.skillLevel);

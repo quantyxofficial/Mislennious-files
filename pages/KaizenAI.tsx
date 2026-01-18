@@ -619,7 +619,7 @@ export const KaizenAI: React.FC = () => {
                                 Kaizen AI can make mistakes. Consider checking important information.
                             </p>
                             <span className={`text-[10px] px-1.5 py-0.5 rounded border ${isDark ? 'border-emerald-500/20 text-emerald-500 bg-emerald-500/10' : 'border-emerald-200 text-emerald-600 bg-emerald-50'}`}>
-                                Running on DeepSeek R1
+                                Running on {currentModel?.name || 'Kaizen AI'}
                             </span>
                         </div>
                     </div>
