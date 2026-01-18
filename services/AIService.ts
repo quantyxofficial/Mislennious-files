@@ -16,27 +16,24 @@ const GEMINI_API_KEYS = [
 
 // OpenRouter API Keys - MAPPED TO SPECIFIC MODELS
 const OPENROUTER_MODEL_KEYS: Record<string, string> = {
-    'gemma-12b': import.meta.env.VITE_OPENROUTER_GEMMA_12B || '',
     'gemma-4b': import.meta.env.VITE_OPENROUTER_GEMMA_4B || '',
     'gemini-flash': import.meta.env.VITE_OPENROUTER_GEMINI_FLASH || '',
-    'meta': import.meta.env.VITE_OPENROUTER_META || ''
+    'deepseek-r1': import.meta.env.VITE_OPENROUTER_DEEPSEEK_R1 || ''
 };
 
 // OpenRouter Model IDs
 const OPENROUTER_MODELS: Record<string, string> = {
-    'gemma-12b': 'google/gemma-3-12b-it',
     'gemma-4b': 'google/gemma-3-4b-it',
     'gemini-flash': 'google/gemini-2.0-flash-exp:free',
-    'meta': 'meta-llama/llama-3.3-70b-instruct'
+    'deepseek-r1': 'deepseek/deepseek-r1:free'
 };
 
 // Per-model optimized configs for REAL-TIME feel
 const MODEL_CONFIGS: Record<string, { maxTokens: number; temperature: number; historyLimit: number }> = {
-    'gemini': { maxTokens: 300, temperature: 0.3, historyLimit: 2 },      // Direct Google - FAST
-    'gemma-4b': { maxTokens: 150, temperature: 0.2, historyLimit: 2 },    // Ultra-short responses
-    'gemma-12b': { maxTokens: 300, temperature: 0.4, historyLimit: 3 },   // Balanced
-    'gemini-flash': { maxTokens: 300, temperature: 0.3, historyLimit: 2 },// OpenRouter Gemini
-    'meta': { maxTokens: 300, temperature: 0.4, historyLimit: 3 }
+    'gemini': { maxTokens: 400, temperature: 0.3, historyLimit: 2 },      // Direct Google - FAST
+    'gemma-4b': { maxTokens: 200, temperature: 0.2, historyLimit: 2 },    // Ultra-short responses
+    'gemini-flash': { maxTokens: 400, temperature: 0.3, historyLimit: 2 },// OpenRouter Gemini
+    'deepseek-r1': { maxTokens: 400, temperature: 0.3, historyLimit: 3 }  // DeepReasoning
 };
 
 // Get a random Gemini API key
@@ -73,15 +70,14 @@ interface ChatResponse {
 
 // Simple, fast system prompt - responds naturally to ANY input
 const buildSystemPrompt = (): string => {
-    return `You are Kaizen AI, a helpful assistant specializing in Python and Data Science.
-
+    return `You are Kaizen AI, a Python and Data Science expert.
 RULES:
-- Respond naturally to what the user says
-- If they greet you, greet them back briefly
-- If they ask a question, answer it directly
-- Keep responses SHORT (1-3 sentences) unless they ask for details
-- For code, give minimal working examples
-- Be friendly but concise`;
+- Talk like a human, not a robot. Be friendly, slightly casual, but precise.
+- Use natural language (e.g., "Sure!", "Here's how...", "Great question").
+- Keep answers CONCISE (1-3 sentences) unless asked for details.
+- For code, give extremely minimal, working examples.
+- Don't lecture. Just help.
+- If user greets, greet back warmly.`;
 };
 
 /**
@@ -178,11 +174,11 @@ async function sendOpenRouterMessage(
     fallbackAttempt: number = 0
 ): Promise<ChatResponse> {
     const apiKey = getOpenRouterKey(model);
-    const modelId = OPENROUTER_MODELS[model] || OPENROUTER_MODELS['gemma-12b'];
+    const modelId = OPENROUTER_MODELS[model] || OPENROUTER_MODELS['deepseek-r1'];
 
     if (!apiKey) {
         // Try fallback chain
-        const fallbackModels: ModelType[] = ['gemma-12b', 'gemma-4b', 'meta'];
+        const fallbackModels: ModelType[] = ['deepseek-r1', 'gemma-4b', 'gemini-flash'];
         const nextFallback = fallbackModels.find(m => m !== model);
 
         if (nextFallback) {
@@ -194,7 +190,7 @@ async function sendOpenRouterMessage(
     }
 
     const systemPrompt = buildSystemPrompt();
-    const config = MODEL_CONFIGS[model] || MODEL_CONFIGS['gemma-12b'];
+    const config = MODEL_CONFIGS[model] || MODEL_CONFIGS['deepseek-r1'];
 
     // Build messages for OpenRouter format (limited history for speed)
     const messages = [
@@ -236,7 +232,7 @@ async function sendOpenRouterMessage(
 
             // If this model fails, try fallback chain (max 3 attempts)
             if (fallbackAttempt < 3) {
-                const fallbackModels: ModelType[] = ['gemma-12b', 'gemma-4b', 'meta'];
+                const fallbackModels: ModelType[] = ['deepseek-r1', 'gemma-4b', 'gemini-flash'];
                 const nextFallback = fallbackModels.find(m => m !== model);
 
                 if (nextFallback) {
@@ -260,7 +256,7 @@ async function sendOpenRouterMessage(
 
         // Network error, try fallback
         if (fallbackAttempt < 3) {
-            const fallbackModels: ModelType[] = ['gemma-12b', 'gemma-4b', 'meta'];
+            const fallbackModels: ModelType[] = ['deepseek-r1', 'gemma-4b', 'gemini-flash'];
             const nextFallback = fallbackModels.find(m => m !== model);
 
             if (nextFallback) {

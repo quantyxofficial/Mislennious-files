@@ -12,10 +12,9 @@ import { sendChatMessage, QUICK_ACTIONS } from '../services/AIService';
 // Premium Model Badge Colors
 const ModelBadgeColors: Record<ModelType, string> = {
     'gemini': 'bg-blue-500/10 text-blue-500 dark:text-blue-400 border-blue-200 dark:border-blue-500/20',
-    'gemma-12b': 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/20',
     'gemma-4b': 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20',
-    'meta': 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-500/20',
-    'gemini-flash': 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-200 dark:border-cyan-500/20'
+    'gemini-flash': 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-200 dark:border-cyan-500/20',
+    'deepseek-r1': 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-500/20'
 };
 
 export const KaizenAI: React.FC = () => {
@@ -119,7 +118,7 @@ export const KaizenAI: React.FC = () => {
 
     return (
         <div className={`flex h-screen overflow-hidden font-sans selection:bg-violet-500/30
-            ${isDark ? 'bg-[#09090b] text-gray-100' : 'bg-white text-gray-900'}
+            ${isDark ? 'bg-[#09090b] text-gray-100' : 'bg-transparent text-gray-900'}
         `}>
             {/* Mobile Backdrop */}
             <AnimatePresence>
@@ -145,7 +144,7 @@ export const KaizenAI: React.FC = () => {
                         initial={{ x: -280, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -280, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "anticipate" }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
                         className={`flex flex-col border-r h-full flex-shrink-0 z-50
                             fixed inset-y-0 left-0 w-[280px] md:relative md:w-auto
                             ${isDark
@@ -159,7 +158,10 @@ export const KaizenAI: React.FC = () => {
                                 <span className={`font-bold text-lg tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
                                     Kaizen AI
                                 </span>
-                                <span className="text-[10px] font-medium text-violet-500 uppercase tracking-wide leading-none">Beta • Under Dev</span>
+                                <div className="flex items-center gap-1.5">
+                                    <span className="text-[10px] font-medium text-violet-500 uppercase tracking-wide leading-none">Beta Stage</span>
+                                    <span className="text-[10px] text-gray-400">•</span>
+                                </div>
                             </div>
                             <button
                                 onClick={() => setSidebarOpen(false)}
@@ -612,9 +614,14 @@ export const KaizenAI: React.FC = () => {
                                 )}
                             </button>
                         </div>
-                        <p className={`text-[10px] text-center mt-3 ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
-                            Kaizen AI can make mistakes. Consider checking important information.
-                        </p>
+                        <div className="flex items-center justify-center gap-2 mt-3">
+                            <p className={`text-[10px] text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                                Kaizen AI can make mistakes. Consider checking important information.
+                            </p>
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded border ${isDark ? 'border-emerald-500/20 text-emerald-500 bg-emerald-500/10' : 'border-emerald-200 text-emerald-600 bg-emerald-50'}`}>
+                                Running on DeepSeek R1
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

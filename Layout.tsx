@@ -12,22 +12,22 @@ export const Layout: React.FC = () => {
             <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-[#F0F4F8]">
 
                 {/* Deep Atmospheric Base */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/40 via-purple-50/20 to-white" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-100/50 via-purple-50/30 to-white" />
 
                 {/* Optimized CSS-Native Aurora Orbs - GPU Accelerated
                     Reduced blur from 80px to 60px for better fill-rate performance.
                     Reduced opacity for better text visibility.
                 */}
                 <div
-                    className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-blue-500/20 rounded-full blur-[60px] gpu-accelerated animate-blob-blue"
+                    className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-blue-500/40 rounded-full blur-[60px] gpu-accelerated animate-blob-blue"
                 />
 
                 <div
-                    className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] bg-purple-500/20 rounded-full blur-[60px] gpu-accelerated animate-blob-purple"
+                    className="absolute top-[10%] right-[-10%] w-[60vw] h-[60vw] bg-purple-500/40 rounded-full blur-[60px] gpu-accelerated animate-blob-purple"
                 />
 
                 <div
-                    className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-teal-400/20 rounded-full blur-[60px] gpu-accelerated animate-blob-teal"
+                    className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] bg-teal-400/40 rounded-full blur-[60px] gpu-accelerated animate-blob-teal"
                 />
 
                 {/* Simplified GRID OVERLAY - Single Radial Mask for Performance */}

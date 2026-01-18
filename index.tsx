@@ -11,7 +11,7 @@ const AppWrapper = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 

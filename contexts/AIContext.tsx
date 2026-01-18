@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 export type PersonalityType = 'teacher' | 'friend' | 'senior-dev' | 'mentor' | 'exam-helper';
 
 // Model Types - Includes fallback
-export type ModelType = 'gemini' | 'gemma-12b' | 'gemma-4b' | 'gemini-flash' | 'meta';
+export type ModelType = 'gemini' | 'gemma-4b' | 'gemini-flash' | 'deepseek-r1';
 
 export interface PersonalityOption {
     id: PersonalityType;
@@ -152,43 +152,37 @@ Your format:
 export const MODELS: ModelOption[] = [
     {
         id: 'gemini',
-        name: 'Gemini Flash',
-        label: '⚡ Gemini Flash',
-        description: 'Google AI Studio - Instant responses'
-    },
-    {
-        id: 'gemma-12b',
-        name: 'Gemma 12B',
-        label: '🧠 Gemma 12B',
-        description: 'Primary model - Best reasoning'
+        name: 'Gemini 2.0 Flash',
+        label: '⚡ Gemini 2.0',
+        description: 'Instant Response'
     },
     {
         id: 'gemma-4b',
-        name: 'Gemma 4B',
-        label: '🚀 Gemma 4B',
-        description: 'Lightweight - Ultra fast'
+        name: 'Gemma 3 4B',
+        label: '🚀 Gemma 3 4B',
+        description: 'Ultra Fast'
     },
     {
-        id: 'meta',
-        name: 'Meta Llama',
-        label: '🦙 Meta Llama',
-        description: 'Meta AI - Great for coding'
+        id: 'deepseek-r1',
+        name: 'DeepSeek R1',
+        label: '🧠 DeepSeek R1',
+        description: 'Deep Reasoning'
     },
     {
         id: 'gemini-flash',
-        name: 'Gemini (OpenRouter)',
-        label: '✨ Gemini OR',
-        description: 'OpenRouter fallback'
+        name: 'Gemini 2.0 Flash (OR)',
+        label: '✨ Gemini 2.0 OR',
+        description: 'OpenRouter'
     }
 ];
 
 // Personality to Model Mapping - Auto-select optimal model
 export const PERSONALITY_MODEL_MAP: Record<PersonalityType, ModelType> = {
-    'friend': 'gemma-4b',        // Casual, fast, no overthinking
-    'teacher': 'gemma-12b',      // Clear explanations, structure
-    'mentor': 'gemma-12b',       // Reasoning + projects
-    'exam-helper': 'gemma-12b',  // Accurate, step-wise answers
-    'senior-dev': 'gemini'       // Speed > depth (instant chat)
+    'friend': 'gemma-4b',        // Casual, fast
+    'teacher': 'deepseek-r1',    // Deep reasoning for teaching
+    'mentor': 'deepseek-r1',     // Deep reasoning for guidance
+    'exam-helper': 'gemini',     // Fast accurate answers
+    'senior-dev': 'gemini'       // Speed coding
 };
 
 const AIContext = createContext<AIContextState | undefined>(undefined);

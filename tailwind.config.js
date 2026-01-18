@@ -34,9 +34,20 @@ export default {
                 '4xl': '2.5rem',
                 '5xl': '3.5rem',
             },
+            transitionDuration: {
+                DEFAULT: '150ms',
+                '75': '50ms',
+                '100': '75ms',
+                '150': '100ms',
+                '200': '150ms',
+                '300': '200ms',
+                '500': '300ms',
+                '700': '400ms',
+                '1000': '600ms',
+            },
             animation: {
-                'marquee-horizontal': 'marquee-horizontal 60s linear infinite',
-                'noise': 'noise 0.3s steps(3) infinite',
+                'marquee-horizontal': 'marquee-horizontal 40s linear infinite',
+                'noise': 'noise 0.2s steps(3) infinite',
             },
             keyframes: {
                 'marquee-horizontal': {
