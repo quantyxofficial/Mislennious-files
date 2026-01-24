@@ -377,8 +377,8 @@ export const KaizenAI: React.FC = () => {
                         <div className="hidden md:flex items-center gap-6">
                             {[
                                 { name: 'Practice', path: '/' },
-                                { name: 'Agency', path: '/agency' },
-                                { name: 'Portfolio', path: '/portfolio' }
+                                { name: 'About', path: '/about' },
+                                { name: 'Events', path: '/events' }
                             ].map(link => (
                                 <Link
                                     key={link.path}

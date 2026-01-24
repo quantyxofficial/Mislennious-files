@@ -6,10 +6,10 @@ import { CommunityModal } from '../components/CommunityModal';
 export const Events: React.FC = () => {
     const events = [
         {
-            title: 'Logo Making Competition',
-            date: 'Coming Soon',
+            title: 'Logo Design Competition',
+            date: 'Live on Unstop',
             category: 'Design',
-            status: 'Upcoming',
+            status: 'Featured',
             color: 'bg-orange-500'
         },
         {
@@ -37,7 +37,7 @@ export const Events: React.FC = () => {
                 onClose={() => setShowCommunityModal(false)}
             />
 
-            <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-start lg:items-center">
+            <div className="max-w-5xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-start lg:items-center">
 
                 {/* LEFT COLUMN: Text & CTA (5 cols) */}
                 <div className="lg:col-span-5 space-y-8">
@@ -85,14 +85,40 @@ export const Events: React.FC = () => {
                 </div>
 
                 {/* RIGHT COLUMN: Event Cards (7 cols) */}
-                <div className="lg:col-span-7">
+                <div className="lg:col-span-7 space-y-6">
+                    {/* Featured Event Banner */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="relative group overflow-hidden rounded-[2rem] border border-black/5 shadow-2xl bg-white"
+                    >
+                        <div className="relative aspect-[1200/400] md:aspect-[3/1] overflow-hidden">
+                            <img
+                                src="/banners/logo-competition.png"
+                                alt="Logo Design Competition"
+                                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                            />
+
+                            {/* Registration Button Overlay - Only visible on hover */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/20 backdrop-blur-[2px]">
+                                <button
+                                    onClick={() => window.open('https://unstop.com', '_blank')}
+                                    className="bg-white text-black px-10 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-lux-cream transition-all transform hover:scale-110 active:scale-95 flex items-center gap-2"
+                                >
+                                    Register on Unstop <ArrowRight className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </motion.div>
+
                     <div className="grid gap-4">
                         {events.map((event, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + (index * 0.1), duration: 0.5 }}
+                                transition={{ delay: 0.5 + (index * 0.1), duration: 0.5 }}
                                 className="group relative overflow-hidden bg-white/40 border border-white/60 backdrop-blur-xl rounded-2xl p-6 hover:bg-white/60 transition-all cursor-default"
                             >
                                 <div className={`absolute top-0 right-0 w-24 h-24 blur-2xl opacity-10 ${event.color} -translate-y-1/2 translate-x-1/2`} />
@@ -113,12 +139,16 @@ export const Events: React.FC = () => {
                                         <p className="text-lux-muted text-xs font-medium">{event.date}</p>
                                     </div>
 
-                                    <div className="shrink-0">
+                                    <div className="shrink-0 text-right">
                                         <button
-                                            disabled={true}
-                                            className="px-4 py-2 rounded-full border border-lux-text/10 text-[10px] font-bold uppercase tracking-wider text-lux-muted/50 cursor-not-allowed group-hover:bg-white/50 transition-all"
+                                            disabled={event.status === 'Pipeline'}
+                                            onClick={() => event.status !== 'Pipeline' && window.open('https://unstop.com', '_blank')}
+                                            className={`px-4 py-2 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-all
+                                                ${event.status === 'Pipeline'
+                                                    ? 'border-lux-text/10 text-lux-muted/50 cursor-not-allowed group-hover:bg-white/50'
+                                                    : 'border-lux-text bg-lux-text text-lux-cream hover:bg-black'}`}
                                         >
-                                            Soon
+                                            {event.status === 'Pipeline' ? 'Soon' : 'Register'}
                                         </button>
                                     </div>
                                 </div>
@@ -129,7 +159,7 @@ export const Events: React.FC = () => {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 }}
+                        transition={{ delay: 0.9 }}
                         className="mt-6 text-right"
                     >
                         <p className="text-[10px] text-lux-muted italic pr-2">

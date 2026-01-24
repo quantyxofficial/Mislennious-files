@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
                             <li><Link to="/" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Home</Link></li>
                             <li><Link to="/about" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>About Us</Link></li>
                             <li><Link to="/events" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Events</Link></li>
-                            <li><Link to="/portfolio" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Portfolio</Link></li>
+
                             <li><Link to="/blog" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Insights</Link></li>
                             <li><Link to="/careers" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Careers</Link></li>
                         </ul>
@@ -67,14 +67,7 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                    {/* Services */}
-                    <div>
-                        <h4 className="font-serif text-xl text-white mb-6">Services</h4>
-                        <ul className="space-y-3">
-                            <li><Link to="/services/eda" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Exploratory Data Analysis</Link></li>
-                            <li><Link to="/services/design" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>YT Thumbnail Design</Link></li>
-                        </ul>
-                    </div>
+
 
                     {/* Contact Info */}
                     <div>

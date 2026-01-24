@@ -1,33 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Briefcase, Clock, Users } from 'lucide-react';
-import { CAREER_POSITIONS, FORMSPREE_ENDPOINT } from '../constants';
+import { MapPin, Briefcase, Clock } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
+import { CAREER_POSITIONS } from '../constants';
 
 export const Careers: React.FC = () => {
-    const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-    const handleApplicationSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setFormStatus('submitting');
-        try {
-            const formData = new FormData(e.currentTarget);
-            formData.append('form_type', 'career_application');
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-            if (response.ok) {
-                setFormStatus('success');
-                e.currentTarget.reset();
-                setTimeout(() => setFormStatus('idle'), 5000);
-            } else {
-                setFormStatus('error');
-            }
-        } catch (error) {
-            setFormStatus('error');
-        }
-    };
+    const [state, handleSubmit] = useForm("mgoovkrz");
 
     return (
         <div className="min-h-screen pt-24 pb-8 px-6 md:px-12 flex flex-col justify-center">
@@ -83,29 +61,55 @@ export const Careers: React.FC = () => {
                     <div className="bg-lux-glass border border-lux-glassBorder backdrop-blur-xl rounded-[2rem] p-6 md:p-8 shadow-sm">
                         <div className="mb-6">
                             <h3 className="font-serif text-xl text-lux-text mb-1">Quick Apply</h3>
-                            <p className="text-xs text-lux-muted">Don't see your role? Send us your resume anyway.</p>
+                            <p className="text-xs text-lux-muted">Send us your details and we'll be in touch.</p>
                         </div>
 
-                        <form onSubmit={handleApplicationSubmit} className="space-y-3">
-                            <div className="grid grid-cols-2 gap-3">
-                                <input type="text" name="name" required placeholder="Full Name" className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20" />
-                                <input type="email" name="email" required placeholder="Email" className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20" />
-                            </div>
-                            <input type="tel" name="phone" placeholder="Phone" className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20" />
-                            <input type="text" name="linkedin" placeholder="LinkedIn URL" className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20" />
-                            <textarea name="message" required placeholder="Tell us about yourself..." rows={3} className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20 resize-none" />
+                        {state.succeeded ? (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="p-8 text-center bg-green-50/50 rounded-2xl border border-green-100"
+                            >
+                                <h4 className="font-serif text-xl text-green-800 mb-2">Application Received!</h4>
+                                <p className="text-sm text-green-700">Thanks for your interest in joining our team. We'll review your details and be in touch soon.</p>
+                            </motion.div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="space-y-1">
+                                    <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-lux-muted px-1">Email Address</label>
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        required
+                                        placeholder="your@email.com"
+                                        className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20"
+                                    />
+                                    <ValidationError prefix="Email" field="email" errors={state.errors} className="text-[10px] text-red-500 mt-1 px-1" />
+                                </div>
 
-                            {formStatus === 'success' && (
-                                <div className="p-2 rounded-lg bg-green-50 text-green-700 text-center text-xs font-medium">Received! We'll be in touch.</div>
-                            )}
-                            {formStatus === 'error' && (
-                                <div className="p-2 rounded-lg bg-red-50 text-red-700 text-center text-xs font-medium">Error. Please try again.</div>
-                            )}
+                                <div className="space-y-1">
+                                    <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-lux-muted px-1">About Yourself / Portfolio</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        required
+                                        placeholder="Tell us about yourself, your skills, and share any relevant links..."
+                                        rows={6}
+                                        className="w-full px-4 py-3 rounded-xl bg-lux-glass border border-lux-text/10 text-xs text-lux-text focus:outline-none focus:ring-1 focus:ring-lux-text/20 resize-none"
+                                    />
+                                    <ValidationError prefix="Message" field="message" errors={state.errors} className="text-[10px] text-red-500 mt-1 px-1" />
+                                </div>
 
-                            <button type="submit" disabled={formStatus === 'submitting'} className="w-full px-6 py-3 bg-lux-text text-lux-cream font-semibold text-xs tracking-widest uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full disabled:opacity-70">
-                                {formStatus === 'submitting' ? 'Sending...' : 'Submit Application'}
-                            </button>
-                        </form>
+                                <button
+                                    type="submit"
+                                    disabled={state.submitting}
+                                    className="w-full px-6 py-4 bg-lux-text text-lux-cream font-semibold text-xs tracking-widest uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full disabled:opacity-70 shadow-lg shadow-black/5"
+                                >
+                                    {state.submitting ? 'Sending...' : 'Submit Application'}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
 

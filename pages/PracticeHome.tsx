@@ -136,22 +136,7 @@ export const PracticeHome: React.FC = () => {
                         <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
                             <ProblemOfTheDay />
 
-                            {/* Agency Promo - Editorial */}
-                            <div className="bg-neutral-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden group">
-                                <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors duration-700" />
 
-                                <Code2 className="w-8 h-8 text-white/80 mb-6" />
-                                <h3 className="font-serif text-2xl mb-2 text-white">Need Custom<br />Solutions?</h3>
-                                <p className="text-white/60 text-sm mb-8 leading-relaxed font-light">
-                                    Our agency team builds enterprise-grade data solutions for businesses worldwide.
-                                </p>
-                                <Link
-                                    to="/agency"
-                                    className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white border-b border-white/30 pb-1 hover:border-white transition-all"
-                                >
-                                    Visit Agency <ArrowRight className="w-3 h-3" />
-                                </Link>
-                            </div>
                         </div>
 
                     </div>

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
-import { SERVICES } from '../constants';
 import { useAI } from '../contexts/AIContext';
 
 export const Navbar: React.FC = () => {
     const { theme, toggleTheme } = useAI();
     const [isVisible, setIsVisible] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isServicesOpen, setIsServicesOpen] = useState(false);
     const [isCompanyOpen, setIsCompanyOpen] = useState(false);
     const location = useLocation();
 
@@ -45,7 +43,7 @@ export const Navbar: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [location.pathname]);
 
-    const services = SERVICES.filter(s => !s.hidden).map(s => ({ id: s.id, name: s.title }));
+
 
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -102,16 +100,7 @@ export const Navbar: React.FC = () => {
                                 }`} />
                         </Link>
 
-                        <Link
-                            to="/agency"
-                            className={`text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/agency' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
-                                }`}
-                            data-hover
-                        >
-                            Agency
-                            <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/agency' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
-                                }`} />
-                        </Link>
+
 
                         <Link
                             to="/kaizen-ai"
@@ -125,55 +114,27 @@ export const Navbar: React.FC = () => {
                                 }`} />
                         </Link>
 
-                        <div
-                            className="relative"
-                            onMouseEnter={() => setIsServicesOpen(true)}
-                            onMouseLeave={() => setIsServicesOpen(false)}
-                        >
-                            <button
-                                className={`flex items-center gap-1 text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname.startsWith('/services') ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
-                                    }`}
-                                data-hover
-                            >
-                                Services
-                                <ChevronDown className="w-3 h-3" />
-                                <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname.startsWith('/services') ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
-                                    }`} />
-                            </button>
 
-                            <AnimatePresence>
-                                {isServicesOpen && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 10 }}
-                                        transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 bg-white/95 dark:bg-black/90 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden z-[210]"
-                                    >
-                                        {services.map((service) => (
-                                            <Link
-                                                key={service.id}
-                                                to={`/services/${service.id}`}
-                                                className={`block px-5 py-3 text-xs font-medium transition-colors ${location.pathname === `/services/${service.id}` ? 'bg-lux-text/5 text-lux-text' : 'text-lux-text hover:bg-lux-text/5'
-                                                    }`}
-                                                data-hover
-                                            >
-                                                {service.name}
-                                            </Link>
-                                        ))}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
 
                         <Link
-                            to="/portfolio"
-                            className={`text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/portfolio' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
+                            to="/about"
+                            className={`text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/about' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                                 }`}
                             data-hover
                         >
-                            Portfolio
-                            <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/portfolio' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+                            About
+                            <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/about' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+                                }`} />
+                        </Link>
+
+                        <Link
+                            to="/events"
+                            className={`text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${location.pathname === '/events' ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
+                                }`}
+                            data-hover
+                        >
+                            Events
+                            <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${location.pathname === '/events' ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                                 }`} />
                         </Link>
 
@@ -184,13 +145,13 @@ export const Navbar: React.FC = () => {
                             onMouseLeave={() => setIsCompanyOpen(false)}
                         >
                             <button
-                                className={`flex items-center gap-1 text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${['/about', '/blog', '/events', '/careers'].some(path => location.pathname.startsWith(path)) ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
+                                className={`flex items-center gap-1 text-[12px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 relative group ${['/blog', '/careers'].some(path => location.pathname.startsWith(path)) ? 'text-lux-text' : 'text-lux-muted hover:text-lux-text'
                                     }`}
                                 data-hover
                             >
                                 Company
                                 <ChevronDown className="w-3 h-3" />
-                                <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${['/about', '/blog', '/events', '/careers'].some(path => location.pathname.startsWith(path)) ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
+                                <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${['/blog', '/careers'].some(path => location.pathname.startsWith(path)) ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                                     }`} />
                             </button>
 
@@ -204,9 +165,7 @@ export const Navbar: React.FC = () => {
                                         className="absolute top-full right-0 mt-4 w-40 bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden"
                                     >
                                         {[
-                                            { path: '/about', label: 'About' },
                                             { path: '/blog', label: 'Blog' },
-                                            { path: '/events', label: 'Events' },
                                             { path: '/careers', label: 'Careers' }
                                         ].map((item) => (
                                             <Link
@@ -254,13 +213,6 @@ export const Navbar: React.FC = () => {
                                 Practice
                             </Link>
                             <Link
-                                to="/agency"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
-                            >
-                                Agency
-                            </Link>
-                            <Link
                                 to="/kaizen-ai"
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors flex items-center gap-2"
@@ -275,11 +227,11 @@ export const Navbar: React.FC = () => {
                                 About
                             </Link>
                             <Link
-                                to="/portfolio"
+                                to="/events"
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
                             >
-                                Portfolio
+                                Events
                             </Link>
                             <Link
                                 to="/blog"
@@ -287,13 +239,6 @@ export const Navbar: React.FC = () => {
                                 className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
                             >
                                 Blog
-                            </Link>
-                            <Link
-                                to="/events"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="font-serif text-3xl text-lux-text hover:text-lux-muted transition-colors"
-                            >
-                                Events
                             </Link>
                             <Link
                                 to="/careers"
