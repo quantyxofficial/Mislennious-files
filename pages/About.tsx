@@ -116,7 +116,7 @@ export const About: React.FC = () => {
                     <div className="grid md:grid-cols-2 gap-12">
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
                             <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 group-hover:scale-105">
-                                <img src="/team/Abhishikta_Dutta.jpeg" alt="Abhishikta Dutta" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                <img src="/team/Abhishikta_Dutta_new.jpg" alt="Abhishikta Dutta" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                             </div>
                             <h3 className="font-serif text-3xl text-lux-text mb-1">Abhishikta Dutta</h3>
                             <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Technology & Product</p>

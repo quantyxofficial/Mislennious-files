@@ -12,7 +12,7 @@ const TEAM = [
         linkedin: "https://www.linkedin.com/in/abhishikta-dutta-99a73838b/",
         icon: Briefcase,
         color: "bg-teal-500",
-        image: "/team/Abhishikta_Dutta.jpeg"
+        image: "/team/Abhishikta_Dutta_new.jpg"
     },
     {
         id: 1,
