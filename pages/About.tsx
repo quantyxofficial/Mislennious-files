@@ -34,27 +34,18 @@ export const About: React.FC = () => {
             <section className="px-6 md:px-12 lg:px-24 pt-24 md:pt-32 pb-16 bg-lux-stone/30">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     {/* Image First on Mobile for better engagement */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        className="relative order-first md:order-last"
-                    >
+                    <div className="relative order-first md:order-last">
                         <div className="aspect-video md:aspect-square rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm relative group">
                             <div className="absolute inset-0 bg-lux-text/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
                             <img
                                 src="/assets/team-new.jpg"
                                 alt="KaizenStat Team"
-                                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
                             />
                         </div>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                    >
+                    <div>
                         <h2 className="font-serif text-3xl md:text-4xl text-lux-text mb-6">Our Narrative</h2>
                         <div className="space-y-4 text-lux-muted/90 leading-relaxed text-sm md:text-base">
                             <p>
@@ -67,7 +58,7 @@ export const About: React.FC = () => {
                                 We don't have decades of history, but we have the hunger to prove ourselves with every line of code and every pixel.
                             </p>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
@@ -114,8 +105,8 @@ export const About: React.FC = () => {
                     <h2 className="font-serif text-3xl md:text-4xl text-lux-text mb-12 text-center text-lux-text/60 uppercase tracking-widest text-sm font-bold">The Minds Behind KaizenStat</h2>
                     <div className="grid md:grid-cols-2 gap-12">
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
-                            <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 group-hover:scale-105">
-                                <img src="/team/Abhishikta_Dutta_new.jpg" alt="Abhishikta Dutta" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                            <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 hover:scale-105">
+                                <img src="/team/Abhishikta_Dutta_new.jpg" alt="Abhishikta Dutta" className="w-full h-full object-cover transition-all duration-700" />
                             </div>
                             <h3 className="font-serif text-3xl text-lux-text mb-1">Abhishikta Dutta</h3>
                             <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Technology & Product</p>
@@ -139,8 +130,8 @@ export const About: React.FC = () => {
                             </div>
                         </div>
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
-                            <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 group-hover:scale-105">
-                                <img src="/team/Kriti_Sharma_new.jpg" alt="Kriti Sharma" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                            <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 hover:scale-105">
+                                <img src="/team/Kriti_Sharma_new.jpg" alt="Kriti Sharma" className="w-full h-full object-cover transition-all duration-700" />
                             </div>
                             <h3 className="font-serif text-3xl text-lux-text mb-1">Kriti Sharma</h3>
                             <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Operations & Strategy</p>
