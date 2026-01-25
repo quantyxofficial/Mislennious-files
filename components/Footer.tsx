@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
                             <a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
                                 <Github className="w-4 h-4" />
                             </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
+                            <a href="https://www.linkedin.com/company/kaizenstat/about/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
                                 <Linkedin className="w-4 h-4" />
                             </a>
                             <a href="https://www.instagram.com/kaizenstat_official/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>
