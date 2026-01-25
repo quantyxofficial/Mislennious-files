@@ -103,7 +103,7 @@ export const Events: React.FC = () => {
                             {/* Registration Button Overlay - Only visible on hover */}
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/20 backdrop-blur-[2px]">
                                 <button
-                                    onClick={() => window.open('https://unstop.com', '_blank')}
+                                    onClick={() => window.open('https://unstop.com/p/logo-design-competition-kaizenstat-1630306?lb=fjUTEblL&utm_medium=Share&utm_source=fdiajurq65944&utm_campaign=Competitions', '_blank')}
                                     className="bg-white text-black px-10 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] shadow-2xl hover:bg-lux-cream transition-all transform hover:scale-110 active:scale-95 flex items-center gap-2"
                                 >
                                     Register on Unstop <ArrowRight className="w-4 h-4" />
@@ -142,7 +142,7 @@ export const Events: React.FC = () => {
                                     <div className="shrink-0 text-right">
                                         <button
                                             disabled={event.status === 'Pipeline'}
-                                            onClick={() => event.status !== 'Pipeline' && window.open('https://unstop.com', '_blank')}
+                                            onClick={() => event.status !== 'Pipeline' && window.open('https://unstop.com/p/logo-design-competition-kaizenstat-1630306?lb=fjUTEblL&utm_medium=Share&utm_source=fdiajurq65944&utm_campaign=Competitions', '_blank')}
                                             className={`px-4 py-2 rounded-full border text-[10px] font-bold uppercase tracking-wider transition-all
                                                 ${event.status === 'Pipeline'
                                                     ? 'border-lux-text/10 text-lux-muted/50 cursor-not-allowed group-hover:bg-white/50'
