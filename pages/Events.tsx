@@ -95,7 +95,7 @@ export const Events: React.FC = () => {
                     >
                         <div className="relative aspect-[1200/400] md:aspect-[3/1] overflow-hidden">
                             <img
-                                src="/banners/logo-competition.png"
+                                src="/banners/logo-design-competition-new.png"
                                 alt="Logo Design Competition"
                                 className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
                             />
