@@ -120,15 +120,24 @@ export const About: React.FC = () => {
                             </div>
                             <h3 className="font-serif text-3xl text-lux-text mb-1">Abhishikta Dutta</h3>
                             <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Technology & Product</p>
-                            <a
-                                href="https://www.linkedin.com/in/abhishikta-dutta-99a73838b/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-xs shadow-sm"
-                            >
-                                <Linkedin className="w-4 h-4" />
-                                LinkedIn Profile
-                            </a>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                <a
+                                    href="https://www.linkedin.com/in/abhishikta-dutta-99a73838b/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                >
+                                    <Linkedin className="w-3.5 h-3.5" />
+                                    LinkedIn
+                                </a>
+                                <a
+                                    href="mailto:abhishiktadutta397@gmail.com"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                >
+                                    <Mail className="w-3.5 h-3.5" />
+                                    Email
+                                </a>
+                            </div>
                         </div>
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
                             <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 group-hover:scale-105">
@@ -136,15 +145,24 @@ export const About: React.FC = () => {
                             </div>
                             <h3 className="font-serif text-3xl text-lux-text mb-1">Kriti Sharma</h3>
                             <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Operations & Strategy</p>
-                            <a
-                                href="https://www.linkedin.com/in/kriti-sharma-795116377/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-xs shadow-sm"
-                            >
-                                <Linkedin className="w-4 h-4" />
-                                LinkedIn Profile
-                            </a>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                <a
+                                    href="https://www.linkedin.com/in/kriti-sharma-795116377/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                >
+                                    <Linkedin className="w-3.5 h-3.5" />
+                                    LinkedIn
+                                </a>
+                                <a
+                                    href="mailto:kritisharma1481550@gmail.com"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                >
+                                    <Mail className="w-3.5 h-3.5" />
+                                    Email
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
