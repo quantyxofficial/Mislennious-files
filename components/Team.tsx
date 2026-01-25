@@ -23,7 +23,7 @@ const TEAM = [
         linkedin: "https://www.linkedin.com/in/kriti-sharma-795116377/",
         icon: TrendingUp,
         color: "bg-purple-500",
-        image: "/team/Kriti_Sharma.jpeg"
+        image: "/team/Kriti_Sharma_new.jpg"
     },
     /* Hidden as per request
     {
