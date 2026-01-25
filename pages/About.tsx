@@ -53,7 +53,7 @@ export const About: React.FC = () => {
                         <div className="aspect-video md:aspect-square rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm relative group">
                             <div className="absolute inset-0 bg-lux-text/5 group-hover:bg-transparent transition-colors duration-500 z-10" />
                             <img
-                                src="/assets/team-narrative.jpg"
+                                src="/assets/team-new.jpg"
                                 alt="KaizenStat Team"
                                 className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                             />
