@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Users, Linkedin, Mail } from 'lucide-react';
-import { Team } from '../components';
 
 export const About: React.FC = () => {
     const values = [
@@ -167,8 +166,6 @@ export const About: React.FC = () => {
                     </div>
                 </div>
             </section>
-
-            <Team />
         </div>
     );
 };
