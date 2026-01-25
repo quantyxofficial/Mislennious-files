@@ -52,7 +52,7 @@ export const About: React.FC = () => {
                                 We represent the next generation of digital builders. While our peers are waiting for graduation to start, we are starting now.
                             </p>
                             <p>
-                                By combining the technical prowess of our founder **Abhishikta Dutta** (3rd-year Engineering) with the fresh business acumen of our co-founder **Kriti Sharma** (1st-year Management), we offer a unique blend of innovation and strategy.
+                                By combining the technical prowess of our founder <strong>Abhishikta Dutta</strong> (3rd-year Engineering) with the fresh business acumen of our co-founder <strong>Kriti Sharma</strong> (1st-year Management), we offer a unique blend of innovation and strategy.
                             </p>
                             <p>
                                 We don't have decades of history, but we have the hunger to prove ourselves with every line of code and every pixel.
