@@ -6,13 +6,24 @@ import { PrismaClient } from '@prisma/client';
 dotenv.config();
 
 const app = express();
-const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: process.env.DATABASE_URL,
-        },
-    },
-});
+
+let prismaInstance = null;
+
+function getPrisma() {
+    if (!prismaInstance) {
+        // Fallback to ensure it doesn't crash if env is missing (for debug purposes)
+        const url = process.env.DATABASE_URL || "postgres://dummy:dummy@localhost:5432/dummy";
+        prismaInstance = new PrismaClient({
+            datasources: {
+                db: {
+                    url: url,
+                },
+            },
+        });
+    }
+    return prismaInstance;
+}
+
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
@@ -30,6 +41,11 @@ app.get('/api/debug-db', async (req, res) => {
         const isSet = !!dbUrl;
         const masked = isSet ? `${dbUrl.substring(0, 15)}...` : 'NOT SET';
 
+        // List keys to verify if ANY env vars are loaded (security safe, only keys)
+        const envKeys = Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET'));
+
+        // Try to connect
+        const prisma = getPrisma();
         await prisma.$connect();
         const count = await prisma.allowedEmail.count();
 
@@ -37,13 +53,15 @@ app.get('/api/debug-db', async (req, res) => {
             status: 'connected',
             envVarSet: isSet,
             maskedUrl: masked,
+            envKeysAvailable: envKeys,
             recordCount: count
         });
     } catch (error) {
         res.status(500).json({
             status: 'error',
             message: error.message,
-            stack: error.stack
+            stack: error.stack,
+            envVarSet: !!process.env.DATABASE_URL
         });
     }
 });
@@ -51,7 +69,7 @@ app.get('/api/debug-db', async (req, res) => {
 // Admin: Get all allowed emails
 app.get('/api/admin/emails', async (req, res) => {
     try {
-        const emails = await prisma.allowedEmail.findMany({ orderBy: { createdAt: 'desc' } });
+        const emails = await getPrisma().allowedEmail.findMany({ orderBy: { createdAt: 'desc' } });
         res.json(emails);
     } catch (error) {
         console.error(error);
@@ -62,7 +80,7 @@ app.get('/api/admin/emails', async (req, res) => {
 // Admin: Get all generated certificates
 app.get('/api/admin/certificates', async (req, res) => {
     try {
-        const certs = await prisma.certificate.findMany({ orderBy: { issuedAt: 'desc' } });
+        const certs = await getPrisma().certificate.findMany({ orderBy: { issuedAt: 'desc' } });
         res.json(certs);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch certificates' });
@@ -73,7 +91,7 @@ app.get('/api/admin/certificates', async (req, res) => {
 app.patch('/api/admin/certificates/:id/revoke', async (req, res) => {
     const { id } = req.params;
     try {
-        const cert = await prisma.certificate.update({
+        const cert = await getPrisma().certificate.update({
             where: { id },
             data: { revoked: true }
         });
@@ -88,13 +106,13 @@ app.delete('/api/admin/certificates/:id', async (req, res) => {
     const { id } = req.params;
     try {
         // 1. Get cert to find email
-        const cert = await prisma.certificate.findUnique({ where: { id } });
+        const cert = await getPrisma().certificate.findUnique({ where: { id } });
         if (!cert) return res.status(404).json({ error: 'Certificate not found' });
 
         // 2. Transaction: Delete Cert + Reset Email Lock (if email validation exists)
-        await prisma.$transaction([
-            prisma.certificate.delete({ where: { id } }),
-            prisma.allowedEmail.updateMany({
+        await getPrisma().$transaction([
+            getPrisma().certificate.delete({ where: { id } }),
+            getPrisma().allowedEmail.updateMany({
                 where: { email: cert.email },
                 data: { isUsed: false }
             })
@@ -114,7 +132,7 @@ app.post('/api/admin/emails', async (req, res) => {
     const { email, name } = req.body;
     if (!email) return res.status(400).json({ error: 'Email is required' });
     try {
-        const newEmail = await prisma.allowedEmail.create({
+        const newEmail = await getPrisma().allowedEmail.create({
             data: {
                 email,
                 name: name || null
@@ -135,9 +153,9 @@ app.post('/api/admin/emails/bulk', async (req, res) => {
     if (!emails || !Array.isArray(emails)) return res.status(400).json({ error: 'Invalid data format' });
 
     try {
-        const result = await prisma.$transaction(
+        const result = await getPrisma().$transaction(
             emails.map(e =>
-                prisma.allowedEmail.upsert({
+                getPrisma().allowedEmail.upsert({
                     where: { email: e.email },
                     update: {}, // Do nothing if exists
                     create: {
@@ -158,7 +176,7 @@ app.post('/api/admin/emails/bulk', async (req, res) => {
 app.delete('/api/admin/emails/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await prisma.allowedEmail.delete({ where: { id } });
+        await getPrisma().allowedEmail.delete({ where: { id } });
         res.json({ message: 'Email deleted' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete email' });
@@ -169,14 +187,14 @@ app.delete('/api/admin/emails/:id', async (req, res) => {
 app.post('/api/verify-email', async (req, res) => {
     const { email } = req.body;
     try {
-        const allowed = await prisma.allowedEmail.findUnique({ where: { email } });
+        const allowed = await getPrisma().allowedEmail.findUnique({ where: { email } });
         if (!allowed) {
             return res.status(403).json({ allowed: false, error: 'Email not authorized' });
         }
 
         // If already used, fetch existing certificate
         if (allowed.isUsed) {
-            const existingCert = await prisma.certificate.findFirst({ where: { email } });
+            const existingCert = await getPrisma().certificate.findFirst({ where: { email } });
             return res.json({ allowed: true, isUsed: true, certificate: existingCert });
         }
 
@@ -196,7 +214,7 @@ app.post('/api/generate-certificate', async (req, res) => {
 
     try {
         // Double check eligibility
-        const allowed = await prisma.allowedEmail.findUnique({ where: { email } });
+        const allowed = await getPrisma().allowedEmail.findUnique({ where: { email } });
 
         // STRICT CHECK: If already used, BLOCK creation/update.
         if (!allowed) {
@@ -209,7 +227,7 @@ app.post('/api/generate-certificate', async (req, res) => {
         const uniqueId = Math.random().toString(36).substring(2, 10).toUpperCase();
 
         // Transaction: Create Cert + Mark Email Used
-        const cert = await prisma.$transaction(async (tx) => {
+        const cert = await getPrisma().$transaction(async (tx) => {
             // Re-check status INSIDE transaction to prevent race conditions
             const currentAllowed = await tx.allowedEmail.findUnique({ where: { email } });
             if (!currentAllowed) throw new Error('Email not authorized');
@@ -250,7 +268,7 @@ app.post('/api/generate-certificate', async (req, res) => {
 app.get('/api/verify/:uniqueId', async (req, res) => {
     const { uniqueId } = req.params;
     try {
-        const cert = await prisma.certificate.findUnique({ where: { uniqueId } });
+        const cert = await getPrisma().certificate.findUnique({ where: { uniqueId } });
         if (!cert) return res.status(404).json({ valid: false });
         res.json({ valid: true, certificate: cert });
     } catch (error) {
@@ -262,7 +280,7 @@ app.get('/api/verify/:uniqueId', async (req, res) => {
 app.post('/api/admin/certificates/bulk-issue', async (req, res) => {
     try {
         // 1. Get all allowed emails
-        const allowedEmails = await prisma.allowedEmail.findMany();
+        const allowedEmails = await getPrisma().allowedEmail.findMany();
 
         const results = [];
 
@@ -273,7 +291,7 @@ app.post('/api/admin/certificates/bulk-issue', async (req, res) => {
 
                 // Check if certificate already exists
                 if (record.isUsed) {
-                    cert = await prisma.certificate.findFirst({ where: { email: record.email } });
+                    cert = await getPrisma().certificate.findFirst({ where: { email: record.email } });
                 }
 
                 // If not exists (or record says used but cert missing), create it
@@ -282,7 +300,7 @@ app.post('/api/admin/certificates/bulk-issue', async (req, res) => {
                     const name = record.name || 'Participant';
 
                     // Transaction to ensure atomicity for each record
-                    cert = await prisma.$transaction(async (tx) => {
+                    cert = await getPrisma().$transaction(async (tx) => {
                         const newCert = await tx.certificate.create({
                             data: {
                                 uniqueId,

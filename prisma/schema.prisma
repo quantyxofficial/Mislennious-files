@@ -5,7 +5,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // Used for validation/dev. In prod, we inject the real URL via constructor.
+  url      = "postgresql://user:password@localhost:5432/db" 
 }
 
 model AllowedEmail {
