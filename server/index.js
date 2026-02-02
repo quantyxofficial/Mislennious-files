@@ -44,6 +44,15 @@ app.get('/api/debug-db', async (req, res) => {
         // List keys to verify if ANY env vars are loaded (security safe, only keys)
         const envKeys = Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET'));
 
+        if (!isSet) {
+            return res.json({
+                status: 'missing_env',
+                message: 'DATABASE_URL is not set in Vercel Environment Variables',
+                envVarSet: false,
+                envKeysAvailable: envKeys
+            });
+        }
+
         // Try to connect
         const prisma = getPrisma();
         await prisma.$connect();
