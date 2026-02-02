@@ -60,6 +60,7 @@ app.get('/api/debug-db', async (req, res) => {
 
         res.json({
             status: 'connected',
+            version: '1.0.1 (Check Update)',
             envVarSet: isSet,
             maskedUrl: masked,
             envKeysAvailable: envKeys,
@@ -68,6 +69,7 @@ app.get('/api/debug-db', async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 'error',
+            version: '1.0.1 (Check Update)',
             message: error.message,
             stack: error.stack,
             envVarSet: !!process.env.DATABASE_URL
