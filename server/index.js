@@ -17,6 +17,31 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
 });
 
+// DEBUG: Connection Test
+app.get('/api/debug-db', async (req, res) => {
+    try {
+        const dbUrl = process.env.DATABASE_URL;
+        const isSet = !!dbUrl;
+        const masked = isSet ? `${dbUrl.substring(0, 15)}...` : 'NOT SET';
+
+        await prisma.$connect();
+        const count = await prisma.allowedEmail.count();
+
+        res.json({
+            status: 'connected',
+            envVarSet: isSet,
+            maskedUrl: masked,
+            recordCount: count
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: error.message,
+            stack: error.stack
+        });
+    }
+});
+
 // Admin: Get all allowed emails
 app.get('/api/admin/emails', async (req, res) => {
     try {
