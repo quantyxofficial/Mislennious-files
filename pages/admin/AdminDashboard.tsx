@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, Plus, ShieldCheck, RefreshCw, Upload, Download } from 'lucide-react';
+import { Trash2, Plus, ShieldCheck, RefreshCw, Upload, Download, Search } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { toPng } from 'html-to-image';
@@ -18,6 +18,7 @@ interface AllowedEmail {
 
 export const AdminDashboard = () => {
     const [emails, setEmails] = useState<AllowedEmail[]>([]);
+    const [searchTerm, setSearchTerm] = useState(''); // Search state for emails
     const [newEmail, setNewEmail] = useState('');
     const [newName, setNewName] = useState('');
     const [loading, setLoading] = useState(true);
@@ -44,6 +45,12 @@ export const AdminDashboard = () => {
             setLoading(false);
         }
     };
+
+    // Filter emails based on search
+    const filteredEmails = emails.filter(email =>
+        email.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (email.name && email.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     const handleRefresh = () => {
         fetchEmails();
@@ -154,12 +161,22 @@ export const AdminDashboard = () => {
         }
     };
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === 'admin') {
-            setIsAuthenticated(true);
-        } else {
-            alert('Incorrect password');
+        try {
+            const res = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password }),
+            });
+            if (res.ok) {
+                setIsAuthenticated(true);
+            } else {
+                alert('Incorrect password');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Server error during login');
         }
     };
 
@@ -211,6 +228,19 @@ export const AdminDashboard = () => {
                     {/* Email Whitelist Section */}
                     <div className="bg-brand-gray/10 rounded-xl border border-white/10 p-6">
                         <h2 className="text-xl font-semibold text-white mb-4">Allowed Emails</h2>
+
+                        {/* Search Input for Emails */}
+                        <div className="relative mb-4">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+                            <input
+                                type="text"
+                                placeholder="Search emails or names..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full bg-black/30 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:outline-none focus:border-brand-purple"
+                            />
+                        </div>
+
                         <form onSubmit={handleAddEmail} className="flex flex-col gap-2 mb-6">
                             <div className="flex gap-2">
                                 <input
@@ -250,7 +280,7 @@ export const AdminDashboard = () => {
                         </div>
 
                         <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                            {emails.map((item) => (
+                            {filteredEmails.map((item) => (
                                 <motion.div
                                     key={item.id}
                                     initial={{ opacity: 0, y: 10 }}
@@ -276,8 +306,8 @@ export const AdminDashboard = () => {
                                     </button>
                                 </motion.div>
                             ))}
-                            {emails.length === 0 && !loading && (
-                                <p className="text-white/40 text-center py-4">No emails authorized yet.</p>
+                            {filteredEmails.length === 0 && !loading && (
+                                <p className="text-white/40 text-center py-4">No emails found.</p>
                             )}
                         </div>
                     </div>
@@ -298,6 +328,7 @@ export const AdminDashboard = () => {
 
 const CertificateList = () => {
     const [certs, setCerts] = useState<any[]>([]);
+    const [certSearch, setCertSearch] = useState(''); // Search state for certs
     const [actionLoading, setActionLoading] = useState<Record<string, string | null>>({});
 
     useEffect(() => {
@@ -310,6 +341,13 @@ const CertificateList = () => {
             if (res.ok) setCerts(await res.json());
         } catch (e) { console.error(e); }
     };
+
+    // Filter certs based on search
+    const filteredCerts = certs.filter(cert =>
+        cert.name.toLowerCase().includes(certSearch.toLowerCase()) ||
+        cert.email.toLowerCase().includes(certSearch.toLowerCase()) ||
+        cert.uniqueId.toLowerCase().includes(certSearch.toLowerCase())
+    );
 
     const handleRevoke = async (id: string) => {
         if (!confirm('Revoke this certificate? This cannot be undone.')) return;
@@ -364,6 +402,18 @@ const CertificateList = () => {
 
     return (
         <div>
+            {/* Search Input for Certificates */}
+            <div className="relative mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+                <input
+                    type="text"
+                    placeholder="Search certificates..."
+                    value={certSearch}
+                    onChange={(e) => setCertSearch(e.target.value)}
+                    className="w-full bg-black/30 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:outline-none focus:border-brand-purple"
+                />
+            </div>
+
             <div className="flex justify-end mb-4">
                 <button onClick={downloadCSV} className="text-xs bg-brand-lime/10 text-brand-lime border border-brand-lime/20 px-3 py-1.5 rounded-lg hover:bg-brand-lime/20 flex items-center gap-2">
                     Download CSV
@@ -372,7 +422,7 @@ const CertificateList = () => {
 
             <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                 <AnimatePresence mode="popLayout">
-                    {certs.map((cert) => (
+                    {filteredCerts.map((cert) => (
                         <motion.div
                             layout
                             key={cert.id}
@@ -414,7 +464,7 @@ const CertificateList = () => {
                         </motion.div>
                     ))}
                 </AnimatePresence>
-                {certs.length === 0 && <p className="text-white/40 text-center py-4">No certificates issued.</p>}
+                {filteredCerts.length === 0 && <p className="text-white/40 text-center py-4">No certificates found.</p>}
             </div>
         </div>
     );

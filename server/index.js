@@ -34,48 +34,19 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// DEBUG: Connection Test
-app.get('/api/debug-db', async (req, res) => {
-    try {
-        const dbUrl = process.env.DATABASE_URL;
-        const isSet = !!dbUrl;
-        const masked = isSet ? `${dbUrl.substring(0, 15)}...` : 'NOT SET';
+// Admin: Login
+app.post('/api/admin/login', (req, res) => {
+    const { password } = req.body;
+    const adminPass = process.env.ADMIN_PASSWORD;
 
-        // List keys to verify if ANY env vars are loaded (security safe, only keys)
-        const envKeys = Object.keys(process.env).filter(k => !k.includes('KEY') && !k.includes('SECRET'));
-
-        if (!isSet) {
-            return res.json({
-                status: 'missing_env',
-                message: 'DATABASE_URL is not set in Vercel Environment Variables',
-                envVarSet: false,
-                envKeysAvailable: envKeys
-            });
-        }
-
-        // Try to connect
-        const prisma = getPrisma();
-        await prisma.$connect();
-        const count = await prisma.allowedEmail.count();
-
-        res.json({
-            status: 'connected',
-            version: '1.0.1 (Check Update)',
-            envVarSet: isSet,
-            maskedUrl: masked,
-            envKeysAvailable: envKeys,
-            recordCount: count
-        });
-    } catch (error) {
-        res.status(500).json({
-            status: 'error',
-            version: '1.0.1 (Check Update)',
-            message: error.message,
-            stack: error.stack,
-            envVarSet: !!process.env.DATABASE_URL
-        });
+    if (password === adminPass) {
+        res.json({ success: true, message: 'Logged in successfully' });
+    } else {
+        res.status(401).json({ success: false, message: 'Invalid password' });
     }
 });
+
+
 
 // Admin: Get all allowed emails
 app.get('/api/admin/emails', async (req, res) => {
