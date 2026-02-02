@@ -14,11 +14,11 @@ export const Layout: React.FC = () => {
             <BackgroundAurora />
 
             {/* Content Layer - Promoted to z-10 to sit above background */}
-            <div className="relative z-10">
+            <div className="relative z-10 flex flex-col">
                 {location.pathname !== '/kaizen-ai' && <Navbar />}
 
-                <div className="lg:pl-0">
-                    <main className="relative z-10 w-full min-h-screen">
+                <div className="lg:pl-0 flex-grow flex flex-col">
+                    <main className="relative z-10 w-full flex-grow">
                         <Outlet />
                     </main>
                 </div>

@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AllowedEmail {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Template {
+  id        String   @id @default(uuid())
+  name      String
+  imageUrl  String   
+  config    String   // JSON string storing layout config
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Certificate {
+  id        String   @id @default(uuid())
+  uniqueId  String   @unique 
+  email     String
+  name      String
+  issuedAt  DateTime @default(now())
+  templateId String
+  revoked   Boolean  @default(false)
+}

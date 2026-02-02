@@ -50,6 +50,7 @@ export const Footer: React.FC = () => {
                             <li><Link to="/events" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Events</Link></li>
 
                             <li><Link to="/blog" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Insights</Link></li>
+                            <li><Link to="/verify" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Verify Certificate</Link></li>
                             <li><Link to="/careers" className="text-stone-300 hover:text-white transition-colors text-base" data-hover>Careers</Link></li>
                         </ul>
                     </div>
@@ -95,6 +96,7 @@ export const Footer: React.FC = () => {
                     <div className="flex gap-6">
                         <Link to="/privacy" className="text-stone-500 hover:text-white transition-colors text-xs" data-hover>Privacy Policy</Link>
                         <Link to="/terms" className="text-stone-500 hover:text-white transition-colors text-xs" data-hover>Terms of Service</Link>
+                        <Link to="/admin" className="text-stone-500 hover:text-white transition-colors text-xs" data-hover>Admin</Link>
                     </div>
                 </div>
             </div>

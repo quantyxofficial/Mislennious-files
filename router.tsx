@@ -22,12 +22,31 @@ const Privacy = lazy(() => import('./pages/Privacy').then(m => ({ default: m.Pri
 const Terms = lazy(() => import('./pages/Terms').then(m => ({ default: m.Terms })));
 const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
 const KaizenAI = lazy(() => import('./pages/KaizenAI').then(m => ({ default: m.KaizenAI })));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const CertificateGenerator = lazy(() => import('./pages/CertificateGenerator').then(m => ({ default: m.CertificateGenerator })));
+const CertificateVerify = lazy(() => import('./pages/CertificateVerify').then(m => ({ default: m.CertificateVerify })));
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout />,
         children: [
+            {
+                path: 'admin',
+                element: <AdminDashboard />,
+            },
+            {
+                path: 'get-certified',
+                element: <CertificateGenerator />,
+            },
+            {
+                path: 'verify',
+                element: <CertificateVerify />,
+            },
+            {
+                path: 'verify/:uniqueId',
+                element: <CertificateVerify />,
+            },
             {
                 index: true,
                 element: <PracticeHome />,

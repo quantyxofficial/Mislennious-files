@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Briefcase, Clock } from 'lucide-react';
+import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
+import { Link } from 'react-router-dom';
 import { CAREER_POSITIONS } from '../constants';
+
 
 export const Careers: React.FC = () => {
     const [state, handleSubmit] = useForm("mgoovkrz");
@@ -28,6 +30,9 @@ export const Careers: React.FC = () => {
                         <p className="text-sm text-lux-muted leading-relaxed max-w-xl">
                             Join a team of Data Scientists, Engineers, and Designers working on challenging problems for world-class clients.
                         </p>
+
+                        {/* Certificate Verify Short Link */}
+
                     </div>
 
                     {/* Compact Open Positions */}
@@ -47,6 +52,16 @@ export const Careers: React.FC = () => {
                                         </div>
                                     </div>
                                     <p className="text-xs text-lux-muted mt-2 line-clamp-2">{position.description}</p>
+
+                                    {/* Offer Button for Tech Blog Writer */}
+                                    {position.id === 'c4' && (
+                                        <div className="mt-4 pt-4 border-t border-lux-text/10">
+                                            <Link to="/get-certified" onClick={(e) => e.stopPropagation()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-purple/10 text-brand-purple hover:bg-brand-purple hover:text-white transition-all border border-brand-purple/20 group w-full justify-center">
+                                                <span className="font-bold text-xs uppercase tracking-wider">Generate Your Joining Certificate</span>
+                                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                            </Link>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

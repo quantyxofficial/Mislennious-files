@@ -28,6 +28,12 @@ export default {
                     glass: 'var(--glass-bg)',
                     glassBorder: 'var(--glass-border)',
                     accent: '#78716C', // Darker accent
+                },
+                brand: {
+                    black: '#09090b', // Zinc 950
+                    gray: '#27272a',  // Zinc 800
+                    purple: '#a855f7', // Purple 500
+                    lime: '#d9f99d',   // Lime 200
                 }
             },
             borderRadius: {
