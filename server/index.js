@@ -3,7 +3,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 
-dotenv.config();
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: join(__dirname, '.env') });
 
 const app = express();
 
@@ -34,22 +40,33 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Admin: Login
+
+
+// Helper to check admin password
+const checkAdminAuth = (req, res, next) => {
+    const password = req.headers['x-admin-password'];
+    const correctPassword = process.env.ADMIN_PASSWORD || 'admin'; // Fallback for safety in dev
+
+    if (password === correctPassword) {
+        next();
+    } else {
+        res.status(401).json({ error: 'Unauthorized: Invalid Admin Password' });
+    }
+};
+
+// Admin: Login verify
 app.post('/api/admin/login', (req, res) => {
     const { password } = req.body;
-    const adminPass = process.env.ADMIN_PASSWORD;
-
-    if (password === adminPass) {
-        res.json({ success: true, message: 'Logged in successfully' });
+    const correctPassword = process.env.ADMIN_PASSWORD || 'admin';
+    if (password === correctPassword) {
+        res.json({ success: true });
     } else {
-        res.status(401).json({ success: false, message: 'Invalid password' });
+        res.status(401).json({ success: false, error: 'Invalid password' });
     }
 });
 
-
-
 // Admin: Get all allowed emails
-app.get('/api/admin/emails', async (req, res) => {
+app.get('/api/admin/emails', checkAdminAuth, async (req, res) => {
     try {
         const emails = await getPrisma().allowedEmail.findMany({ orderBy: { createdAt: 'desc' } });
         res.json(emails);
@@ -60,7 +77,7 @@ app.get('/api/admin/emails', async (req, res) => {
 });
 
 // Admin: Get all generated certificates
-app.get('/api/admin/certificates', async (req, res) => {
+app.get('/api/admin/certificates', checkAdminAuth, async (req, res) => {
     try {
         const certs = await getPrisma().certificate.findMany({ orderBy: { issuedAt: 'desc' } });
         res.json(certs);
@@ -70,7 +87,7 @@ app.get('/api/admin/certificates', async (req, res) => {
 });
 
 // Admin: Revoke certificate
-app.patch('/api/admin/certificates/:id/revoke', async (req, res) => {
+app.patch('/api/admin/certificates/:id/revoke', checkAdminAuth, async (req, res) => {
     const { id } = req.params;
     try {
         const cert = await getPrisma().certificate.update({
@@ -84,7 +101,7 @@ app.patch('/api/admin/certificates/:id/revoke', async (req, res) => {
 });
 
 // Admin: Delete certificate (and reset email lock)
-app.delete('/api/admin/certificates/:id', async (req, res) => {
+app.delete('/api/admin/certificates/:id', checkAdminAuth, async (req, res) => {
     const { id } = req.params;
     try {
         // 1. Get cert to find email
@@ -108,9 +125,7 @@ app.delete('/api/admin/certificates/:id', async (req, res) => {
 });
 
 // Admin: Add allowed email
-
-// Admin: Add allowed email
-app.post('/api/admin/emails', async (req, res) => {
+app.post('/api/admin/emails', checkAdminAuth, async (req, res) => {
     const { email, name } = req.body;
     if (!email) return res.status(400).json({ error: 'Email is required' });
     try {
@@ -130,7 +145,7 @@ app.post('/api/admin/emails', async (req, res) => {
 });
 
 // Admin: Bulk add allowed emails
-app.post('/api/admin/emails/bulk', async (req, res) => {
+app.post('/api/admin/emails/bulk', checkAdminAuth, async (req, res) => {
     const { emails } = req.body;
     if (!emails || !Array.isArray(emails)) return res.status(400).json({ error: 'Invalid data format' });
 
@@ -155,7 +170,7 @@ app.post('/api/admin/emails/bulk', async (req, res) => {
 });
 
 // Admin: Delete allowed email
-app.delete('/api/admin/emails/:id', async (req, res) => {
+app.delete('/api/admin/emails/:id', checkAdminAuth, async (req, res) => {
     const { id } = req.params;
     try {
         await getPrisma().allowedEmail.delete({ where: { id } });
@@ -259,7 +274,7 @@ app.get('/api/verify/:uniqueId', async (req, res) => {
 });
 
 // Admin: Bulk Issue Certificates (Ensure DB records exist for all allowed emails)
-app.post('/api/admin/certificates/bulk-issue', async (req, res) => {
+app.post('/api/admin/certificates/bulk-issue', checkAdminAuth, async (req, res) => {
     try {
         // 1. Get all allowed emails
         const allowedEmails = await getPrisma().allowedEmail.findMany();

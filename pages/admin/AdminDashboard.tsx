@@ -24,6 +24,7 @@ export const AdminDashboard = () => {
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
+    const [adminPassword, setAdminPassword] = useState(''); // Store verified password
     const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
@@ -34,10 +35,14 @@ export const AdminDashboard = () => {
 
     const fetchEmails = async () => {
         try {
-            const res = await fetch('/api/admin/emails');
+            const res = await fetch('/api/admin/emails', {
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (res.ok) {
                 const data = await res.json();
                 setEmails(data);
+            } else if (res.status === 401) {
+                setIsAuthenticated(false);
             }
         } catch (error) {
             console.error('Error fetching emails:', error);
@@ -64,7 +69,10 @@ export const AdminDashboard = () => {
         try {
             const res = await fetch('/api/admin/emails', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-admin-password': adminPassword
+                },
                 body: JSON.stringify({ email: newEmail, name: newName }),
             });
             if (res.ok) {
@@ -88,25 +96,13 @@ export const AdminDashboard = () => {
             const text = event.target?.result as string;
             if (!text) return;
 
-            // Simple CSV Parser
-            // Expected format: Sl. No., NAME, PHONE NO., EMAIL
-            // We need NAME (index 1) and EMAIL (index 3)
-
             const lines = text.split(/\r?\n/);
             const emailsToAdd: { name: string; email: string }[] = [];
-
-            // Skip header if strictly matching known headers, or just try to parse
-            // Assuming first row might be header. 
-            // Better: loop all, check if it looks like email.
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (!line) continue;
-
-                // Handle basic CSV splitting (ignoring quoted commas for now as simple names/emails usually don't have them)
                 const columns = line.split(',').map(c => c.trim());
-
-                // If this is the header row, skip
                 if (columns[3]?.toLowerCase() === 'email' || columns[1]?.toLowerCase() === 'name') continue;
 
                 const name = columns[1];
@@ -126,7 +122,10 @@ export const AdminDashboard = () => {
                 try {
                     const res = await fetch('/api/admin/emails/bulk', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-password': adminPassword
+                        },
                         body: JSON.stringify({ emails: emailsToAdd }),
                     });
 
@@ -139,11 +138,8 @@ export const AdminDashboard = () => {
                     }
                 } catch (error) {
                     console.error(error);
-                    alert('Error uploading emails');
                 }
             }
-
-            // Reset input
             e.target.value = '';
         };
         reader.readAsText(file);
@@ -152,7 +148,10 @@ export const AdminDashboard = () => {
     const handleDeleteEmail = async (id: string) => {
         if (!confirm('Are you sure you want to delete this email?')) return;
         try {
-            const res = await fetch(`/api/admin/emails/${id}`, { method: 'DELETE' });
+            const res = await fetch(`/api/admin/emails/${id}`, {
+                method: 'DELETE',
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (res.ok) {
                 fetchEmails();
             }
@@ -167,16 +166,23 @@ export const AdminDashboard = () => {
             const res = await fetch('/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password }),
+                body: JSON.stringify({ password })
             });
+
             if (res.ok) {
+                setAdminPassword(password);
                 setIsAuthenticated(true);
             } else {
-                alert('Incorrect password');
+                // If proxy fails (server down), vite returns 504/502/503
+                if (res.status === 504 || res.status === 502 || res.status === 503) {
+                    alert('Error: Backend server is not running. Please run "node server/index.js" in a new terminal.');
+                } else {
+                    const data = await res.json().catch(() => ({}));
+                    alert(data.error || 'Incorrect password');
+                }
             }
         } catch (error) {
-            console.error('Login error:', error);
-            alert('Server error during login');
+            alert('Connection failed. Make sure the backend server is running.');
         }
     };
 
@@ -218,7 +224,7 @@ export const AdminDashboard = () => {
                             <RefreshCw size={16} />
                             Refresh Data
                         </button>
-                        <button onClick={() => setIsAuthenticated(false)} className="text-white/60 hover:text-white">
+                        <button onClick={() => { setIsAuthenticated(false); setAdminPassword(''); }} className="text-white/60 hover:text-white">
                             Logout
                         </button>
                     </div>
@@ -315,18 +321,18 @@ export const AdminDashboard = () => {
                     {/* Certificates Section */}
                     <div className="bg-brand-gray/10 rounded-xl border border-white/10 p-6">
                         <h2 className="text-xl font-semibold text-white mb-4">Issued Certificates</h2>
-                        <CertificateList key={refreshKey} />
+                        <CertificateList key={refreshKey} adminPassword={adminPassword} onUnauthorized={() => setIsAuthenticated(false)} />
                     </div>
                 </div>
 
-                <BulkGenerator emails={emails} onSuccess={handleRefresh} />
+                <BulkGenerator emails={emails} adminPassword={adminPassword} onSuccess={handleRefresh} />
                 <VerifyTool />
             </div>
         </div>
     );
 };
 
-const CertificateList = () => {
+const CertificateList = ({ adminPassword, onUnauthorized }: { adminPassword: string, onUnauthorized: () => void }) => {
     const [certs, setCerts] = useState<any[]>([]);
     const [certSearch, setCertSearch] = useState(''); // Search state for certs
     const [actionLoading, setActionLoading] = useState<Record<string, string | null>>({});
@@ -337,8 +343,11 @@ const CertificateList = () => {
 
     const fetchCerts = async () => {
         try {
-            const res = await fetch('/api/admin/certificates');
+            const res = await fetch('/api/admin/certificates', {
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (res.ok) setCerts(await res.json());
+            else if (res.status === 401) onUnauthorized();
         } catch (e) { console.error(e); }
     };
 
@@ -353,7 +362,10 @@ const CertificateList = () => {
         if (!confirm('Revoke this certificate? This cannot be undone.')) return;
         setActionLoading(prev => ({ ...prev, [id]: 'revoke' }));
         try {
-            const res = await fetch(`/api/admin/certificates/${id}/revoke`, { method: 'PATCH' });
+            const res = await fetch(`/api/admin/certificates/${id}/revoke`, {
+                method: 'PATCH',
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (res.ok) fetchCerts();
         } catch (e) { console.error(e); }
         setActionLoading(prev => ({ ...prev, [id]: null }));
@@ -363,7 +375,10 @@ const CertificateList = () => {
         if (!confirm('DELETE this certificate? This will remove it completely and reset the email so the user can generate it again.')) return;
         setActionLoading(prev => ({ ...prev, [id]: 'delete' }));
         try {
-            const res = await fetch(`/api/admin/certificates/${id}`, { method: 'DELETE' });
+            const res = await fetch(`/api/admin/certificates/${id}`, {
+                method: 'DELETE',
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (res.ok) {
                 // Optimistic removal
                 setCerts(prev => prev.filter(c => c.id !== id));
@@ -527,7 +542,7 @@ const VerifyTool = () => {
     );
 };
 
-const BulkGenerator = ({ emails, onSuccess }: { emails: AllowedEmail[], onSuccess: () => void }) => {
+const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEmail[], adminPassword: string, onSuccess: () => void }) => {
     const [generating, setGenerating] = useState(false);
     const [progress, setProgress] = useState(0);
     const certRef = useRef<HTMLDivElement>(null);
@@ -543,7 +558,10 @@ const BulkGenerator = ({ emails, onSuccess }: { emails: AllowedEmail[], onSucces
 
         try {
             // 1. Sync with backend to ensure certificates exist and get real IDs
-            const res = await fetch('/api/admin/certificates/bulk-issue', { method: 'POST' });
+            const res = await fetch('/api/admin/certificates/bulk-issue', {
+                method: 'POST',
+                headers: { 'x-admin-password': adminPassword }
+            });
             if (!res.ok) throw new Error('Failed to synchronize certificates with backend');
 
             const issuedCerts = await res.json(); // Array of { uniqueId, name, email }
