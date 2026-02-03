@@ -27,6 +27,8 @@ export const AdminDashboard = () => {
     const [adminPassword, setAdminPassword] = useState(''); // Store verified password
     const [refreshKey, setRefreshKey] = useState(0);
 
+    const [error, setError] = useState(''); // Custom error state
+
     useEffect(() => {
         if (isAuthenticated) {
             fetchEmails();
@@ -162,6 +164,7 @@ export const AdminDashboard = () => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError('');
         try {
             const res = await fetch('/api/admin/login', {
                 method: 'POST',
@@ -175,21 +178,21 @@ export const AdminDashboard = () => {
             } else {
                 // If proxy fails (server down), vite returns 504/502/503
                 if (res.status === 504 || res.status === 502 || res.status === 503) {
-                    alert('Error: Backend server is not running. Please run "node server/index.js" in a new terminal.');
+                    setError('Error: Backend server is not running.');
                 } else {
                     const data = await res.json().catch(() => ({}));
-                    alert(data.error || 'Incorrect password');
+                    setError(data.error || 'Incorrect password');
                 }
             }
         } catch (error) {
-            alert('Connection failed. Make sure the backend server is running.');
+            setError('Connection failed. Backend may be offline.');
         }
     };
 
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center bg-brand-black">
-                <div className="bg-brand-gray/10 p-8 rounded-xl border border-white/10 w-full max-w-md">
+            <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center bg-brand-black relative">
+                <div className="bg-brand-gray/10 p-8 rounded-xl border border-white/10 w-full max-w-md relative z-10">
                     <h1 className="text-2xl font-bold text-white mb-6 text-center">Admin Login</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <input
@@ -207,6 +210,33 @@ export const AdminDashboard = () => {
                         </button>
                     </form>
                 </div>
+
+                {/* Custom Error Popup */}
+                {error && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="bg-[#1a1a1a] border border-red-500/30 p-6 rounded-xl shadow-2xl max-w-sm w-full"
+                        >
+                            <div className="flex flex-col items-center text-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center">
+                                    <ShieldCheck className="text-red-500" size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-semibold text-white">Access Denied</h3>
+                                    <p className="text-white/60 text-sm mt-1">{error}</p>
+                                </div>
+                                <button
+                                    onClick={() => setError('')}
+                                    className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                                >
+                                    Try Again
+                                </button>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
             </div>
         );
     }
