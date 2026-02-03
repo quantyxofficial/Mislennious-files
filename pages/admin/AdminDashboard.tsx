@@ -181,11 +181,7 @@ export const AdminDashboard = () => {
                     setError('Error: Backend server is not running.');
                 } else {
                     const data = await res.json().catch(() => ({}));
-                    if (data.debug) {
-                        setError(`Invalid Pwd. Debug: Expected Len: ${data.debug.expectedLength}, Got: ${data.debug.receivedLength}. Env Loaded: ${data.debug.envVarExists}`);
-                    } else {
-                        setError(data.error || 'Incorrect password');
-                    }
+                    setError(data.error || 'Incorrect password');
                 }
             }
         } catch (error) {

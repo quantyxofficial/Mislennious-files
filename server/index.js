@@ -45,7 +45,8 @@ app.get('/api/health', (req, res) => {
 // Helper to check admin password
 const checkAdminAuth = (req, res, next) => {
     const password = req.headers['x-admin-password'];
-    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'admin'; // Fallback for safety in dev
+    // CRITICAL FIX: Fallback to the actual password if Env Var fails
+    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'QuantyX@MyAlu.C0m';
 
     if (password === correctPassword) {
         next();
@@ -57,20 +58,13 @@ const checkAdminAuth = (req, res, next) => {
 // Admin: Login verify
 app.post('/api/admin/login', (req, res) => {
     const { password } = req.body;
-    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'admin';
+    // CRITICAL FIX: Fallback to the actual password if Env Var fails
+    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'QuantyX@MyAlu.C0m';
+
     if (password === correctPassword) {
         res.json({ success: true });
     } else {
-        // SAFE DEBUGGING: Send hints about what the server expects
-        const debugInfo = {
-            envVarExists: !!process.env.APP_ADMIN_PASSWORD,
-            expectedLength: correctPassword.length,
-            receivedLength: password?.length,
-            firstCharMatch: password?.[0] === correctPassword[0],
-            lastCharMatch: password?.slice(-1) === correctPassword.slice(-1),
-            usingFallback: !process.env.APP_ADMIN_PASSWORD
-        };
-        res.status(401).json({ success: false, error: 'Invalid password', debug: debugInfo });
+        res.status(401).json({ success: false, error: 'Invalid password' });
     }
 });
 
