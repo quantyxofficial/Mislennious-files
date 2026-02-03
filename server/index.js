@@ -45,7 +45,7 @@ app.get('/api/health', (req, res) => {
 // Helper to check admin password
 const checkAdminAuth = (req, res, next) => {
     const password = req.headers['x-admin-password'];
-    const correctPassword = process.env.ADMIN_PASSWORD || 'admin'; // Fallback for safety in dev
+    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'admin'; // Fallback for safety in dev
 
     if (password === correctPassword) {
         next();
@@ -57,7 +57,7 @@ const checkAdminAuth = (req, res, next) => {
 // Admin: Login verify
 app.post('/api/admin/login', (req, res) => {
     const { password } = req.body;
-    const correctPassword = process.env.ADMIN_PASSWORD || 'admin';
+    const correctPassword = process.env.APP_ADMIN_PASSWORD || 'admin';
     if (password === correctPassword) {
         res.json({ success: true });
     } else {
