@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, Plus, ShieldCheck, RefreshCw, Upload, Download, Search } from 'lucide-react';
+import { Trash2, Plus, ShieldCheck, RefreshCw, Upload, Download, Search, Eye, EyeOff } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { toPng } from 'html-to-image';
@@ -189,19 +189,30 @@ export const AdminDashboard = () => {
         }
     };
 
+    const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen pt-24 pb-12 px-4 flex items-center justify-center bg-brand-black relative">
                 <div className="bg-brand-gray/10 p-8 rounded-xl border border-white/10 w-full max-w-md relative z-10">
                     <h1 className="text-2xl font-bold text-white mb-6 text-center">Admin Login</h1>
                     <form onSubmit={handleLogin} className="space-y-4">
-                        <input
-                            type="password"
-                            placeholder="Enter Admin Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-black/50 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple"
-                        />
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter Admin Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full bg-black/50 border border-white/20 rounded-lg pl-4 pr-12 py-3 text-white focus:outline-none focus:border-brand-purple"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
                         <button
                             type="submit"
                             className="w-full bg-brand-purple hover:bg-brand-purple/80 text-white font-medium py-3 rounded-lg transition-colors"
