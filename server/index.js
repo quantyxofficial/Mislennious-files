@@ -61,7 +61,16 @@ app.post('/api/admin/login', (req, res) => {
     if (password === correctPassword) {
         res.json({ success: true });
     } else {
-        res.status(401).json({ success: false, error: 'Invalid password' });
+        // SAFE DEBUGGING: Send hints about what the server expects
+        const debugInfo = {
+            envVarExists: !!process.env.APP_ADMIN_PASSWORD,
+            expectedLength: correctPassword.length,
+            receivedLength: password?.length,
+            firstCharMatch: password?.[0] === correctPassword[0],
+            lastCharMatch: password?.slice(-1) === correctPassword.slice(-1),
+            usingFallback: !process.env.APP_ADMIN_PASSWORD
+        };
+        res.status(401).json({ success: false, error: 'Invalid password', debug: debugInfo });
     }
 });
 
