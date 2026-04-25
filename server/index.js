@@ -154,7 +154,7 @@ app.post('/api/admin/emails', checkAdminAuth, async (req, res) => {
             return res.status(400).json({ error: 'Email already exists' });
         }
         res.status(500).json({ 
-            error: 'Failed to add email - V2',
+            error: 'Failed to add email',
             details: error.message 
         });
     }
