@@ -716,7 +716,7 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
     const [generating, setGenerating] = useState(false);
     const [progress, setProgress] = useState(0);
     const certRef = useRef<HTMLDivElement>(null);
-    const [currentCert, setCurrentCert] = useState<{ name: string, email: string, uniqueId: string, position?: string, category?: string } | null>(null);
+    const [currentCert, setCurrentCert] = useState<{ name: string, email: string, uniqueId: string, position?: string, category?: string, templateId?: string } | null>(null);
 
     const generateAll = async () => {
         if (!emails.length) return alert('No emails to generate');
@@ -757,7 +757,7 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
                             name: record.name || 'Participant',
                             position: record.position,
                             category: record.category,
-                            template_id: 'default'
+                            template_id: record.category === 'Tech Blog Completion' ? 'tech-blog-completion' : 'default'
                         })
                         .select()
                         .single();
@@ -778,7 +778,8 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
                         email: cert.email,
                         uniqueId: cert.unique_id,
                         position: cert.position,
-                        category: cert.category
+                        category: cert.category,
+                        templateId: cert.template_id
                     });
 
                     // Wait for React to render
@@ -787,12 +788,16 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
                     if (certRef.current) {
                         try {
                             const dataUrl = await toPng(certRef.current, { quality: 1.0, pixelRatio: 2 });
+                            const isLandscape = (currentCert.templateId === 'tech-blog-completion');
+                            const width = isLandscape ? 848 : 600;
+                            const height = isLandscape ? 600 : 848;
+
                             const pdf = new jsPDF({
-                                orientation: 'portrait',
+                                orientation: isLandscape ? 'landscape' : 'portrait',
                                 unit: 'px',
-                                format: [600, 848]
+                                format: [width, height]
                             });
-                            pdf.addImage(dataUrl, 'PNG', 0, 0, 600, 848);
+                            pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
 
                             const safeName = (cert.name || cert.email).replace(/[^a-z0-9]/gi, '_');
                             const fileName = `${safeName}_Certificate.pdf`;
@@ -846,6 +851,7 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
                         uniqueId={currentCert.uniqueId}
                         position={currentCert.position}
                         category={currentCert.category}
+                        templateId={currentCert.templateId}
                     />
                 )}
             </div>

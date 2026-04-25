@@ -160,8 +160,9 @@ export const CertificateGenerator = () => {
                 unit: 'px',
                 format: [width, height]
             });
+            console.log('PDF Download triggered for:', certData.name, 'with ID:', certData.unique_id);
             pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
-            pdf.save(`Certificate-${certData.unique_id}.pdf`);
+            pdf.save(`Certificate-${certData.name.replace(/\s+/g, '_')}-${certData.unique_id}.pdf`);
         } catch (err) {
             console.error('Download failed', err);
         }
