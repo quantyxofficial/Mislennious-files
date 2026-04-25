@@ -206,21 +206,31 @@ export const BlogPost: React.FC = () => {
                             <h3 className="font-serif font-bold text-gray-900 mb-4">Share this article</h3>
                             <div className="flex gap-2">
                                 <button
-                                    onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    onClick={() => {
+                                        const text = encodeURIComponent(`Check out this article: ${post.title}`);
+                                        const url = encodeURIComponent(window.location.href);
+                                        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+                                    }}
                                     className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-400 transition-colors"
                                     title="Share on Twitter"
                                 >
                                     <Twitter className="w-5 h-5" />
                                 </button>
                                 <button
-                                    onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    onClick={() => {
+                                        const url = encodeURIComponent(window.location.href);
+                                        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+                                    }}
                                     className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-700 transition-colors"
                                     title="Share on LinkedIn"
                                 >
                                     <Linkedin className="w-5 h-5" />
                                 </button>
                                 <button
-                                    onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    onClick={() => {
+                                        const url = encodeURIComponent(window.location.href);
+                                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+                                    }}
                                     className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-600 transition-colors"
                                     title="Share on Facebook"
                                 >
