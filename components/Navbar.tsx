@@ -3,12 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
 import { useAI } from '../contexts/AIContext';
+import { useAuth } from '../contexts/AuthContext';
+import { LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
     const { theme, toggleTheme } = useAI();
     const [isVisible, setIsVisible] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isCompanyOpen, setIsCompanyOpen] = useState(false);
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const { user, signInWithGoogle, signOut } = useAuth();
     const location = useLocation();
 
     useEffect(() => {
@@ -182,6 +186,61 @@ export const Navbar: React.FC = () => {
                                 )}
                             </AnimatePresence>
                         </div>
+
+                        {/* AUTHENTICATION */}
+                        <div className="relative ml-2">
+                            {user ? (
+                                <div
+                                    className="relative"
+                                    onMouseEnter={() => setIsUserMenuOpen(true)}
+                                    onMouseLeave={() => setIsUserMenuOpen(false)}
+                                >
+                                    <button className="flex items-center gap-2 p-1 rounded-full bg-white/20 dark:bg-black/20 border border-white/40 dark:border-white/10 hover:bg-white/40 transition-all duration-300">
+                                        <div className="w-8 h-8 rounded-full overflow-hidden border border-white/50">
+                                            {user.user_metadata?.avatar_url ? (
+                                                <img src={user.user_metadata.avatar_url} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <div className="w-full h-full bg-lux-text flex items-center justify-center text-lux-cream">
+                                                    <UserIcon className="w-4 h-4" />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </button>
+
+                                    <AnimatePresence>
+                                        {isUserMenuOpen && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 10 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="absolute top-full right-0 mt-4 w-48 bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl shadow-xl overflow-hidden"
+                                            >
+                                                <div className="px-4 py-3 border-b border-lux-text/10">
+                                                    <p className="text-xs font-bold text-lux-text truncate">{user.user_metadata?.full_name || 'User'}</p>
+                                                    <p className="text-[10px] text-lux-muted truncate">{user.email}</p>
+                                                </div>
+                                                <button
+                                                    onClick={() => signOut()}
+                                                    className="w-full text-left px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-red-500 hover:bg-red-50 transition-colors flex items-center gap-2"
+                                                >
+                                                    <LogOut className="w-3.5 h-3.5" />
+                                                    Sign Out
+                                                </button>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ) : (
+                                <button
+                                    onClick={() => signInWithGoogle()}
+                                    className="px-5 py-2 rounded-full bg-lux-text text-lux-cream text-[11px] font-bold uppercase tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all flex items-center gap-2"
+                                >
+                                    <LogIn className="w-3.5 h-3.5" />
+                                    Join Us
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-2 pl-4 border-l border-gray-200/50 ml-4">
@@ -247,6 +306,39 @@ export const Navbar: React.FC = () => {
                             >
                                 Careers
                             </Link>
+                            
+                            <div className="mt-8 pt-8 border-t border-lux-text/10 w-full flex justify-center">
+                                {user ? (
+                                    <div className="flex flex-col items-center gap-4">
+                                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-lux-text/20">
+                                            {user.user_metadata?.avatar_url ? (
+                                                <img src={user.user_metadata.avatar_url} alt="Profile" className="w-full h-full object-cover" />
+                                            ) : (
+                                                <div className="w-full h-full bg-lux-text flex items-center justify-center text-lux-cream">
+                                                    <UserIcon className="w-8 h-8" />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="text-center">
+                                            <p className="font-serif text-xl text-lux-text">{user.user_metadata?.full_name}</p>
+                                            <button 
+                                                onClick={() => { signOut(); setIsMobileMenuOpen(false); }}
+                                                className="text-red-500 font-bold uppercase tracking-widest text-[10px] mt-2"
+                                            >
+                                                Sign Out
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <button
+                                        onClick={() => { signInWithGoogle(); setIsMobileMenuOpen(false); }}
+                                        className="px-8 py-4 rounded-full bg-lux-text text-lux-cream font-bold uppercase tracking-widest text-xs flex items-center gap-2"
+                                    >
+                                        <LogIn className="w-4 h-4" />
+                                        Continue with Google
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </motion.div>
                 )}

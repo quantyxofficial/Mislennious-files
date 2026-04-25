@@ -32,7 +32,7 @@ export const Privacy: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-lux-muted text-lg"
                     >
-                        Last updated: January 12, 2026
+                        Last updated: April 25, 2026
                     </motion.p>
                 </div>
             </section>
@@ -60,6 +60,7 @@ export const Privacy: React.FC = () => {
                             <li><strong>Usage Data:</strong> Information about how you access and use our website, including your IP address, browser type, pages visited, and time spent on pages.</li>
                             <li><strong>Cookies and Tracking:</strong> We use cookies and similar tracking technologies to track activity on our website and store certain information.</li>
                             <li><strong>Business Information:</strong> Details about your company, project requirements, and business needs when requesting our services.</li>
+                            <li><strong>Third-Party Authentication Data:</strong> If you choose to log in via Google, we collect your Google profile information (name, email address, and profile picture) as permitted by your Google account settings.</li>
                         </ul>
                     </div>
 
