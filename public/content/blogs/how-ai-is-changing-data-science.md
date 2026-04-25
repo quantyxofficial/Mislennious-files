@@ -5,7 +5,7 @@ keywords: "how AI is changing data science, AI in data science, artificial intel
 author: "Rashel Shah"
 date: "2026-02-23"
 category: "Emerging Trends"
-image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=80"
+image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80"
 ---
 
 # How AI Is Changing Data Science: The Future of Intelligent Analytics
