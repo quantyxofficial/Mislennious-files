@@ -5,16 +5,20 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // Used for validation/dev. In prod, we inject the real URL via constructor.
-  url      = "postgresql://user:password@localhost:5432/db" 
+  url      = env("DATABASE_URL")
 }
 
 model AllowedEmail {
   id        String   @id @default(uuid())
-  email     String   @unique
+  email     String
   name      String?
+  position  String?  // New: Job Title / Role
+  category  String?  // New: Core Team, Tech Blog, Graphic Design
+  profile   String?  // Preserving legacy field
   isUsed    Boolean  @default(false)
   createdAt DateTime @default(now())
+
+  @@unique([email, category])
 }
 
 model Template {
@@ -31,6 +35,9 @@ model Certificate {
   uniqueId  String   @unique 
   email     String
   name      String
+  position  String?  // New
+  category  String?  // New
+  profile   String?  // Preserving legacy field
   issuedAt  DateTime @default(now())
   templateId String
   revoked   Boolean  @default(false)

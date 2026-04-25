@@ -55,9 +55,13 @@ export const Careers: React.FC = () => {
 
                                     {/* Offer Button for Tech Blog Writer */}
                                     {position.id === 'c4' && (
-                                        <div className="mt-4 pt-4 border-t border-lux-text/10">
+                                        <div className="mt-4 pt-4 border-t border-lux-text/10 space-y-3">
                                             <Link to="/get-certified" onClick={(e) => e.stopPropagation()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-purple/10 text-brand-purple hover:bg-brand-purple hover:text-white transition-all border border-brand-purple/20 group w-full justify-center">
                                                 <span className="font-bold text-xs uppercase tracking-wider">Generate Your Joining Certificate</span>
+                                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                            </Link>
+                                            <Link to="/get-certified?template=tech-blog-completion" onClick={(e) => e.stopPropagation()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-lime/10 text-brand-lime hover:bg-brand-lime hover:text-white transition-all border border-brand-lime/20 group w-full justify-center">
+                                                <span className="font-bold text-xs uppercase tracking-wider">Generate Completion Certificate</span>
                                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                             </Link>
                                         </div>

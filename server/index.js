@@ -129,17 +129,20 @@ app.delete('/api/admin/certificates/:id', checkAdminAuth, async (req, res) => {
 
 // Admin: Add allowed email
 app.post('/api/admin/emails', checkAdminAuth, async (req, res) => {
-    const { email, name } = req.body;
+    const { email, name, position, category } = req.body;
     if (!email) return res.status(400).json({ error: 'Email is required' });
     try {
         const newEmail = await getPrisma().allowedEmail.create({
             data: {
                 email,
-                name: name || null
+                name: name || null,
+                position: position || null,
+                category: category || null
             }
         });
         res.json(newEmail);
     } catch (error) {
+        console.error('Error adding email:', error);
         if (error.code === 'P2002') {
             return res.status(400).json({ error: 'Email already exists' });
         }
@@ -156,11 +159,17 @@ app.post('/api/admin/emails/bulk', checkAdminAuth, async (req, res) => {
         const result = await getPrisma().$transaction(
             emails.map(e =>
                 getPrisma().allowedEmail.upsert({
-                    where: { email: e.email },
-                    update: {}, // Do nothing if exists
                     create: {
                         email: e.email,
-                        name: e.name || null
+                        name: e.name || null,
+                        position: e.position || null,
+                        category: e.category || null
+                    },
+                    where: {
+                        email_category: { // Use composite unique key for upsert
+                            email: e.email,
+                            category: e.category || null
+                        }
                     }
                 })
             )
@@ -185,21 +194,43 @@ app.delete('/api/admin/emails/:id', checkAdminAuth, async (req, res) => {
 
 // User: Verify if email is allowed to generate certificate
 app.post('/api/verify-email', async (req, res) => {
-    const { email } = req.body;
+    const { email, templateId } = req.body;
     try {
-        const allowed = await getPrisma().allowedEmail.findUnique({ where: { email } });
-        if (!allowed) {
+        // Find ALL allowed entries for this email
+        const allowedEntries = await getPrisma().allowedEmail.findMany({
+            where: { email },
+            orderBy: { createdAt: 'desc' }
+        });
+
+        if (allowedEntries.length === 0) {
             return res.status(403).json({ allowed: false, error: 'Email not authorized' });
         }
 
-        // If already used, fetch existing certificate
-        if (allowed.isUsed) {
-            const existingCert = await getPrisma().certificate.findFirst({ where: { email } });
+        // Check if this SPECIFIC certificate has already been generated
+        const existingCert = await getPrisma().certificate.findFirst({
+            where: { 
+                email,
+                templateId: templateId || 'default'
+            },
+            orderBy: { issuedAt: 'desc' }
+        });
+
+        if (existingCert) {
             return res.json({ allowed: true, isUsed: true, certificate: existingCert });
         }
 
-        // Return allowed along with the pre-set name if available
-        res.json({ allowed: true, isUsed: false, name: allowed.name });
+        // Check if ANY entry is available (not strictly enforced by isUsed if we want multiple certs, 
+        // but we'll use it as a general "authorized" flag)
+        const isAuthorized = allowedEntries.length > 0;
+
+        return res.json({ 
+            allowed: isAuthorized, 
+            isUsed: false,
+            name: allowedEntries[0].name,
+            position: allowedEntries[0].position,
+            category: allowedEntries[0].category
+        });
+
     } catch (error) {
         res.status(500).json({ error: 'Verification failed' });
     }
@@ -208,50 +239,52 @@ app.post('/api/verify-email', async (req, res) => {
 // User: Generate Certificate
 app.post('/api/generate-certificate', async (req, res) => {
     const { email, name, templateId } = req.body;
+    const targetTemplateId = templateId || 'default';
 
     // Simple validation
     if (!email || !name) return res.status(400).json({ error: 'Missing fields' });
 
     try {
-        // Double check eligibility
-        const allowed = await getPrisma().allowedEmail.findUnique({ where: { email } });
+        // 1. Check if authorized
+        const allowed = await getPrisma().allowedEmail.findFirst({
+            where: { email }
+        });
 
-        // STRICT CHECK: If already used, BLOCK creation/update.
         if (!allowed) {
             return res.status(403).json({ error: 'Email not authorized' });
         }
-        if (allowed.isUsed) {
-            return res.status(403).json({ error: 'Certificate already generated. Cannot regenerate.' });
+
+        // 2. Check if this specific certificate already exists
+        const existing = await getPrisma().certificate.findFirst({
+            where: { email, templateId: targetTemplateId }
+        });
+
+        if (existing) {
+            return res.status(403).json({ error: 'Certificate already generated for this type.' });
         }
 
         const uniqueId = Math.random().toString(36).substring(2, 10).toUpperCase();
 
-        // Transaction: Create Cert + Mark Email Used
+        // Transaction: Create Cert + Mark Email Entry Used (if not already)
         const cert = await getPrisma().$transaction(async (tx) => {
-            // Re-check status INSIDE transaction to prevent race conditions
-            const currentAllowed = await tx.allowedEmail.findUnique({ where: { email } });
-            if (!currentAllowed) throw new Error('Email not authorized');
-            if (currentAllowed.isUsed) {
-                // Check if a certificate actually exists (double verification)
-                const existing = await tx.certificate.findFirst({ where: { email } });
-                if (existing) {
-                    throw new Error('Certificate already generated. Cannot regenerate.');
-                }
-            }
-
             const certificate = await tx.certificate.create({
                 data: {
                     uniqueId,
                     email,
                     name,
-                    templateId: templateId || 'default',
+                    position: allowed.position,
+                    category: allowed.category,
+                    templateId: targetTemplateId,
                 }
             });
 
-            await tx.allowedEmail.update({
-                where: { email },
-                data: { isUsed: true }
-            });
+            // Mark as used if it was the first time
+            if (!allowed.isUsed) {
+                await tx.allowedEmail.update({
+                    where: { id: allowed.id },
+                    data: { isUsed: true }
+                });
+            }
 
             return certificate;
         });
@@ -279,8 +312,24 @@ app.get('/api/verify/:uniqueId', async (req, res) => {
 // Admin: Bulk Issue Certificates (Ensure DB records exist for all allowed emails)
 app.post('/api/admin/certificates/bulk-issue', checkAdminAuth, async (req, res) => {
     try {
-        // 1. Get all allowed emails
-        const allowedEmails = await getPrisma().allowedEmail.findMany();
+        const { category } = req.body;
+        // 1. Get allowed emails (filtered by category if provided)
+        let where = {};
+        if (category) {
+            if (category === 'Tech Blog') {
+                // Tech Blog includes explicit 'Tech Blog' AND legacy nulls
+                where = {
+                    OR: [
+                        { category: 'Tech Blog' },
+                        { category: null }
+                    ]
+                };
+            } else {
+                where = { category };
+            }
+        }
+
+        const allowedEmails = await getPrisma().allowedEmail.findMany({ where });
 
         const results = [];
 
@@ -306,6 +355,8 @@ app.post('/api/admin/certificates/bulk-issue', checkAdminAuth, async (req, res) 
                                 uniqueId,
                                 email: record.email,
                                 name: name,
+                                position: record.position,
+                                category: record.category,
                                 templateId: 'default',
                             }
                         });

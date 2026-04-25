@@ -64,4 +64,11 @@ source venv/bin/activate
 npm run build
 ```
 
-The built assets will be in the `dist` directory.
+
+## Admin Dashboard
+The admin dashboard is protected by a password.
+- **Login URL**: `http://localhost:3000/admin`
+- **Admin Password**: `QuantyX@MyAlu.C0m`
+
+> [!NOTE]
+> The `npm run dev` command starts both the Vite frontend (port 3000) and the Express backend (port 3001) concurrently. Ensure both ports are free.

@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
-import QRCode from 'react-qr-code';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import { CertificateDesign } from '../components/certificate/CertificateDesign';
-
-// ... 
 
 
 export const CertificateGenerator = () => {
+    const [searchParams] = useSearchParams();
+    const templateId = searchParams.get('template') || 'default';
+    
     const [email, setEmail] = useState('');
     const [step, setStep] = useState<'verify' | 'form' | 'preview'>('verify');
     const [error, setError] = useState('');
@@ -34,7 +35,7 @@ export const CertificateGenerator = () => {
             const res = await fetch('/api/verify-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, templateId }),
             });
             const data = await res.json();
 
@@ -68,7 +69,7 @@ export const CertificateGenerator = () => {
                 body: JSON.stringify({
                     email,
                     name: userData.name,
-                    templateId: 'default'
+                    templateId: templateId
                 }),
             });
             const data = await res.json();
@@ -87,17 +88,23 @@ export const CertificateGenerator = () => {
         if (!certRef.current) return;
         try {
             const dataUrl = await toPng(certRef.current, { quality: 1.0 });
+            const isLandscape = templateId === 'tech-blog-completion';
+            const width = isLandscape ? 848 : 600;
+            const height = isLandscape ? 600 : 848;
+
             const pdf = new jsPDF({
-                orientation: 'portrait',
+                orientation: isLandscape ? 'landscape' : 'portrait',
                 unit: 'px',
-                format: [certRef.current.clientWidth, certRef.current.clientHeight]
+                format: [width, height]
             });
-            pdf.addImage(dataUrl, 'PNG', 0, 0, certRef.current.clientWidth, certRef.current.clientHeight);
+            pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
             pdf.save(`Certificate-${certData.uniqueId}.pdf`);
         } catch (err) {
             console.error('Download failed', err);
         }
     };
+
+    const isCompletion = templateId === 'tech-blog-completion';
 
     return (
         <div className="w-full pt-24 pb-8 px-4">
@@ -107,7 +114,9 @@ export const CertificateGenerator = () => {
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         {/* Left: Verification Form */}
                         <div className="bg-white/60 backdrop-blur-xl p-8 rounded-2xl border border-white/40 shadow-xl">
-                            <h1 className="text-3xl font-serif font-bold text-lux-text mb-3 tracking-tight">Get Your Certificate</h1>
+                            <h1 className="text-3xl font-serif font-bold text-lux-text mb-3 tracking-tight">
+                                {isCompletion ? 'Download Completion Certificate' : 'Get Your Joining Certificate'}
+                            </h1>
                             <p className="text-lux-muted mb-6 text-sm">Enter your authorized email to proceed securely.</p>
 
                             <AnimatePresence mode="wait">
@@ -162,51 +171,15 @@ export const CertificateGenerator = () => {
                             <div className="text-center mb-6">
                                 <span className="inline-block px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[9px] font-bold uppercase tracking-widest border border-brand-purple/20">Sample Preview</span>
                             </div>
-                            {/* Wrapper to constrain layout flow to visual size */}
                             <div className="relative w-[300px] h-[424px] shadow-2xl rounded overflow-hidden border border-stone-200">
-                                <div className="absolute top-0 left-0 bg-white origin-top-left transform scale-[0.5]"
-                                    style={{
-                                        width: '600px',
-                                        height: '848px',
-                                        backgroundImage: 'url(/certificate-template.png)',
-                                        backgroundSize: 'cover'
-                                    }}
-                                >
-                                    {/* Demo Content */}
-                                    <div className="absolute top-[28%] left-[12%] text-left w-[450px]">
-                                        <h2 className="text-xl font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible opacity-40">
-                                            Your Name
-                                        </h2>
-                                    </div>
-                                    <div className="absolute top-[30.5%] left-[12%] text-left w-[450px]">
-                                        <p className="text-sm font-serif text-black whitespace-nowrap overflow-visible opacity-40">
-                                            your.email@example.com
-                                        </p>
-                                    </div>
-                                    <div className="absolute top-[41.2%] left-[13%] text-left w-[400px]">
-                                        <h2 className="text-sm font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible opacity-40">
-                                            Your Name,
-                                        </h2>
-                                    </div>
-                                    {/* Demo User Image Placeholder */}
-                                    <div className="absolute top-[28%] right-[12%] w-[110px] h-[130px] rounded-sm border-2 border-dashed border-gray-300 z-10 bg-gray-50 flex items-center justify-center opacity-60">
-                                        <div className="text-center">
-                                            <div className="w-10 h-10 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
-                                                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
-                                            </div>
-                                            <span className="text-[7px] text-gray-400 font-mono uppercase tracking-wide">Photo</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="absolute bottom-[55px] right-[40px] opacity-40 p-1 bg-white/50 rounded-lg">
-                                        <QRCode
-                                            value="https://kaizenstat.com"
-                                            size={40}
-                                            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                        />
-                                    </div>
+                                <div className="absolute top-0 left-0 bg-white origin-top-left transform scale-[0.5]">
+                                    <CertificateDesign
+                                        name="Your Name"
+                                        email="your.email@example.com"
+                                        uniqueId="DEMO123"
+                                        templateId={templateId}
+                                        verificationUrl="https://kaizenstat.com"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -260,62 +233,18 @@ export const CertificateGenerator = () => {
                     <div className="flex flex-col items-center">
                         <h1 className="text-3xl font-serif font-bold text-lux-text mb-8">Certificate Generated!</h1>
 
-                        {/* Certificate Canvas - Portrait Mode (A4 approx ratio) */}
-                        <div
-                            className="relative mb-8 overflow-hidden bg-white shadow-2xl bg-cover bg-center bg-no-repeat"
+                        <CertificateDesign
                             ref={certRef}
-                            style={{
-                                width: '600px',
-                                height: '848px',
-                                backgroundImage: 'url(/certificate-template.png)'
-                            }}
-                        >
+                            name={userData.name}
+                            email={certData.email}
+                            uniqueId={certData.uniqueId}
+                            userImage={userData.userImage}
+                            category={certData.category}
+                            position={certData.position}
+                            templateId={templateId}
+                        />
 
-                            {/* Overlay Content */}
-                            {/* Overlay Content */}
-                            {/* To: Name */}
-                            <div className="absolute top-[28%] left-[12%] text-left w-[450px]">
-                                <h2 className="text-xl font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
-                                    {userData.name}
-                                </h2>
-                            </div>
-
-                            {/* To: Email */}
-                            <div className="absolute top-[30.5%] left-[12%] text-left w-[450px]">
-                                <p className="text-sm font-serif text-black whitespace-nowrap overflow-visible">
-                                    {certData.email}
-                                </p>
-                            </div>
-
-                            {/* Dear [Name], */}
-                            <div className="absolute top-[41.2%] left-[13%] text-left w-[400px]">
-                                <h2 className="text-sm font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
-                                    {userData.name},
-                                </h2>
-                            </div>
-
-                            {/* User Uploaded Image */}
-                            {userData.userImage && (
-                                <div className="absolute top-[28%] right-[12%] w-[110px] h-[130px] rounded-sm overflow-hidden border border-gray-300 shadow-sm z-10 bg-white">
-                                    <img src={userData.userImage} alt="User" className="w-full h-full object-cover" />
-                                </div>
-                            )}
-
-                            {/* QR Code - Moved slightly to avoid overlapping signatures */}
-                            <div className="absolute bottom-[55px] right-[40px] opacity-90 p-1 bg-white/50 rounded-lg">
-                                <QRCode
-                                    value={`${window.location.origin}/verify/${certData.uniqueId}`}
-                                    size={40}
-                                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                                />
-                            </div>
-
-                            <div className="absolute bottom-[40px] right-[40px] text-[8px] text-gray-500 font-mono text-center w-[40px]">
-                                ID: {certData.uniqueId}
-                            </div>
-                        </div>
-
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 mt-8">
                             <button onClick={downloadPDF} className="bg-brand-black hover:bg-stone-800 text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2 shadow-lg">
                                 Download PDF
                             </button>

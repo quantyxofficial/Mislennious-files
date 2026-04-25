@@ -12,6 +12,8 @@ interface AllowedEmail {
     id: string;
     email: string;
     name?: string;
+    position?: string;
+    category?: string;
     isUsed: boolean;
     createdAt: string;
 }
@@ -19,8 +21,10 @@ interface AllowedEmail {
 export const AdminDashboard = () => {
     const [emails, setEmails] = useState<AllowedEmail[]>([]);
     const [searchTerm, setSearchTerm] = useState(''); // Search state for emails
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [newEmail, setNewEmail] = useState('');
     const [newName, setNewName] = useState('');
+    const [newPosition, setNewPosition] = useState('');
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
@@ -54,10 +58,16 @@ export const AdminDashboard = () => {
     };
 
     // Filter emails based on search
-    const filteredEmails = emails.filter(email =>
-        email.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (email.name && email.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    const filteredEmails = emails.filter(email => {
+        const matchesCategory = selectedCategory === 'Tech Blog'
+            ? (email.category === 'Tech Blog' || !email.category) // Legacy support: Null = Tech Blog/Default
+            : email.category === selectedCategory;
+
+        return matchesCategory && (
+            email.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (email.name && email.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+    });
 
     const handleRefresh = () => {
         fetchEmails();
@@ -75,11 +85,17 @@ export const AdminDashboard = () => {
                     'Content-Type': 'application/json',
                     'x-admin-password': adminPassword
                 },
-                body: JSON.stringify({ email: newEmail, name: newName }),
+                body: JSON.stringify({
+                    email: newEmail,
+                    name: newName,
+                    position: newPosition,
+                    category: selectedCategory
+                }),
             });
             if (res.ok) {
                 setNewEmail('');
                 setNewName('');
+                setNewPosition('');
                 fetchEmails();
             } else {
                 alert('Failed to add email. It might already exist.');
@@ -99,7 +115,7 @@ export const AdminDashboard = () => {
             if (!text) return;
 
             const lines = text.split(/\r?\n/);
-            const emailsToAdd: { name: string; email: string }[] = [];
+            const emailsToAdd: { name: string; email: string; position?: string; category: string }[] = [];
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
@@ -108,10 +124,34 @@ export const AdminDashboard = () => {
                 if (columns[3]?.toLowerCase() === 'email' || columns[1]?.toLowerCase() === 'name') continue;
 
                 const name = columns[1];
-                const email = columns[3];
+                const email = columns[3]; // Assuming Column D is Email based on user request (Wait, user screenshot shows C is Email, D is Position)
+                // Actually user screenshot: A=SL, B=NAME, C=EMAIL, D=POSITION
+                // So columns[0]=SL, columns[1]=NAME, columns[2]=EMAIL, columns[3]=POSITION
 
-                if (email && email.includes('@')) {
-                    emailsToAdd.push({ name: name || '', email });
+                // Let's re-read the screenshot layout.
+                // A=SL. NO, B=NAME, C=EMAIL, D=POSITION
+                // CSV split by comma.
+                // If the CSV matches that:
+                // col[0] -> SL
+                // col[1] -> Name
+                // col[2] -> Email
+                // col[3] -> Position
+
+                // My previous code allowed column 3 to be email.
+                // I should allow both or stick to user screenshot.
+                // Let's assume the user uses the format in screenshot.
+
+                const possibleEmail = columns[2]?.includes('@') ? columns[2] : columns[3];
+                const possibleName = columns[1];
+                const position = columns[3];
+
+                if (possibleEmail && possibleEmail.includes('@')) {
+                    emailsToAdd.push({
+                        name: possibleName || '',
+                        email: possibleEmail,
+                        position: position || '',
+                        category: selectedCategory || 'Core Team'
+                    });
                 }
             }
 
@@ -250,16 +290,66 @@ export const AdminDashboard = () => {
                 )}
             </div>
         );
+
+    }
+
+    if (!selectedCategory) {
+        // Category Selection View
+        const categories = [
+            { id: 'Tech Blog', color: 'bg-blue-500', icon: <RefreshCw /> },
+            { id: 'Graphic Design', color: 'bg-pink-500', icon: <Upload /> },
+            { id: 'Core Team', color: 'bg-purple-500', icon: <ShieldCheck /> }
+        ];
+
+        return (
+            <div className="min-h-screen pt-24 pb-12 px-4 bg-brand-black">
+                <div className="max-w-4xl mx-auto">
+                    <div className="flex justify-between items-center mb-10">
+                        <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+                            <ShieldCheck className="text-brand-purple" />
+                            Admin Dashboard
+                        </h1>
+                        <button onClick={() => { setIsAuthenticated(false); setAdminPassword(''); }} className="text-white/60 hover:text-white">
+                            Logout
+                        </button>
+                    </div>
+
+                    <h2 className="text-xl text-white/60 mb-6 font-mono text-center">Select Department</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {categories.map(cat => (
+                            <motion.button
+                                key={cat.id}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => setSelectedCategory(cat.id)}
+                                className={`h-40 rounded-xl border border-white/10 flex flex-col items-center justify-center gap-4 ${cat.color}/10 hover:${cat.color}/20 transition-all`}
+                            >
+                                <div className={`p-4 rounded-full ${cat.color}/20 text-white`}>
+                                    {cat.icon}
+                                </div>
+                                <span className="text-xl font-bold text-white">{cat.id}</span>
+                            </motion.button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 bg-brand-black">
             <div className="max-w-6xl mx-auto">
                 <div className="flex justify-between items-center mb-10">
-                    <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-                        <ShieldCheck className="text-brand-purple" />
-                        Admin Dashboard
-                    </h1>
+                    <div className="flex items-center gap-4">
+                        <button onClick={() => setSelectedCategory(null)} className="text-white/60 hover:text-white">
+                            &larr; Back
+                        </button>
+                        <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+                            <span className="text-brand-purple">{selectedCategory}</span>
+                            Dashboard
+                        </h1>
+                    </div>
                     <div className="flex gap-4">
                         <button onClick={handleRefresh} className="text-white/60 hover:text-white flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg transition-colors">
                             <RefreshCw size={16} />
@@ -288,27 +378,37 @@ export const AdminDashboard = () => {
                             />
                         </div>
 
-                        <form onSubmit={handleAddEmail} className="flex flex-col gap-2 mb-6">
-                            <div className="flex gap-2">
+                        <form onSubmit={handleAddEmail} className="bg-black/20 p-4 rounded-lg border border-white/5 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                                 <input
                                     type="email"
                                     placeholder="Authorized Email..."
                                     value={newEmail}
                                     onChange={(e) => setNewEmail(e.target.value)}
-                                    className="flex-1 bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-purple"
+                                    className="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-purple w-full"
                                 />
                                 <input
                                     type="text"
                                     placeholder="Name (Optional)"
                                     value={newName}
                                     onChange={(e) => setNewName(e.target.value)}
-                                    className="flex-1 bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-purple"
+                                    className="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-purple w-full"
                                 />
+                                {selectedCategory === 'Core Team' && (
+                                    <input
+                                        type="text"
+                                        placeholder="Position / Role"
+                                        value={newPosition}
+                                        onChange={(e) => setNewPosition(e.target.value)}
+                                        className="bg-black/50 border border-white/20 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-brand-purple w-full"
+                                    />
+                                )}
                                 <button
                                     type="submit"
-                                    className="bg-brand-purple/20 hover:bg-brand-purple/40 text-brand-purple border border-brand-purple/50 p-2 rounded-lg transition-colors"
+                                    className="bg-brand-purple/20 hover:bg-brand-purple/40 text-brand-purple border border-brand-purple/50 px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2"
                                 >
-                                    <Plus size={24} />
+                                    <Plus size={20} />
+                                    <span className="md:hidden lg:inline">Add</span>
                                 </button>
                             </div>
                         </form>
@@ -316,7 +416,7 @@ export const AdminDashboard = () => {
                         <div className="mb-4">
                             <label className="flex items-center justify-center gap-2 cursor-pointer w-full bg-white/5 border border-white/10 border-dashed rounded-lg p-4 hover:bg-white/10 transition-colors">
                                 <Upload className="text-white/40" />
-                                <span className="text-white/60 text-sm">Upload CSV (Sl.No, Name, Phone, Email)</span>
+                                <span className="text-white/60 text-sm">Upload CSV (Sl.No, Name, Email, Position)</span>
                                 <input
                                     type="file"
                                     accept=".csv"
@@ -338,6 +438,7 @@ export const AdminDashboard = () => {
                                         <div className="flex items-center gap-2">
                                             <p className="text-white font-medium">{item.email}</p>
                                             {item.name && <span className="text-white/50 text-xs">({item.name})</span>}
+                                            {item.position && <span className="ml-2 bg-brand-purple/20 text-brand-purple text-[10px] px-2 py-0.5 rounded">{item.position}</span>}
                                         </div>
                                         <div className="flex items-center gap-2 mt-1">
                                             <span className={`text-[10px] px-2 py-0.5 rounded-full ${item.isUsed ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
@@ -362,18 +463,23 @@ export const AdminDashboard = () => {
                     {/* Certificates Section */}
                     <div className="bg-brand-gray/10 rounded-xl border border-white/10 p-6">
                         <h2 className="text-xl font-semibold text-white mb-4">Issued Certificates</h2>
-                        <CertificateList key={refreshKey} adminPassword={adminPassword} onUnauthorized={() => setIsAuthenticated(false)} />
+                        <CertificateList key={refreshKey} adminPassword={adminPassword} onUnauthorized={() => setIsAuthenticated(false)} selectedCategory={selectedCategory} />
                     </div>
                 </div>
 
-                <BulkGenerator emails={emails} adminPassword={adminPassword} onSuccess={handleRefresh} />
+                <BulkGenerator
+                    emails={filteredEmails}
+                    adminPassword={adminPassword}
+                    selectedCategory={selectedCategory}
+                    onSuccess={handleRefresh}
+                />
                 <VerifyTool />
             </div>
         </div>
     );
 };
 
-const CertificateList = ({ adminPassword, onUnauthorized }: { adminPassword: string, onUnauthorized: () => void }) => {
+const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { adminPassword: string, onUnauthorized: () => void, selectedCategory: string | null }) => {
     const [certs, setCerts] = useState<any[]>([]);
     const [certSearch, setCertSearch] = useState(''); // Search state for certs
     const [actionLoading, setActionLoading] = useState<Record<string, string | null>>({});
@@ -393,11 +499,17 @@ const CertificateList = ({ adminPassword, onUnauthorized }: { adminPassword: str
     };
 
     // Filter certs based on search
-    const filteredCerts = certs.filter(cert =>
-        cert.name.toLowerCase().includes(certSearch.toLowerCase()) ||
-        cert.email.toLowerCase().includes(certSearch.toLowerCase()) ||
-        cert.uniqueId.toLowerCase().includes(certSearch.toLowerCase())
-    );
+    const filteredCerts = certs.filter(cert => {
+        const matchesCategory = selectedCategory === 'Tech Blog'
+            ? (cert.category === 'Tech Blog' || !cert.category) // Legacy support
+            : cert.category === selectedCategory;
+
+        return matchesCategory && (
+            cert.name.toLowerCase().includes(certSearch.toLowerCase()) ||
+            cert.email.toLowerCase().includes(certSearch.toLowerCase()) ||
+            cert.uniqueId.toLowerCase().includes(certSearch.toLowerCase())
+        );
+    });
 
     const handleRevoke = async (id: string) => {
         if (!confirm('Revoke this certificate? This cannot be undone.')) return;
@@ -583,11 +695,11 @@ const VerifyTool = () => {
     );
 };
 
-const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEmail[], adminPassword: string, onSuccess: () => void }) => {
+const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: { emails: AllowedEmail[], adminPassword: string, selectedCategory: string | null, onSuccess: () => void }) => {
     const [generating, setGenerating] = useState(false);
     const [progress, setProgress] = useState(0);
     const certRef = useRef<HTMLDivElement>(null);
-    const [currentCert, setCurrentCert] = useState<{ name: string, email: string, uniqueId: string } | null>(null);
+    const [currentCert, setCurrentCert] = useState<{ name: string, email: string, uniqueId: string, position?: string, category?: string } | null>(null);
 
     const generateAll = async () => {
         if (!emails.length) return alert('No emails to generate');
@@ -601,7 +713,11 @@ const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEm
             // 1. Sync with backend to ensure certificates exist and get real IDs
             const res = await fetch('/api/admin/certificates/bulk-issue', {
                 method: 'POST',
-                headers: { 'x-admin-password': adminPassword }
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-admin-password': adminPassword
+                },
+                body: JSON.stringify({ category: selectedCategory })
             });
             if (!res.ok) throw new Error('Failed to synchronize certificates with backend');
 
@@ -619,7 +735,9 @@ const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEm
                 setCurrentCert({
                     name: cert.name || 'Participant',
                     email: cert.email,
-                    uniqueId: cert.uniqueId // REAL ID from backend
+                    uniqueId: cert.uniqueId, // REAL ID from backend
+                    position: cert.position,
+                    category: cert.category
                 });
 
                 // Wait for React to render
@@ -647,7 +765,7 @@ const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEm
             }
 
             const content = await zip.generateAsync({ type: "blob" });
-            saveAs(content, "All_Certificates.zip");
+            saveAs(content, `${selectedCategory || 'All'}_Certificates.zip`);
             onSuccess(); // Refresh the dashboard data
 
         } catch (error: any) {
@@ -672,7 +790,7 @@ const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEm
                 className="w-full bg-brand-white/5 hover:bg-brand-purple/20 border border-white/10 hover:border-brand-purple text-white p-4 rounded-xl flex items-center justify-center gap-3 transition-all disabled:opacity-50"
             >
                 <Download size={20} />
-                {generating ? 'Generating PDFs...' : 'Download All Certificates (PDF ZIP)'}
+                {generating ? 'Generating PDFs...' : `Download ${selectedCategory || 'All'} Certificates (PDF ZIP)`}
             </button>
 
             {/* Hidden Render Area - Moved off-screen instead of opacity-0 for better capture reliability */}
@@ -684,6 +802,8 @@ const BulkGenerator = ({ emails, adminPassword, onSuccess }: { emails: AllowedEm
                         name={currentCert.name}
                         email={currentCert.email}
                         uniqueId={currentCert.uniqueId}
+                        position={currentCert.position}
+                        category={currentCert.category}
                     />
                 )}
             </div>

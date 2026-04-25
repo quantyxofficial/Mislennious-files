@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run update-content && vite",
+    "dev": "npm run update-content && (cd server && npm run dev & vite)",
     "build": "npm run update-content && vite build",
     "preview": "vite preview",
     "update-content": "node scripts/generate-manifest.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && (cd server && npm install)"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",
     "@google/genai": "^1.35.0",
     "@prisma/client": "^6.3.0",
+    "@supabase/supabase-js": "^2.95.3",
     "@types/file-saver": "^2.0.7",
     "@types/react-syntax-highlighter": "^15.5.13",
     "cors": "^2.8.5",
@@ -25,8 +26,10 @@
     "jspdf": "^4.0.0",
     "jszip": "^3.10.1",
     "lucide-react": "^0.562.0",
+    "papaparse": "^5.5.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-draggable": "^4.5.0",
     "react-helmet-async": "^2.0.5",
     "react-markdown": "^10.1.0",
     "react-qr-code": "^2.0.18",
