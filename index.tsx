@@ -74,10 +74,16 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-[#e0e5ec] text-lux-text p-4 text-center">
-          <div>
-            <h1 className="text-2xl font-serif mb-4">Something went wrong.</h1>
-            <p className="text-sm opacity-60">Please try refreshing the page.</p>
+        <div className="fixed inset-0 z-[500] flex items-center justify-center bg-[#e0e5ec] text-lux-text p-4 text-center">
+          <div className="max-w-md">
+            <h1 className="text-3xl font-serif mb-4">Something went wrong.</h1>
+            <p className="text-base opacity-70 mb-8">An unexpected error occurred. Please try refreshing the page or contact support if the problem persists.</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-8 py-3 bg-lux-text text-lux-cream rounded-full font-bold uppercase tracking-widest text-xs hover:scale-105 transition-transform"
+            >
+              Refresh Page
+            </button>
           </div>
         </div>
       );
