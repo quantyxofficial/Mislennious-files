@@ -153,7 +153,10 @@ app.post('/api/admin/emails', checkAdminAuth, async (req, res) => {
         if (error.code === 'P2002') {
             return res.status(400).json({ error: 'Email already exists' });
         }
-        res.status(500).json({ error: 'Failed to add email' });
+        res.status(500).json({ 
+            error: 'Failed to add email',
+            details: error.message 
+        });
     }
 });
 
