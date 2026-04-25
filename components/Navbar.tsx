@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Sparkles, Sun, Moon } from 'lucide-react';
 import { useAI } from '../contexts/AIContext';
 import { useAuth } from '../contexts/AuthContext';
+import { AuthModal } from './AuthModal';
 import { LogIn, LogOut, User as UserIcon } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -12,6 +13,7 @@ export const Navbar: React.FC = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isCompanyOpen, setIsCompanyOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const { user, signInWithGoogle, signOut } = useAuth();
     const location = useLocation();
 
@@ -233,7 +235,7 @@ export const Navbar: React.FC = () => {
                                 </div>
                             ) : (
                                 <button
-                                    onClick={() => signInWithGoogle()}
+                                    onClick={() => setIsAuthModalOpen(true)}
                                     className="px-5 py-2 rounded-full bg-lux-text text-lux-cream text-[11px] font-bold uppercase tracking-widest hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all flex items-center gap-2"
                                 >
                                     <LogIn className="w-3.5 h-3.5" />
@@ -331,11 +333,11 @@ export const Navbar: React.FC = () => {
                                     </div>
                                 ) : (
                                     <button
-                                        onClick={() => { signInWithGoogle(); setIsMobileMenuOpen(false); }}
+                                        onClick={() => { setIsAuthModalOpen(true); setIsMobileMenuOpen(false); }}
                                         className="px-8 py-4 rounded-full bg-lux-text text-lux-cream font-bold uppercase tracking-widest text-xs flex items-center gap-2"
                                     >
                                         <LogIn className="w-4 h-4" />
-                                        Continue with Google
+                                        Continue to Join
                                     </button>
                                 )}
                             </div>
@@ -343,6 +345,8 @@ export const Navbar: React.FC = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
         </>
     );
 };
