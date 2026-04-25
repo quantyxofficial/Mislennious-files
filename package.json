@@ -8,7 +8,7 @@
     "build": "npm run update-content && vite build",
     "preview": "vite preview",
     "update-content": "node scripts/generate-manifest.js",
-    "postinstall": "prisma generate && (cd server && npm install)"
+    "postinstall": "prisma generate && cd server && npm install && npm run prisma:generate"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

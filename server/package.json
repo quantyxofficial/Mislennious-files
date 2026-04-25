@@ -7,9 +7,8 @@
     "scripts": {
         "start": "node index.js",
         "dev": "node --watch index.js",
-        "prisma:generate": "prisma generate",
-        "prisma:push": "prisma db push",
-        "postinstall": "prisma generate"
+        "prisma:generate": "prisma generate --schema=../prisma/schema.prisma",
+        "prisma:push": "prisma db push --schema=../prisma/schema.prisma"
     },
     "keywords": [],
     "author": "",
