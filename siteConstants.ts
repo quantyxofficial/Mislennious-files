@@ -15,10 +15,31 @@ import {
   Brain,
   BarChart
 } from 'lucide-react';
-import { ServiceItem, CaseStudy, Testimonial, MarqueeItem } from './types';
+import { ServiceItem, CaseStudy, Testimonial, MarqueeItem, BlogPost, CareerPosition, ServiceDetail, ExtendedCaseStudy } from './types';
 
 // Services Data
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mgoovkrz';
+
+export const CAREER_POSITIONS: CareerPosition[] = [
+  {
+    id: 'c4',
+    title: 'Tech/Data Science Blogger',
+    department: 'Content',
+    location: 'Remote',
+    type: 'Part-time',
+    description: 'Share your knowledge and passion for technology and data science with our growing community.',
+    responsibilities: [
+      'Write engaging blog posts about the latest tech trends and data science concepts',
+      'Create tutorials and guides for our student community',
+      'Collaborate with the dev team to document technical achievements'
+    ],
+    requirements: [
+      'Passion for writing and technology',
+      'Basic understanding of Data Science or Web Development concepts',
+      'Excellent written communication skills'
+    ]
+  }
+];
 
 export const SERVICES = [
   {
@@ -126,12 +147,6 @@ export const MARQUEE_ITEMS: MarqueeItem[] = [
   { label: 'Visual Design', icon: Zap },
 ];
 
-import {
-  BlogPost,
-  CareerPosition,
-  ServiceDetail,
-  ExtendedCaseStudy
-} from './types';
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -186,26 +201,6 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 ];
 
-export const CAREER_POSITIONS: CareerPosition[] = [
-  {
-    id: 'c4',
-    title: 'Tech/Data Science Blogger',
-    department: 'Content',
-    location: 'Remote',
-    type: 'Part-time',
-    description: 'Share your knowledge and passion for technology and data science with our growing community.',
-    responsibilities: [
-      'Write engaging blog posts about the latest tech trends and data science concepts',
-      'Create tutorials and guides for our student community',
-      'Collaborate with the dev team to document technical achievements'
-    ],
-    requirements: [
-      'Passion for writing and technology',
-      'Basic understanding of Data Science or Web Development concepts',
-      'Excellent written communication skills'
-    ]
-  }
-];
 
 export const SERVICE_DETAILS: ServiceDetail[] = [
   {

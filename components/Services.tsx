@@ -1,4 +1,4 @@
-import { SERVICES } from '../constants';
+import { SERVICES } from '../siteConstants';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 

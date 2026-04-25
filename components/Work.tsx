@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { CASE_STUDIES } from '../constants';
+import { CASE_STUDIES } from '../siteConstants';
 
 export const Work: React.FC = () => {
     const targetRef = useRef<HTMLDivElement>(null);

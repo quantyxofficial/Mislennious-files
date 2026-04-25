@@ -1,5 +1,5 @@
 import React from 'react';
-import { MARQUEE_ITEMS } from '../constants';
+import { MARQUEE_ITEMS } from '../siteConstants';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const VerticalMarquee: React.FC = () => {

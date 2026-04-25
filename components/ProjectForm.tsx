@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FORMSPREE_ENDPOINT } from '../constants';
+import { FORMSPREE_ENDPOINT } from '../siteConstants';
 
 interface ProjectFormProps {
     serviceName?: string;

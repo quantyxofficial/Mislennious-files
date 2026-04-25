@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ShieldCheck, XCircle, AlertCircle } from 'lucide-react';
+import { createClient } from '../lib/supabase/client';
 
 export const CertificateVerify = () => {
     const { uniqueId } = useParams();
@@ -20,15 +21,20 @@ export const CertificateVerify = () => {
 
     const verifyCertificate = async (id: string) => {
         setLoading(true);
+        const supabase = createClient();
         try {
-            const res = await fetch(`/api/verify/${id}`);
-            const data = await res.json();
-            if (res.ok && data.valid) {
-                if (data.certificate.revoked) {
+            const { data: cert, error } = await supabase
+                .from('certificates')
+                .select('*')
+                .eq('unique_id', id)
+                .maybeSingle();
+
+            if (!error && cert) {
+                if (cert.revoked) {
                     setStatus('revoked');
                 } else {
                     setStatus('valid');
-                    setCertData(data.certificate);
+                    setCertData(cert);
                 }
             } else {
                 setStatus('invalid');
@@ -116,11 +122,11 @@ export const CertificateVerify = () => {
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">Certificate ID</p>
-                                    <p className="text-brand-purple font-mono font-medium bg-brand-purple/5 inline-block px-2 py-0.5 rounded text-sm">{certData.uniqueId}</p>
+                                    <p className="text-brand-purple font-mono font-medium bg-brand-purple/5 inline-block px-2 py-0.5 rounded text-sm">{certData.unique_id}</p>
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">Issued Date</p>
-                                    <p className="text-lux-text font-medium">{new Date(certData.issuedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                    <p className="text-lux-text font-medium">{new Date(certData.issued_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                                 </div>
                             </div>
                         </div>

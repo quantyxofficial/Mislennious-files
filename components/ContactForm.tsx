@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
-import { FORMSPREE_ENDPOINT } from '../constants';
+import { FORMSPREE_ENDPOINT } from '../siteConstants';
 
 interface ContactFormData {
     name: string;

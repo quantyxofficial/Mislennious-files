@@ -8,7 +8,7 @@ import {
     Testimonials,
     Team,
     Contact
-} from '../components';
+} from '../components/index';
 
 export const AgencyHome: React.FC = () => {
     return (

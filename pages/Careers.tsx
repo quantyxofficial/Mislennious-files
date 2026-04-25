@@ -3,8 +3,29 @@ import { motion } from 'framer-motion';
 import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
-import { CAREER_POSITIONS } from '../constants';
+import { CareerPosition } from '../types';
 
+
+const CAREER_POSITIONS: CareerPosition[] = [
+    {
+        id: 'c4',
+        title: 'Tech/Data Science Blogger',
+        department: 'Content',
+        location: 'Remote',
+        type: 'Part-time',
+        description: 'Share your knowledge and passion for technology and data science with our growing community.',
+        responsibilities: [
+            'Write engaging blog posts about the latest tech trends and data science concepts',
+            'Create tutorials and guides for our student community',
+            'Collaborate with the dev team to document technical achievements'
+        ],
+        requirements: [
+            'Passion for writing and technology',
+            'Basic understanding of Data Science or Web Development concepts',
+            'Excellent written communication skills'
+        ]
+    }
+];
 
 export const Careers: React.FC = () => {
     const [state, handleSubmit] = useForm("mgoovkrz");
@@ -60,7 +81,7 @@ export const Careers: React.FC = () => {
                                                 <span className="font-bold text-xs uppercase tracking-wider">Generate Your Joining Certificate</span>
                                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                             </Link>
-                                            <Link to="/get-certified?template=tech-blog-completion" onClick={(e) => e.stopPropagation()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-brand-lime/10 text-brand-lime hover:bg-brand-lime hover:text-white transition-all border border-brand-lime/20 group w-full justify-center">
+                                            <Link to="/get-certified?template=tech-blog-completion" onClick={(e) => e.stopPropagation()} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500/10 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all border border-emerald-500/20 group w-full justify-center">
                                                 <span className="font-bold text-xs uppercase tracking-wider">Generate Completion Certificate</span>
                                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                             </Link>

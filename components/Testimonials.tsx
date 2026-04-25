@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Sparkles } from 'lucide-react';
-import { TESTIMONIALS } from '../constants';
+import { TESTIMONIALS } from '../siteConstants';
 
 export const Testimonials: React.FC = () => {
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { EXTENDED_CASE_STUDIES } from '../constants';
+import { EXTENDED_CASE_STUDIES } from '../siteConstants';
 import { Filter } from 'lucide-react';
 import { ProjectForm } from '../components/ProjectForm';
 

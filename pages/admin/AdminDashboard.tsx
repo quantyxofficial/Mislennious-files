@@ -7,6 +7,7 @@ import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 import { CertificateDesign } from '../../components/certificate/CertificateDesign';
 import { useRef } from 'react';
+import { createClient } from '../../lib/supabase/client';
 
 interface AllowedEmail {
     id: string;
@@ -14,8 +15,8 @@ interface AllowedEmail {
     name?: string;
     position?: string;
     category?: string;
-    isUsed: boolean;
-    createdAt: string;
+    is_used: boolean;
+    created_at: string;
 }
 
 export const AdminDashboard = () => {
@@ -40,16 +41,15 @@ export const AdminDashboard = () => {
     }, [isAuthenticated]);
 
     const fetchEmails = async () => {
+        const supabase = createClient();
         try {
-            const res = await fetch('/api/admin/emails', {
-                headers: { 'x-admin-password': adminPassword }
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setEmails(data);
-            } else if (res.status === 401) {
-                setIsAuthenticated(false);
-            }
+            const { data, error } = await supabase
+                .from('allowed_emails')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            setEmails(data || []);
         } catch (error) {
             console.error('Error fetching emails:', error);
         } finally {
@@ -78,27 +78,24 @@ export const AdminDashboard = () => {
         e.preventDefault();
         if (!newEmail) return;
 
+        const supabase = createClient();
         try {
-            const res = await fetch('/api/admin/emails', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-admin-password': adminPassword
-                },
-                body: JSON.stringify({
+            const { error } = await supabase
+                .from('allowed_emails')
+                .insert({
                     email: newEmail,
                     name: newName,
                     position: newPosition,
                     category: selectedCategory
-                }),
-            });
-            if (res.ok) {
+                });
+
+            if (!error) {
                 setNewEmail('');
                 setNewName('');
                 setNewPosition('');
                 fetchEmails();
             } else {
-                alert('Failed to add email. It might already exist.');
+                alert('Failed to add email: ' + error.message);
             }
         } catch (error) {
             console.error(error);
@@ -161,22 +158,22 @@ export const AdminDashboard = () => {
             }
 
             if (confirm(`Found ${emailsToAdd.length} emails. Upload?`)) {
+                const supabase = createClient();
                 try {
-                    const res = await fetch('/api/admin/emails/bulk', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-admin-password': adminPassword
-                        },
-                        body: JSON.stringify({ emails: emailsToAdd }),
-                    });
+                    const { error } = await supabase
+                        .from('allowed_emails')
+                        .upsert(emailsToAdd.map(e => ({
+                            email: e.email,
+                            name: e.name,
+                            position: e.position,
+                            category: e.category
+                        })), { onConflict: 'email,category' });
 
-                    if (res.ok) {
-                        const data = await res.json();
-                        alert(data.message);
+                    if (!error) {
+                        alert('Successfully uploaded emails');
                         fetchEmails();
                     } else {
-                        alert('Failed to upload emails');
+                        alert('Failed to upload emails: ' + error.message);
                     }
                 } catch (error) {
                     console.error(error);
@@ -189,13 +186,17 @@ export const AdminDashboard = () => {
 
     const handleDeleteEmail = async (id: string) => {
         if (!confirm('Are you sure you want to delete this email?')) return;
+        const supabase = createClient();
         try {
-            const res = await fetch(`/api/admin/emails/${id}`, {
-                method: 'DELETE',
-                headers: { 'x-admin-password': adminPassword }
-            });
-            if (res.ok) {
+            const { error } = await supabase
+                .from('allowed_emails')
+                .delete()
+                .eq('id', id);
+            
+            if (!error) {
                 fetchEmails();
+            } else {
+                alert('Error deleting email: ' + error.message);
             }
         } catch (error) {
             console.error(error);
@@ -442,8 +443,8 @@ export const AdminDashboard = () => {
                                             {item.position && <span className="ml-2 bg-brand-purple/20 text-brand-purple text-[10px] px-2 py-0.5 rounded">{item.position}</span>}
                                         </div>
                                         <div className="flex items-center gap-2 mt-1">
-                                            <span className={`text-[10px] px-2 py-0.5 rounded-full ${item.isUsed ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
-                                                {item.isUsed ? 'Certificate Generated' : 'Pending'}
+                                            <span className={`text-[10px] px-2 py-0.5 rounded-full ${item.is_used ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                                                {item.is_used ? 'Certificate Generated' : 'Pending'}
                                             </span>
                                         </div>
                                     </div>
@@ -490,12 +491,15 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
     }, []);
 
     const fetchCerts = async () => {
+        const supabase = createClient();
         try {
-            const res = await fetch('/api/admin/certificates', {
-                headers: { 'x-admin-password': adminPassword }
-            });
-            if (res.ok) setCerts(await res.json());
-            else if (res.status === 401) onUnauthorized();
+            const { data, error } = await supabase
+                .from('certificates')
+                .select('*')
+                .order('issued_at', { ascending: false });
+            
+            if (error) throw error;
+            setCerts(data || []);
         } catch (e) { console.error(e); }
     };
 
@@ -508,19 +512,21 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
         return matchesCategory && (
             cert.name.toLowerCase().includes(certSearch.toLowerCase()) ||
             cert.email.toLowerCase().includes(certSearch.toLowerCase()) ||
-            cert.uniqueId.toLowerCase().includes(certSearch.toLowerCase())
+            cert.unique_id.toLowerCase().includes(certSearch.toLowerCase())
         );
     });
 
     const handleRevoke = async (id: string) => {
         if (!confirm('Revoke this certificate? This cannot be undone.')) return;
         setActionLoading(prev => ({ ...prev, [id]: 'revoke' }));
+        const supabase = createClient();
         try {
-            const res = await fetch(`/api/admin/certificates/${id}/revoke`, {
-                method: 'PATCH',
-                headers: { 'x-admin-password': adminPassword }
-            });
-            if (res.ok) fetchCerts();
+            const { error } = await supabase
+                .from('certificates')
+                .update({ revoked: true })
+                .eq('id', id);
+            
+            if (!error) fetchCerts();
         } catch (e) { console.error(e); }
         setActionLoading(prev => ({ ...prev, [id]: null }));
     };
@@ -528,17 +534,22 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
     const handleDelete = async (id: string) => {
         if (!confirm('DELETE this certificate? This will remove it completely and reset the email so the user can generate it again.')) return;
         setActionLoading(prev => ({ ...prev, [id]: 'delete' }));
+        const supabase = createClient();
         try {
-            const res = await fetch(`/api/admin/certificates/${id}`, {
-                method: 'DELETE',
-                headers: { 'x-admin-password': adminPassword }
-            });
-            if (res.ok) {
-                // Optimistic removal
-                setCerts(prev => prev.filter(c => c.id !== id));
-                fetchCerts();
-            } else {
-                alert('Failed to delete. Check console.');
+            // 1. Get cert to find email
+            const { data: cert } = await supabase.from('certificates').select('email').eq('id', id).single();
+            
+            if (cert) {
+                // 2. Delete Cert
+                const { error: delError } = await supabase.from('certificates').delete().eq('id', id);
+                
+                if (!delError) {
+                    // 3. Reset Email Lock
+                    await supabase.from('allowed_emails').update({ is_used: false }).eq('email', cert.email);
+                    
+                    setCerts(prev => prev.filter(c => c.id !== id));
+                    fetchCerts();
+                }
             }
         } catch (e) {
             console.error(e);
@@ -552,8 +563,8 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
         const rows = certs.map(cert => [
             cert.name,
             cert.email,
-            cert.uniqueId,
-            new Date(cert.issuedAt).toLocaleString(),
+            cert.unique_id,
+            new Date(cert.issued_at).toLocaleString(),
             cert.revoked ? "Revoked" : "Valid"
         ]);
 
@@ -627,8 +638,8 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
                                 </div>
                             </div>
                             <div className="text-[10px] text-white/20 font-mono mt-1 flex justify-between">
-                                <span className="bg-white/5 px-2 py-0.5 rounded text-brand-purple">{cert.uniqueId}</span>
-                                <span>{new Date(cert.issuedAt).toLocaleDateString()}</span>
+                                <span className="bg-white/5 px-2 py-0.5 rounded text-brand-purple">{cert.unique_id}</span>
+                                <span>{new Date(cert.issued_at).toLocaleDateString()}</span>
                             </div>
                         </motion.div>
                     ))}
@@ -648,11 +659,16 @@ const VerifyTool = () => {
         e.preventDefault();
         setLoading(true);
         setResult(null);
+        const supabase = createClient();
         try {
-            const res = await fetch(`/api/verify/${code}`);
-            if (res.ok) {
-                const data = await res.json();
-                setResult(data);
+            const { data: cert, error } = await supabase
+                .from('certificates')
+                .select('*')
+                .eq('unique_id', code)
+                .maybeSingle();
+
+            if (!error && cert) {
+                setResult({ valid: !cert.revoked, certificate: cert });
             } else {
                 setResult({ valid: false });
             }
@@ -685,7 +701,7 @@ const VerifyTool = () => {
                             <p className="text-green-400 font-bold mb-1">✓ Valid Certificate</p>
                             <p className="text-white text-sm">Issued to: <span className="font-bold">{result.certificate.name}</span></p>
                             <p className="text-white/60 text-xs text-sm">Email: {result.certificate.email}</p>
-                            <p className="text-white/60 text-xs">Date: {new Date(result.certificate.issuedAt).toLocaleDateString()}</p>
+                            <p className="text-white/60 text-xs">Date: {new Date(result.certificate.issued_at).toLocaleDateString()}</p>
                         </div>
                     ) : (
                         <p className="text-red-400 font-bold">✗ Invalid or Revoked Certificate</p>
@@ -709,65 +725,90 @@ const BulkGenerator = ({ emails, adminPassword, selectedCategory, onSuccess }: {
         setGenerating(true);
         setProgress(0);
         const zip = new JSZip();
+        const supabase = createClient();
 
         try {
-            // 1. Sync with backend to ensure certificates exist and get real IDs
-            const res = await fetch('/api/admin/certificates/bulk-issue', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-admin-password': adminPassword
-                },
-                body: JSON.stringify({ category: selectedCategory })
-            });
-            if (!res.ok) throw new Error('Failed to synchronize certificates with backend');
+            // 1. Get all allowed emails for the category (already passed in via props 'emails')
+            const targetEmails = emails;
 
-            const issuedCerts = await res.json(); // Array of { uniqueId, name, email }
+            const results = [];
 
-            if (issuedCerts.length === 0) {
-                alert('No certificates found to generate.');
-                return;
-            }
+            for (let i = 0; i < targetEmails.length; i++) {
+                const record = targetEmails[i];
+                let cert = null;
 
-            // 2. Generate PDFs using the REAL data from backend
-            for (let i = 0; i < issuedCerts.length; i++) {
-                const cert = issuedCerts[i];
+                // Check if certificate already exists
+                const { data: existingCert } = await supabase
+                    .from('certificates')
+                    .select('*')
+                    .eq('email', record.email)
+                    .eq('category', record.category)
+                    .maybeSingle();
+                
+                cert = existingCert;
 
-                setCurrentCert({
-                    name: cert.name || 'Participant',
-                    email: cert.email,
-                    uniqueId: cert.uniqueId, // REAL ID from backend
-                    position: cert.position,
-                    category: cert.category
-                });
-
-                // Wait for React to render
-                await new Promise(resolve => setTimeout(resolve, 500));
-
-                if (certRef.current) {
-                    try {
-                        const dataUrl = await toPng(certRef.current, { quality: 1.0, pixelRatio: 2 });
-                        const pdf = new jsPDF({
-                            orientation: 'portrait',
-                            unit: 'px',
-                            format: [600, 848]
-                        });
-                        pdf.addImage(dataUrl, 'PNG', 0, 0, 600, 848);
-
-                        const safeName = (cert.name || cert.email).replace(/[^a-z0-9]/gi, '_');
-                        const fileName = `${safeName}_Certificate.pdf`;
-                        zip.file(fileName, pdf.output('blob'));
-                    } catch (innerError) {
-                        console.error(`Failed to render cert for ${cert.email}`, innerError);
+                if (!cert) {
+                    const uniqueId = Math.random().toString(36).substring(2, 10).toUpperCase();
+                    const { data: newCert, error: certError } = await supabase
+                        .from('certificates')
+                        .insert({
+                            unique_id: uniqueId,
+                            email: record.email,
+                            name: record.name || 'Participant',
+                            position: record.position,
+                            category: record.category,
+                            template_id: 'default'
+                        })
+                        .select()
+                        .single();
+                    
+                    if (!certError && newCert) {
+                        cert = newCert;
+                        // Mark as used
+                        await supabase
+                            .from('allowed_emails')
+                            .update({ is_used: true })
+                            .eq('id', record.id);
                     }
                 }
 
-                setProgress(Math.round(((i + 1) / issuedCerts.length) * 100));
+                if (cert) {
+                    setCurrentCert({
+                        name: cert.name,
+                        email: cert.email,
+                        uniqueId: cert.unique_id,
+                        position: cert.position,
+                        category: cert.category
+                    });
+
+                    // Wait for React to render
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    if (certRef.current) {
+                        try {
+                            const dataUrl = await toPng(certRef.current, { quality: 1.0, pixelRatio: 2 });
+                            const pdf = new jsPDF({
+                                orientation: 'portrait',
+                                unit: 'px',
+                                format: [600, 848]
+                            });
+                            pdf.addImage(dataUrl, 'PNG', 0, 0, 600, 848);
+
+                            const safeName = (cert.name || cert.email).replace(/[^a-z0-9]/gi, '_');
+                            const fileName = `${safeName}_Certificate.pdf`;
+                            zip.file(fileName, pdf.output('blob'));
+                        } catch (innerError) {
+                            console.error(`Failed to render cert for ${cert.email}`, innerError);
+                        }
+                    }
+                }
+
+                setProgress(Math.round(((i + 1) / targetEmails.length) * 100));
             }
 
             const content = await zip.generateAsync({ type: "blob" });
             saveAs(content, `${selectedCategory || 'All'}_Certificates.zip`);
-            onSuccess(); // Refresh the dashboard data
+            onSuccess();
 
         } catch (error: any) {
             console.error(error);

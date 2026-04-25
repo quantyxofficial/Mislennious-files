@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { CertificateDesign } from '../components/certificate/CertificateDesign';
+import { createClient } from '../lib/supabase/client';
 
 
 export const CertificateGenerator = () => {
@@ -31,30 +32,53 @@ export const CertificateGenerator = () => {
         e.preventDefault();
         setError('');
         setIsLoading(true);
+        console.log('Starting verification for:', email);
+        
         try {
-            const res = await fetch('/api/verify-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, templateId }),
-            });
-            const data = await res.json();
+            const supabase = createClient();
+            
+            // 1. Check if the email is in allowed_emails
+            const { data: allowed, error: allowedError } = await supabase
+                .from('allowed_emails')
+                .select('*')
+                .eq('email', email.trim())
+                .maybeSingle();
 
-            if (res.ok && data.allowed) {
-                if (data.isUsed && data.certificate) {
-                    setCertData(data.certificate);
-                    setUserData(prev => ({ ...prev, name: data.certificate.name }));
-                    setStep('preview');
-                } else {
-                    if (data.name) {
-                        setUserData(prev => ({ ...prev, name: data.name }));
-                    }
-                    setStep('form');
-                }
-            } else {
-                setError(data.error || 'Verification failed');
+            if (allowedError) {
+                console.error('Database error during allowed check:', allowedError);
+                throw new Error(allowedError.message);
             }
-        } catch (err) {
-            setError('System error. Please try again.');
+
+            if (!allowed) {
+                console.warn('Email not found in allowed_emails');
+                setError('Email not authorized');
+                setIsLoading(false);
+                return;
+            }
+
+            console.log('Email authorized:', allowed);
+
+            // 2. Check if already generated for this template
+            const { data: existing, error: certError } = await supabase
+                .from('certificates')
+                .select('*')
+                .eq('email', email.trim())
+                .eq('template_id', templateId)
+                .maybeSingle();
+
+            if (existing) {
+                console.log('Certificate already exists:', existing);
+                setCertData(existing);
+                setUserData({ name: existing.name, college: '' });
+                setStep('preview');
+            } else {
+                console.log('Proceeding to generation form');
+                if (allowed.name) setUserData(prev => ({ ...prev, name: allowed.name }));
+                setStep('form');
+            }
+        } catch (err: any) {
+            console.error('CRITICAL VERIFICATION ERROR:', err);
+            setError(`Connection Error: ${err.message || 'Please check your internet'}`);
         } finally {
             setIsLoading(false);
         }
@@ -62,25 +86,64 @@ export const CertificateGenerator = () => {
 
     const handleGenerate = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsLoading(true);
+        setError('');
+        console.log('Generating certificate for:', email);
+        
         try {
-            const res = await fetch('/api/generate-certificate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email,
-                    name: userData.name,
-                    templateId: templateId
-                }),
-            });
-            const data = await res.json();
-            if (res.ok) {
-                setCertData(data.certificate);
-                setStep('preview');
-            } else {
-                setError(data.error);
+            const supabase = createClient();
+            
+            // 1. Get allowed info again to be sure
+            const { data: allowed, error: allowedError } = await supabase
+                .from('allowed_emails')
+                .select('*')
+                .eq('email', email.trim())
+                .maybeSingle();
+
+            if (allowedError || !allowed) {
+                console.error('Final check failed:', allowedError);
+                setError('Authorization lost. Please refresh.');
+                setIsLoading(false);
+                return;
             }
-        } catch (err) {
-            setError('Generation failed.');
+
+            const uniqueId = Math.random().toString(36).substring(2, 10).toUpperCase();
+
+            // 2. Create Certificate
+            const { data: cert, error: certError } = await supabase
+                .from('certificates')
+                .insert({
+                    unique_id: uniqueId,
+                    email: email.trim(),
+                    name: userData.name,
+                    position: allowed.position,
+                    category: allowed.category,
+                    template_id: templateId,
+                })
+                .select()
+                .single();
+
+            if (certError) {
+                console.error('Insert error:', certError);
+                setError(`Failed to create certificate: ${certError.message}`);
+                setIsLoading(false);
+                return;
+            }
+
+            // 3. Mark as used
+            await supabase
+                .from('allowed_emails')
+                .update({ is_used: true })
+                .eq('id', allowed.id);
+
+            console.log('Generation successful:', cert);
+            setCertData(cert);
+            setStep('preview');
+        } catch (err: any) {
+            console.error('CRITICAL GENERATION ERROR:', err);
+            setError(`Generation failed: ${err.message}`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -98,7 +161,7 @@ export const CertificateGenerator = () => {
                 format: [width, height]
             });
             pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
-            pdf.save(`Certificate-${certData.uniqueId}.pdf`);
+            pdf.save(`Certificate-${certData.unique_id}.pdf`);
         } catch (err) {
             console.error('Download failed', err);
         }
@@ -236,7 +299,7 @@ export const CertificateGenerator = () => {
                             ref={certRef}
                             name={userData.name}
                             email={certData.email}
-                            uniqueId={certData.uniqueId}
+                            uniqueId={certData.unique_id}
                             userImage={userData.userImage}
                             category={certData.category}
                             position={certData.position}

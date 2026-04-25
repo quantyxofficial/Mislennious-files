@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SERVICES, SERVICE_DETAILS } from '../constants';
+import { SERVICES, SERVICE_DETAILS } from '../siteConstants';
 import { Check, ArrowRight, Layers, ChevronRight, Minus } from 'lucide-react';
 import { ProjectForm } from '../components/ProjectForm';
 
