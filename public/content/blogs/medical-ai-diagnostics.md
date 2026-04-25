@@ -5,6 +5,7 @@ keywords: "Deep Learning, Python for Data Science, Skin Disease Detection AI, Me
 author: "Sumedh Pednekar"
 date: "2026-02-20"
 category: "Artificial Intelligence & Data Science"
+image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80"
 ---
 
 # Introduction: The High Stakes of Medical AI

@@ -5,6 +5,7 @@ keywords: "tech outages, system reliability, distributed systems, data engineeri
 author: "KaizenStat Team"
 date: "2026-01-17"
 category: "Tech Analysis"
+image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80"
 ---
 
 

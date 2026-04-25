@@ -5,6 +5,7 @@ keywords: "data science in e-commerce, ecommerce data science, how ecommerce use
 author: "Rashel Shah"
 date: "2026-02-14"
 category: "Industry Applications"
+image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80"
 ---
 
 # Data Science in E-commerce: How It Works and Why It Matters

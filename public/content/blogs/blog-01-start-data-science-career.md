@@ -5,6 +5,7 @@ keywords: "data science career, start data science, student data science guide, 
 author: "KaizenStat Team"
 date: "2026-01-17"
 category: "Career Guide"
+image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=80"
 ---
 
 

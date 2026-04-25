@@ -5,6 +5,7 @@ keywords: "data science career, start data science, student data science guide, 
 author: Sriranjani Karthikeyan
 date: "2026-01-17"
 category: "Career Guide"
+image: "https://images.unsplash.com/photo-1523240715639-95389f781f0c?w=1200&q=80"
 ---
 
 

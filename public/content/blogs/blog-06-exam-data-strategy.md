@@ -5,6 +5,7 @@ keywords: "exam preparation strategy, data driven study, JEE preparation, smart 
 author: "KaizenStat Team"
 date: "2026-01-17"
 category: "Education Strategy"
+image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80"
 ---
 
 

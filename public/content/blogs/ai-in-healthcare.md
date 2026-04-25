@@ -5,6 +5,7 @@ keywords: "AI in healthcare, machine learning medical diagnostics, skin disease 
 author: "Sumedh Pednekar"
 date: "2026-02-17"
 category: "AI & Healthcare"
+image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80"
 ---
 
 The healthcare landscape is undergoing a radical transformation. By 2026, the digital health market is projected to exceed $300 billion, driven largely by AI-powered clinical decision support and diagnostics. For students and tech enthusiasts, there is no better time to explore the intersection of Artificial Intelligence (AI) and medicine.

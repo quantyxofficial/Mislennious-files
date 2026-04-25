@@ -5,6 +5,7 @@ keywords: "data science portfolio, portfolio projects, get hired data science, p
 author: "KaizenStat Team"
 date: "2026-01-17"
 category: "Career Development"
+image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
 ---
 
 

@@ -5,6 +5,7 @@ keywords: "Data Science vs AI vs Machine Learning, difference between AI and ML,
 author: "Rashel Shah"
 date: "2026-02-12"
 category: "Career Guide"
+image: "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=1200&q=80"
 ---
 
 # Data Science vs AI vs Machine Learning: Key Differences Explained for College Students
