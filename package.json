@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "npm run update-content && (cd server && npm run dev & vite)",
-    "build": "prisma generate && cd server && npm install && prisma generate --schema=../prisma/schema.prisma && cd .. && npm run update-content && vite build",
+    "build": "prisma generate && npm run update-content && vite build",
     "preview": "vite preview",
     "update-content": "node scripts/generate-manifest.js",
-    "postinstall": "prisma generate && cd server && npm install && npm run prisma:generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "qrcode": "^1.5.4",
     "prisma": "^6.3.0",
     "@formspree/react": "^3.0.0",
     "@google/genai": "^1.35.0",
