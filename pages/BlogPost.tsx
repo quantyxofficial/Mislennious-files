@@ -205,16 +205,35 @@ export const BlogPost: React.FC = () => {
                         <div className="bg-white/50 backdrop-blur-sm border border-white/60 shadow-sm rounded-xl p-6">
                             <h3 className="font-serif font-bold text-gray-900 mb-4">Share this article</h3>
                             <div className="flex gap-2">
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-600 transition-colors">
+                                <button
+                                    onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-400 transition-colors"
+                                    title="Share on Twitter"
+                                >
                                     <Twitter className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-700 transition-colors">
+                                <button
+                                    onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                                    title="Share on LinkedIn"
+                                >
                                     <Linkedin className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-600 transition-colors">
+                                <button
+                                    onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 hover:text-blue-600 transition-colors"
+                                    title="Share on Facebook"
+                                >
                                     <Facebook className="w-5 h-5" />
                                 </button>
-                                <button className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors ml-auto">
+                                <button
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        alert('Link copied to clipboard!');
+                                    }}
+                                    className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors ml-auto group relative"
+                                    title="Copy Link"
+                                >
                                     <Copy className="w-5 h-5" />
                                 </button>
                             </div>
