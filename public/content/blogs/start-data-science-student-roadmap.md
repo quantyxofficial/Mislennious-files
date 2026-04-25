@@ -3,7 +3,7 @@ title: "How to Start a Data Science Career as a Student: A Complete Roadmap"
 description: "Discover the essential steps, skills, and resources to launch your data science career while still in university. Perfect for students worldwide."
 keywords: "data science career, start data science, student data science guide, learn data science, data science skills"
 author: Sriranjani Karthikeyan
-date: "2026-01-17"
+date: "2026-02-17"
 category: "Career Guide"
 image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80"
 ---
