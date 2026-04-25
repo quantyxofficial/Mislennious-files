@@ -36,7 +36,7 @@ const students = [
 const upload = async () => {
     for (const student of students) {
         try {
-            const res = await fetch('http://localhost:3001/api/admin/emails', {
+            const res = await fetch('https://www.kaizenstat.com/api/admin/emails', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const upload = async () => {
                     category: "Tech Blog" 
                 })
             });
-            const data = await res.json();
+            const data = await res.json().catch(() => ({}));
             console.log(`${student.email}: ${res.status} - ${JSON.stringify(data)}`);
         } catch (err) {
             console.error(`${student.email}: Error - ${err.message}`);

@@ -37,7 +37,14 @@ app.use(express.json());
 
 // Basic health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Server is running' });
+    const dbUrl = process.env.DATABASE_URL || '';
+    const dbHost = dbUrl.split('@')[1]?.split(':')[0] || 'not connected';
+    res.json({ 
+        status: 'ok', 
+        message: 'Server is running',
+        database: dbHost,
+        envLoaded: !!process.env.DATABASE_URL
+    });
 });
 
 
