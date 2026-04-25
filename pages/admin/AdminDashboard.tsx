@@ -59,7 +59,7 @@ export const AdminDashboard = () => {
 
     // Filter emails based on search
     const filteredEmails = emails.filter(email => {
-        const matchesCategory = selectedCategory === 'Tech Blog'
+        const matchesCategory = (selectedCategory === 'Tech Blog' || selectedCategory === 'Tech Blog Completion')
             ? (email.category === 'Tech Blog' || !email.category) // Legacy support: Null = Tech Blog/Default
             : email.category === selectedCategory;
 
@@ -297,6 +297,7 @@ export const AdminDashboard = () => {
         // Category Selection View
         const categories = [
             { id: 'Tech Blog', color: 'bg-blue-500', icon: <RefreshCw /> },
+            { id: 'Tech Blog Completion', color: 'bg-emerald-500', icon: <ShieldCheck /> },
             { id: 'Graphic Design', color: 'bg-pink-500', icon: <Upload /> },
             { id: 'Core Team', color: 'bg-purple-500', icon: <ShieldCheck /> }
         ];
@@ -500,7 +501,7 @@ const CertificateList = ({ adminPassword, onUnauthorized, selectedCategory }: { 
 
     // Filter certs based on search
     const filteredCerts = certs.filter(cert => {
-        const matchesCategory = selectedCategory === 'Tech Blog'
+        const matchesCategory = (selectedCategory === 'Tech Blog' || selectedCategory === 'Tech Blog Completion')
             ? (cert.category === 'Tech Blog' || !cert.category) // Legacy support
             : cert.category === selectedCategory;
 
