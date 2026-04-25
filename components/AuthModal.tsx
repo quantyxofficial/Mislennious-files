@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Sparkles, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { X, Mail, Sparkles, Loader2, ArrowRight, CheckCircle2, Github } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 interface AuthModalProps {
@@ -14,7 +14,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { signInWithEmail, signInWithGoogle } = useAuth();
+  const { signInWithEmail, signInWithGoogle, signInWithGithub } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +37,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
       await signInWithGoogle();
     } catch (err: any) {
       setError(err.message || 'Failed to initialize Google login');
+      setLoading(false);
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await signInWithGithub();
+    } catch (err: any) {
+      setError(err.message || 'Failed to initialize GitHub login');
       setLoading(false);
     }
   };
@@ -116,14 +127,25 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
                     <div className="flex-grow border-t border-gray-100 dark:border-white/10"></div>
                   </div>
 
-                  <button
-                    onClick={handleGoogleLogin}
-                    disabled={loading}
-                    className="w-full py-4 rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-all flex items-center justify-center gap-3 group"
-                  >
-                    <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
-                    <span className="text-xs font-bold text-gray-600 dark:text-gray-300">Continue with Google</span>
-                  </button>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      onClick={handleGoogleLogin}
+                      disabled={loading}
+                      className="py-4 rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-all flex items-center justify-center gap-3 group"
+                    >
+                      <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
+                      <span className="text-xs font-bold text-gray-600 dark:text-gray-300">Google</span>
+                    </button>
+
+                    <button
+                      onClick={handleGithubLogin}
+                      disabled={loading}
+                      className="py-4 rounded-2xl border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-all flex items-center justify-center gap-3 group"
+                    >
+                      <Github className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity text-gray-900 dark:text-white" />
+                      <span className="text-xs font-bold text-gray-600 dark:text-gray-300">GitHub</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <motion.div 
