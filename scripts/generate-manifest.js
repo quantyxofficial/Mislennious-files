@@ -24,6 +24,12 @@ function parseFrontmatter(content) {
         const key = line.substring(0, colonIndex).trim();
         let value = line.substring(colonIndex + 1).trim();
 
+        // Strip surrounding quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) || 
+            (value.startsWith("'") && value.endsWith("'"))) {
+            value = value.substring(1, value.length - 1).trim();
+        }
+
         // Handle arrays (check this first before type coercion)
         if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
             try {
@@ -237,6 +243,55 @@ ${urls.map(url => `  <url>
     }
 }
 
+// Generate Blog Manifest
+async function generateBlogManifest() {
+    const BLOG_DIR = path.join(CONTENT_DIR, 'blogs');
+    console.log(`Checking Blog Directory: ${BLOG_DIR}`);
+    if (!fs.existsSync(BLOG_DIR)) {
+        console.warn(`Blog Directory not found: ${BLOG_DIR}`);
+        return;
+    }
+
+    try {
+        const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.md'));
+        const blogs = [];
+
+        for (const file of files) {
+            try {
+                const content = fs.readFileSync(path.join(BLOG_DIR, file), 'utf-8');
+                const data = parseFrontmatter(content);
+                
+                // Calculate read time (approx 200 words per minute)
+                const wordCount = content.split(/\s+/).length;
+                const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
+
+                blogs.push({
+                    id: data.id || file.replace('.md', ''),
+                    file: file,
+                    title: data.title || file.replace(/-/g, ' ').replace('.md', ''),
+                    description: data.description || '',
+                    category: data.category || 'Technology',
+                    date: data.date || new Date().toISOString().split('T')[0],
+                    image: data.image || `https://images.unsplash.com/photo-1504868584819-f8e905263543?w=1200&q=80`, // Generic Data Science image
+                    readTime: data.readTime || `${readTimeMinutes} min`,
+                    author: data.author || 'KaizenStat Team',
+                    featured: data.featured || false
+                });
+            } catch (err) {
+                console.error(`Error processing blog ${file}:`, err);
+            }
+        }
+
+        // Sort by date descending
+        blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        fs.writeFileSync(path.join(BLOG_DIR, 'manifest.json'), JSON.stringify(blogs, null, 2));
+        console.log(`Generated manifest.json for blogs with ${blogs.length} entries`);
+    } catch (error) {
+        console.error("Fatal error in generateBlogManifest:", error);
+    }
+}
+
 async function main() {
     console.log('Starting content manifest generation...');
     console.log(`Content Directory: ${CONTENT_DIR}`);
@@ -244,6 +299,7 @@ async function main() {
     try {
         await generateStudyManifests();
         const problemUrls = await generatePracticeManifests();
+        await generateBlogManifest();
         generateSitemap(problemUrls);
         console.log('Manifest generation completed successfully!');
     } catch (error) {
