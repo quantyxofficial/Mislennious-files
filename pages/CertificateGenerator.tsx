@@ -166,12 +166,11 @@ export const CertificateGenerator = () => {
                             </p>
                         </div>
 
-                        {/* Right: Demo Preview */}
                         <div className="hidden md:flex flex-col items-center justify-center">
                             <div className="text-center mb-6">
                                 <span className="inline-block px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-[9px] font-bold uppercase tracking-widest border border-brand-purple/20">Sample Preview</span>
                             </div>
-                            <div className="relative w-[300px] h-[424px] shadow-2xl rounded overflow-hidden border border-stone-200">
+                            <div className={isCompletion ? "relative w-[424px] h-[300px] shadow-2xl rounded overflow-hidden border border-stone-200" : "relative w-[300px] h-[424px] shadow-2xl rounded overflow-hidden border border-stone-200"}>
                                 <div className="absolute top-0 left-0 bg-white origin-top-left transform scale-[0.5]">
                                     <CertificateDesign
                                         name="Your Name"

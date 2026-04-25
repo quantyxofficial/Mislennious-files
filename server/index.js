@@ -35,9 +35,26 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Basic health check
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Server is running' });
+app.get('/api/health', async (req, res) => {
+    try {
+        const emailCount = await getPrisma().allowedEmail.count();
+        const certCount = await getPrisma().certificate.count();
+        res.json({ 
+            status: 'ok', 
+            message: 'Server is running',
+            database: {
+                connected: true,
+                emails: emailCount,
+                certificates: certCount
+            }
+        });
+    } catch (error) {
+        res.json({ 
+            status: 'error', 
+            message: 'Server running, but database connection failed',
+            error: error.message
+        });
+    }
 });
 
 
