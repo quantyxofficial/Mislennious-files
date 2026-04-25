@@ -113,10 +113,10 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                             </p>
                         </div>
 
-                        {/* Awarded To Area (Main name) - Moved more right and up */}
-                        <div className="absolute top-[44%] left-[38%] text-left">
-                            <h2 className="text-2xl font-serif font-bold text-black tracking-wider uppercase">
-                                {name},
+                        {/* Awarded To Area (Main name) - Centered and scaled */}
+                        <div className="absolute top-[42%] left-[50%] transform -translate-x-1/2 text-center w-full">
+                            <h2 className="text-xl md:text-2xl font-serif font-bold text-black tracking-widest uppercase whitespace-nowrap">
+                                {name}
                             </h2>
                         </div>
                     </>
