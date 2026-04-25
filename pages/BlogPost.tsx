@@ -97,8 +97,8 @@ export const BlogPost: React.FC = () => {
 
                         <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 border-b border-gray-100 pb-8">
                             <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs">
-                                    KS
+                                <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 border border-gray-200">
+                                    <User className="w-4 h-4" />
                                 </div>
                                 <span className="font-medium text-gray-900">{post.author}</span>
                             </div>
