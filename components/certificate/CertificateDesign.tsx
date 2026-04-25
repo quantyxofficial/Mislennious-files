@@ -5,7 +5,6 @@ interface CertificateDesignProps {
     name: string;
     email: string;
     uniqueId: string;
-    userImage?: string;
     verificationUrl?: string;
     position?: string;
     category?: string;
@@ -13,7 +12,7 @@ interface CertificateDesignProps {
 }
 
 export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignProps>(
-    ({ name, email, uniqueId, userImage, verificationUrl, position, category, templateId }, ref) => {
+    ({ name, email, uniqueId, verificationUrl, position, category, templateId }, ref) => {
         const qrValue = verificationUrl || `https://www.kaizenstat.com/verify/${uniqueId}`;
 
         // Determine template and text positions based on category and templateId
@@ -142,12 +141,6 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                     </>
                 )}
 
-                {/* Common Elements */}
-                {userImage && (
-                    <div className="absolute top-[28%] right-[12%] w-[110px] h-[130px] border border-gray-300 shadow-sm z-10 bg-white">
-                        <img src={userImage} alt="User" className="w-full h-full object-cover" />
-                    </div>
-                )}
 
                 {/* QR Code and ID for NON-completion templates */}
                 {!isCompletion && (

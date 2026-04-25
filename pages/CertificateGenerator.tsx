@@ -16,7 +16,7 @@ export const CertificateGenerator = () => {
     const [step, setStep] = useState<'verify' | 'form' | 'preview'>('verify');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [userData, setUserData] = useState<{ name: string; college: string; userImage?: string }>({ name: '', college: '' });
+    const [userData, setUserData] = useState({ name: '', college: '' });
     const [certData, setCertData] = useState<any>(null);
     const certRef = useRef<HTMLDivElement>(null);
 
@@ -263,27 +263,6 @@ export const CertificateGenerator = () => {
                                 />
                             </div>
 
-                            <div>
-                                <label className="block text-lux-text text-xs font-bold uppercase tracking-wider mb-2 ml-1 opacity-70">Passport Photo (Optional)</label>
-                                <div className="relative group">
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => {
-                                            const file = e.target.files?.[0];
-                                            if (file) {
-                                                const reader = new FileReader();
-                                                reader.onloadend = () => {
-                                                    setUserData(prev => ({ ...prev, userImage: reader.result as string }));
-                                                };
-                                                reader.readAsDataURL(file);
-                                            }
-                                        }}
-                                        className="w-full text-sm text-stone-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-brand-black file:text-white hover:file:bg-stone-800 cursor-pointer bg-white border border-stone-200 rounded-lg p-2 transition-colors shadow-sm"
-                                    />
-                                </div>
-                            </div>
-
                             <button type="submit" className="w-full bg-brand-black text-white font-bold py-3.5 rounded-lg hover:bg-stone-800 transition-all transform hover:scale-[1.02] shadow-lg mt-4">
                                 Generate Certificate
                             </button>
@@ -297,10 +276,9 @@ export const CertificateGenerator = () => {
 
                         <CertificateDesign
                             ref={certRef}
-                            name={userData.name}
+                            name={certData.name}
                             email={certData.email}
                             uniqueId={certData.unique_id}
-                            userImage={userData.userImage}
                             category={certData.category}
                             position={certData.position}
                             templateId={templateId}
