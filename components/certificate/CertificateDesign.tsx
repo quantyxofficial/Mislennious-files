@@ -45,14 +45,14 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                     <>
                         {/* To: Name */}
                         <div className="absolute top-[27.5%] left-[10%] text-left w-[450px]">
-                            <h2 className="text-xl font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <h2 className="text-xl font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name}
                             </h2>
                         </div>
 
                         {/* Dear [Name], */}
                         <div className="absolute top-[41%] left-[10%] text-left w-[400px]">
-                            <p className="text-lg font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <p className="text-lg font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name},
                             </p>
                         </div>
@@ -61,28 +61,28 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                     <>
                         {/* To: Name */}
                         <div className="absolute top-[19.5%] left-[12%] text-left w-[450px]">
-                            <h2 className="text-xl font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <h2 className="text-xl font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name}
                             </h2>
                         </div>
 
                         {/* Sub: Onboarding as [Position] */}
                         <div className="absolute top-[27.5%] left-[36%] text-left w-[400px]">
-                            <p className="text-md font-serif font-bold text-black whitespace-nowrap overflow-visible">
+                            <p className="text-md font-serif font-semibold text-black whitespace-nowrap overflow-visible">
                                 {position || 'Core Team Member'}
                             </p>
                         </div>
 
                         {/* Dear [Name], */}
                         <div className="absolute top-[32%] left-[16%] text-left w-[400px]">
-                            <p className="text-lg font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <p className="text-lg font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name},
                             </p>
                         </div>
 
                         {/* Body Position Insert */}
                         <div className="absolute top-[46.5%] left-[50%] transform -translate-x-1/2 text-left w-[300px]">
-                            <p className="text-md font-serif font-bold text-black tracking-wide text-center w-full">
+                            <p className="text-md font-serif font-semibold text-black tracking-wide text-center w-full">
                                 {position || 'Core Team Member'}
                             </p>
                         </div>
@@ -94,7 +94,7 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                         {/* Top Right Cluster: Name, Email, QR, ID */}
                         <div className="absolute top-[20px] right-[20px] flex flex-col items-end gap-1">
                             <div className="text-right mb-1">
-                                <h2 className="text-[8px] font-serif font-bold text-black tracking-widest uppercase">
+                                <h2 className="text-[8px] font-serif font-semibold text-black tracking-widest uppercase">
                                     {name}
                                 </h2>
                                 <p className="text-[6px] font-serif text-black/70">
@@ -115,7 +115,7 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
 
                         {/* Awarded To Area (Main name) - Centered and scaled */}
                         <div className="absolute top-[42%] left-[50%] transform -translate-x-1/2 text-center w-full">
-                            <h2 className="text-xl md:text-2xl font-serif font-bold text-black tracking-widest uppercase whitespace-nowrap">
+                            <h2 className="text-xl md:text-2xl font-serif font-semibold text-black tracking-widest uppercase whitespace-nowrap">
                                 {name}
                             </h2>
                         </div>
@@ -124,7 +124,7 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                     <>
                         {/* Tech Blog / Default Legacy Layout (certificate-template.png) - Portrait */}
                         <div className="absolute top-[28%] left-[12%] text-left w-[450px]">
-                            <h2 className="text-xl font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <h2 className="text-xl font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name}
                             </h2>
                         </div>
@@ -134,7 +134,7 @@ export const CertificateDesign = forwardRef<HTMLDivElement, CertificateDesignPro
                             </p>
                         </div>
                         <div className="absolute top-[41.2%] left-[13%] text-left w-[400px]">
-                            <h2 className="text-sm font-serif font-bold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
+                            <h2 className="text-sm font-serif font-semibold text-black tracking-wide uppercase whitespace-nowrap overflow-visible">
                                 {name},
                             </h2>
                         </div>
