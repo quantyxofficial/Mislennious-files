@@ -144,6 +144,8 @@ export const Navbar: React.FC = () => {
                                 }`} />
                         </Link>
 
+
+
                         {/* COMPANY DROPDOWN: Consolidating About, Blog, Events, Careers */}
                         <div
                             className="relative"
@@ -308,6 +310,7 @@ export const Navbar: React.FC = () => {
                             >
                                 Careers
                             </Link>
+
                             
                             <div className="mt-8 pt-8 border-t border-lux-text/10 w-full flex justify-center">
                                 {user ? (

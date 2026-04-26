@@ -25,6 +25,7 @@ const KaizenAI = lazy(() => import('./pages/KaizenAI').then(m => ({ default: m.K
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const CertificateGenerator = lazy(() => import('./pages/CertificateGenerator').then(m => ({ default: m.CertificateGenerator })));
 const CertificateVerify = lazy(() => import('./pages/CertificateVerify').then(m => ({ default: m.CertificateVerify })));
+const OpenSourceLanding = lazy(() => import('./pages/OpenSourceLanding').then(m => ({ default: m.OpenSourceLanding })));
 
 export const router = createBrowserRouter([
     {
@@ -128,6 +129,10 @@ export const router = createBrowserRouter([
             {
                 path: 'terms',
                 element: <Terms />,
+            },
+            {
+                path: 'contribute',
+                element: <OpenSourceLanding />,
             },
             {
                 path: '*',

@@ -225,8 +225,8 @@ export const CertificateExam: React.FC = () => {
                                     </div>
                                     <div className="py-10">
                                         <p className="text-lux-muted text-sm mb-2">This certifies that</p>
-                                        <p className="text-4xl font-serif text-lux-text border-b-2 border-amber-300 pb-2 mb-2 inline-block px-8">{studentName}</p>
-                                        <p className="text-lux-muted text-sm">from <span className="font-medium text-lux-text">{collegeName}</span></p>
+                                        <p className="text-4xl font-serif font-medium text-lux-text border-b-2 border-amber-300 pb-2 mb-2 inline-block px-8 whitespace-nowrap">{studentName}</p>
+                                        <p className="text-lux-muted text-sm">from <span className="font-medium text-lux-text whitespace-nowrap">{collegeName}</span></p>
                                         <p className="text-lux-muted text-sm mt-6">has successfully completed the</p>
                                         <p className="text-2xl font-serif text-amber-700 mt-1">{topicTitle} Certification Exam</p>
                                         <p className="text-lux-muted text-sm mt-2">with a score of <span className="font-bold text-green-600">{score}%</span></p>
