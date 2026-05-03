@@ -5,6 +5,17 @@ import { GraduationCap, Code, Briefcase, TrendingUp, ArrowRight, Linkedin } from
 const TEAM = [
     {
         id: 0,
+        name: "Masuddar Rahaman",
+        role: "Lead Engineer & Architect",
+        bio: "Focused on high-performance pipelines. Turns raw data into actionable growth engines with engineering precision.",
+        edu: "Top Institutes",
+        linkedin: "https://www.linkedin.com/in/masuddar-rahaman/",
+        icon: Code,
+        color: "bg-blue-500",
+        image: "/team/Masuddar_Rahaman.jpeg"
+    },
+    {
+        id: 1,
         name: "Abhishikta Dutta",
         role: "[Founder] Technology & Product",
         bio: "Building predictive models that anticipate user behavior. Every algorithm is optimized for maximum impact.",
@@ -15,7 +26,7 @@ const TEAM = [
         image: "/team/Abhishikta_Dutta_new.jpg"
     },
     {
-        id: 1,
+        id: 2,
         name: "Kriti Sharma",
         role: "[Founder] Operations & Strategy",
         bio: "Translating market signals into ROI. Bridges the gap between technical data science and business revenue.",
@@ -24,27 +35,14 @@ const TEAM = [
         icon: TrendingUp,
         color: "bg-purple-500",
         image: "/team/Kriti_Sharma_new.jpg"
-    },
-    /* Hidden as per request
-    {
-        id: 2,
-        name: "Masuddar Rahaman",
-        role: "Lead Engineer & Architect",
-        bio: "Focused on high-performance pipelines. Turns raw data into actionable growth engines with engineering precision.",
-        edu: "Top Institutes",
-        linkedin: "https://www.linkedin.com/in/masuddar-rahaman/",
-        icon: Code,
-        color: "bg-blue-500",
-        image: "/team/Masuddar_Rahaman.jpeg"
     }
-    */
 ];
 
 export const Team: React.FC = () => {
     const [activeId, setActiveId] = useState(0);
 
     return (
-        <section id="agency" className="py-24 md:py-32 px-6 lg:px-24 relative z-10">
+        <section id="collective" className="py-24 md:py-32 px-6 lg:px-24 relative z-10">
             <div className="max-w-[1300px] mx-auto">
 
                 <div className="mb-12 md:mb-16">

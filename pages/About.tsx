@@ -25,7 +25,7 @@ export const About: React.FC = () => {
         { year: '2023', event: 'Team Formation in Campus Dorms' },
         { year: '2024', event: 'Building Individual Portfolios & Skills' },
         { year: '2025', event: 'Winning Campus Hackathons' },
-        { year: '2026', event: 'KaizenStat Agency Official Launch' }
+        { year: '2026', event: 'KaizenStat Foundation Official Launch' }
     ];
 
     return (
@@ -52,7 +52,7 @@ export const About: React.FC = () => {
                                 We represent the next generation of digital builders. While our peers are waiting for graduation to start, we are starting now.
                             </p>
                             <p>
-                                By combining the technical prowess of our founder <strong>Abhishikta Dutta</strong> (3rd-year Engineering) with the fresh business acumen of our co-founder <strong>Kriti Sharma</strong> (1st-year Management), we offer a unique blend of innovation and strategy.
+                                By combining the technical prowess of our founders <strong>Masuddar Rahaman</strong> & <strong>Abhishikta Dutta</strong> with the fresh business acumen of our co-founder <strong>Kriti Sharma</strong>, we offer a unique blend of innovation and strategy.
                             </p>
                             <p>
                                 We don't have decades of history, but we have the hunger to prove ourselves with every line of code and every pixel.
@@ -101,55 +101,82 @@ export const About: React.FC = () => {
 
             {/* FOUNDERS SECTION */}
             <section className="px-6 md:px-12 lg:px-24 py-16 bg-lux-stone/20">
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-6xl mx-auto">
                     <h2 className="font-serif text-3xl md:text-4xl text-lux-text mb-12 text-center text-lux-text/60 uppercase tracking-widest text-sm font-bold">The Minds Behind KaizenStat</h2>
-                    <div className="grid md:grid-cols-2 gap-12">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                        <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
+                            <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 hover:scale-105">
+                                <img src="/team/Masuddar_Rahaman.jpeg" alt="Masuddar Rahaman" className="w-full h-full object-cover transition-all duration-700" />
+                            </div>
+                            <h3 className="font-serif text-2xl text-lux-text mb-1">Masuddar Rahaman</h3>
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Engineering & Architecture</p>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                <a
+                                    href="https://www.linkedin.com/in/masuddar-rahaman/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
+                                >
+                                    <Linkedin className="w-3 h-3" />
+                                    LinkedIn
+                                </a>
+                                <a
+                                    href="mailto:founders@kaizenstat.com"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
+                                >
+                                    <Mail className="w-3 h-3" />
+                                    Email
+                                </a>
+                            </div>
+                        </div>
+
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
                             <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 hover:scale-105">
                                 <img src="/team/Abhishikta_Dutta_new.jpg" alt="Abhishikta Dutta" className="w-full h-full object-cover transition-all duration-700" />
                             </div>
-                            <h3 className="font-serif text-3xl text-lux-text mb-1">Abhishikta Dutta</h3>
-                            <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Technology & Product</p>
+                            <h3 className="font-serif text-2xl text-lux-text mb-1">Abhishikta Dutta</h3>
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Technology & Product</p>
                             <div className="flex flex-wrap justify-center gap-3">
                                 <a
                                     href="https://www.linkedin.com/in/abhishikta-dutta-99a73838b/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
                                 >
-                                    <Linkedin className="w-3.5 h-3.5" />
+                                    <Linkedin className="w-3 h-3" />
                                     LinkedIn
                                 </a>
                                 <a
                                     href="mailto:abhishiktadutta397@gmail.com"
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
                                 >
-                                    <Mail className="w-3.5 h-3.5" />
+                                    <Mail className="w-3 h-3" />
                                     Email
                                 </a>
                             </div>
                         </div>
+
                         <div className="bg-white/40 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/60 flex flex-col items-center text-center shadow-lg group">
                             <div className="w-32 h-32 rounded-2xl overflow-hidden mb-6 border border-lux-text/10 shadow-sm transition-transform duration-500 hover:scale-105">
                                 <img src="/team/Kriti_Sharma_new.jpg" alt="Kriti Sharma" className="w-full h-full object-cover transition-all duration-700" />
                             </div>
-                            <h3 className="font-serif text-3xl text-lux-text mb-1">Kriti Sharma</h3>
-                            <p className="text-xs uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Operations & Strategy</p>
+                            <h3 className="font-serif text-2xl text-lux-text mb-1">Kriti Sharma</h3>
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-lux-muted mb-6">Founder | Operations & Strategy</p>
                             <div className="flex flex-wrap justify-center gap-3">
                                 <a
                                     href="https://www.linkedin.com/in/kriti-sharma-795116377/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
                                 >
-                                    <Linkedin className="w-3.5 h-3.5" />
+                                    <Linkedin className="w-3 h-3" />
                                     LinkedIn
                                 </a>
                                 <a
                                     href="mailto:kritisharma1481550@gmail.com"
-                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[10px] shadow-sm"
+                                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/50 border border-lux-text/10 text-lux-text hover:bg-lux-text hover:text-white transition-all duration-300 font-medium text-[9px] shadow-sm"
                                 >
-                                    <Mail className="w-3.5 h-3.5" />
+                                    <Mail className="w-3 h-3" />
                                     Email
                                 </a>
                             </div>

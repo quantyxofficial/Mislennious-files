@@ -63,10 +63,10 @@ export const Work: React.FC = () => {
                         {/* Intro Card */}
                         <div className="w-[80vw] md:w-[30vw] shrink-0 pr-12">
                             <h3 className="text-4xl font-serif text-lux-text leading-tight mb-6">
-                                Curated Digital <br /> <span className="italic text-lux-muted">Excellence.</span>
+                                Community <br /> <span className="italic text-lux-muted">Impact.</span>
                             </h3>
                             <p className="text-lux-muted text-lg">
-                                Drag to explore our recent impact across industries.
+                                Explore our community initiatives and hackathon victories.
                                 <br /><span className="text-sm opacity-50 mt-2 block">(Keep scrolling down)</span>
                             </p>
                         </div>

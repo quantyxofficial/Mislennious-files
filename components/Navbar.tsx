@@ -146,7 +146,7 @@ export const Navbar: React.FC = () => {
 
 
 
-                        {/* COMPANY DROPDOWN: Consolidating About, Blog, Events, Careers */}
+                        {/* FOUNDATION DROPDOWN: Consolidating Blog, Events, Careers */}
                         <div
                             className="relative"
                             onMouseEnter={() => setIsCompanyOpen(true)}
@@ -157,7 +157,7 @@ export const Navbar: React.FC = () => {
                                     }`}
                                 data-hover
                             >
-                                Company
+                                Collective
                                 <ChevronDown className="w-3 h-3" />
                                 <span className={`absolute -bottom-1 left-0 h-px bg-lux-text transition-all duration-300 ${['/blog', '/careers'].some(path => location.pathname.startsWith(path)) ? 'w-full opacity-100' : 'w-0 group-hover:w-full opacity-0 group-hover:opacity-100'
                                     }`} />

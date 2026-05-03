@@ -25,8 +25,8 @@ export const Footer: React.FC = () => {
                             <h3 className="font-serif text-3xl text-white">KaizenStat.</h3>
                         </Link>
                         <p className="text-stone-300 text-base leading-relaxed">
-                            An elite digital agency led by Data Science scholars.
-                            Bridging Engineering precision with Creative intelligence.
+                            A student-led foundation dedicated to Data Science excellence.
+                            Providing a space for students to practice, learn, and win competitions.
                         </p>
                         <div className="flex gap-3">
                             <a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:text-lux-text transition-all text-white" data-hover>

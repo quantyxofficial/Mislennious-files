@@ -22,7 +22,7 @@ export const Services: React.FC = () => {
             </div>
           </div>
           <p className="text-lux-muted max-w-md text-lg leading-relaxed mix-blend-multiply">
-            Delivered by our professional team of experts—we provide the architectural blueprint for market dominance.
+            Curated by our student-led foundation—providing the resources and space for competitive learning and data science excellence.
           </p>
         </div>
 

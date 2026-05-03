@@ -1,5 +1,17 @@
 [
   {
+    "id": "about-kaizenstat-foundation",
+    "file": "about-kaizenstat-foundation.md",
+    "title": "KaizenStat: The Student-Led Foundation Empowering the Next Gen of Data Scientists",
+    "description": "Discover KaizenStat, a student-led collective dedicated to data science excellence, hackathons, and competitive learning. Meet the founders: Masuddar Rahaman, Abhishikta Dutta, and Kriti Sharma.",
+    "category": "Community",
+    "date": "2026-05-03",
+    "image": "/assets/team-new.jpg",
+    "readTime": "5 min",
+    "author": "KaizenStat Editorial",
+    "featured": true
+  },
+  {
     "id": "how-ai-is-changing-data-science",
     "file": "how-ai-is-changing-data-science.md",
     "title": "How AI Is Changing Data Science: The Future of Intelligent Analytics",

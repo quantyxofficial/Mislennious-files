@@ -45,7 +45,7 @@ export const SERVICES = [
   {
     id: 'eda',
     title: 'Exploratory Data Analysis',
-    description: 'Uncovering patterns, spotting anomalies, and checking assumptions with detailed statistical summaries and graphical representations.',
+    description: 'Uncovering patterns in datasets to tell compelling stories, essential for hackathon excellence and research.',
     icon: Database,
   },
   {
@@ -78,8 +78,8 @@ export const SERVICES = [
   },
   {
     id: 'design',
-    title: 'YT Thumbnail & Poster Making',
-    description: 'High-converting visual assets designed to maximize click-through rates and brand engagement.',
+    title: 'Scientific Visual Design',
+    description: 'High-impact visual assets for research posters, project presentations, and digital storytelling.',
     icon: Palette,
   },
   {
@@ -149,6 +149,19 @@ export const MARQUEE_ITEMS: MarqueeItem[] = [
 
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    id: 'about-kaizenstat-foundation',
+    title: 'KaizenStat: The Student-Led Foundation Empowering the Next Gen of Data Scientists',
+    excerpt: 'Discover KaizenStat, a student-led collective dedicated to data science excellence, hackathons, and competitive learning. Meet the founders: Masuddar Rahaman, Abhishikta Dutta, and Kriti Sharma.',
+    content: 'Full article content would go here...',
+    author: 'KaizenStat Editorial',
+    authorRole: 'KaizenStat Team',
+    date: '2026-05-03',
+    category: 'Community',
+    readTime: '5 min',
+    image: '/assets/team-new.jpg',
+    featured: true
+  },
   {
     id: 'b1',
     title: 'The Future of AI in Marketing: Beyond Automation',

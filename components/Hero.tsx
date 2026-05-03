@@ -49,8 +49,8 @@ export const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 0.8 }}
           className="text-base md:text-xl text-lux-muted max-w-2xl mx-auto font-light leading-relaxed font-sans px-4 md:px-0"
         >
-          A <span className="font-medium text-lux-text">student-run agency</span> building communities and delivering
-          <br className="hidden md:block" />professional Web, AI/ML, and Data Analytics solutions.
+          A <span className="font-medium text-lux-text">student-led foundation</span> building communities and providing 
+          <br className="hidden md:block" /> a space for students to practice, learn, and win competitions.
         </motion.p>
 
         <motion.div
@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
         >
           <button
             onClick={() => {
-              const element = document.getElementById('expertise');
+              const element = document.getElementById('collective');
               if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
@@ -69,7 +69,7 @@ export const Hero: React.FC = () => {
             className="w-full md:w-auto px-10 py-4 bg-lux-text text-lux-cream font-semibold text-sm tracking-[0.2em] uppercase hover:bg-black dark:hover:bg-white dark:hover:text-black transition-all rounded-full hover:-translate-y-1 md:mr-2"
             data-hover
           >
-            Start Your Project
+            Explore Collective
           </button>
           <button
             onClick={() => setShowCommunityModal(true)}

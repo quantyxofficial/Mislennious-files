@@ -142,38 +142,38 @@ export const ContactForm: React.FC = () => {
                 </div>
             </div>
 
-            <div>
-                <label htmlFor="company" className="block text-sm font-medium text-stone-400 mb-2">
-                    Company (Optional)
-                </label>
-                <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formState.company}
-                    onChange={handleChange}
-                    disabled={formState.status === 'loading'}
-                    className="w-full px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-white/20 disabled:opacity-50"
-                    placeholder="Your Company"
-                />
-            </div>
+                <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-stone-400 mb-2">
+                        Organization / College (Optional)
+                    </label>
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formState.company}
+                        onChange={handleChange}
+                        disabled={formState.status === 'loading'}
+                        className="w-full px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-white/20 disabled:opacity-50"
+                        placeholder="Your University or Group"
+                    />
+                </div>
 
-            <div>
-                <label htmlFor="message" className="block text-sm font-medium text-stone-400 mb-2">
-                    Your Message *
-                </label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    disabled={formState.status === 'loading'}
-                    rows={6}
-                    className="w-full px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-white/20 disabled:opacity-50 resize-none"
-                    placeholder="Tell us about your project..."
-                    required
-                ></textarea>
-            </div>
+                <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-stone-400 mb-2">
+                        Your Message *
+                    </label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        value={formState.message}
+                        onChange={handleChange}
+                        disabled={formState.status === 'loading'}
+                        rows={6}
+                        className="w-full px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-white/20 disabled:opacity-50 resize-none"
+                        placeholder="Tell us how you'd like to collaborate or join our initiatives..."
+                        required
+                    ></textarea>
+                </div>
 
             {/* Status Messages */}
             {formState.status === 'success' && (
