@@ -148,9 +148,9 @@ CREATE POLICY "admin_delete_student_profiles" ON student_profiles
 
 -- ─── SEED DATA ─────────────────────────────────────────────
 
--- Admin user (password: QuantyX@MyAlu.C0m)
+-- Admin user (password: [REDACTED - SET YOUR OWN PASSWORD IN SUPABASE])
 INSERT INTO admins (email, password_hash, full_name, is_active)
-VALUES ('admin@kaizenstat.com', 'QuantyX@MyAlu.C0m', 'KaizenStat Admin', true)
+VALUES ('admin@kaizenstat.com', '[REDACTED - SET YOUR OWN PASSWORD IN SUPABASE]', 'KaizenStat Admin', true)
 ON CONFLICT (email) DO NOTHING;
 
 -- ─── CLEANUP ────────────────────────────────────────────────
