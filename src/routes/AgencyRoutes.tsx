@@ -39,11 +39,15 @@ const AdminLogin = lazy(() => import('../pages/agency/admin/AdminLogin').then(m 
 const StudentAnalytics = lazy(() => import('../pages/agency/admin/StudentAnalytics').then(m => ({ default: m.StudentAnalytics })));
 const DashboardAdmin = lazy(() => import('../pages/agency/admin/DashboardAdmin').then(m => ({ default: m.DashboardAdmin })));
 
+// Member ID Verification
+const MemberIdVerify = lazy(() => import('../pages/agency/MemberIdVerify').then(m => ({ default: m.MemberIdVerify })));
+
 export const AgencyRoutes = () => {
     return (
         <Routes>
             <Route element={<AgencyLayout />}>
                 <Route path="get-certified" element={<CertificateGenerator />} />
+                <Route path="verify/:shortId" element={<MemberIdVerify />} />
                 <Route path="verify" element={<CertificateVerify />} />
                 <Route path="verify/:uniqueId" element={<CertificateVerify />} />
                 <Route path="practice" element={<PracticeHome />} />
