@@ -113,8 +113,14 @@ ALTER TABLE admin_logs DISABLE ROW LEVEL SECURITY;
 -- ─── RLS POLICIES ──────────────────────────────────────────
 
 -- student_profiles
-CREATE POLICY "student_own_profile" ON student_profiles
-  FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "student_insert_own" ON student_profiles
+  FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "student_update_own" ON student_profiles
+  FOR UPDATE TO authenticated USING (auth.uid() = user_id);
+
+CREATE POLICY "student_select_own" ON student_profiles
+  FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
 CREATE POLICY "profile_public_read" ON student_profiles
   FOR SELECT USING (true);
@@ -123,8 +129,14 @@ CREATE POLICY "admin_delete_student_profiles" ON student_profiles
   FOR DELETE TO anon USING (true);
 
 -- student_id_cards
-CREATE POLICY "student_own_idcard" ON student_id_cards
-  FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "idcard_insert_own" ON student_id_cards
+  FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "idcard_update_own" ON student_id_cards
+  FOR UPDATE TO authenticated USING (auth.uid() = user_id);
+
+CREATE POLICY "idcard_select_own" ON student_id_cards
+  FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
 CREATE POLICY "idcard_public_read" ON student_id_cards
   FOR SELECT USING (true);
