@@ -280,7 +280,7 @@ export function VirtualIdCard() {
         user_id: user.id,
         id_number: generateShortId(user.id),
         status: 'ACTIVE',
-        valid_thru: '2027',
+        valid_thru: new Date().toISOString(),
       }, { onConflict: 'user_id' });
 
       if (cardError) {
