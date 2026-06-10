@@ -1,5 +1,6 @@
 {
-  "name": "KaizenStat Foundation",
-  "description": "A student-led community and foundation focused on Data Science excellence and hackathons.",
-  "requestFramePermissions": []
+  "name": "Kaizen Stat Summer of Computation (KSoC)",
+  "description": "A premium, fully modern, 3D interactive single-page website for a data science open-source platform where learners contribute to real-world datasets and models.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

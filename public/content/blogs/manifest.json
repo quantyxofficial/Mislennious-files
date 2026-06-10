@@ -1,5 +1,41 @@
 [
   {
+    "id": "docs-quickstart",
+    "file": "docs-quickstart.md",
+    "title": "Quick Start: Zero-Friction AutoML",
+    "description": "Get up and running with KaizenStat in under 5 minutes. Learn installation and basic AutoML.",
+    "category": "Documentation",
+    "date": "2026-06-06",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
+    "readTime": "3 min",
+    "author": "KaizenStat Team",
+    "featured": false
+  },
+  {
+    "id": "docs-cli-reference",
+    "file": "docs-cli-reference.md",
+    "title": "CLI Command Reference Guide",
+    "description": "Complete reference for the KaizenStat command-line interface.",
+    "category": "Documentation",
+    "date": "2026-06-06",
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80",
+    "readTime": "4 min",
+    "author": "KaizenStat Team",
+    "featured": false
+  },
+  {
+    "id": "docs-api-reference",
+    "file": "docs-api-reference.md",
+    "title": "Python SDK API Reference",
+    "description": "Complete class and method definitions for the KaizenStat Python SDK.",
+    "category": "Documentation",
+    "date": "2026-06-06",
+    "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
+    "readTime": "5 min",
+    "author": "KaizenStat Team",
+    "featured": false
+  },
+  {
     "id": "about-kaizenstat-foundation",
     "file": "about-kaizenstat-foundation.md",
     "title": "KaizenStat: The Student-Led Foundation Empowering the Next Gen of Data Scientists",
