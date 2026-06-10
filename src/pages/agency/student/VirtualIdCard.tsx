@@ -344,7 +344,7 @@ function CardBack({ profile, shortId }: { profile: Profile | null; shortId: stri
 }
 
 export function VirtualIdCard() {
-  const { user, signInWithGoogle, signInWithEmail } = useAgencyAuth();
+  const { user, signInWithEmail } = useAgencyAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -459,13 +459,6 @@ export function VirtualIdCard() {
         {/* Sign in options */}
         <div className="w-full max-w-sm space-y-3">
           <button
-            onClick={() => signInWithGoogle()}
-            className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all text-sm font-semibold text-white"
-          >
-            <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4" />
-            Continue with Google
-          </button>
-          <button
             onClick={() => setIsAuthModalOpen(true)}
             className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-white text-black hover:bg-white/90 transition-all text-sm font-bold uppercase tracking-widest"
           >
@@ -473,7 +466,7 @@ export function VirtualIdCard() {
             Sign in with Email
           </button>
           <p className="text-center text-[10px] text-slate-600 pt-1">
-            New here? Signing in creates your account automatically.
+            We'll send a magic link — no password needed.
           </p>
         </div>
 
