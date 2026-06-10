@@ -92,6 +92,21 @@ export function StudentInfo() {
       setError('You must be signed in to save your profile.');
       return;
     }
+
+    // Validate required fields
+    if (!formData.full_name?.trim()) {
+      setError('Full Name is required.');
+      return;
+    }
+    if (!formData.university?.trim()) {
+      setError('University is required.');
+      return;
+    }
+    if (!formData.major?.trim()) {
+      setError('Major / Field is required.');
+      return;
+    }
+
     try {
       setError(null);
       setSaveSuccess(false);
@@ -217,7 +232,7 @@ export function StudentInfo() {
             {/* Full Name */}
             <div className={cardClass(isEditing)}>
               <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lux-muted mb-4">
-                <User className="w-4 h-4" /> Full Name
+                <User className="w-4 h-4" /> Full Name <span className="text-red-400">*</span>
               </label>
               {isEditing ? (
                 <input type="text" name="full_name" value={formData.full_name} onChange={handleChange}
@@ -285,7 +300,7 @@ export function StudentInfo() {
             {/* University */}
             <div className={cardClass(isEditing)}>
               <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lux-muted mb-4">
-                <MapPin className="w-4 h-4" /> University
+                <MapPin className="w-4 h-4" /> University <span className="text-red-400">*</span>
               </label>
               {isEditing ? (
                 <input type="text" name="university" value={formData.university} onChange={handleChange}
@@ -298,7 +313,7 @@ export function StudentInfo() {
             {/* Major */}
             <div className={cardClass(isEditing)}>
               <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-lux-muted mb-4">
-                <BookOpen className="w-4 h-4" /> Major / Field
+                <BookOpen className="w-4 h-4" /> Major / Field <span className="text-red-400">*</span>
               </label>
               {isEditing ? (
                 <input type="text" name="major" value={formData.major} onChange={handleChange}
