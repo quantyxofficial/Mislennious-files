@@ -255,10 +255,10 @@ function IdCard({ user, profile, shortId, isEmailVerified }: {
 
 function CardBack({ profile, shortId }: { profile: Profile | null; shortId: string }) {
   const links = [
-    { label: 'LinkedIn',  url: profile?.linkedin_url,  icon: '💼' },
-    { label: 'Resume',    url: profile?.resume_url,     icon: '📄' },
-    { label: 'GitHub',    url: profile?.github_url,     icon: '💻' },
-    { label: 'Portfolio', url: profile?.portfolio_url,  icon: '🌐' },
+    { label: 'LinkedIn',  url: profile?.linkedin_url  },
+    { label: 'Resume',    url: profile?.resume_url    },
+    { label: 'GitHub',    url: profile?.github_url    },
+    { label: 'Portfolio', url: profile?.portfolio_url },
   ].filter(l => l.url);
 
   return (
@@ -305,20 +305,23 @@ function CardBack({ profile, shortId }: { profile: Profile | null; shortId: stri
         {/* QR codes grid */}
         {links.length > 0 ? (
           <div className="grid grid-cols-4 gap-3 flex-1 items-start">
-            {links.map(({ label, url, icon }) => (
+            {links.map(({ label, url }) => (
               <div key={label} className="flex flex-col items-center gap-1.5">
-                <div className="p-1.5 rounded-lg" style={{ background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                <a href={url!} target="_blank" rel="noopener noreferrer"
+                  className="p-1.5 rounded-lg block transition-opacity hover:opacity-80"
+                  style={{ background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
                   <QRCodeSVG value={url!} size={72} bgColor="#ffffff" fgColor="#0a0a0a" level="M" />
-                </div>
-                <div className="text-[8px] font-mono tracking-[0.12em] uppercase text-center" style={{ color: 'rgba(255,255,255,0.45)' }}>
-                  {icon} {label}
-                </div>
+                </a>
+                <a href={url!} target="_blank" rel="noopener noreferrer"
+                  className="text-[8px] font-mono tracking-[0.12em] uppercase text-center hover:text-white transition-colors"
+                  style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  {label} ↗
+                </a>
               </div>
             ))}
           </div>
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center gap-2 opacity-40">
-            <span className="text-2xl">🔗</span>
             <p className="text-[10px] font-mono tracking-widest text-white/40 uppercase text-center">
               Add LinkedIn, Resume, GitHub<br />or Portfolio in Member Info
             </p>
@@ -403,15 +406,22 @@ export function VirtualIdCard() {
   const handleDownload = async () => {
     if (!cardRef.current) return;
     try {
-      const { default: html2canvas } = await import('html2canvas');
-      const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: '#0a0a0a', scale: 3, useCORS: true,
+      const domtoimage = await import('dom-to-image-more');
+      const dataUrl = await domtoimage.default.toPng(cardRef.current, {
+        width: cardRef.current.offsetWidth * 3,
+        height: cardRef.current.offsetHeight * 3,
+        style: {
+          transform: 'scale(3)',
+          transformOrigin: 'top left',
+          borderRadius: '20px',
+        },
+        bgcolor: '#0a0a0a',
       });
       const a = document.createElement('a');
-      a.href = canvas.toDataURL('image/png');
+      a.href = dataUrl;
       a.download = `kaizenstat-id-${shortId}.png`;
       a.click();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error('Download failed:', e); }
   };
 
   // Not signed in — show sign-in gate

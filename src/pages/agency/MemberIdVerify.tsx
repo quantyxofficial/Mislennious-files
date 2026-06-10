@@ -85,12 +85,11 @@ function Chip() {
   );
 }
 
-function MemberCard({ idNumber, name, university, major, joinedDate }: {
+function MemberCard({ idNumber, name, university, major }: {
   idNumber: string;
   name: string;
   university: string;
   major: string;
-  joinedDate: string;
 }) {
   const verifyUrl = `${window.location.origin}/verify/${idNumber}`;
 
@@ -185,7 +184,7 @@ function MemberCard({ idNumber, name, university, major, joinedDate }: {
         {/* FOOTER */}
         <div className="flex items-center justify-between flex-shrink-0">
           <div className="text-[9px] font-mono tracking-[0.1em] italic" style={{ color: 'rgba(255,255,255,0.28)' }}>
-            Member since {joinedDate}
+            Continuous improvement for ML pipelines.
           </div>
           <Barcode value={idNumber} />
         </div>
@@ -241,9 +240,6 @@ export function MemberIdVerify() {
     }
   };
 
-  const joinedDate = card?.created_at
-    ? new Date(card.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-    : '—';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#020617] via-[#0a0a0a] to-[#0d0d1a] flex flex-col items-center justify-center px-4 py-12">
@@ -278,7 +274,6 @@ export function MemberIdVerify() {
                 name={profile?.full_name || 'Member'}
                 university={profile?.university || '—'}
                 major={profile?.major || '—'}
-                joinedDate={joinedDate}
               />
             </div>
 
