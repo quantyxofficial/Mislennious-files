@@ -276,13 +276,19 @@ export function VirtualIdCard() {
         .single();
       if (data) setProfile(data);
 
-      await supabase.from('student_id_cards').upsert({
+      const { error: cardError } = await supabase.from('student_id_cards').upsert({
         user_id: user.id,
         id_number: generateShortId(user.id),
         status: 'ACTIVE',
         valid_thru: '2027',
       }, { onConflict: 'user_id' });
-    } catch { }
+
+      if (cardError) {
+        console.error('Failed to create/update ID card:', cardError);
+      }
+    } catch (err) {
+      console.error('Profile load error:', err);
+    }
     finally { setIsLoading(false); }
   };
 

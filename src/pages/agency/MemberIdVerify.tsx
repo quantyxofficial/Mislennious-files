@@ -45,7 +45,8 @@ export function MemberIdVerify() {
         .single();
 
       if (cardError || !cardData) {
-        setError(`Member ID "${shortId}" not found in our system.`);
+        console.error('Verification error:', { cardError, shortId, noData: !cardData });
+        setError(`Member ID "${shortId}" not found. Please ensure you have completed your profile setup and your email is verified.`);
         setLoading(false);
         return;
       }

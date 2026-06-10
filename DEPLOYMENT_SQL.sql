@@ -104,23 +104,33 @@ ALTER TABLE admin_logs DISABLE ROW LEVEL SECURITY;
 -- ─── DROP EXISTING POLICIES ────────────────────────────────
 
 DROP POLICY IF EXISTS "student_own_profile" ON student_profiles;
+DROP POLICY IF EXISTS "profile_public_read" ON student_profiles;
 DROP POLICY IF EXISTS "student_own_idcard" ON student_id_cards;
+DROP POLICY IF EXISTS "idcard_public_read" ON student_id_cards;
 DROP POLICY IF EXISTS "competitions_public_read" ON competitions;
 DROP POLICY IF EXISTS "competition_reg_own" ON competition_registrations;
 DROP POLICY IF EXISTS "announcements_public_read" ON announcements;
-DROP POLICY IF EXISTS "Admin full access competitions" ON competitions;
-DROP POLICY IF EXISTS "Admin full access announcements" ON announcements;
-DROP POLICY IF EXISTS "Admin delete student profiles" ON student_profiles;
+DROP POLICY IF EXISTS "admin_full_access_competitions" ON competitions;
+DROP POLICY IF EXISTS "admin_full_access_announcements" ON announcements;
+DROP POLICY IF EXISTS "admin_delete_student_profiles" ON student_profiles;
 
 -- ─── CREATE NEW POLICIES ───────────────────────────────────
 
--- Student can only read/write their own profile
+-- Students can read/write their own profile
 CREATE POLICY "student_own_profile" ON student_profiles
   FOR ALL USING (auth.uid() = user_id);
 
--- Student can only read/write their own ID card
+-- Public read for member verification (via QR code scan)
+CREATE POLICY "profile_public_read" ON student_profiles
+  FOR SELECT USING (true);
+
+-- Students can read/write their own, but anyone can read (for QR verification)
 CREATE POLICY "student_own_idcard" ON student_id_cards
   FOR ALL USING (auth.uid() = user_id);
+
+-- Public read for QR code verification (anyone can scan & verify)
+CREATE POLICY "idcard_public_read" ON student_id_cards
+  FOR SELECT USING (true);
 
 -- Anyone can read competitions
 CREATE POLICY "competitions_public_read" ON competitions
