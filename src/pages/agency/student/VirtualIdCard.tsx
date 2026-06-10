@@ -12,6 +12,10 @@ interface Profile {
   university: string;
   major: string;
   graduation_year: string;
+  linkedin_url: string;
+  resume_url: string;
+  github_url: string;
+  portfolio_url: string;
 }
 
 function generateShortId(userId: string) {
@@ -249,6 +253,93 @@ function IdCard({ user, profile, shortId, isEmailVerified }: {
   );
 }
 
+function CardBack({ profile, shortId }: { profile: Profile | null; shortId: string }) {
+  const links = [
+    { label: 'LinkedIn',  url: profile?.linkedin_url,  icon: '💼' },
+    { label: 'Resume',    url: profile?.resume_url,     icon: '📄' },
+    { label: 'GitHub',    url: profile?.github_url,     icon: '💻' },
+    { label: 'Portfolio', url: profile?.portfolio_url,  icon: '🌐' },
+  ].filter(l => l.url);
+
+  return (
+    <div
+      className="relative select-none overflow-hidden"
+      style={{
+        width: 480,
+        aspectRatio: '1.586',
+        borderRadius: 20,
+        background: 'linear-gradient(140deg, #111111 0%, #0a0a0a 40%, #141414 100%)',
+        boxShadow: [
+          '0 50px 120px rgba(0,0,0,0.95)',
+          '0 20px 60px rgba(0,0,0,0.7)',
+          '0 0 0 1px rgba(255,255,255,0.08)',
+          'inset 0 1px 0 rgba(255,255,255,0.1)',
+          'inset 0 -1px 0 rgba(255,255,255,0.03)',
+        ].join(', '),
+      }}
+    >
+      {/* Brushed texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,1) 1px, rgba(255,255,255,1) 2px)', backgroundSize: '100% 3px' }}
+      />
+      {/* Top shine */}
+      <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.18) 70%, transparent)' }} />
+
+      <div className="absolute inset-0 z-10 flex flex-col" style={{ padding: '5% 7% 5% 7%' }}>
+
+        {/* Header */}
+        <div className="flex items-center justify-between flex-shrink-0 mb-4">
+          <div className="flex items-center gap-2">
+            <Logo className="w-5 h-5 text-white opacity-50" />
+            <span className="text-[10px] font-black tracking-[0.16em] text-white/40 uppercase">KaizenStat</span>
+          </div>
+          <span className="text-[9px] font-mono tracking-[0.2em] text-white/30 uppercase">{shortId}</span>
+        </div>
+
+        {/* Title */}
+        <div className="flex-shrink-0 mb-5">
+          <div className="text-[9px] tracking-[0.22em] uppercase font-mono text-white/40 mb-1">Connect with me</div>
+          <div className="text-[15px] font-bold text-white tracking-wide">{profile?.full_name?.toUpperCase() || 'MEMBER'}</div>
+        </div>
+
+        {/* QR codes grid */}
+        {links.length > 0 ? (
+          <div className="grid grid-cols-4 gap-3 flex-1 items-start">
+            {links.map(({ label, url, icon }) => (
+              <div key={label} className="flex flex-col items-center gap-1.5">
+                <div className="p-1.5 rounded-lg" style={{ background: '#fff', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>
+                  <QRCodeSVG value={url!} size={72} bgColor="#ffffff" fgColor="#0a0a0a" level="M" />
+                </div>
+                <div className="text-[8px] font-mono tracking-[0.12em] uppercase text-center" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                  {icon} {label}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex-1 flex flex-col items-center justify-center gap-2 opacity-40">
+            <span className="text-2xl">🔗</span>
+            <p className="text-[10px] font-mono tracking-widest text-white/40 uppercase text-center">
+              Add LinkedIn, Resume, GitHub<br />or Portfolio in Member Info
+            </p>
+          </div>
+        )}
+
+        {/* Footer divider */}
+        <div className="mt-auto pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className="text-[8px] font-mono tracking-[0.12em] text-white/20 italic text-center">
+            Scan any QR code to connect · kaizenstat.com
+          </div>
+        </div>
+
+      </div>
+
+      {/* Bottom shine */}
+      <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: 1, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)' }} />
+    </div>
+  );
+}
+
 export function VirtualIdCard() {
   const { user, signInWithGoogle, signInWithEmail } = useAgencyAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -256,6 +347,7 @@ export function VirtualIdCard() {
   const [isLoading, setIsLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [resendSent, setResendSent] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const shortId = user ? generateShortId(user.id) : 'KS-PREVIEW0';
@@ -271,10 +363,16 @@ export function VirtualIdCard() {
     try {
       const { data } = await supabase
         .from('student_profiles')
-        .select('full_name, university, major, graduation_year')
+        .select('full_name, university, major, graduation_year, linkedin_url, resume_url, github_url, portfolio_url')
         .eq('user_id', user.id)
         .single();
-      if (data) setProfile(data);
+      if (data) setProfile({
+        ...data,
+        linkedin_url: data.linkedin_url || '',
+        resume_url: data.resume_url || '',
+        github_url: data.github_url || '',
+        portfolio_url: data.portfolio_url || '',
+      });
 
       const { error: cardError } = await supabase.from('student_id_cards').upsert({
         user_id: user.id,
@@ -331,7 +429,7 @@ export function VirtualIdCard() {
           <div className="filter blur-[3px] opacity-60 pointer-events-none">
             <IdCard
               user={{ user_metadata: { full_name: 'Your Name Here' } }}
-              profile={{ full_name: 'Your Name Here', university: 'Your University', major: 'Your Programme', graduation_year: '2026' }}
+              profile={{ full_name: 'Your Name Here', university: 'Your University', major: 'Your Programme', graduation_year: '2026', linkedin_url: '', resume_url: '', github_url: '', portfolio_url: '' }}
               shortId="KS-PREVIEW0"
               isEmailVerified={false}
             />
@@ -388,24 +486,38 @@ export function VirtualIdCard() {
         </div>
       ) : (
         <>
-          <motion.div
-            ref={cardRef}
-            whileHover={{ y: -6, scale: 1.015, rotateX: 2, rotateY: -1 }}
-            transition={{ type: 'spring', stiffness: 280, damping: 28 }}
-            style={{ transformStyle: 'preserve-3d', perspective: 1200 }}
-          >
-            <IdCard user={user} profile={profile} shortId={shortId} isEmailVerified={isEmailVerified} />
-          </motion.div>
+          {/* Flip container */}
+          <div style={{ perspective: 1200, width: 480 }}>
+            <motion.div
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+              style={{ transformStyle: 'preserve-3d', position: 'relative', width: 480, aspectRatio: '1.586' }}
+            >
+              {/* FRONT */}
+              <div ref={cardRef} style={{ backfaceVisibility: 'hidden', position: 'absolute', inset: 0 }}>
+                <IdCard user={user} profile={profile} shortId={shortId} isEmailVerified={isEmailVerified} />
+              </div>
+              {/* BACK */}
+              <div style={{ backfaceVisibility: 'hidden', position: 'absolute', inset: 0, transform: 'rotateY(180deg)' }}>
+                <CardBack profile={profile} shortId={shortId} />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Flip hint */}
+          <p className="text-[10px] text-slate-600 mt-3 tracking-widest uppercase font-mono">
+            {isFlipped ? '← Front — Member ID' : 'Back — Connect links →'}
+          </p>
 
           {/* Actions */}
-          <div className="flex items-center gap-3 mt-8">
+          <div className="flex items-center gap-3 mt-4">
             <button onClick={handleDownload}
               className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all active:scale-95">
               <Download className="w-3.5 h-3.5" /> Download Card
             </button>
-            <button onClick={loadProfile}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/40 text-xs font-bold uppercase tracking-widest hover:text-white hover:border-white/25 transition-all">
-              <RefreshCw className="w-3.5 h-3.5" /> Refresh
+            <button onClick={() => setIsFlipped(f => !f)}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/60 text-xs font-bold uppercase tracking-widest hover:text-white hover:border-white/25 transition-all">
+              <RefreshCw className="w-3.5 h-3.5" /> {isFlipped ? 'Show Front' : 'Show Back'}
             </button>
           </div>
 
@@ -458,10 +570,18 @@ export function VirtualIdCard() {
             </p>
           )}
 
-          <p className="text-[10px] text-slate-600 mt-2">
-            Update details in the{' '}
-            <a href="/student" className="text-slate-400 hover:text-white underline">Member Info</a> tab.
-          </p>
+          {/* Activation hint */}
+          <div className="mt-4 px-4 py-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] max-w-md text-center">
+            <p className="text-[10px] text-slate-500 leading-relaxed">
+              To activate your card, fill in the{' '}
+              <span className="text-red-400 font-semibold">required fields</span>{' '}
+              (Name <span className="text-red-400">*</span>, University <span className="text-red-400">*</span>, Major <span className="text-red-400">*</span>)
+              and verify your email in the{' '}
+              <a href="/student" className="text-slate-300 hover:text-white underline">Member Info</a> tab.
+              Add LinkedIn, Resume, GitHub & Portfolio to unlock the{' '}
+              <button onClick={() => setIsFlipped(true)} className="text-slate-300 hover:text-white underline">back of the card</button>.
+            </p>
+          </div>
         </>
       )}
     </motion.div>
