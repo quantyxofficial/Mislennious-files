@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { useAgencyAuth } from '../../context/AgencyAuthContext';
 import { AuthModal } from '../agency/AuthModal';
+import { AVATAR_COMPONENTS_MAP } from '../avatars/AvatarComponents';
 
 export function Navbar() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -91,7 +92,19 @@ export function Navbar() {
                 <Link to="/student" className="flex items-center gap-2 p-1 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300">
                   <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30">
                     {user.user_metadata?.avatar_url ? (
-                      <img src={user.user_metadata.avatar_url} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />
+                      (() => {
+                        const avatarUrl = user.user_metadata.avatar_url as string;
+                        if (avatarUrl.startsWith('builtin:')) {
+                          const avatarId = avatarUrl.replace('builtin:', '');
+                          const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
+                          return AvatarComponent ? <AvatarComponent /> : (
+                            <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                              <UserIcon className="w-4 h-4" />
+                            </div>
+                          );
+                        }
+                        return <img src={avatarUrl} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />;
+                      })()
                     ) : (
                       <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
                         <UserIcon className="w-4 h-4" />
