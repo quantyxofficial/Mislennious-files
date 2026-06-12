@@ -11,7 +11,7 @@
         {
           "@type": "Person",
           "name": "Masuddar Rahaman",
-          "jobTitle": "ML Engineer & Co-founder",
+          "jobTitle": "ML Engineer & Lead Creator/Founder",
           "url": "https://github.com/masuddar",
           "sameAs": [
             "https://www.linkedin.com/in/masuddar",
@@ -26,6 +26,16 @@
           "sameAs": [
             "https://www.linkedin.com/in/kriti-sharma",
             "https://twitter.com/kritisharma"
+          ]
+        },
+        {
+          "@type": "Person",
+          "name": "Abhishikta Dutta",
+          "jobTitle": "ML Researcher & Co-founder",
+          "url": "https://github.com/abhishiktadutta",
+          "sameAs": [
+            "https://www.linkedin.com/in/abhishiktadutta",
+            "https://twitter.com/abhishiktadutta"
           ]
         }
       ],
@@ -64,11 +74,18 @@
       "creator": [
         {
           "@type": "Person",
-          "name": "Masuddar Rahaman"
+          "name": "Masuddar Rahaman",
+          "description": "Lead Creator & Founder"
         },
         {
           "@type": "Person",
-          "name": "Kriti Sharma"
+          "name": "Kriti Sharma",
+          "description": "Co-founder"
+        },
+        {
+          "@type": "Person",
+          "name": "Abhishikta Dutta",
+          "description": "Co-founder"
         }
       ],
       "offers": {
@@ -129,7 +146,7 @@
           "name": "Who are the founders of KaizenStat?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "KaizenStat was created by Masuddar Rahaman and Kriti Sharma, both experienced machine learning engineers. Masuddar Rahaman is an ML engineer specializing in pipeline optimization, while Kriti Sharma is a data scientist focused on model validation and continuous improvement. Together, they built KaizenStat to make ML debugging accessible and efficient for the global data science community."
+            "text": "KaizenStat was created by Masuddar Rahaman (Lead Creator & Founder), Kriti Sharma (Co-founder), and Abhishikta Dutta (Co-founder). Masuddar Rahaman is an experienced ML engineer who led the creation of KaizenStat, specializing in pipeline optimization. Kriti Sharma is a data scientist focused on model validation and continuous improvement. Abhishikta Dutta is an ML researcher contributing to framework development. Together, they built KaizenStat to make ML debugging accessible and efficient for the global data science community."
           }
         },
         {
