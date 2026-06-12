@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, MapPin, BookOpen, Calendar, AlertCircle, Github,
   Link as LinkIcon, Check, Mail, CheckCircle2, Linkedin,
-  FileText, ExternalLink as ExtIcon, Loader2, X,
+  FileText, ExternalLink as ExtIcon, X,
 } from 'lucide-react';
 import { useAgencyAuth } from '../../../context/AgencyAuthContext';
 import { supabase } from '../../../lib/supabase';
@@ -187,13 +187,9 @@ export function StudentInfo() {
             <div className="relative flex-shrink-0 group cursor-pointer" onClick={() => setAvatarModal(true)}>
               <div className="w-20 h-20 rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center"
                 style={{ background: 'linear-gradient(135deg,#0f2744,#1a1a2e)' }}>
-                {avatarUploading
-                  ? <Loader2 className="w-6 h-6 text-white/50 animate-spin" />
-                  : <AvatarDisplay avatarUrl={draft.avatar_url} initials={initials} />
-                }
+                <AvatarDisplay avatarUrl={draft.avatar_url} initials={initials} />
               </div>
               <div className="absolute inset-0 rounded-2xl bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1">
-                <Camera className="w-4 h-4 text-white" />
                 <span className="text-[9px] text-white/80 font-mono">Change</span>
               </div>
               {user?.email_confirmed_at && (
@@ -373,7 +369,7 @@ export function StudentInfo() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
             style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)' }}
-            onClick={() => { setAvatarModal(false); setCropSrc(null); }}>
+            onClick={() => setAvatarModal(false)}>
 
             <motion.div initial={{ opacity: 0, scale: 0.95, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}

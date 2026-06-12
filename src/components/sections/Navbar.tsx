@@ -89,44 +89,72 @@ export function Navbar() {
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
-                <Link to="/student" className="relative group flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300">
-                  {/* Background glow */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300" />
+                <Link to="/student" className="relative group flex items-center transition-all duration-300">
+                  {/* UFO shape */}
+                  <div className="relative flex flex-col items-center">
 
-                  {/* Avatar container */}
-                  <div className="relative">
-                    <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-cyan-400/60 flex items-center justify-center relative group/avatar shadow-lg shadow-cyan-500/20">
-                      {/* Glow ring */}
-                      <div className="absolute -inset-1.5 rounded-full border border-cyan-400/20 group-hover/avatar:border-cyan-400/40 transition-colors" />
-                      <div className="absolute -inset-1 rounded-full bg-cyan-500/5 group-hover/avatar:bg-cyan-500/10 transition-colors" />
-
-                      {user.user_metadata?.avatar_url ? (
-                        (() => {
-                          const avatarUrl = user.user_metadata.avatar_url as string;
-                          if (avatarUrl.startsWith('builtin:')) {
-                            const avatarId = avatarUrl.replace('builtin:', '');
-                            const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
-                            return AvatarComponent ? <AvatarComponent /> : (
-                              <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                                <UserIcon className="w-4 h-4" />
-                              </div>
-                            );
-                          }
-                          return <img src={avatarUrl} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />;
-                        })()
-                      ) : (
-                        <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                          <UserIcon className="w-4 h-4" />
-                        </div>
-                      )}
-                    </div>
-                    {/* Animated pulse on avatar */}
+                    {/* Tractor beam — glows on hover */}
                     <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-                      className="absolute -inset-1.5 rounded-full border border-cyan-400/30 pointer-events-none"
+                      animate={{ opacity: [0.4, 0.8, 0.4], scaleY: [1, 1.08, 1] }}
+                      transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                      className="w-4 h-3 origin-top"
+                      style={{
+                        background: 'linear-gradient(to bottom, rgba(6,182,212,0.5), transparent)',
+                        clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
+                        marginBottom: -1,
+                      }}
                     />
+
+                    {/* UFO saucer body */}
+                    <div className="relative flex flex-col items-center">
+                      {/* Dome / cockpit — avatar inside */}
+                      <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
+                        style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
+                        <div className="w-full h-full">
+                          {user.user_metadata?.avatar_url ? (
+                            (() => {
+                              const avatarUrl = user.user_metadata.avatar_url as string;
+                              if (avatarUrl.startsWith('builtin:')) {
+                                const avatarId = avatarUrl.replace('builtin:', '');
+                                const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
+                                return AvatarComponent ? (
+                                  <div className="w-full h-full scale-150 translate-y-1 overflow-hidden">
+                                    <AvatarComponent />
+                                  </div>
+                                ) : null;
+                              }
+                              return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover object-top" />;
+                            })()
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <UserIcon className="w-3 h-3 text-cyan-400" />
+                            </div>
+                          )}
+                        </div>
+                        {/* Dome glare */}
+                        <div className="absolute top-0.5 left-1 w-2 h-1 rounded-full bg-white/20" />
+                      </div>
+
+                      {/* Saucer disc */}
+                      <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                        style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
+                        {/* Lights row */}
+                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
+                          {[0,1,2,3].map(i => (
+                            <motion.div key={i}
+                              animate={{ opacity: [1, 0.2, 1] }}
+                              transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2, ease: 'easeInOut' }}
+                              className="w-1 h-1 rounded-full"
+                              style={{ background: i % 2 === 0 ? '#06b6d4' : '#a855f7' }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Hover glow underneath */}
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
+                      style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
                   </div>
                 </Link>
                 <AnimatePresence>
