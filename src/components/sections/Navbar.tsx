@@ -73,18 +73,17 @@ export function Navbar() {
 
         {/* Right side */}
         <div className="absolute right-6 lg:right-12 flex items-center gap-3">
-          {/* Version pill */}
+          {/* Python checkout pill */}
           <a
-            href="https://pypi.org/project/kaizenstat/0.5.9/"
+            href="https://pypi.org/project/kaizenstat/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/25 bg-indigo-500/[0.07] text-[10px] font-extrabold uppercase tracking-widest text-indigo-300 hover:bg-indigo-500/[0.12] hover:border-indigo-500/40 transition-all shadow-[0_0_12px_rgba(99,102,241,0.1)]"
+            className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/25 bg-blue-500/[0.07] text-[10px] font-bold uppercase tracking-widest text-blue-300 hover:bg-blue-500/[0.12] hover:border-blue-500/40 transition-all shadow-[0_0_12px_rgba(59,130,246,0.1)]"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-500" />
-            </span>
-            🚀 v0.5.9
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22c-5.52 0-10-4.48-10-10S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 10 15.5 10 14 10.67 14 11.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 10 8.5 10 7 10.67 7 11.5 7.67 13 8.5 13zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+            </svg>
+            Checkout on PyPI
           </a>
 
           {/* User menu / Dashboard */}
