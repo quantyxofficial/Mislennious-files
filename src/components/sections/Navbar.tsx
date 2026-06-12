@@ -50,7 +50,7 @@ export function Navbar() {
                 KAIZEN<span className="font-light opacity-50">STAT</span>
               </span>
             </div>
-            <span className="text-[7px] font-mono uppercase tracking-widest text-white/25 px-0.5">
+            <span className="text-[7px] font-mono uppercase tracking-widest text-white/25 px-0.5 pl-12">
               Open Source · Python Framework
             </span>
           </Link>
