@@ -392,30 +392,27 @@ export function StudentInfo() {
 
               {/* Scrollable body */}
               <div className="overflow-y-auto overscroll-contain flex-1 p-5 space-y-5">
-                  <>
-                    {/* Avatar grid */}
-                    <div>
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-3">Avatars</p>
-                      <div className="grid grid-cols-4 gap-2">
-                        {AVATAR_COMPONENTS.map(av => {
-                          const isSelected = draft.avatar_url === `builtin:${av.id}`;
-                          return (
-                            <button key={av.id} onClick={() => handleBuiltInAvatar(av.id)}
-                              className={`relative aspect-square rounded-xl overflow-hidden border transition-all ${
-                                isSelected ? 'border-cyan-400 ring-2 ring-cyan-400/30 scale-105' : 'border-white/[0.06] hover:border-white/20 hover:scale-105'
-                              }`}>
-                              <av.component />
-                              {isSelected && (
-                                <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-cyan-400 flex items-center justify-center">
-                                  <Check className="w-2.5 h-2.5 text-black" strokeWidth={3} />
-                                </div>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </>
+                <div>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-3">Avatars</p>
+                  <div className="grid grid-cols-4 gap-2">
+                    {AVATAR_COMPONENTS.map(av => {
+                      const isSelected = draft.avatar_url === `builtin:${av.id}`;
+                      return (
+                        <button key={av.id} onClick={() => handleBuiltInAvatar(av.id)}
+                          className={`relative aspect-square rounded-xl overflow-hidden border transition-all ${
+                            isSelected ? 'border-cyan-400 ring-2 ring-cyan-400/30 scale-105' : 'border-white/[0.06] hover:border-white/20 hover:scale-105'
+                          }`}>
+                          <av.component />
+                          {isSelected && (
+                            <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-cyan-400 flex items-center justify-center">
+                              <Check className="w-2.5 h-2.5 text-black" strokeWidth={3} />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </motion.div>
           </motion.div>
