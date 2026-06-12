@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { LogOut, User as UserIcon } from 'lucide-react';
+import { LogOut, User as UserIcon, Menu, X as MenuX } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '../ui/Logo';
 import { useAgencyAuth } from '../../context/AgencyAuthContext';
@@ -10,6 +10,7 @@ import { AVATAR_COMPONENTS_MAP } from '../avatars/AvatarComponents';
 export function Navbar() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, signOut } = useAgencyAuth();
   const location = useLocation();
 
@@ -86,20 +87,42 @@ export function Navbar() {
             Checkout
           </a>
 
+          {/* Mobile menu button */}
+          {user && (
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors">
+              {isMobileMenuOpen ? <MenuX className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          )}
+
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
                 <Link to="/student" className="relative group flex items-center transition-all duration-300">
-                  {/* UFO shape */}
-                  <div className="relative flex flex-col items-center">
+                  {/* UFO shape with floating motion */}
+                  <motion.div
+                    animate={{
+                      y: [0, -3, 0],
+                      rotateZ: [0, 1, -1, 0],
+                    }}
+                    transition={{
+                      y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                      rotateZ: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                    }}
+                    className="relative flex flex-col items-center"
+                  >
 
                     {/* Tractor beam — glows on hover */}
                     <motion.div
-                      animate={{ opacity: [0.4, 0.8, 0.4], scaleY: [1, 1.08, 1] }}
+                      animate={{
+                        opacity: [0.3, 0.9, 0.3],
+                        scaleY: [0.8, 1.2, 0.8],
+                        height: ['0.75rem', '1rem', '0.75rem']
+                      }}
                       transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-4 h-3 origin-top"
+                      className="w-4 origin-top"
                       style={{
-                        background: 'linear-gradient(to bottom, rgba(6,182,212,0.5), transparent)',
+                        background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
                         clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
                         marginBottom: -1,
                       }}
@@ -155,7 +178,14 @@ export function Navbar() {
                     {/* Hover glow underneath */}
                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
                       style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
-                  </div>
+
+                    {/* Rotating ring around UFO */}
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+                      className="absolute inset-x-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-6 border border-cyan-500/20 rounded-full pointer-events-none"
+                    />
+                  </motion.div>
                 </Link>
                 <AnimatePresence>
                   {isUserMenuOpen && (
@@ -199,6 +229,38 @@ export function Navbar() {
           </div>
         </div>
       </motion.header>
+
+      {/* Mobile menu dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && user && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden bg-black/95 border-b border-white/10 backdrop-blur-xl"
+          >
+            <div className="px-4 py-3 space-y-2">
+              {[
+                { to: '/student', label: 'Member Info' },
+                { to: '/student/competitions', label: 'Competitions' },
+                { to: '/student/id-card', label: 'Member ID Card' },
+                { to: '/student/announcements', label: 'Announcements' },
+              ].map(({ to, label }) => (
+                <Link key={to} to={to}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/10 transition-colors">
+                  {label}
+                </Link>
+              ))}
+              <button onClick={() => { signOut(); setIsMobileMenuOpen(false); }}
+                className="w-full text-left px-4 py-2.5 rounded-lg text-sm text-red-400 hover:bg-white/10 transition-colors">
+                Sign Out
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </>
