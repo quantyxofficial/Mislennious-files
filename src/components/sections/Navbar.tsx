@@ -49,9 +49,6 @@ export function Navbar() {
               KAIZEN<span className="font-light opacity-50">STAT</span>
             </span>
           </Link>
-          <span className="hidden md:inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/35">
-            Open Source · Python Framework
-          </span>
         </div>
 
         {/* Nav links */}
@@ -165,6 +162,18 @@ export function Navbar() {
           </div>
         </div>
       </motion.header>
+
+      {/* Sub-header bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-[70px] left-0 right-0 z-40 flex items-center justify-center px-6 lg:px-12 py-3 border-b border-white/[0.05] backdrop-blur-xl bg-black/20"
+      >
+        <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/35 hover:text-white/50 transition-colors">
+          Open Source · Python Framework
+        </span>
+      </motion.div>
 
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </>
