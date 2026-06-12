@@ -59,7 +59,6 @@ export function Navbar() {
           <NavLink to="/" label="Home" />
           <NavLink to="/docs" label="Docs" />
           <NavLink to="/founder-connect" label="Team" />
-          <NavLink to="/kaizen-ai" label="Kaizen AI" />
           <Link
             to="/contribute"
             className={`relative py-2 transition-colors ${isActive('/contribute') ? 'text-emerald-400' : 'text-slate-400 hover:text-emerald-400'}`}

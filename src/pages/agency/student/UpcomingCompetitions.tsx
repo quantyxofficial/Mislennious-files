@@ -11,7 +11,7 @@ interface Competition {
   prize: string;
   deadline: string;
   participants: number;
-  status: 'open' | 'urgent' | 'upcoming';
+  status: 'open' | 'urgent' | 'upcoming' | 'closed';
   color: string;
 }
 
@@ -32,79 +32,10 @@ export function UpcomingCompetitions() {
         .order('deadline', { ascending: true });
 
       if (error) throw error;
-
-      if (data && data.length > 0) {
-        setCompetitions(data);
-      } else {
-        // Fallback to demo data
-        setCompetitions([
-          {
-            id: '1',
-            title: 'Global AutoML Challenge 2026',
-            description: 'Build the most robust pipeline using KaizenStat on an imbalanced dataset with noisy features.',
-            prize: '$5,000 + Internship',
-            deadline: 'In 14 days',
-            participants: 1240,
-            status: 'open',
-            color: 'emerald'
-          },
-          {
-            id: '2',
-            title: 'KSoC Deep Learning Sprint',
-            description: 'Optimize a custom PyTorch model using KaizenStat hardware accelerators.',
-            prize: '$2,000',
-            deadline: 'In 3 days',
-            participants: 856,
-            status: 'urgent',
-            color: 'orange'
-          },
-          {
-            id: '3',
-            title: 'Data Cleaning Hackathon',
-            description: 'A 24-hour sprint to clean a highly corrupted medical dataset using the `kz heal` engine.',
-            prize: 'Swag Kit',
-            deadline: 'Starts Next Month',
-            participants: 432,
-            status: 'upcoming',
-            color: 'cyan'
-          }
-        ]);
-      }
+      setCompetitions(data || []);
     } catch (err) {
       console.error('Error loading competitions:', err);
-      // Use demo data on error
-      setCompetitions([
-        {
-          id: '1',
-          title: 'Global AutoML Challenge 2026',
-          description: 'Build the most robust pipeline using KaizenStat on an imbalanced dataset with noisy features.',
-          prize: '$5,000 + Internship',
-          deadline: 'In 14 days',
-          participants: 1240,
-          status: 'open',
-          color: 'emerald'
-        },
-        {
-          id: '2',
-          title: 'KSoC Deep Learning Sprint',
-          description: 'Optimize a custom PyTorch model using KaizenStat hardware accelerators.',
-          prize: '$2,000',
-          deadline: 'In 3 days',
-          participants: 856,
-          status: 'urgent',
-          color: 'orange'
-        },
-        {
-          id: '3',
-          title: 'Data Cleaning Hackathon',
-          description: 'A 24-hour sprint to clean a highly corrupted medical dataset using the `kz heal` engine.',
-          prize: 'Swag Kit',
-          deadline: 'Starts Next Month',
-          participants: 432,
-          status: 'upcoming',
-          color: 'cyan'
-        }
-      ]);
+      setCompetitions([]);
     } finally {
       setIsLoading(false);
     }
@@ -167,6 +98,7 @@ export function UpcomingCompetitions() {
                   <span className={`px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border ${
                     comp.status === 'urgent' ? 'border-orange-500/30 text-orange-400 bg-orange-500/10' :
                     comp.status === 'open' ? 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10' :
+                    comp.status === 'closed' ? 'border-slate-500/30 text-slate-400 bg-slate-500/10' :
                     'border-cyan-500/30 text-cyan-400 bg-cyan-500/10'
                   }`}>
                     {comp.status}
@@ -191,14 +123,18 @@ export function UpcomingCompetitions() {
                 <div className="flex items-center gap-4 mt-2">
                   <span className="flex items-center gap-1.5 text-xs text-slate-400 font-medium bg-black/40 px-3 py-1.5 rounded-full border border-white/5">
                     <Users className="w-3.5 h-3.5 text-slate-500" />
-                    {comp.participants}
+                    {comp.participants} {comp.participants === 1 ? 'participant' : 'participants'}
                   </span>
-                  <button
-                    onClick={() => handleJoin(comp.id)}
-                    className="flex items-center gap-2 text-xs font-bold text-black bg-white hover:bg-slate-200 px-4 py-2 rounded-full transition-colors"
-                  >
-                    Join <ArrowRight className="w-3 h-3" />
-                  </button>
+                  {comp.status !== 'closed' ? (
+                    <button
+                      onClick={() => handleJoin(comp.id)}
+                      className="flex items-center gap-2 text-xs font-bold text-black bg-white hover:bg-slate-200 px-4 py-2 rounded-full transition-colors"
+                    >
+                      Join <ArrowRight className="w-3 h-3" />
+                    </button>
+                  ) : (
+                    <span className="text-xs font-bold text-slate-400 px-4 py-2">Closed</span>
+                  )}
                 </div>
               </div>
             </div>

@@ -28,61 +28,10 @@ export function Announcements() {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-
-      if (data && data.length > 0) {
-        setAnnouncements(data);
-      } else {
-        // Fallback to demo data
-        setAnnouncements([
-          {
-            id: '1',
-            type: 'alert',
-            title: 'Platform Maintenance Scheduled',
-            date: 'Oct 24, 2026',
-            content: 'The KaizenStat AutoML clusters will undergo routine maintenance this Saturday at 02:00 AM UTC for approximately 4 hours. Job queues will be paused during this window.',
-          },
-          {
-            id: '2',
-            type: 'megaphone',
-            title: 'New "kz codegen" Feature Released!',
-            date: 'Oct 22, 2026',
-            content: 'We are thrilled to announce the new code generation engine! You can now generate standalone, dependency-free Python scripts of your best-performing models directly from the CLI.',
-          },
-          {
-            id: '3',
-            type: 'info',
-            title: 'Welcome to the new Member Dashboard',
-            date: 'Oct 15, 2026',
-            content: 'The new unified Member Dashboard is now live. You can manage your profile, view upcoming competitions, and generate your virtual ID card all in one place.',
-          }
-        ]);
-      }
+      setAnnouncements(data || []);
     } catch (err) {
       console.error('Error loading announcements:', err);
-      // Use demo data on error
-      setAnnouncements([
-        {
-          id: '1',
-          type: 'alert',
-          title: 'Platform Maintenance Scheduled',
-          date: 'Oct 24, 2026',
-          content: 'The KaizenStat AutoML clusters will undergo routine maintenance this Saturday at 02:00 AM UTC for approximately 4 hours. Job queues will be paused during this window.',
-        },
-        {
-          id: '2',
-          type: 'megaphone',
-          title: 'New "kz codegen" Feature Released!',
-          date: 'Oct 22, 2026',
-          content: 'We are thrilled to announce the new code generation engine! You can now generate standalone, dependency-free Python scripts of your best-performing models directly from the CLI.',
-        },
-        {
-          id: '3',
-          type: 'info',
-          title: 'Welcome to the new Member Dashboard',
-          date: 'Oct 15, 2026',
-          content: 'The new unified Member Dashboard is now live. You can manage your profile, view upcoming competitions, and generate your virtual ID card all in one place.',
-        }
-      ]);
+      setAnnouncements([]);
     } finally {
       setIsLoading(false);
     }

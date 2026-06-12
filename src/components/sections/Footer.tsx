@@ -108,6 +108,7 @@ export function Footer() {
               <li><Link to="/contribute" className="hover:text-cyan-400 transition-colors">KSoC</Link></li>
               <li><Link to="/blog" className="hover:text-cyan-400 transition-colors">Blog</Link></li>
               <li><Link to="/careers" className="hover:text-cyan-400 transition-colors">Careers</Link></li>
+              <li><Link to="/kaizen-ai" className="hover:text-cyan-400 transition-colors">Kaizen AI</Link></li>
               <li><Link to="/verify" className="hover:text-cyan-400 transition-colors">Verify Certificate</Link></li>
               <li><Link to="/admin/dashboard" className="hover:text-white/60 transition-colors text-white/20">Admin</Link></li>
             </ul>
