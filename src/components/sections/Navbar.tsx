@@ -102,26 +102,35 @@ export function Navbar() {
                   {/* UFO — fixed container so it never shifts siblings */}
                   <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
 
-                    {/* Flying motion: gentle bob + slight banking tilt */}
+                    {/* Flying motion: bob + tilt. On hover: whole UFO spins on Y axis (saucer spin) */}
                     <motion.div
                       animate={{
                         y: [0, -4, -1, -4, 0],
                         rotate: [-3, 3, -3],
+                      }}
+                      whileHover={{
+                        rotateY: [0, 360],
+                        scale: 1.12,
+                        transition: {
+                          rotateY: { duration: 0.7, ease: 'easeInOut', repeat: Infinity },
+                          scale: { duration: 0.2 },
+                        },
                       }}
                       transition={{
                         y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                         rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                       }}
                       className="relative flex flex-col items-center"
-                      style={{ willChange: 'transform' }}
+                      style={{ willChange: 'transform', perspective: 400 }}
                     >
-                      {/* Tractor beam — opacity only, no layout reflow */}
+                      {/* Tractor beam — brightens on hover */}
                       <motion.div
                         animate={{ opacity: [0.3, 0.8, 0.3] }}
+                        whileHover={{ opacity: 1, scaleX: 1.3 }}
                         transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
                         className="w-4 h-3 origin-top"
                         style={{
-                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
+                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.9), rgba(6,182,212,0.1))',
                           clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
                           marginBottom: -1,
                           willChange: 'opacity',
@@ -131,7 +140,7 @@ export function Navbar() {
                       {/* UFO saucer body */}
                       <div className="relative flex flex-col items-center">
                         {/* Dome / cockpit — avatar inside */}
-                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
+                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30 group-hover:border-cyan-300/90 group-hover:shadow-cyan-400/60 transition-all duration-300"
                           style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
                           <div className="w-full h-full">
                             {user.user_metadata?.avatar_url ? (
@@ -159,7 +168,7 @@ export function Navbar() {
                         </div>
 
                         {/* Saucer disc */}
-                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:border-cyan-300/80 transition-all duration-300"
                           style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
                           {/* Lights row — CSS pulse, no JS per-frame */}
                           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
@@ -177,10 +186,22 @@ export function Navbar() {
                         </div>
                       </div>
 
-                      {/* Hover glow underneath */}
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
-                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
+                      {/* Hover glow underneath — expands on hover */}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-14 transition-all duration-300 blur-sm"
+                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.8), transparent)' }} />
                     </motion.div>
+
+                    {/* Premium glow ring — only visible on hover */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.7 }}
+                      whileHover={{ opacity: 1, scale: 1 }}
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-8 rounded-full pointer-events-none"
+                      style={{
+                        background: 'transparent',
+                        boxShadow: '0 0 16px 4px rgba(6,182,212,0.35), 0 0 32px 8px rgba(139,92,246,0.15)',
+                        willChange: 'transform, opacity',
+                      }}
+                    />
                   </div>
                 </Link>
                 <AnimatePresence>
