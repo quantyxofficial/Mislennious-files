@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
 import { Quote, Cpu, Zap, Radio } from 'lucide-react';
+import { updateMetaTags, SEO_CONFIG } from '../utils/seo';
 
 const FOUNDERS = [
   {
@@ -55,8 +56,8 @@ const FOUNDERS = [
   {
     id: 'abhishikta',
     name: 'Abhishikta Dutta',
-    role: 'Full Stack Engineer',
-    bio: 'Full Stack Engineer responsible for KaizenStat\'s platform infrastructure — from the member dashboard to certificate systems. Abhishikta builds the tools that keep the community running smoothly.',
+    role: 'ML Engineer & Researcher',
+    bio: 'ML Engineer & Researcher working across KaizenStat\'s data and intelligence layer — from building Python-based pipelines and models to translating research into production-ready tools. Abhishikta combines hands-on engineering with a research mindset, turning raw data into systems that learn, adapt, and scale.',
     image: 'https://github.com/abhishiktadutta.png',
     colors: {
       primary: 'emerald',
@@ -71,15 +72,19 @@ const FOUNDERS = [
       mail: 'mailto:abhishikta@kaizenstat.org'
     },
     pageNo: '03',
-    expertise: ['Full-Stack Luxury', 'Interface Engineering', 'Edge Computing'],
-    quote: "User experience is the ultimate form of technical respect.",
+    expertise: ['Python ML Pipelines', 'Model Engineering', 'Production Systems'],
+    quote: "Good models are useless without good engineering around them.",
     icon: <Radio className="w-4 h-4" />
   }
 ];
 
 export default function FounderConnect() {
   useEffect(() => {
-    document.title = "Team | KaizenStat";
+    updateMetaTags({
+      ...SEO_CONFIG.team,
+      ogImage: 'https://www.kaizenstat.com/logo.png',
+      canonical: 'https://www.kaizenstat.com/founder-connect',
+    });
     window.scrollTo(0, 0);
   }, []);
 

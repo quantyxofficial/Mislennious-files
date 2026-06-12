@@ -23,10 +23,10 @@ const TEAM = [
       linkedin: 'https://www.linkedin.com/in/kriti-sharma-795116377/'
     }
   },
-  { 
-    name: 'Abhishikta Dutta', 
-    role: 'Full Stack Engineer', 
-    hue: 'from-emerald-400 to-cyan-500', 
+  {
+    name: 'Abhishikta Dutta',
+    role: 'ML Engineer & Researcher',
+    hue: 'from-emerald-400 to-cyan-500',
     img: 'https://github.com/abhishiktadutta.png',
     links: {
       github: 'https://github.com/abhishiktadutta',

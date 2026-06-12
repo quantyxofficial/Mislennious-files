@@ -114,43 +114,78 @@ function updateStructuredData(data: Record<string, unknown>) {
   document.head.appendChild(script);
 }
 
+const OG_IMAGE = 'https://www.kaizenstat.com/logo.png';
+
 // SEO Configuration for different pages
 export const SEO_CONFIG = {
   home: {
-    title: 'KaizenStat - Open-Source Python ML Pipeline Debugging Framework | Continuous Improvement for Machine Learning',
-    description: 'KaizenStat is an advanced open-source Python framework for machine learning pipeline debugging, model optimization, and continuous improvement. Created by Masuddar Rahaman & Kriti Sharma. Debug, test, and optimize ML pipelines with ease. Free, production-ready, Apache 2.0 licensed.',
-    keywords: ['kaizenstat', 'machine learning', 'python framework', 'debugging ml pipelines', 'model optimization', 'open source', 'continuous improvement', 'data science', 'ml debugging tools', 'pipeline optimization', 'deep learning', 'python ml library'],
+    title: 'KaizenStat — Open Source ML Python Library | AutoML, Data Health & Pipeline Debugging',
+    description: 'KaizenStat is an open source ML Python library (v0.6.0) for automated model training, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Apache 2.0. Built by Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta.',
+    keywords: [
+      'kaizenstat', 'open source ml', 'kaizen machine learning', 'kaizenstat python',
+      'open source python ml library', 'automl python', 'ml pipeline debugging',
+      'data health score', 'machine learning continuous improvement', 'kaizen data science',
+      'pip install kaizenstat', 'datadoctor python', 'open source machine learning framework',
+      'ml automation python', 'kaizenstat masuddar rahaman', 'kaizenstat v0.6',
+    ],
     canonical: 'https://www.kaizenstat.com/',
     ogType: 'website',
+    ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
   docs: {
-    title: 'KaizenStat Documentation - Complete ML Pipeline Debugging Guide & Tutorial',
-    description: 'Comprehensive documentation for KaizenStat framework. Learn how to debug machine learning pipelines, optimize models, validate data quality, and implement continuous improvement in your ML workflows. Includes step-by-step tutorials and best practices.',
-    keywords: ['kaizenstat documentation', 'ml debugging guide', 'machine learning tutorial', 'pipeline optimization', 'python ml framework', 'model validation', 'data quality', 'ml best practices', 'debugging tutorial'],
+    title: 'KaizenStat Handbook — Open Source ML Python Library Documentation',
+    description: 'Complete documentation for KaizenStat (v0.6.0). Learn AutoML, data health scoring, pipeline debugging, validation, NLP, and deployment. Every chapter has a runnable Colab notebook. pip install kaizenstat.',
+    keywords: [
+      'kaizenstat docs', 'kaizenstat documentation', 'open source ml tutorial',
+      'kaizen ml guide', 'datadoctor tutorial', 'automl tutorial python',
+      'ml pipeline tutorial', 'data health check python', 'kaizenstat handbook',
+      'machine learning python tutorial', 'kaizenstat api reference',
+    ],
     canonical: 'https://www.kaizenstat.com/docs',
     ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
   },
   competitions: {
-    title: 'KaizenStat Competitions - ML Pipeline Debugging Challenges & Prizes',
-    description: 'Join KaizenStat machine learning competitions and challenges. Test your pipeline debugging skills, compete with other data scientists, win prizes, and learn real-world ML optimization techniques. Perfect for building portfolio projects.',
-    keywords: ['ml competition', 'machine learning challenge', 'kaizenstat competition', 'pipeline debugging challenge', 'data science competition', 'ml challenge 2024', 'model optimization prize'],
+    title: 'KaizenStat Competitions — Data Science & ML Challenges for Students',
+    description: 'Join KaizenStat ML competitions and data science challenges. Compete with students worldwide, build real ML projects, win prizes, and earn certificates. Open to all skill levels.',
+    keywords: [
+      'kaizenstat competition', 'data science competition students', 'ml hackathon',
+      'machine learning challenge', 'kaizenstat challenge', 'open source ml competition',
+      'data science hackathon india', 'ml competition 2026', 'student ml challenge',
+    ],
     canonical: 'https://www.kaizenstat.com/competitions',
     ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
   },
   team: {
-    title: 'KaizenStat Founders - Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta | ML Engineers',
-    description: 'Meet the founders of KaizenStat: Masuddar Rahaman (Lead Creator), Kriti Sharma, and Abhishikta Dutta. Learn about their vision for ML pipeline debugging, continuous improvement philosophy, and mission to make machine learning development more efficient. All are experienced ML engineers and researchers passionate about open source.',
-    keywords: ['masuddar rahaman', 'kriti sharma', 'abhishikta dutta', 'kaizenstat team', 'kaizenstat founders', 'ml engineers', 'machine learning engineers', 'masuddar rahaman machine learning', 'kriti sharma data science', 'abhishikta dutta machine learning', 'kaizenstat creators'],
+    title: 'KaizenStat Founders — Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta',
+    description: 'Meet the founders of KaizenStat: Masuddar Rahaman (Lead Creator & ML Engineer), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer & Researcher). Student-led team building the future of open source ML.',
+    keywords: [
+      'masuddar rahaman', 'kriti sharma', 'abhishikta dutta',
+      'kaizenstat team', 'kaizenstat founders', 'masuddar rahaman kaizenstat',
+      'masuddar rahaman ml engineer', 'kriti sharma ai', 'abhishikta dutta ml engineer',
+      'kaizenstat open source founders', 'student ml founders', 'python ml pipelines',
+    ],
     canonical: 'https://www.kaizenstat.com/founder-connect',
     ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
   },
   simulation: {
-    title: 'ML Pipeline Simulation - Interactive KaizenStat Demo & Real-Time Debugging',
-    description: 'Experience interactive machine learning pipeline simulation with KaizenStat. See real-time model optimization, data validation, and debugging in action. Try the simulation without installing anything. Perfect for learning ML debugging concepts.',
-    keywords: ['ml simulation', 'pipeline demo', 'interactive ml', 'model optimization', 'real-time debugging', 'ml visualization', 'pipeline visualization', 'learning ml debugging', 'interactive demo'],
+    title: 'KaizenStat ML Simulation — Interactive Data Science Pipeline Demo',
+    description: 'Try the KaizenStat interactive ML pipeline simulation. Run data health checks, model training, and debugging in your browser — no install required. Perfect for learning open source ML concepts.',
+    keywords: [
+      'kaizenstat simulation', 'ml pipeline demo', 'interactive machine learning',
+      'data science simulation', 'open source ml demo', 'kaizenstat demo',
+      'learn machine learning online', 'ml pipeline interactive',
+    ],
     canonical: 'https://www.kaizenstat.com/simulation',
     ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
   },
 };
 
