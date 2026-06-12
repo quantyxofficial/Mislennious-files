@@ -39,10 +39,10 @@ export function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-5 border-b border-white/[0.05] backdrop-blur-xl bg-black/40"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-6 lg:px-12 py-5 border-b border-white/[0.05] backdrop-blur-xl bg-black/40"
       >
         {/* Logo */}
-        <div className="flex items-center gap-4">
+        <div className="absolute left-6 lg:left-12 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-3 group">
             <Logo className="w-9 h-9 text-white group-hover:rotate-[15deg] transition-transform duration-700 ease-out" />
             <span className="text-xl font-bold tracking-tighter text-white flex items-center gap-2">
@@ -51,7 +51,7 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Nav links */}
+        {/* Nav links - centered */}
         <nav className="hidden lg:flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
           <NavLink to="/" label="Home" />
           <NavLink to="/docs" label="Docs" />
@@ -72,7 +72,7 @@ export function Navbar() {
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-3">
+        <div className="absolute right-6 lg:right-12 flex items-center gap-3">
           {/* Version pill */}
           <a
             href="https://pypi.org/project/kaizenstat/0.5.9/"
