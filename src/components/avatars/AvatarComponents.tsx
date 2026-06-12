@@ -359,6 +359,537 @@ export function AvatarNinja() {
   );
 }
 
+// ── Premium Avatars ────────────────────────────────────────────────────────
+
+export function AvatarAstronaut() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="asbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0a0a1a"/><stop offset="1" stopColor="#0f1e3d"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#asbg)"/>
+      {/* stars */}
+      {[[10,8],[20,15],[55,6],[65,18],[70,10],[15,30],[68,35]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="0.8" fill="white" opacity="0.6"/>
+      ))}
+      {/* suit body */}
+      <path d="M20 74 Q20 56 40 54 Q60 56 60 74Z" fill="#c8d6e5"/>
+      <path d="M34 54 L40 60 L46 54" fill="#a8b8c8"/>
+      {/* suit collar */}
+      <ellipse cx="40" cy="53" rx="10" ry="4" fill="#d8e6f5" opacity="0.9"/>
+      {/* helmet outer */}
+      <circle cx="40" cy="34" r="18" fill="#d8e6f5"/>
+      {/* visor */}
+      <ellipse cx="40" cy="34" rx="13" ry="12" fill="#1a3a6e"/>
+      <ellipse cx="40" cy="34" rx="13" ry="12" fill="url(#visor)" opacity="0.6"/>
+      <defs>
+        <linearGradient id="visor" x1="27" y1="22" x2="53" y2="46" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#60a5fa" stopOpacity="0.8"/><stop offset="1" stopColor="#1d4ed8" stopOpacity="0.2"/>
+        </linearGradient>
+      </defs>
+      {/* visor glare */}
+      <ellipse cx="34" cy="28" rx="4" ry="2.5" fill="white" opacity="0.2" transform="rotate(-20 34 28)"/>
+      {/* helmet detail */}
+      <circle cx="40" cy="34" r="18" stroke="#a8b8c8" strokeWidth="1.5" fill="none"/>
+      {/* suit details */}
+      <rect x="35" y="58" width="10" height="5" rx="2" fill="#a8b8c8"/>
+      <circle cx="40" cy="60.5" r="1.5" fill="#60a5fa"/>
+      {/* shoulder pads */}
+      <ellipse cx="23" cy="58" rx="5" ry="4" fill="#c8d6e5"/>
+      <ellipse cx="57" cy="58" rx="5" ry="4" fill="#c8d6e5"/>
+      {/* NASA-style patch */}
+      <circle cx="27" cy="62" r="3" fill="#1d4ed8" opacity="0.8"/>
+      <circle cx="27" cy="62" r="1.5" fill="#60a5fa" opacity="0.8"/>
+    </svg>
+  );
+}
+
+export function AvatarWizard() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="wzbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1e0533"/><stop offset="1" stopColor="#3b0764"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#wzbg)"/>
+      {/* stars */}
+      {[[12,10],[25,7],[60,12],[68,8],[15,20],[70,28]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="0.9" fill="#fbbf24" opacity="0.7"/>
+      ))}
+      {/* robe */}
+      <path d="M16 74 Q16 54 40 52 Q64 54 64 74Z" fill="#6d28d9"/>
+      <path d="M32 52 L40 58 L48 52" fill="#5b21b6"/>
+      {/* robe stars */}
+      <circle cx="32" cy="62" r="1.2" fill="#fbbf24" opacity="0.7"/>
+      <circle cx="48" cy="66" r="1" fill="#fbbf24" opacity="0.6"/>
+      <circle cx="38" cy="70" r="0.8" fill="#fbbf24" opacity="0.5"/>
+      {/* neck/skin */}
+      <rect x="36" y="46" width="8" height="8" rx="2" fill="#fde68a"/>
+      {/* head */}
+      <ellipse cx="40" cy="34" rx="13" ry="14" fill="#fde68a"/>
+      {/* long beard */}
+      <path d="M31 44 Q28 55 30 62 Q36 58 40 60 Q44 58 50 62 Q52 55 49 44" fill="#e2e8f0" opacity="0.9"/>
+      <path d="M34 48 Q36 52 40 53 Q44 52 46 48" fill="#f1f5f9"/>
+      {/* mustache */}
+      <path d="M33 41 Q37 43 40 42 Q43 43 47 41" stroke="#94a3b8" strokeWidth="2" fill="none" strokeLinecap="round"/>
+      {/* eyes */}
+      <ellipse cx="34" cy="33" rx="2.8" ry="2.5" fill="#1e0533"/>
+      <ellipse cx="46" cy="33" rx="2.8" ry="2.5" fill="#1e0533"/>
+      <circle cx="35" cy="32" r="0.8" fill="white"/>
+      <circle cx="47" cy="32" r="0.8" fill="white"/>
+      {/* eyebrows bushy */}
+      <path d="M30 29 Q34 27 38 29" stroke="#e2e8f0" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+      <path d="M42 29 Q46 27 50 29" stroke="#e2e8f0" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+      {/* hat */}
+      <path d="M27 28 L40 2 L53 28Z" fill="#4c1d95"/>
+      <path d="M23 30 Q40 26 57 30 Q40 34 23 30Z" fill="#7c3aed"/>
+      {/* hat star */}
+      <circle cx="40" cy="12" r="2.5" fill="#fbbf24"/>
+      <circle cx="40" cy="12" r="1.2" fill="#fef3c7"/>
+      {/* wand sparkle bottom right */}
+      <line x1="58" y1="58" x2="66" y2="66" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="66" cy="66" r="3" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="66" cy="66" r="1.5" fill="white"/>
+    </svg>
+  );
+}
+
+export function AvatarSamurai() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="smbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1c0a00"/><stop offset="1" stopColor="#3b0f00"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#smbg)"/>
+      {/* armor body */}
+      <path d="M16 74 Q16 54 40 52 Q64 54 64 74Z" fill="#1f2937"/>
+      <path d="M16 74 Q16 60 40 58 Q64 60 64 74Z" fill="#dc2626" opacity="0.7"/>
+      {/* armor plates */}
+      <rect x="28" y="59" width="24" height="5" rx="1" fill="#b91c1c" opacity="0.8"/>
+      <rect x="30" y="65" width="20" height="4" rx="1" fill="#991b1b" opacity="0.8"/>
+      {/* neck */}
+      <rect x="36" y="46" width="8" height="8" rx="2" fill="#f5c5a3"/>
+      {/* head */}
+      <ellipse cx="40" cy="34" rx="13" ry="14" fill="#f5c5a3"/>
+      {/* helmet */}
+      <path d="M27 30 Q27 16 40 15 Q53 16 53 30" fill="#1f2937"/>
+      <path d="M27 30 Q24 25 25 32" stroke="#1f2937" strokeWidth="5" fill="none"/>
+      <path d="M53 30 Q56 25 55 32" stroke="#1f2937" strokeWidth="5" fill="none"/>
+      {/* helmet detail */}
+      <path d="M27 28 Q40 24 53 28" stroke="#dc2626" strokeWidth="2" fill="none"/>
+      {/* menpo face guard - partial */}
+      <rect x="27" y="38" width="26" height="10" rx="3" fill="#1f2937" opacity="0.85"/>
+      <rect x="29" y="40" width="10" height="6" rx="2" fill="#374151" opacity="0.5"/>
+      <rect x="41" y="40" width="10" height="6" rx="2" fill="#374151" opacity="0.5"/>
+      {/* eyes above face guard */}
+      <ellipse cx="34" cy="33" rx="2.5" ry="2.5" fill="#111827"/>
+      <ellipse cx="46" cy="33" rx="2.5" ry="2.5" fill="#111827"/>
+      <circle cx="34.8" cy="32.2" r="0.8" fill="white"/>
+      <circle cx="46.8" cy="32.2" r="0.8" fill="white"/>
+      {/* katana hint */}
+      <line x1="60" y1="20" x2="68" y2="62" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"/>
+      <rect x="58" y="18" width="5" height="4" rx="1" fill="#92400e"/>
+    </svg>
+  );
+}
+
+export function AvatarViking() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="vkbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1c1917"/><stop offset="1" stopColor="#292524"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#vkbg)"/>
+      {/* fur cloak */}
+      <path d="M14 74 Q14 52 40 50 Q66 52 66 74Z" fill="#78350f"/>
+      <path d="M14 74 Q18 58 40 56 Q62 58 66 74Z" fill="#92400e"/>
+      {/* fur texture */}
+      {[22,28,34,40,46,52,58].map((x,i)=>(
+        <path key={i} d={`M${x} 58 Q${x+3} 54 ${x} 52`} stroke="#57534e" strokeWidth="1.5" fill="none"/>
+      ))}
+      {/* neck */}
+      <rect x="36" y="46" width="8" height="8" rx="2" fill="#fbbf24"/>
+      {/* head */}
+      <ellipse cx="40" cy="34" rx="13" ry="14" fill="#fbbf24"/>
+      {/* helmet */}
+      <path d="M27 28 Q27 16 40 15 Q53 16 53 28" fill="#6b7280"/>
+      <path d="M27 28 Q25 24 26 30" stroke="#6b7280" strokeWidth="4" fill="none"/>
+      <path d="M53 28 Q55 24 54 30" stroke="#6b7280" strokeWidth="4" fill="none"/>
+      {/* horns */}
+      <path d="M27 22 Q18 10 20 4 Q24 10 28 18" fill="#d6d3d1"/>
+      <path d="M53 22 Q62 10 60 4 Q56 10 52 18" fill="#d6d3d1"/>
+      {/* metal band */}
+      <path d="M27 28 Q40 32 53 28" stroke="#9ca3af" strokeWidth="2" fill="none"/>
+      {/* eyes */}
+      <ellipse cx="34" cy="33" rx="2.8" ry="2.5" fill="#1c1917"/>
+      <ellipse cx="46" cy="33" rx="2.8" ry="2.5" fill="#1c1917"/>
+      <circle cx="35" cy="32.2" r="0.8" fill="white"/>
+      <circle cx="47" cy="32.2" r="0.8" fill="white"/>
+      {/* thick brows */}
+      <path d="M30 29 Q34 27 38 29" stroke="#1c1917" strokeWidth="3" strokeLinecap="round" fill="none"/>
+      <path d="M42 29 Q46 27 50 29" stroke="#1c1917" strokeWidth="3" strokeLinecap="round" fill="none"/>
+      {/* big beard */}
+      <path d="M29 42 Q26 55 28 64 Q34 60 40 62 Q46 60 52 64 Q54 55 51 42" fill="#d97706"/>
+      <path d="M33 46 Q36 50 40 51 Q44 50 47 46" fill="#fbbf24" opacity="0.7"/>
+      {/* scar */}
+      <line x1="46" y1="30" x2="48" y2="36" stroke="#92400e" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function AvatarGamer() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="gmbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0f0f1a"/><stop offset="1" stopColor="#1a0a2e"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#gmbg)"/>
+      {/* neon grid floor */}
+      <line x1="0" y1="72" x2="80" y2="72" stroke="#7c3aed" strokeWidth="0.5" opacity="0.4"/>
+      <line x1="0" y1="68" x2="80" y2="68" stroke="#7c3aed" strokeWidth="0.3" opacity="0.2"/>
+      {/* hoodie */}
+      <path d="M16 74 Q16 54 40 52 Q64 54 64 74Z" fill="#1e1b4b"/>
+      <path d="M32 52 L36 62 L40 52" fill="#312e81"/>
+      <path d="M48 52 L44 62 L40 52" fill="#312e81"/>
+      {/* hoodie strings */}
+      <line x1="37" y1="53" x2="35" y2="64" stroke="#4338ca" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="43" y1="53" x2="45" y2="64" stroke="#4338ca" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* neck */}
+      <rect x="36" y="46" width="8" height="8" rx="2" fill="#c4b5fd"/>
+      {/* head */}
+      <ellipse cx="40" cy="34" rx="13" ry="14" fill="#c4b5fd"/>
+      {/* headphones */}
+      <path d="M27 30 Q27 14 40 14 Q53 14 53 30" stroke="#7c3aed" strokeWidth="4" fill="none" strokeLinecap="round"/>
+      <rect x="22" y="28" width="8" height="10" rx="4" fill="#7c3aed"/>
+      <rect x="50" y="28" width="8" height="10" rx="4" fill="#7c3aed"/>
+      <rect x="23.5" y="29.5" width="5" height="7" rx="3" fill="#a78bfa"/>
+      <rect x="51.5" y="29.5" width="5" height="7" rx="3" fill="#a78bfa"/>
+      {/* gaming visor glow */}
+      <rect x="28" y="31" width="24" height="8" rx="3" fill="#312e81" opacity="0.9"/>
+      <rect x="29" y="32" width="10" height="6" rx="2" fill="#818cf8" opacity="0.3"/>
+      <rect x="41" y="32" width="10" height="6" rx="2" fill="#818cf8" opacity="0.3"/>
+      <ellipse cx="34" cy="35" rx="2.5" ry="2" fill="#a78bfa"/>
+      <ellipse cx="46" cy="35" rx="2.5" ry="2" fill="#a78bfa"/>
+      {/* smile */}
+      <path d="M36 43 Q40 47 44 43" stroke="#7c3aed" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      {/* controller icon on chest */}
+      <rect x="33" y="60" width="14" height="9" rx="4" stroke="#7c3aed" strokeWidth="1" fill="none" opacity="0.7"/>
+      <circle cx="43" cy="64" r="1" fill="#7c3aed" opacity="0.7"/>
+      <path d="M36 62 L36 66 M34 64 L38 64" stroke="#7c3aed" strokeWidth="1" strokeLinecap="round" opacity="0.7"/>
+      {/* neon glow under */}
+      <ellipse cx="40" cy="74" rx="20" ry="2" fill="#7c3aed" opacity="0.15"/>
+    </svg>
+  );
+}
+
+export function AvatarArtist() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="arbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#2d1657"/><stop offset="1" stopColor="#1a0a3e"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#arbg)"/>
+      {/* paint splats bg */}
+      <circle cx="12" cy="15" r="5" fill="#f43f5e" opacity="0.3"/>
+      <circle cx="68" cy="20" r="4" fill="#3b82f6" opacity="0.3"/>
+      <circle cx="65" cy="65" r="6" fill="#10b981" opacity="0.2"/>
+      <circle cx="10" cy="65" r="4" fill="#f59e0b" opacity="0.3"/>
+      {/* overalls */}
+      <path d="M16 74 Q16 54 40 52 Q64 54 64 74Z" fill="#1d4ed8"/>
+      <path d="M34 54 L40 60 L46 54" fill="#1e40af"/>
+      {/* bib pocket */}
+      <rect x="34" y="57" width="12" height="9" rx="2" fill="#1e40af"/>
+      {/* straps */}
+      <line x1="34" y1="54" x2="30" y2="48" stroke="#1d4ed8" strokeWidth="2.5"/>
+      <line x1="46" y1="54" x2="50" y2="48" stroke="#1d4ed8" strokeWidth="2.5"/>
+      {/* neck/shirt */}
+      <rect x="35" y="46" width="10" height="9" rx="2" fill="#fde68a"/>
+      {/* head */}
+      <ellipse cx="40" cy="34" rx="13" ry="14" fill="#fde68a"/>
+      {/* beret */}
+      <ellipse cx="38" cy="22" rx="14" ry="7" fill="#dc2626"/>
+      <ellipse cx="40" cy="20" rx="4" ry="3" fill="#b91c1c"/>
+      <circle cx="35" cy="19" r="2.5" fill="#ef4444"/>
+      {/* hair peeking */}
+      <path d="M27 26 Q25 30 27 32" stroke="#92400e" strokeWidth="3" fill="none"/>
+      {/* eyes */}
+      <ellipse cx="34" cy="33" rx="2.8" ry="3" fill="#1c1917"/>
+      <ellipse cx="46" cy="33" rx="2.8" ry="3" fill="#1c1917"/>
+      <circle cx="35.2" cy="32" r="0.9" fill="white"/>
+      <circle cx="47.2" cy="32" r="0.9" fill="white"/>
+      {/* playful smile */}
+      <path d="M35 42 Q40 47 45 42" stroke="#c2410c" strokeWidth="2" fill="none" strokeLinecap="round"/>
+      <circle cx="40" cy="44" r="1" fill="#c2410c"/>
+      {/* paintbrush */}
+      <line x1="54" y1="28" x2="62" y2="18" stroke="#92400e" strokeWidth="2.5" strokeLinecap="round"/>
+      <ellipse cx="63" cy="17" rx="3" ry="2" fill="#3b82f6" transform="rotate(-45 63 17)"/>
+      {/* paint on cheek */}
+      <circle cx="30" cy="38" r="2" fill="#3b82f6" opacity="0.5"/>
+      <circle cx="50" cy="37" r="1.5" fill="#f43f5e" opacity="0.5"/>
+    </svg>
+  );
+}
+
+export function AvatarAlien() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="albg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#022c22"/><stop offset="1" stopColor="#064e3b"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#albg)"/>
+      {/* stars */}
+      {[[8,6],[20,12],[62,8],[72,18],[5,40],[75,45]].map(([x,y],i)=>(
+        <circle key={i} cx={x} cy={y} r="0.7" fill="#6ee7b7" opacity="0.6"/>
+      ))}
+      {/* alien suit */}
+      <path d="M18 74 Q18 55 40 53 Q62 55 62 74Z" fill="#065f46"/>
+      <path d="M33 53 L40 59 L47 53" fill="#047857"/>
+      {/* neck */}
+      <rect x="36" y="46" width="8" height="9" rx="2" fill="#6ee7b7"/>
+      {/* alien head — tall oval */}
+      <ellipse cx="40" cy="31" rx="14" ry="18" fill="#6ee7b7"/>
+      {/* huge black eyes */}
+      <ellipse cx="33" cy="30" rx="6" ry="7" fill="#0f172a"/>
+      <ellipse cx="47" cy="30" rx="6" ry="7" fill="#0f172a"/>
+      {/* eye shine */}
+      <ellipse cx="31" cy="27" rx="2.5" ry="2" fill="#34d399" opacity="0.7"/>
+      <ellipse cx="45" cy="27" rx="2.5" ry="2" fill="#34d399" opacity="0.7"/>
+      <circle cx="30.5" cy="26.5" r="1" fill="white" opacity="0.5"/>
+      <circle cx="44.5" cy="26.5" r="1" fill="white" opacity="0.5"/>
+      {/* tiny nose slits */}
+      <line x1="39" y1="40" x2="39" y2="43" stroke="#4ade80" strokeWidth="1" strokeLinecap="round" opacity="0.7"/>
+      <line x1="41" y1="40" x2="41" y2="43" stroke="#4ade80" strokeWidth="1" strokeLinecap="round" opacity="0.7"/>
+      {/* thin mouth */}
+      <path d="M35 46 Q40 49 45 46" stroke="#4ade80" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      {/* antenna */}
+      <line x1="35" y1="14" x2="30" y2="4" stroke="#6ee7b7" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="30" cy="3.5" r="2.5" fill="#34d399"/>
+      <circle cx="30" cy="3.5" r="1" fill="#d1fae5"/>
+      <line x1="45" y1="14" x2="50" y2="4" stroke="#6ee7b7" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="50" cy="3.5" r="2.5" fill="#34d399"/>
+      <circle cx="50" cy="3.5" r="1" fill="#d1fae5"/>
+      {/* glow aura */}
+      <ellipse cx="40" cy="31" rx="18" ry="22" fill="#34d399" opacity="0.06"/>
+    </svg>
+  );
+}
+
+export function AvatarPirate() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="pibg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1c1917"/><stop offset="1" stopColor="#0c0a09"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#pibg)"/>
+      {/* waves */}
+      <path d="M0 70 Q10 66 20 70 Q30 74 40 70 Q50 66 60 70 Q70 74 80 70 L80 80 L0 80Z" fill="#1e3a5f" opacity="0.5"/>
+      {/* coat */}
+      <path d="M15 74 Q15 53 40 51 Q65 53 65 74Z" fill="#1c1917"/>
+      <path d="M15 74 Q15 62 40 60 Q65 62 65 74Z" fill="#dc2626" opacity="0.8"/>
+      {/* coat lapels */}
+      <path d="M32 51 L28 60 L40 57Z" fill="#1f2937"/>
+      <path d="M48 51 L52 60 L40 57Z" fill="#1f2937"/>
+      {/* neck */}
+      <rect x="36" y="45" width="8" height="8" rx="2" fill="#d4a574"/>
+      {/* head */}
+      <ellipse cx="40" cy="33" rx="13" ry="14" fill="#d4a574"/>
+      {/* bandana */}
+      <path d="M27 27 Q40 22 53 27 Q50 20 40 19 Q30 20 27 27Z" fill="#dc2626"/>
+      <path d="M27 27 Q24 31 26 35" stroke="#dc2626" strokeWidth="4" fill="none"/>
+      <path d="M53 27 Q56 30 55 34" stroke="#dc2626" strokeWidth="3" fill="none"/>
+      {/* bandana knot */}
+      <path d="M53 25 Q58 22 60 26 Q58 28 54 27" fill="#b91c1c"/>
+      {/* eye patch */}
+      <ellipse cx="46" cy="32" rx="5" ry="4" fill="#0c0a09"/>
+      <path d="M41 31 Q44 28 51 31" stroke="#0c0a09" strokeWidth="2" fill="none"/>
+      {/* normal eye */}
+      <ellipse cx="33" cy="33" rx="2.8" ry="2.8" fill="#1c1917"/>
+      <circle cx="34" cy="32" r="0.9" fill="white"/>
+      {/* scar */}
+      <line x1="32" y1="38" x2="34" y2="43" stroke="#92400e" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* grin */}
+      <path d="M33 43 Q40 49 47 43" stroke="#92400e" strokeWidth="2" fill="none" strokeLinecap="round"/>
+      {/* gold tooth */}
+      <rect x="38" y="43" width="4" height="3" rx="1" fill="#f59e0b"/>
+      {/* skull crossbones on chest */}
+      <circle cx="40" cy="63" r="4" fill="#374151" opacity="0.8"/>
+      <circle cx="40" cy="62" r="2" fill="#f3f4f6" opacity="0.7"/>
+      <line x1="37" y1="65" x2="43" y2="65" stroke="#f3f4f6" strokeWidth="1.5" opacity="0.7"/>
+    </svg>
+  );
+}
+
+export function AvatarDetective() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="dtbg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1c1917"/><stop offset="1" stopColor="#292524"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#dtbg)"/>
+      {/* trench coat */}
+      <path d="M14 74 Q14 52 40 50 Q66 52 66 74Z" fill="#44403c"/>
+      <path d="M14 74 Q18 58 40 56 Q62 58 66 74Z" fill="#57534e"/>
+      {/* coat lapels */}
+      <path d="M32 50 L26 62 L40 58Z" fill="#44403c"/>
+      <path d="M48 50 L54 62 L40 58Z" fill="#44403c"/>
+      {/* tie */}
+      <path d="M38 50 L37 60 L40 64 L43 60 L42 50Z" fill="#dc2626"/>
+      {/* neck */}
+      <rect x="36" y="44" width="8" height="8" rx="2" fill="#f5c5a3"/>
+      {/* head */}
+      <ellipse cx="40" cy="32" rx="13" ry="14" fill="#f5c5a3"/>
+      {/* fedora */}
+      <ellipse cx="40" cy="22" rx="16" ry="4" fill="#292524"/>
+      <path d="M28 22 L28 17 Q40 14 52 17 L52 22Z" fill="#44403c"/>
+      {/* hat band */}
+      <rect x="28" y="20" width="24" height="2.5" fill="#292524"/>
+      {/* eyes */}
+      <ellipse cx="34" cy="31" rx="2.8" ry="2.8" fill="#1c1917"/>
+      <ellipse cx="46" cy="31" rx="2.8" ry="2.8" fill="#1c1917"/>
+      <circle cx="35" cy="30" r="0.9" fill="white"/>
+      <circle cx="47" cy="30" r="0.9" fill="white"/>
+      {/* eyebrows furrowed */}
+      <path d="M31 27 Q34 25.5 37 27" stroke="#1c1917" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M43 27 Q46 25.5 49 27" stroke="#1c1917" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      {/* stubble */}
+      {[33,35,37,39,41,43,45,47].map((x,i)=>(
+        <line key={i} x1={x} y1="41" x2={x} y2="43" stroke="#92400e" strokeWidth="0.8" opacity="0.6"/>
+      ))}
+      {/* straight mouth */}
+      <line x1="36" y1="42" x2="44" y2="42" stroke="#92400e" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* magnifying glass */}
+      <circle cx="62" cy="58" r="7" stroke="#d6d3d1" strokeWidth="2" fill="none"/>
+      <circle cx="62" cy="58" r="5" fill="#1c1917" opacity="0.4"/>
+      <line x1="57" y1="63" x2="52" y2="69" stroke="#d6d3d1" strokeWidth="2.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+// ── Stick Figure Faces ────────────────────────────────────────────────────
+
+export function AvatarStickBasic() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="sb1bg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0f172a"/><stop offset="1" stopColor="#1e293b"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#sb1bg)"/>
+      {/* big circle face */}
+      <circle cx="40" cy="40" r="28" stroke="#e2e8f0" strokeWidth="3" fill="none"/>
+      {/* dot eyes */}
+      <circle cx="30" cy="34" r="3.5" fill="#e2e8f0"/>
+      <circle cx="50" cy="34" r="3.5" fill="#e2e8f0"/>
+      {/* smile */}
+      <path d="M28 50 Q40 62 52 50" stroke="#e2e8f0" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function AvatarStickDancer() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="sd1bg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#1a0533"/><stop offset="1" stopColor="#0f0728"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#sd1bg)"/>
+      {/* sparkles */}
+      <circle cx="12" cy="14" r="2" fill="#f0abfc" opacity="0.7"/>
+      <circle cx="68" cy="18" r="1.5" fill="#f0abfc" opacity="0.5"/>
+      <circle cx="65" cy="65" r="1.5" fill="#f0abfc" opacity="0.4"/>
+      {/* big circle face */}
+      <circle cx="40" cy="40" r="28" stroke="#a855f7" strokeWidth="3" fill="none"/>
+      {/* star eyes */}
+      <circle cx="30" cy="34" r="4" fill="#a855f7"/>
+      <circle cx="30" cy="34" r="2" fill="#f0abfc"/>
+      <circle cx="50" cy="34" r="4" fill="#a855f7"/>
+      <circle cx="50" cy="34" r="2" fill="#f0abfc"/>
+      {/* big happy open mouth */}
+      <path d="M26 50 Q40 66 54 50" stroke="#a855f7" strokeWidth="3" fill="none" strokeLinecap="round"/>
+      <path d="M28 52 Q40 64 52 52" fill="#a855f7" opacity="0.2"/>
+      {/* rosy cheeks */}
+      <circle cx="22" cy="46" r="5" fill="#f0abfc" opacity="0.25"/>
+      <circle cx="58" cy="46" r="5" fill="#f0abfc" opacity="0.25"/>
+    </svg>
+  );
+}
+
+export function AvatarStickNinja() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="sn1bg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0a0a0a"/><stop offset="1" stopColor="#1a0a0a"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#sn1bg)"/>
+      {/* big circle face */}
+      <circle cx="40" cy="40" r="28" stroke="#ef4444" strokeWidth="3" fill="none"/>
+      {/* mask covering lower half */}
+      <path d="M13 44 Q14 68 40 68 Q66 68 67 44Z" fill="#ef4444" opacity="0.15"/>
+      <path d="M13 44 Q40 50 67 44" stroke="#ef4444" strokeWidth="2.5" fill="none"/>
+      {/* narrow intense eyes */}
+      <ellipse cx="30" cy="35" rx="5" ry="3" fill="#ef4444"/>
+      <ellipse cx="50" cy="35" rx="5" ry="3" fill="#ef4444"/>
+      <ellipse cx="30" cy="35" rx="3" ry="1.5" fill="#1a0a0a"/>
+      <ellipse cx="50" cy="35" rx="3" ry="1.5" fill="#1a0a0a"/>
+      {/* furrowed brows */}
+      <line x1="24" y1="28" x2="36" y2="31" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/>
+      <line x1="56" y1="28" x2="44" y2="31" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+export function AvatarStickCoder() {
+  return (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+      <defs>
+        <linearGradient id="sc1bg" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#022c22"/><stop offset="1" stopColor="#0a0a0a"/>
+        </linearGradient>
+      </defs>
+      <rect width="80" height="80" fill="url(#sc1bg)"/>
+      {/* terminal glow */}
+      <circle cx="40" cy="40" r="30" fill="#22c55e" opacity="0.04"/>
+      {/* big circle face */}
+      <circle cx="40" cy="40" r="28" stroke="#22c55e" strokeWidth="3" fill="none"/>
+      {/* glasses left */}
+      <rect x="19" y="30" width="16" height="12" rx="5" stroke="#22c55e" strokeWidth="2" fill="none"/>
+      {/* glasses right */}
+      <rect x="45" y="30" width="16" height="12" rx="5" stroke="#22c55e" strokeWidth="2" fill="none"/>
+      {/* bridge */}
+      <line x1="35" y1="36" x2="45" y2="36" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
+      {/* pupils */}
+      <circle cx="27" cy="36" r="3" fill="#22c55e" opacity="0.8"/>
+      <circle cx="53" cy="36" r="3" fill="#22c55e" opacity="0.8"/>
+      {/* smirk */}
+      <path d="M32 54 Q42 62 52 54" stroke="#22c55e" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+      {/* cursor blink on forehead */}
+      <rect x="38" y="18" width="4" height="8" rx="1" fill="#22c55e" opacity="0.6"/>
+    </svg>
+  );
+}
+
 export const AVATAR_COMPONENTS_MAP: { [key: string]: React.FC } = {
   male1: AvatarMale1,
   male2: AvatarMale2,
@@ -371,4 +902,17 @@ export const AVATAR_COMPONENTS_MAP: { [key: string]: React.FC } = {
   tech3: AvatarTech3,
   robot: AvatarRobot,
   ninja: AvatarNinja,
+  astronaut: AvatarAstronaut,
+  wizard: AvatarWizard,
+  samurai: AvatarSamurai,
+  viking: AvatarViking,
+  gamer: AvatarGamer,
+  artist: AvatarArtist,
+  alien: AvatarAlien,
+  pirate: AvatarPirate,
+  detective: AvatarDetective,
+  stickbasic: AvatarStickBasic,
+  stickdancer: AvatarStickDancer,
+  stickninja: AvatarStickNinja,
+  stickcoder: AvatarStickCoder,
 };

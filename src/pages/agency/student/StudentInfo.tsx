@@ -11,7 +11,10 @@ import {
   AvatarMale1, AvatarMale2, AvatarMale3,
   AvatarFemale1, AvatarFemale2, AvatarFemale3,
   AvatarTech1, AvatarTech2, AvatarTech3,
-  AvatarRobot, AvatarNinja
+  AvatarRobot, AvatarNinja,
+  AvatarAstronaut, AvatarWizard, AvatarSamurai, AvatarViking,
+  AvatarGamer, AvatarArtist, AvatarAlien, AvatarPirate, AvatarDetective,
+  AvatarStickBasic, AvatarStickDancer, AvatarStickNinja, AvatarStickCoder,
 } from '../../../components/avatars/AvatarComponents';
 
 interface StudentProfile {
@@ -41,19 +44,49 @@ const LINKS = [
   { key: 'resume_url' as const,    label: 'Resume',    icon: FileText, placeholder: 'https://drive.google.com/...' },
 ];
 
-const AVATAR_COMPONENTS: { id: string; label: string; component: React.FC }[] = [
-  { id: 'male1',   label: 'Dev M',     component: AvatarMale1 },
-  { id: 'male2',   label: 'Dev M',     component: AvatarMale2 },
-  { id: 'male3',   label: 'Nerd',      component: AvatarMale3 },
-  { id: 'female1', label: 'Dev F',     component: AvatarFemale1 },
-  { id: 'female2', label: 'Dev F',     component: AvatarFemale2 },
-  { id: 'female3', label: 'Dev F',     component: AvatarFemale3 },
-  { id: 'tech1',   label: 'Hacker',    component: AvatarTech1 },
-  { id: 'tech2',   label: 'Researcher',component: AvatarTech2 },
-  { id: 'tech3',   label: 'Cyber',     component: AvatarTech3 },
-  { id: 'robot',   label: 'Robot',     component: AvatarRobot },
-  { id: 'ninja',   label: 'Ninja',     component: AvatarNinja },
+type AvatarEntry = { id: string; label: string; component: React.FC };
+const AVATAR_CATEGORIES: { label: string; emoji: string; items: AvatarEntry[] }[] = [
+  {
+    label: 'Dev Crew', emoji: '💻',
+    items: [
+      { id: 'male1',   label: 'Dev',      component: AvatarMale1 },
+      { id: 'male2',   label: 'Dev II',   component: AvatarMale2 },
+      { id: 'male3',   label: 'Nerd',     component: AvatarMale3 },
+      { id: 'female1', label: 'Dev F',    component: AvatarFemale1 },
+      { id: 'female2', label: 'Dev F II', component: AvatarFemale2 },
+      { id: 'female3', label: 'Dev F III',component: AvatarFemale3 },
+      { id: 'tech1',   label: 'Hacker',   component: AvatarTech1 },
+      { id: 'tech2',   label: 'Research', component: AvatarTech2 },
+      { id: 'tech3',   label: 'Cyber',    component: AvatarTech3 },
+      { id: 'robot',   label: 'Robot',    component: AvatarRobot },
+      { id: 'ninja',   label: 'Ninja',    component: AvatarNinja },
+    ],
+  },
+  {
+    label: 'Legends', emoji: '⚔️',
+    items: [
+      { id: 'astronaut', label: 'Astronaut', component: AvatarAstronaut },
+      { id: 'wizard',    label: 'Wizard',    component: AvatarWizard },
+      { id: 'samurai',   label: 'Samurai',   component: AvatarSamurai },
+      { id: 'viking',    label: 'Viking',    component: AvatarViking },
+      { id: 'pirate',    label: 'Pirate',    component: AvatarPirate },
+      { id: 'detective', label: 'Detective', component: AvatarDetective },
+      { id: 'gamer',     label: 'Gamer',     component: AvatarGamer },
+      { id: 'artist',    label: 'Artist',    component: AvatarArtist },
+      { id: 'alien',     label: 'Alien',     component: AvatarAlien },
+    ],
+  },
+  {
+    label: 'Stick Figures', emoji: '🕴️',
+    items: [
+      { id: 'stickbasic',   label: 'Classic',  component: AvatarStickBasic },
+      { id: 'stickdancer',  label: 'Dancer',   component: AvatarStickDancer },
+      { id: 'stickninja',   label: 'Ninja',    component: AvatarStickNinja },
+      { id: 'stickcoder',   label: 'Coder',    component: AvatarStickCoder },
+    ],
+  },
 ];
+const AVATAR_COMPONENTS = AVATAR_CATEGORIES.flatMap(c => c.items);
 
 function AvatarDisplay({ avatarUrl, initials, size = 'md' }: { avatarUrl: string; initials: string; size?: 'sm' | 'md' }) {
   const found = AVATAR_COMPONENTS.find(a => `builtin:${a.id}` === avatarUrl);
@@ -170,6 +203,7 @@ export function StudentInfo() {
   );
 
   return (
+    <>
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="pb-24">
 
       {/* ── Profile Hero ── */}
@@ -363,80 +397,103 @@ export function StudentInfo() {
         )}
       </AnimatePresence>
 
-      {/* ── Avatar Modal ── */}
+    </motion.div>
+
+      {/* ── Avatar Picker — bottom drawer style ── */}
       <AnimatePresence>
         {avatarModal && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)' }}
-            onClick={() => setAvatarModal(false)}>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 z-[99]"
+              style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }}
+              onClick={() => setAvatarModal(false)}
+            />
 
-            <motion.div initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              onClick={e => e.stopPropagation()}
-              className="w-full max-w-md rounded-3xl border border-cyan-500/30 flex flex-col shadow-2xl shadow-cyan-500/10"
-              style={{ background: 'linear-gradient(135deg, rgba(9,9,11,0.99) 0%, rgba(15,23,42,0.98) 100%)', maxHeight: '90vh' }}>
+            {/* Drawer — slides down from top */}
+            <motion.div
+              initial={{ y: '-100%' }} animate={{ y: 0 }} exit={{ y: '-100%' }}
+              transition={{ type: 'spring', stiffness: 400, damping: 40 }}
+              className="fixed top-0 left-0 right-0 z-[100] rounded-b-3xl overflow-hidden"
+              style={{ background: 'linear-gradient(180deg, rgba(5,5,10,1) 0%, rgba(10,10,15,0.99) 100%)', boxShadow: '0 20px 60px rgba(6,182,212,0.12)' }}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pb-3 pt-1">
+                <div className="w-10 h-1 rounded-full bg-white/20" />
+              </div>
 
-              {/* Header — fixed with gradient */}
-              <div className="flex items-center justify-between px-6 py-5 border-b border-cyan-500/20 flex-shrink-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10">
+              {/* Title row */}
+              <div className="flex items-center justify-between px-6 py-4">
                 <div>
-                  <h3 className="text-base font-bold text-white">Choose Your Avatar</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">Pick a unique avatar for your profile</p>
+                  <p className="text-white font-bold text-lg tracking-tight">Pick Your Avatar</p>
+                  <p className="text-slate-500 text-xs mt-0.5">Tap one to set it as your profile</p>
                 </div>
                 <button onClick={() => setAvatarModal(false)}
-                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all">
+                  className="w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-all">
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Scrollable body */}
-              <div className="overflow-y-auto flex-1 p-6 space-y-5">
-                <div>
-                  <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4">Available Avatars</p>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                    {AVATAR_COMPONENTS.map(av => {
-                      const isSelected = draft.avatar_url === `builtin:${av.id}`;
-                      return (
-                        <motion.button key={av.id}
-                          whileHover={{ scale: 1.08 }}
-                          whileTap={{ scale: 0.96 }}
-                          onClick={() => handleBuiltInAvatar(av.id)}
-                          className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-200 flex items-center justify-center ${
-                            isSelected
-                              ? 'border-cyan-400 ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-500/30 bg-cyan-500/10'
-                              : 'border-white/10 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10 bg-white/5 hover:bg-white/10'
-                          }`}>
-                          <div className="w-full h-full flex items-center justify-center">
-                            <av.component />
-                          </div>
-                          {isSelected && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center shadow-lg">
-                              <Check className="w-3 h-3 text-black font-bold" strokeWidth={4} />
-                            </motion.div>
-                          )}
-                          <div className="absolute bottom-0 left-0 right-0 text-xs font-semibold text-white text-center py-1.5 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity">
-                            {av.label}
-                          </div>
-                        </motion.button>
-                      );
-                    })}
+              {/* Categorized avatar grid */}
+              <div className="px-4 pb-8 space-y-6">
+                {AVATAR_CATEGORIES.map((cat, ci) => (
+                  <div key={cat.label}>
+                    {/* Category heading */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-sm">{cat.emoji}</span>
+                      <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-500">{cat.label}</span>
+                      <div className="flex-1 h-px bg-white/[0.05]" />
+                    </div>
+                    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-11 gap-3">
+                      {cat.items.map((av, i) => {
+                        const isSelected = draft.avatar_url === `builtin:${av.id}`;
+                        return (
+                          <motion.button
+                            key={av.id}
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: (ci * 0.05) + i * 0.03, duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            whileTap={{ scale: 0.92 }}
+                            onClick={() => handleBuiltInAvatar(av.id)}
+                            className="relative flex flex-col items-center gap-1.5 group"
+                          >
+                            <div className={`relative w-full aspect-square rounded-2xl overflow-hidden transition-all duration-200 ${
+                              isSelected
+                                ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-black shadow-lg shadow-cyan-500/40'
+                                : 'ring-1 ring-white/10 group-hover:ring-cyan-400/40 group-hover:shadow-md group-hover:shadow-cyan-500/10'
+                            }`}>
+                              <av.component />
+                              {isSelected && (
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                                  className="absolute inset-0 bg-cyan-400/10" />
+                              )}
+                            </div>
+                            {isSelected && (
+                              <motion.div
+                                initial={{ scale: 0 }} animate={{ scale: 1 }}
+                                transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-cyan-400 flex items-center justify-center shadow-lg shadow-cyan-400/50 z-10"
+                              >
+                                <Check className="w-3 h-3 text-black" strokeWidth={3} />
+                              </motion.div>
+                            )}
+                            <span className={`text-[9px] font-mono uppercase tracking-wider truncate w-full text-center transition-colors ${
+                              isSelected ? 'text-cyan-400' : 'text-slate-600 group-hover:text-slate-400'
+                            }`}>{av.label}</span>
+                          </motion.button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Footer hint */}
-              <div className="px-6 py-4 border-t border-cyan-500/20 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 flex-shrink-0">
-                <p className="text-xs text-slate-400 text-center">Click an avatar to select it for your profile</p>
+                ))}
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
-
-    </motion.div>
+    </>
   );
 }
 
