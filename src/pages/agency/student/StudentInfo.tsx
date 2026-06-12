@@ -552,6 +552,7 @@ export function StudentInfo() {
     setDraft(newDraft);
     if (user?.id) {
       await supabase.from('student_profiles').upsert({ user_id: user.id, ...newDraft }, { onConflict: 'user_id' });
+      await supabase.auth.updateUser({ data: { avatar_url: val } });
       setSaved(newDraft);
     }
     setAvatarModal(false);
@@ -631,6 +632,7 @@ export function StudentInfo() {
       const newDraft = { ...draft, avatar_url: avatarUrl };
       setDraft(newDraft);
       await supabase.from('student_profiles').upsert({ user_id: user.id, ...newDraft }, { onConflict: 'user_id' });
+      await supabase.auth.updateUser({ data: { avatar_url: avatarUrl } });
       setSaved(newDraft);
       setCropSrc(null);
       setAvatarModal(false);
