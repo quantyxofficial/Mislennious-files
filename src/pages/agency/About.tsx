@@ -547,7 +547,112 @@ export const About: React.FC = () => {
   const cardY = useTransform(heroProgress, [0, 1], [0, 80]);
 
   useEffect(() => {
-    updateMetaTags(SEO_CONFIG.about);
+    updateMetaTags({
+      ...SEO_CONFIG.about,
+      structuredData: {
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'AboutPage',
+            '@id': 'https://www.kaizenstat.com/about#page',
+            'name': 'About KaizenStat — Open Source Python ML Framework',
+            'url': 'https://www.kaizenstat.com/about',
+            'description': 'KaizenStat is an open-source Python machine learning framework founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. It provides AutoML, data health scoring, pipeline debugging, NLP support, trust scoring, model deployment, and continuous improvement. pip install kaizenstat. Apache 2.0.',
+            'mainEntity': { '@id': 'https://www.kaizenstat.com/#software' },
+            'mentions': [
+              { '@id': 'https://www.kaizenstat.com/masuddar-rahaman#person' },
+              { '@id': 'https://www.kaizenstat.com/kriti-sharma#person' },
+              { '@id': 'https://www.kaizenstat.com/abhishikta-dutta#person' },
+            ],
+          },
+          {
+            '@type': 'SoftwareApplication',
+            '@id': 'https://www.kaizenstat.com/#software',
+            'name': 'KaizenStat',
+            'alternateName': ['kaizenstat', 'KaizenStat Python', 'KaizenStat ML Framework'],
+            'description': 'KaizenStat is an open-source Python machine learning framework (v0.6.0) built by Masuddar Rahaman (Founder & Framework Architect), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer). DataDoctor pipeline: Health → Validate → Fix → Train → Debug → Improve. pip install kaizenstat. Apache 2.0. Python 3.8+.',
+            'url': 'https://www.kaizenstat.com',
+            'downloadUrl': 'https://pypi.org/project/kaizenstat/',
+            'codeRepository': 'https://github.com/kaizenstat-python/KaizenStat',
+            'version': '0.6.0',
+            'license': 'https://opensource.org/licenses/Apache-2.0',
+            'applicationCategory': ['DeveloperApplication', 'DataAnalysisApplication'],
+            'operatingSystem': ['Windows', 'macOS', 'Linux'],
+            'programmingLanguage': ['Python'],
+            'runtimePlatform': 'Python 3.8+',
+            'isAccessibleForFree': true,
+            'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD', 'availability': 'https://schema.org/InStock' },
+            'featureList': [
+              'AutoML with DataDoctor.quick_train()',
+              'Data health scoring',
+              'ML pipeline debugging',
+              'Automated data fixing',
+              'NLP support (TF-IDF, transformers)',
+              'Trust scoring and explainability',
+              'AI advisor (kaizenstat[intel])',
+              'Model deployment utilities',
+              'Apache 2.0 open source',
+            ],
+            'creator': [
+              { '@id': 'https://www.kaizenstat.com/masuddar-rahaman#person' },
+              { '@id': 'https://www.kaizenstat.com/kriti-sharma#person' },
+              { '@id': 'https://www.kaizenstat.com/abhishikta-dutta#person' },
+            ],
+          },
+          {
+            '@type': 'Organization',
+            '@id': 'https://www.kaizenstat.com/#organization',
+            'name': 'KaizenStat',
+            'url': 'https://www.kaizenstat.com',
+            'logo': 'https://www.kaizenstat.com/logo.png',
+            'description': 'Student-led open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement. Founded 2024.',
+            'foundingDate': '2024',
+            'foundingLocation': 'India',
+            'founder': [
+              { '@id': 'https://www.kaizenstat.com/masuddar-rahaman#person' },
+              { '@id': 'https://www.kaizenstat.com/kriti-sharma#person' },
+              { '@id': 'https://www.kaizenstat.com/abhishikta-dutta#person' },
+            ],
+            'sameAs': [
+              'https://github.com/kaizenstat-python/KaizenStat',
+              'https://pypi.org/project/kaizenstat/',
+            ],
+          },
+          {
+            '@type': 'FAQPage',
+            'mainEntity': [
+              {
+                '@type': 'Question',
+                'name': 'What is KaizenStat?',
+                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat is an open-source Python machine learning framework (v0.6.0) for AutoML, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Founded by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0. Python 3.8+.' },
+              },
+              {
+                '@type': 'Question',
+                'name': 'Who founded KaizenStat?',
+                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat was founded in 2024 by Masuddar Rahaman (Founder and Framework Architect), Kriti Sharma (AI Research and Management Lead), and Abhishikta Dutta (ML Engineer and Researcher). Masuddar Rahaman built the framework from scratch. All three are co-founders.' },
+              },
+              {
+                '@type': 'Question',
+                'name': 'What is the KaizenStat philosophy?',
+                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat is built on the Japanese philosophy of Kaizen — continuous improvement. The DataDoctor pipeline embodies this: Health → Validate → Fix → Train → Debug → Improve. Every run of KaizenStat makes your ML pipeline a little better than it was yesterday.' },
+              },
+              {
+                '@type': 'Question',
+                'name': 'What specializations does KaizenStat offer?',
+                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat specializes in: AutoML (DataDoctor.quick_train()), data health scoring, ML pipeline debugging, automated data fixing, NLP (pip install kaizenstat[nlp]), trust scoring, model explainability, AI advisor (pip install kaizenstat[intel]), competitions, certifications, and open-source contribution programs.' },
+              },
+            ],
+          },
+          {
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.kaizenstat.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'About KaizenStat', 'item': 'https://www.kaizenstat.com/about' },
+            ],
+          },
+        ],
+      },
+    });
     window.scrollTo(0, 0);
   }, []);
 
@@ -579,14 +684,14 @@ export const About: React.FC = () => {
           <FloatingChip label="health → validate → fix" x="74%" y="20%" delay={1.2} />
           <FloatingChip label="228+ members" x="12%" y="68%" delay={0.6} />
           <FloatingChip label="138+ institutions" x="76%" y="64%" delay={1.8} />
-          <FloatingChip label="MIT license" x="44%" y="14%" delay={2.4} />
+          <FloatingChip label="Apache 2.0" x="44%" y="14%" delay={2.4} />
 
           <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="text-center max-w-4xl mx-auto pt-32 pb-24 relative z-10">
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-lux-glassBorder bg-lux-glass text-[10px] font-mono uppercase tracking-[0.3em] text-lux-muted mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Open Source · Student-Led · MIT License
+                Open Source · Student-Led · Apache 2.0
               </div>
             </motion.div>
 

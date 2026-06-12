@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ArrowRight, Users, Zap, Globe, Star } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Link } from 'react-router-dom';
-import { updateMetaTags } from '../../utils/seo';
+import { updateMetaTags, SEO_CONFIG } from '../../utils/seo';
 
 const benefits = [
   { icon: Globe, label: 'Global Network', sub: '138+ institutions worldwide' },
@@ -15,14 +15,7 @@ export const Careers: React.FC = () => {
   const [state, handleSubmit] = useForm("mgoovkrz");
 
   useEffect(() => {
-    updateMetaTags({
-      title: 'Careers & Contribute — Join KaizenStat | Open Source Data Science',
-      description: 'Join the KaizenStat team as a contributor, blogger, mentor, or campus partner. Student-led open-source foundation with a global network of 138+ institutions. Real projects, expert mentors, and community impact.',
-      keywords: ['kaizenstat careers', 'data science internship', 'open source contributor', 'kaizenstat volunteer', 'ml community', 'student data science'],
-      canonical: 'https://www.kaizenstat.com/careers',
-      ogType: 'website',
-      twitterCard: 'summary_large_image',
-    });
+    updateMetaTags(SEO_CONFIG.careers);
   }, []);
 
   return (

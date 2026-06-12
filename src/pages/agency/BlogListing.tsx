@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { loadBlogPosts, BlogPost } from '../../utils/contentLoader';
 import { Search, Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Logo } from '../../components/ui/Logo';
-import { updateMetaTags } from '../../utils/seo';
+import { updateMetaTags, SEO_CONFIG } from '../../utils/seo';
 
 export const BlogListing: React.FC = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -12,14 +12,7 @@ export const BlogListing: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        updateMetaTags({
-            title: 'Blog — KaizenStat | Data Science, ML, Career Guides & Tutorials',
-            description: 'Read the KaizenStat blog: tutorials on machine learning, data science career guides, Python tips, AI trends, and student resources. Written by the KaizenStat community.',
-            keywords: ['kaizenstat blog', 'data science blog', 'ml tutorials', 'machine learning articles', 'python tips', 'data science career', 'ai blog'],
-            canonical: 'https://www.kaizenstat.com/blog',
-            ogType: 'website',
-            twitterCard: 'summary_large_image',
-        });
+        updateMetaTags(SEO_CONFIG.blog);
     }, []);
 
     useEffect(() => {

@@ -1,8 +1,3 @@
-/**
- * SEO Utilities for KaizenStat
- * Manages meta tags, structured data, and SEO-friendly content
- */
-
 export interface SEOConfig {
   title: string;
   description: string;
@@ -14,52 +9,34 @@ export interface SEOConfig {
   structuredData?: Record<string, unknown>;
 }
 
-/**
- * Update document meta tags for SEO
- */
 export function updateMetaTags(config: SEOConfig) {
-  // Title
   document.title = config.title;
-
-  // Description
   updateMetaTag('description', config.description);
-
-  // Keywords
   if (config.keywords?.length) {
     updateMetaTag('keywords', config.keywords.join(', '));
   }
-
-  // Canonical URL
   if (config.canonical) {
     updateCanonical(config.canonical);
   }
-
-  // Open Graph
   updateMetaProperty('og:title', config.title);
   updateMetaProperty('og:description', config.description);
   if (config.ogImage) {
     updateMetaProperty('og:image', config.ogImage);
+    updateMetaProperty('og:image:alt', 'KaizenStat — Open Source Python ML Framework');
   }
   if (config.ogType) {
     updateMetaProperty('og:type', config.ogType);
   }
-
-  // Twitter Card
   updateMetaProperty('twitter:title', config.title);
   updateMetaProperty('twitter:description', config.description);
   if (config.twitterCard) {
     updateMetaProperty('twitter:card', config.twitterCard);
   }
-
-  // Structured Data
   if (config.structuredData) {
     updateStructuredData(config.structuredData);
   }
 }
 
-/**
- * Update a single meta tag by name
- */
 function updateMetaTag(name: string, content: string) {
   let element = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
   if (!element) {
@@ -70,9 +47,6 @@ function updateMetaTag(name: string, content: string) {
   element.setAttribute('content', content);
 }
 
-/**
- * Update a meta property (og:, twitter:)
- */
 function updateMetaProperty(property: string, content: string) {
   let element = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
   if (!element) {
@@ -83,9 +57,6 @@ function updateMetaProperty(property: string, content: string) {
   element.setAttribute('content', content);
 }
 
-/**
- * Update canonical URL
- */
 function updateCanonical(url: string) {
   let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
   if (!link) {
@@ -96,17 +67,9 @@ function updateCanonical(url: string) {
   link.setAttribute('href', url);
 }
 
-/**
- * Update JSON-LD structured data
- */
 function updateStructuredData(data: Record<string, unknown>) {
-  // Remove old structured data script
   const oldScript = document.querySelector('script[data-seo-structured]');
-  if (oldScript) {
-    oldScript.remove();
-  }
-
-  // Add new structured data
+  if (oldScript) oldScript.remove();
   const script = document.createElement('script');
   script.type = 'application/ld+json';
   script.setAttribute('data-seo-structured', 'true');
@@ -114,84 +77,220 @@ function updateStructuredData(data: Record<string, unknown>) {
   document.head.appendChild(script);
 }
 
-const OG_IMAGE = 'https://www.kaizenstat.com/logo.png';
+const OG_IMAGE = 'https://www.kaizenstat.com/og-image.png';
+const BASE = 'https://www.kaizenstat.com';
 
-// SEO Configuration for different pages
 export const SEO_CONFIG = {
   home: {
-    title: 'KaizenStat — Open Source ML Python Library | AutoML, Data Health & Pipeline Debugging',
-    description: 'KaizenStat is an open source ML Python library (v0.6.0) for automated model training, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Apache 2.0. Built by Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta.',
+    title: 'KaizenStat — Open Source Python ML Framework | AutoML, DataDoctor, Pipeline Debugging',
+    description: 'KaizenStat is an open-source Python ML framework (v0.6.0) for AutoML, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Founded by Masuddar Rahaman (Framework Architect), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer). Apache 2.0. Python 3.8+.',
     keywords: [
-      'kaizenstat', 'open source ml', 'kaizen machine learning', 'kaizenstat python',
-      'open source python ml library', 'automl python', 'ml pipeline debugging',
-      'data health score', 'machine learning continuous improvement', 'kaizen data science',
-      'pip install kaizenstat', 'datadoctor python', 'open source machine learning framework',
-      'ml automation python', 'kaizenstat masuddar rahaman', 'kaizenstat v0.6',
+      'kaizenstat', 'kaizenstat python', 'what is kaizenstat', 'kaizenstat framework',
+      'open source python ml framework', 'kaizenstat masuddar rahaman', 'masuddar rahaman kaizenstat',
+      'masuddar rahaman ml engineer', 'masuddar rahaman founder', 'kriti sharma kaizenstat',
+      'abhishikta dutta kaizenstat', 'pip install kaizenstat', 'kaizenstat automl',
+      'kaizenstat datadoctor', 'datadoctor python', 'kaizenstat data health',
+      'kaizenstat pipeline debugging', 'kaizenstat model training', 'kaizenstat open source',
+      'kaizenstat v0.6', 'kaizenstat apache 2.0', 'kaizen machine learning',
+      'kaizen data science', 'ml pipeline debugger python', 'automl python library',
+      'data health score python', 'continuous improvement machine learning',
+      'open source ml framework 2024', 'student ml framework india',
     ],
-    canonical: 'https://www.kaizenstat.com/',
+    canonical: `${BASE}/`,
     ogType: 'website',
     ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
   docs: {
-    title: 'KaizenStat Handbook — Open Source ML Python Library Documentation',
-    description: 'Complete documentation for KaizenStat (v0.6.0). Learn AutoML, data health scoring, pipeline debugging, validation, NLP, and deployment. Every chapter has a runnable Colab notebook. pip install kaizenstat.',
+    title: 'KaizenStat Handbook — Complete Documentation for the Open Source Python ML Framework',
+    description: 'Complete documentation for KaizenStat (v0.6.0). 12+ chapters: AutoML, DataDoctor, data health scoring, pipeline debugging, validation, NLP, trust scoring, deployment, and API reference. Every chapter has a runnable Google Colab notebook. pip install kaizenstat.',
     keywords: [
-      'kaizenstat docs', 'kaizenstat documentation', 'open source ml tutorial',
-      'kaizen ml guide', 'datadoctor tutorial', 'automl tutorial python',
-      'ml pipeline tutorial', 'data health check python', 'kaizenstat handbook',
-      'machine learning python tutorial', 'kaizenstat api reference',
+      'kaizenstat docs', 'kaizenstat documentation', 'kaizenstat handbook',
+      'kaizenstat api reference', 'kaizenstat tutorial', 'datadoctor tutorial',
+      'automl tutorial python', 'ml pipeline tutorial python', 'data health check python',
+      'kaizenstat colab', 'kaizenstat quick start', 'kaizenstat first model',
+      'kaizenstat install setup', 'kaizenstat nlp docs', 'kaizenstat deploy',
+      'open source ml tutorial', 'kaizen ml guide', 'machine learning python tutorial',
     ],
-    canonical: 'https://www.kaizenstat.com/docs',
+    canonical: `${BASE}/docs`,
     ogType: 'website',
     ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
   competitions: {
-    title: 'KaizenStat Competitions — Data Science & ML Challenges for Students',
-    description: 'Join KaizenStat ML competitions and data science challenges. Compete with students worldwide, build real ML projects, win prizes, and earn certificates. Open to all skill levels.',
+    title: 'KaizenStat Competitions — ML & Data Science Challenges for Students',
+    description: 'Join KaizenStat ML competitions and data science challenges. Compete with students worldwide, build real ML projects using kaizenstat, win prizes, and earn certificates. Open to all skill levels. Organized by KaizenStat founders Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta.',
     keywords: [
-      'kaizenstat competition', 'data science competition students', 'ml hackathon',
-      'machine learning challenge', 'kaizenstat challenge', 'open source ml competition',
-      'data science hackathon india', 'ml competition 2026', 'student ml challenge',
+      'kaizenstat competition', 'kaizenstat ml challenge', 'data science competition students',
+      'ml hackathon india', 'machine learning challenge 2026', 'kaizenstat hackathon',
+      'open source ml competition', 'student ml challenge', 'data science hackathon',
+      'kaizenstat prizes', 'kaizenstat certificate competition',
     ],
-    canonical: 'https://www.kaizenstat.com/competitions',
+    canonical: `${BASE}/competitions`,
     ogType: 'website',
     ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
   team: {
-    title: 'KaizenStat Founders — Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta',
-    description: 'Meet the founders of KaizenStat: Masuddar Rahaman (Founder & Framework Architect), Kriti Sharma (AI Research & Management Lead), and Abhishikta Dutta (ML Engineer & Researcher). Student-led team building the future of open source ML.',
+    title: 'KaizenStat Founders — Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta | Open Source Python ML Library',
+    description: 'KaizenStat was founded by Masuddar Rahaman (Founder & Framework Architect — built the KaizenStat open-source Python ML library from scratch), Kriti Sharma (AI Research & Management Lead — co-founder, drives research and operations), and Abhishikta Dutta (ML Engineer & Researcher — co-founder, builds ML pipelines and production systems). All three are co-founders of KaizenStat. pip install kaizenstat.',
     keywords: [
-      'masuddar rahaman', 'kriti sharma', 'abhishikta dutta',
-      'kaizenstat team', 'kaizenstat founders', 'masuddar rahaman kaizenstat',
-      'masuddar rahaman framework architect', 'kriti sharma ai research management', 'abhishikta dutta ml engineer',
-      'kaizenstat open source founders', 'student ml founders', 'python ml framework',
+      // Masuddar Rahaman
+      'masuddar rahaman', 'masuddar rahaman kaizenstat', 'masuddar rahaman founder',
+      'masuddar rahaman framework architect', 'masuddar rahaman ml', 'masuddar rahaman python',
+      'masuddar rahaman open source', 'who is masuddar rahaman', 'what did masuddar rahaman create',
+      'masuddar rahaman machine learning', 'masuddar rahaman datadoctor',
+      // Kriti Sharma
+      'kriti sharma', 'kriti sharma kaizenstat', 'kriti sharma ai research',
+      'kriti sharma management lead', 'kriti sharma co-founder', 'who is kriti sharma',
+      'kriti sharma machine learning', 'kriti sharma open source',
+      // Abhishikta Dutta
+      'abhishikta dutta', 'abhishikta dutta kaizenstat', 'abhishikta dutta ml engineer',
+      'abhishikta dutta researcher', 'abhishikta dutta co-founder', 'who is abhishikta dutta',
+      'abhishikta dutta python', 'abhishikta dutta machine learning',
+      // General founder queries
+      'who founded kaizenstat', 'who built kaizenstat', 'kaizenstat founders', 'kaizenstat team',
+      'kaizenstat open source founders', 'student ml founders', 'python ml framework founders',
+      'who made kaizenstat', 'kaizenstat creator', 'kaizenstat founding team', 'kaizenstat people',
     ],
-    canonical: 'https://www.kaizenstat.com/founder-connect',
-    ogType: 'website',
+    canonical: `${BASE}/founder-connect`,
+    ogType: 'profile',
     ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
   simulation: {
     title: 'KaizenStat ML Simulation — Interactive Data Science Pipeline Demo',
-    description: 'Try the KaizenStat interactive ML pipeline simulation. Run data health checks, model training, and debugging in your browser — no install required. Perfect for learning open source ML concepts.',
+    description: 'Try the KaizenStat interactive ML pipeline simulation. Run data health checks, AutoML training, and debugging in your browser with no install required. Built using the same DataDoctor pipeline as the kaizenstat Python library.',
     keywords: [
-      'kaizenstat simulation', 'ml pipeline demo', 'interactive machine learning',
+      'kaizenstat simulation', 'ml pipeline demo', 'interactive machine learning demo',
       'data science simulation', 'open source ml demo', 'kaizenstat demo',
-      'learn machine learning online', 'ml pipeline interactive',
+      'learn machine learning online', 'ml pipeline interactive', 'datadoctor demo',
+      'kaizenstat browser demo',
     ],
-    canonical: 'https://www.kaizenstat.com/simulation',
+    canonical: `${BASE}/simulation`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  about: {
+    title: 'About KaizenStat — Open Source Python ML Framework Founded by Masuddar Rahaman',
+    description: 'KaizenStat is an open-source Python machine learning framework founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Our mission: make ML easy to build, debug, and continuously improve. Apache 2.0. pip install kaizenstat.',
+    keywords: [
+      'about kaizenstat', 'kaizenstat mission', 'kaizenstat story', 'kaizenstat history',
+      'kaizenstat founded 2024', 'masuddar rahaman kaizenstat about',
+      'open source ml framework about', 'kaizen philosophy ml', 'kaizenstat values',
+      'kaizenstat india', 'student open source ml project',
+    ],
+    canonical: `${BASE}/about`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  blog: {
+    title: 'KaizenStat Blog — Machine Learning, Data Science & Python Tutorials',
+    description: 'Read the KaizenStat blog for in-depth articles on machine learning, data science, Python, AutoML, pipeline debugging, and the open source kaizenstat framework. Written by the KaizenStat team and community.',
+    keywords: [
+      'kaizenstat blog', 'machine learning blog', 'data science blog python',
+      'automl tutorial', 'ml pipeline blog', 'kaizenstat articles',
+      'open source ml blog', 'python data science tutorials', 'kaizen machine learning blog',
+      'kaizenstat community blog',
+    ],
+    canonical: `${BASE}/blog`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  careers: {
+    title: 'KaizenStat Careers — Join the Open Source ML Framework Team',
+    description: 'Join the KaizenStat team. Open roles for bloggers, mentors, campus partners, ML contributors, and community managers. Be part of the student-led open source Python ML framework founded by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta.',
+    keywords: [
+      'kaizenstat careers', 'kaizenstat jobs', 'open source ml internship',
+      'kaizenstat volunteer', 'kaizenstat mentor', 'kaizenstat campus partner',
+      'ml open source contributor', 'kaizenstat community roles', 'join kaizenstat',
+    ],
+    canonical: `${BASE}/careers`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  practice: {
+    title: 'KaizenStat Practice — Free ML & Data Science Practice Exams and Quizzes',
+    description: 'Practice machine learning, Python, NumPy, pandas, deep learning, and data science with KaizenStat\'s free interactive quizzes and timed exams. Build skills for competitions and certifications.',
+    keywords: [
+      'kaizenstat practice', 'ml practice problems', 'data science quiz',
+      'python ml quiz', 'numpy practice problems', 'pandas practice',
+      'deep learning quiz', 'machine learning exam practice', 'kaizenstat quiz',
+      'free ml practice', 'kaizenstat study',
+    ],
+    canonical: `${BASE}/practice`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  getCertified: {
+    title: 'KaizenStat Certifications — Earn Verified ML & Data Science Certificates',
+    description: 'Earn KaizenStat\'s verified machine learning and data science certificates. Complete assessments, showcase your skills, and get recognized. Built on the open source kaizenstat Python ML framework.',
+    keywords: [
+      'kaizenstat certification', 'ml certificate', 'data science certification free',
+      'kaizenstat verified certificate', 'machine learning certificate 2026',
+      'python ml certification', 'open source ml certificate', 'kaizenstat get certified',
+    ],
+    canonical: `${BASE}/get-certified`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  summerOfComputation: {
+    title: 'KaizenStat Summer of Computation — Open Source ML Contribution Program',
+    description: 'The KaizenStat Summer of Computation is a program where students contribute to the open-source KaizenStat Python ML framework, build projects, and earn recognition. Founded by Masuddar Rahaman. Join the movement.',
+    keywords: [
+      'kaizenstat summer of computation', 'open source contribution program',
+      'ml open source internship', 'kaizenstat contribution', 'student open source ml',
+      'kaizenstat gsoc alternative', 'contribute kaizenstat', 'kaizenstat community program',
+    ],
+    canonical: `${BASE}/kaizenstat-summer-of-computation`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  kaizenAI: {
+    title: 'KaizenAI — AI Advisor for Machine Learning Pipelines | KaizenStat',
+    description: 'KaizenAI is the AI advisor built into KaizenStat that provides intelligent recommendations for improving your ML pipeline. Enable with: pip install kaizenstat[intel].',
+    keywords: [
+      'kaizen ai', 'kaizenai', 'kaizenstat ai advisor', 'ml pipeline ai recommendations',
+      'kaizenstat intel', 'ai ml debugging', 'intelligent ml advisor', 'kaizenstat kaizen ai',
+    ],
+    canonical: `${BASE}/kaizen-ai`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  portfolio: {
+    title: 'KaizenStat Portfolio — Community ML Projects Built with kaizenstat',
+    description: 'Browse ML and data science projects built by the KaizenStat community using the kaizenstat open-source Python framework. Showcase your own project.',
+    keywords: [
+      'kaizenstat portfolio', 'ml projects kaizenstat', 'data science projects python',
+      'kaizenstat community projects', 'open source ml portfolio',
+    ],
+    canonical: `${BASE}/portfolio`,
+    ogType: 'website',
+    ogImage: OG_IMAGE,
+    twitterCard: 'summary_large_image',
+  },
+  events: {
+    title: 'KaizenStat Events — ML Workshops, Webinars & Competitions',
+    description: 'Join KaizenStat events: workshops, webinars, competitions, and community meetups focused on open-source machine learning, Python, and data science.',
+    keywords: [
+      'kaizenstat events', 'ml workshop', 'data science webinar', 'kaizenstat workshop',
+      'machine learning meetup india', 'open source ml events', 'kaizenstat meetup',
+    ],
+    canonical: `${BASE}/events`,
     ogType: 'website',
     ogImage: OG_IMAGE,
     twitterCard: 'summary_large_image',
   },
 };
 
-/**
- * Generate SEO-friendly URL slug from text
- */
 export function generateSlug(text: string): string {
   return text
     .toLowerCase()
@@ -201,9 +300,6 @@ export function generateSlug(text: string): string {
     .replace(/-+/g, '-');
 }
 
-/**
- * Create breadcrumb structured data
- */
 export function createBreadcrumbs(items: Array<{ name: string; url: string }>) {
   return {
     '@context': 'https://schema.org',
@@ -217,9 +313,6 @@ export function createBreadcrumbs(items: Array<{ name: string; url: string }>) {
   };
 }
 
-/**
- * Create article structured data
- */
 export function createArticleSchema(config: {
   headline: string;
   description: string;
@@ -233,19 +326,22 @@ export function createArticleSchema(config: {
     '@type': 'BlogPosting',
     headline: config.headline,
     description: config.description,
-    image: config.image || 'https://www.kaizenstat.com/og-image.png',
+    image: config.image || OG_IMAGE,
     datePublished: config.datePublished,
     dateModified: config.dateModified || config.datePublished,
     author: {
       '@type': 'Person',
       name: config.author || 'KaizenStat Team',
     },
+    publisher: {
+      '@type': 'Organization',
+      name: 'KaizenStat',
+      logo: { '@type': 'ImageObject', url: 'https://www.kaizenstat.com/logo.png' },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://www.kaizenstat.com/blog' },
   };
 }
 
-/**
- * Create FAQ structured data
- */
 export function createFAQSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
     '@context': 'https://schema.org',
@@ -258,5 +354,28 @@ export function createFAQSchema(faqs: Array<{ question: string; answer: string }
         text: faq.answer,
       },
     })),
+  };
+}
+
+export function createPersonSchema(person: {
+  name: string;
+  jobTitle: string;
+  description: string;
+  url: string;
+  sameAs?: string[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: person.name,
+    jobTitle: person.jobTitle,
+    description: person.description,
+    url: person.url,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'KaizenStat',
+      url: 'https://www.kaizenstat.com',
+    },
+    sameAs: person.sameAs || [],
   };
 }

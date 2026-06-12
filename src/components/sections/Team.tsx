@@ -37,7 +37,7 @@ const TEAM = [
 
 export function Team() {
   return (
-    <section className="py-24 relative z-20 border-t border-white/5 bg-black/60" id="team">
+    <section className="pt-8 pb-24 relative z-20 border-t border-white/5 bg-black/60" id="team">
       <div className="container mx-auto px-4 max-w-6xl relative">
         <div className="flex flex-col md:flex-row gap-16 items-center">
           <div className="flex-1 text-left">

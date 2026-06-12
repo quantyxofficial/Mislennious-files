@@ -103,40 +103,18 @@ export function Navbar() {
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
                 <Link to="/student" className="relative group flex items-center transition-all duration-300">
-                  {/* UFO — fixed container so it never shifts siblings */}
+                  {/* Professional Avatar Profile Container */}
                   <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
-
-                    {/* Flying motion: gentle bob + slight banking tilt */}
                     <motion.div
-                      animate={{
-                        y: [0, -4, -1, -4, 0],
-                        rotate: [-3, 3, -3],
-                      }}
-                      transition={{
-                        y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                        rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                      }}
+                      animate={{ y: [0, -2, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                       className="relative flex flex-col items-center"
                       style={{ willChange: 'transform' }}
                     >
-                      {/* Tractor beam — opacity only, no layout reflow */}
-                      <motion.div
-                        animate={{ opacity: [0.3, 0.8, 0.3] }}
-                        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                        className="w-4 h-3 origin-top"
-                        style={{
-                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
-                          clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
-                          marginBottom: -1,
-                          willChange: 'opacity',
-                        }}
-                      />
-
-                      {/* UFO saucer body */}
+                      {/* Profile card container */}
                       <div className="relative flex flex-col items-center">
-                        {/* Dome / cockpit — avatar inside */}
-                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
-                          style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
+                        {/* Avatar circle — solid professional design */}
+                        <div className="relative z-10 w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/40 bg-slate-900">
                           <div className="w-full h-full">
                             {user.user_metadata?.avatar_url ? (
                               (() => {
@@ -150,40 +128,25 @@ export function Navbar() {
                                     </div>
                                   ) : null;
                                 }
-                                return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover object-top" />;
+                                return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />;
                               })()
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center">
-                                <UserIcon className="w-3 h-3 text-cyan-400" />
+                              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-600 to-blue-600">
+                                <UserIcon className="w-5 h-5 text-white" />
                               </div>
                             )}
                           </div>
-                          {/* Dome glare */}
-                          <div className="absolute top-0.5 left-1 w-2 h-1 rounded-full bg-white/20" />
+                          {/* Subtle inner ring */}
+                          <div className="absolute inset-1 rounded-full border border-white/20 pointer-events-none" />
                         </div>
 
-                        {/* Saucer disc */}
-                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
-                          style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
-                          {/* Lights row — CSS pulse, no JS per-frame */}
-                          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
-                            {[0,1,2,3].map(i => (
-                              <div key={i}
-                                className="w-1 h-1 rounded-full animate-pulse"
-                                style={{
-                                  background: i % 2 === 0 ? '#06b6d4' : '#a855f7',
-                                  animationDelay: `${i * 0.2}s`,
-                                  animationDuration: '1.2s',
-                                }}
-                              />
-                            ))}
-                          </div>
-                        </div>
+                        {/* Status indicator dot */}
+                        <div className="absolute bottom-0 right-0 z-20 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white/30 shadow-lg shadow-emerald-500/50" />
                       </div>
 
-                      {/* Hover glow underneath */}
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
-                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
+                      {/* Hover glow */}
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"
+                        style={{ background: 'radial-gradient(ellipse, #06b6d4, transparent)' }} />
                     </motion.div>
                   </div>
                 </Link>

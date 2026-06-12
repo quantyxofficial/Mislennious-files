@@ -15,6 +15,9 @@ import Terms from './pages/legal/Terms';
 import Ethics from './pages/legal/Ethics';
 import Login from './pages/Login';
 import FounderConnect from './pages/FounderConnect';
+import MasuddarRahaman from './pages/founders/MasuddarRahaman';
+import KritiSharma from './pages/founders/KritiSharma';
+import AbhishiktaDutta from './pages/founders/AbhishiktaDutta';
 import MentorDashboard from './pages/dashboards/MentorDashboard';
 import { BackgroundScene } from './components/3d/BackgroundScene';
 import { CustomCursor } from './components/ui/CustomCursor';
@@ -23,7 +26,7 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AgencyRoutes } from './routes/AgencyRoutes';
 import { AgencyAuthProvider } from './context/AgencyAuthContext';
 import { AIProvider } from './context/AIContext';
-import { updateMetaTags, SEO_CONFIG } from './utils/seo';
+import { updateMetaTags, SEO_CONFIG, SEOConfig } from './utils/seo';
 
 // Only render heavy 3D on pages that actually use it
 const HEAVY_BG_PATHS = ['/', '/competitions', '/docs', '/simulation', '/dashboard'];
@@ -82,6 +85,9 @@ function AppShell() {
           <Route path="/ethics" element={<Ethics />} />
           <Route path="/login" element={<Login />} />
           <Route path="/founder-connect" element={<FounderConnect />} />
+          <Route path="/masuddar-rahaman" element={<MasuddarRahaman />} />
+          <Route path="/kriti-sharma" element={<KritiSharma />} />
+          <Route path="/abhishikta-dutta" element={<AbhishiktaDutta />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/mentor/*"

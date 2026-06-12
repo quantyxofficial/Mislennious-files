@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Users, ArrowRight } from 'lucide-react';
 import { CommunityModal } from '../../components/agency/CommunityModal';
 import { Logo } from '../../components/ui/Logo';
-import { updateMetaTags } from '../../utils/seo';
+import { updateMetaTags, SEO_CONFIG } from '../../utils/seo';
 
 export const Events: React.FC = () => {
     const events = [
@@ -33,14 +33,7 @@ export const Events: React.FC = () => {
     const [showCommunityModal, setShowCommunityModal] = React.useState(false);
 
     useEffect(() => {
-        updateMetaTags({
-            title: 'Events & Competitions — KaizenStat | Data Science Hackathons & Challenges',
-            description: 'Discover KaizenStat events: data science hackathons, design competitions, and ML challenges. Open to students worldwide. Win prizes and build your portfolio.',
-            keywords: ['kaizenstat events', 'data science hackathon', 'ml competition', 'student competition', 'kaizenstat challenge', 'design competition'],
-            canonical: 'https://www.kaizenstat.com/events',
-            ogType: 'website',
-            twitterCard: 'summary_large_image',
-        });
+        updateMetaTags(SEO_CONFIG.events);
     }, []);
 
     return (

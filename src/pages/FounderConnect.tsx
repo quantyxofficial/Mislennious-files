@@ -12,8 +12,8 @@ const FOUNDERS = [
     name: 'Masuddar Rahaman',
     role: 'Founder • Framework Architect',
     bio: [
-      'Creator of KaizenStat and the architect of its core philosophy: making machine learning easy to learn, debug, and understand.',
-      'Masuddar built the Python framework from scratch with a single belief — that every student deserves tools that explain themselves. From pipeline design to the learning ecosystem, he built KaizenStat to grow alongside the people who use it.',
+      'Masuddar built KaizenStat because he felt what every student feels: the tools were powerful, but nothing ever explained why.',
+      'So he built one. Not for a grade, not for a job. For every person who ever stared at a broken model and felt like the problem was them. He designed every layer of the framework to be transparent and teachable, from the data health engine to the training loop.',
     ],
     image: 'https://i.postimg.cc/02cvHZ2Y/IMG-4853.avif',
     colors: {
@@ -38,8 +38,8 @@ const FOUNDERS = [
     name: 'Kriti Sharma',
     role: 'AI Research & Management Lead',
     bio: [
-      'AI Research and Management Lead driving KaizenStat\'s market intelligence and operational growth.',
-      'Kriti bridges the gap between AI research trends and community strategy, studying how models are evolving in the real world and steering KaizenStat\'s direction to stay ahead. She oversees the research roadmap and manages the day-to-day operations that keep KaizenStat running at scale.',
+      'AI Research and Management Lead who learns, builds, and leads alongside the team every step of the way.',
+      'Kriti doesn\'t just study AI from the outside. She actively implements it. From running experiments to managing KaizenStat\'s research roadmap and day-to-day operations, she stays hands-on with the team, turning market intelligence into real direction and turning direction into shipped work.',
     ],
     image: 'https://i.postimg.cc/mZ9PZg1k/IMG-3848.avif',
     colors: {
@@ -87,12 +87,251 @@ const FOUNDERS = [
   }
 ];
 
+const FOUNDERS_STRUCTURED_DATA = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // ── ProfilePage: Masuddar Rahaman ─────────────────────────────────────────
+    {
+      '@type': 'ProfilePage',
+      '@id': 'https://www.kaizenstat.com/founder-connect#masuddar-rahaman-page',
+      'name': 'Masuddar Rahaman — Founder of KaizenStat',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'description': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library. He built KaizenStat from the ground up.',
+      'mainEntity': { '@id': 'https://www.kaizenstat.com/founder-connect#masuddar-rahaman' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.kaizenstat.com/founder-connect#masuddar-rahaman',
+      'name': 'Masuddar Rahaman',
+      'givenName': 'Masuddar',
+      'familyName': 'Rahaman',
+      'alternateName': ['Masuddar', 'Masuddar Rahaman KaizenStat'],
+      'jobTitle': 'Founder and Framework Architect',
+      'description': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library and framework. He built KaizenStat from the ground up — designing the DataDoctor class, the core AutoML pipeline engine, and all KaizenStat APIs. Masuddar Rahaman founded KaizenStat to make machine learning easy to build, debug, and understand for every student and developer.',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'image': 'https://i.postimg.cc/02cvHZ2Y/IMG-4853.avif',
+      'sameAs': [
+        'https://github.com/Masuddar',
+        'https://www.linkedin.com/in/masuddar-rahaman/',
+        'https://www.kaizenstat.com/founder-connect',
+      ],
+      'worksFor': {
+        '@type': 'Organization',
+        '@id': 'https://www.kaizenstat.com/#organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+      },
+      'founder': {
+        '@type': 'Organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+        'description': 'KaizenStat is an open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement.',
+      },
+      'knowsAbout': [
+        'Python', 'Machine Learning', 'AutoML', 'ML Framework Design',
+        'Open Source Software', 'Pipeline Architecture', 'DataDoctor',
+        'Data Health Scoring', 'Continuous Improvement', 'Deep Learning',
+      ],
+      'hasOccupation': {
+        '@type': 'Occupation',
+        'name': 'ML Framework Architect',
+        'description': 'Built and maintains the KaizenStat open-source Python ML framework',
+        'occupationLocation': { '@type': 'Country', 'name': 'India' },
+      },
+    },
+    // ── ProfilePage: Kriti Sharma ─────────────────────────────────────────────
+    {
+      '@type': 'ProfilePage',
+      '@id': 'https://www.kaizenstat.com/founder-connect#kriti-sharma-page',
+      'name': 'Kriti Sharma — Co-Founder of KaizenStat',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'description': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library.',
+      'mainEntity': { '@id': 'https://www.kaizenstat.com/founder-connect#kriti-sharma' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.kaizenstat.com/founder-connect#kriti-sharma',
+      'name': 'Kriti Sharma',
+      'givenName': 'Kriti',
+      'familyName': 'Sharma',
+      'alternateName': ['Kriti Sharma KaizenStat', 'Kriti Sharma AI'],
+      'jobTitle': 'AI Research and Management Lead, Co-Founder',
+      'description': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the research roadmap, manages day-to-day operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat with Masuddar Rahaman and Abhishikta Dutta.',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'image': 'https://i.postimg.cc/mZ9PZg1k/IMG-3848.avif',
+      'sameAs': [
+        'https://github.com/kriti-sharma-ai',
+        'https://www.linkedin.com/in/kriti-sharma-795116377/',
+        'https://www.kaizenstat.com/founder-connect',
+      ],
+      'worksFor': {
+        '@type': 'Organization',
+        '@id': 'https://www.kaizenstat.com/#organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+      },
+      'founder': {
+        '@type': 'Organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+        'description': 'KaizenStat is an open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement.',
+      },
+      'knowsAbout': [
+        'AI Research', 'Operations Management', 'Market Intelligence',
+        'Research Strategy', 'Machine Learning', 'Community Management',
+        'Open Source', 'Data Science',
+      ],
+      'hasOccupation': {
+        '@type': 'Occupation',
+        'name': 'AI Research and Management Lead',
+        'description': 'Leads AI research, operations, and community at KaizenStat',
+        'occupationLocation': { '@type': 'Country', 'name': 'India' },
+      },
+    },
+    // ── ProfilePage: Abhishikta Dutta ─────────────────────────────────────────
+    {
+      '@type': 'ProfilePage',
+      '@id': 'https://www.kaizenstat.com/founder-connect#abhishikta-dutta-page',
+      'name': 'Abhishikta Dutta — Co-Founder of KaizenStat',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'description': 'Abhishikta Dutta is an ML Engineer, Researcher, and co-founder of KaizenStat, an open-source Python machine learning library.',
+      'mainEntity': { '@id': 'https://www.kaizenstat.com/founder-connect#abhishikta-dutta' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.kaizenstat.com/founder-connect#abhishikta-dutta',
+      'name': 'Abhishikta Dutta',
+      'givenName': 'Abhishikta',
+      'familyName': 'Dutta',
+      'alternateName': ['Abhishikta Dutta KaizenStat', 'Abhishikta Dutta ML'],
+      'jobTitle': 'ML Engineer and Researcher, Co-Founder',
+      'description': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat with Masuddar Rahaman and Kriti Sharma.',
+      'url': 'https://www.kaizenstat.com/founder-connect',
+      'image': 'https://github.com/abhishiktadutta.png',
+      'sameAs': [
+        'https://github.com/abhishiktadutta',
+        'https://www.linkedin.com/in/abhishikta-dutta1',
+        'https://www.kaizenstat.com/founder-connect',
+      ],
+      'worksFor': {
+        '@type': 'Organization',
+        '@id': 'https://www.kaizenstat.com/#organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+      },
+      'founder': {
+        '@type': 'Organization',
+        'name': 'KaizenStat',
+        'url': 'https://www.kaizenstat.com',
+        'description': 'KaizenStat is an open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement.',
+      },
+      'knowsAbout': [
+        'Python', 'ML Pipelines', 'Model Engineering', 'Production Systems',
+        'Deep Learning', 'Machine Learning Research', 'Data Science', 'Open Source',
+      ],
+      'hasOccupation': {
+        '@type': 'Occupation',
+        'name': 'ML Engineer and Researcher',
+        'description': 'Builds ML pipelines and production systems at KaizenStat',
+        'occupationLocation': { '@type': 'Country', 'name': 'India' },
+      },
+    },
+    // ── Per-person FAQs (Google AI Overview triggers) ─────────────────────────
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.kaizenstat.com/founder-connect#faq',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'Who is Masuddar Rahaman?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up — designing the DataDoctor class, the AutoML pipeline engine, and all core APIs. Masuddar Rahaman founded KaizenStat in 2024 with the goal of making ML easy to build, debug, and understand. GitHub: https://github.com/Masuddar. LinkedIn: https://www.linkedin.com/in/masuddar-rahaman/',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'What did Masuddar Rahaman create?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Masuddar Rahaman created and built KaizenStat, an open-source Python machine learning framework. He designed the DataDoctor class (KaizenStat\'s core AutoML pipeline engine), the data health scoring system, the pipeline debugging tools, and all KaizenStat APIs. KaizenStat is available at https://pypi.org/project/kaizenstat/ and https://github.com/kaizenstat-python/KaizenStat.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'Who is Kriti Sharma?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the KaizenStat research roadmap, manages operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat in 2024 with Masuddar Rahaman and Abhishikta Dutta. GitHub: https://github.com/kriti-sharma-ai. LinkedIn: https://www.linkedin.com/in/kriti-sharma-795116377/',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'Who is Abhishikta Dutta?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems at KaizenStat, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat in 2024 with Masuddar Rahaman and Kriti Sharma. GitHub: https://github.com/abhishiktadutta. LinkedIn: https://www.linkedin.com/in/abhishikta-dutta1',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'What is Masuddar Rahaman known for?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Masuddar Rahaman is known for founding and building KaizenStat, an open-source Python machine learning framework for AutoML, data health scoring, pipeline debugging, and continuous improvement. He is the Founder and Framework Architect of KaizenStat. pip install kaizenstat.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'What is Kriti Sharma known for?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Kriti Sharma is known for co-founding KaizenStat, an open-source Python machine learning library, and serving as its AI Research and Management Lead. She leads the research roadmap, operations, and community at KaizenStat.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'What is Abhishikta Dutta known for?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Abhishikta Dutta is known for co-founding KaizenStat, an open-source Python machine learning library, and serving as its ML Engineer and Researcher. She builds the ML pipelines and production systems that power KaizenStat.',
+          },
+        },
+      ],
+    },
+    // ── Organization back-reference ───────────────────────────────────────────
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.kaizenstat.com/#organization',
+      'name': 'KaizenStat',
+      'url': 'https://www.kaizenstat.com',
+      'description': 'KaizenStat is an open-source Python machine learning library for AutoML, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Apache 2.0.',
+      'founder': [
+        { '@id': 'https://www.kaizenstat.com/founder-connect#masuddar-rahaman' },
+        { '@id': 'https://www.kaizenstat.com/founder-connect#kriti-sharma' },
+        { '@id': 'https://www.kaizenstat.com/founder-connect#abhishikta-dutta' },
+      ],
+    },
+  ],
+};
+
 export default function FounderConnect() {
   useEffect(() => {
     updateMetaTags({
       ...SEO_CONFIG.team,
-      ogImage: 'https://www.kaizenstat.com/logo.png',
-      canonical: 'https://www.kaizenstat.com/founder-connect',
+      structuredData: {
+        ...FOUNDERS_STRUCTURED_DATA,
+        '@graph': [
+          ...FOUNDERS_STRUCTURED_DATA['@graph'],
+          {
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.kaizenstat.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'KaizenStat Founders', 'item': 'https://www.kaizenstat.com/founder-connect' },
+            ],
+          },
+        ],
+      },
     });
     window.scrollTo(0, 0);
   }, []);
@@ -109,9 +348,6 @@ export default function FounderConnect() {
         <div className="absolute -top-1/4 -left-1/4 w-full h-full bg-cyan-500/10 blur-[120px] rounded-full" />
         <div className="absolute -bottom-1/4 -right-1/4 w-full h-full bg-purple-500/10 blur-[120px] rounded-full" />
       </div>
-
-      {/* Spacer for fixed navbar (~80px tall) */}
-      <div className="h-20" />
 
       <main className="relative z-20">
         <div className="flex flex-col">
@@ -320,7 +556,7 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
     <section
       id={founder.id}
       ref={spreadRef}
-      className="min-h-screen flex items-center relative overflow-hidden py-24 md:py-16 will-change-transform"
+      className={`min-h-screen flex items-center relative overflow-hidden ${index === 0 ? 'pt-20 pb-24 md:pt-20 md:pb-16' : 'py-24 md:py-16'} will-change-transform`}
     >
       {/* Optimized Background Aura (Reduced Blur) */}
       <div className={`absolute ${isEven ? 'right-0' : 'left-0'} top-1/4 w-[500px] h-[500px] blur-[100px] rounded-full opacity-15 pointer-events-none`} 
@@ -394,7 +630,7 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
               
               <div className="mb-8 text-left">
                 <span className="text-xl font-black text-white/20 uppercase tracking-[0.4em] block mb-3 italic">{founder.name}</span>
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white leading-[0.9]">
+                <h2 className="text-3xl md:text-5xl font-bold tracking-normal text-white leading-tight">
                   {founder.role.split('•')[1] || founder.role}
                 </h2>
               </div>

@@ -103,27 +103,14 @@ export function Footer() {
               Ecosystem
             </div>
             <ul className="space-y-4 text-[13px] text-slate-400 font-light">
+              <li><Link to="/about" className="hover:text-cyan-400 transition-colors">About Us</Link></li>
               <li><Link to="/founder-connect" className="hover:text-cyan-400 transition-colors">Team</Link></li>
-              <li><Link to="/events" className="hover:text-cyan-400 transition-colors">Events</Link></li>
               <li><Link to="/contribute" className="hover:text-cyan-400 transition-colors">KSoC</Link></li>
               <li><Link to="/blog" className="hover:text-cyan-400 transition-colors">Blog</Link></li>
               <li><Link to="/careers" className="hover:text-cyan-400 transition-colors">Careers</Link></li>
               <li><Link to="/kaizen-ai" className="hover:text-cyan-400 transition-colors">Kaizen AI</Link></li>
               <li><Link to="/verify" className="hover:text-cyan-400 transition-colors">Verify Certificate</Link></li>
               <li><Link to="/admin/dashboard" className="hover:text-white/60 transition-colors text-white/20">Admin</Link></li>
-            </ul>
-          </div>
-
-          <div className="col-span-1 lg:col-span-2">
-            <div className="text-[10px] uppercase tracking-[0.2em] font-mono text-white/60 mb-6">
-              Courses
-            </div>
-            <ul className="space-y-4 text-[13px] text-slate-400 font-light">
-              <li><Link to="/study/deep-learning" className="hover:text-cyan-400 transition-colors">Deep Learning</Link></li>
-              <li><Link to="/study/machine-learning" className="hover:text-cyan-400 transition-colors">Machine Learning</Link></li>
-              <li><Link to="/study/numpy" className="hover:text-cyan-400 transition-colors">NumPy</Link></li>
-              <li><Link to="/study/pandas" className="hover:text-cyan-400 transition-colors">Pandas</Link></li>
-              <li><Link to="/study/matplotlib" className="hover:text-cyan-400 transition-colors">Matplotlib</Link></li>
             </ul>
           </div>
 

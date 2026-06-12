@@ -3,38 +3,73 @@
   "@graph": [
     {
       "@type": "Organization",
+      "@id": "https://www.kaizenstat.com/#organization",
       "name": "KaizenStat",
+      "alternateName": ["KaizenStat Open Source", "KaizenStat Python Framework", "kaizenstat"],
       "url": "https://www.kaizenstat.com",
-      "logo": "https://www.kaizenstat.com/logo.png",
-      "description": "Student-led open-source Python machine learning framework for debugging, testing, and optimizing ML pipelines with continuous improvement philosophy",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.kaizenstat.com/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "KaizenStat is a student-led open-source Python machine learning framework for debugging, testing, and optimizing ML pipelines with continuous improvement. Founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0 licensed. pip install kaizenstat.",
       "foundingDate": "2024",
+      "foundingLocation": "India",
+      "knowsAbout": [
+        "Machine Learning", "AutoML", "Python", "Data Science", "Pipeline Debugging",
+        "Data Health Scoring", "Model Optimization", "NLP", "Deep Learning",
+        "Open Source Software", "Continuous Improvement", "Kaizen Philosophy"
+      ],
       "founder": [
         {
           "@type": "Person",
+          "@id": "https://www.kaizenstat.com/founder-connect#masuddar-rahaman",
           "name": "Masuddar Rahaman",
-          "jobTitle": "ML Engineer & Lead Creator / Founder",
-          "url": "https://github.com/masuddar",
+          "givenName": "Masuddar",
+          "familyName": "Rahaman",
+          "jobTitle": "Founder and Framework Architect",
+          "description": "Masuddar Rahaman is the founder of KaizenStat and the architect of its Python ML framework. He built KaizenStat from the ground up, designing the DataDoctor class, the core pipeline engine, and all KaizenStat APIs. His mission: make machine learning easy to learn, debug, and understand for every student and developer.",
+          "url": "https://www.kaizenstat.com/founder-connect",
           "sameAs": [
-            "https://www.linkedin.com/in/masuddar",
-            "https://twitter.com/masuddarrahaman"
+            "https://github.com/Masuddar",
+            "https://www.linkedin.com/in/masuddar-rahaman/"
           ]
         },
         {
           "@type": "Person",
+          "@id": "https://www.kaizenstat.com/founder-connect#kriti-sharma",
           "name": "Kriti Sharma",
-          "jobTitle": "Data Scientist & Co-founder",
-          "sameAs": ["https://www.linkedin.com/in/kriti-sharma"]
+          "givenName": "Kriti",
+          "familyName": "Sharma",
+          "jobTitle": "AI Research and Management Lead",
+          "description": "Kriti Sharma is the AI Research and Management Lead at KaizenStat. She drives market intelligence, oversees the research roadmap, manages day-to-day operations, and builds the KaizenStat community and partnerships.",
+          "url": "https://www.kaizenstat.com/founder-connect",
+          "sameAs": [
+            "https://github.com/kriti-sharma-ai",
+            "https://www.linkedin.com/in/kriti-sharma-795116377/"
+          ]
         },
         {
           "@type": "Person",
+          "@id": "https://www.kaizenstat.com/founder-connect#abhishikta-dutta",
           "name": "Abhishikta Dutta",
-          "jobTitle": "ML Researcher & Co-founder",
-          "sameAs": ["https://www.linkedin.com/in/abhishiktadutta"]
+          "givenName": "Abhishikta",
+          "familyName": "Dutta",
+          "jobTitle": "ML Engineer and Researcher",
+          "description": "Abhishikta Dutta is an ML Engineer and Researcher at KaizenStat. She builds Python-based ML pipelines and production systems, translating research into tools that learn, adapt, and scale.",
+          "url": "https://www.kaizenstat.com/founder-connect",
+          "sameAs": [
+            "https://github.com/abhishiktadutta",
+            "https://www.linkedin.com/in/abhishikta-dutta1"
+          ]
         }
       ],
       "sameAs": [
-        "https://github.com/kaizenstat-python",
-        "https://pypi.org/project/kaizenstat/"
+        "https://github.com/kaizenstat-python/KaizenStat",
+        "https://pypi.org/project/kaizenstat/",
+        "https://twitter.com/kaizenstat",
+        "https://www.linkedin.com/company/kaizenstat"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -44,43 +79,59 @@
     },
     {
       "@type": "SoftwareApplication",
+      "@id": "https://www.kaizenstat.com/#software",
       "name": "KaizenStat",
-      "description": "Advanced Python machine learning framework for pipeline debugging, model optimization, and continuous improvement",
+      "alternateName": ["kaizenstat", "KaizenStat Python", "KaizenStat ML Framework", "DataDoctor"],
+      "description": "KaizenStat is an open-source Python ML framework (v0.6.0) that automates the full ML pipeline: data health scoring, validation, auto-fixing, model training, debugging, and continuous improvement. Its flagship class, DataDoctor, runs the entire pipeline end-to-end. Founded by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta.",
       "url": "https://www.kaizenstat.com",
       "version": "0.6.0",
+      "softwareVersion": "0.6.0",
       "license": "https://opensource.org/licenses/Apache-2.0",
-      "applicationCategory": [
-        "DeveloperApplication",
-        "DataAnalysisApplication",
-        "UtilityApplication"
-      ],
+      "applicationCategory": ["DeveloperApplication", "DataAnalysisApplication", "UtilityApplication"],
+      "applicationSubCategory": "Machine Learning Framework",
       "operatingSystem": ["Windows", "macOS", "Linux"],
       "programmingLanguage": ["Python"],
       "runtimePlatform": "Python 3.8+",
-      "creator": [
-        { "@type": "Person", "name": "Masuddar Rahaman", "description": "Lead Creator & Founder" },
-        { "@type": "Person", "name": "Kriti Sharma", "description": "Co-founder" },
-        { "@type": "Person", "name": "Abhishikta Dutta", "description": "Co-founder" }
+      "softwareRequirements": "Python 3.8 or later",
+      "featureList": [
+        "AutoML: DataDoctor.quick_train() trains a model in one line",
+        "Data health scoring: detects missing values, outliers, class imbalance, drift",
+        "ML pipeline debugging with root-cause tracing",
+        "Automated data validation and fixing",
+        "NLP support: TF-IDF and transformer embeddings, zero config",
+        "Model deployment utilities",
+        "Trust scoring and model explainability",
+        "AI advisor for pipeline recommendations",
+        "Runnable Google Colab notebooks for every chapter",
+        "Apache 2.0 open source license"
       ],
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
+        "availability": "https://schema.org/InStock",
+        "description": "Free and open source under Apache 2.0"
       },
       "downloadUrl": "https://pypi.org/project/kaizenstat/",
+      "installUrl": "https://pypi.org/project/kaizenstat/",
       "codeRepository": "https://github.com/kaizenstat-python/KaizenStat",
-      "keywords": [
-        "machine learning", "debugging", "pipeline", "optimization",
-        "continuous improvement", "python", "open source", "data science",
-        "ml framework", "DataDoctor", "automl", "model validation"
-      ]
+      "releaseNotes": "https://github.com/kaizenstat-python/KaizenStat/releases",
+      "creator": [
+        { "@id": "https://www.kaizenstat.com/founder-connect#masuddar-rahaman" },
+        { "@id": "https://www.kaizenstat.com/founder-connect#kriti-sharma" },
+        { "@id": "https://www.kaizenstat.com/founder-connect#abhishikta-dutta" }
+      ],
+      "keywords": "kaizenstat, automl, datadoctor, python ml framework, pipeline debugging, data health score, open source machine learning, kaizen data science, ml automation python, continuous improvement ml"
     },
     {
       "@type": "WebSite",
+      "@id": "https://www.kaizenstat.com/#website",
       "name": "KaizenStat",
       "url": "https://www.kaizenstat.com",
-      "description": "Open-source Python machine learning framework — handbook, competitions, blog, and community",
+      "description": "KaizenStat — open-source Python ML framework, handbook with Colab notebooks, competitions, blog, practice exams, certifications, and community.",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://www.kaizenstat.com/#organization" },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -92,29 +143,62 @@
     },
     {
       "@type": "FAQPage",
+      "@id": "https://www.kaizenstat.com/#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is KaizenStat and what problem does it solve?",
+          "name": "What is KaizenStat?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "KaizenStat is an open-source Python ML framework (v0.6.0) that solves the critical problem of debugging and optimizing ML pipelines. Its DataDoctor class runs the full pipeline: Health → Validate → Fix → Train → Debug → Improve. Built by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0 licensed. Install with: pip install kaizenstat"
+            "text": "KaizenStat is an open-source Python ML framework (v0.6.0) that automates the full ML pipeline: data health scoring, validation, auto-fixing, model training, debugging, and continuous improvement. Its flagship class, DataDoctor, runs the entire pipeline end-to-end with a single command. Built by Masuddar Rahaman (Founder & Framework Architect), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer). Install: pip install kaizenstat. Apache 2.0. Python 3.8+."
           }
         },
         {
           "@type": "Question",
-          "name": "How do I train a model with KaizenStat?",
+          "name": "Who founded KaizenStat?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "One line: from kaizenstat import DataDoctor; result = DataDoctor.quick_train('data.csv', target='label'). Or use the full pipeline: doctor = DataDoctor(); doctor.load('data.csv').fit(target='label'); result = doctor.run(). See https://www.kaizenstat.com/docs/first-model for a runnable example."
+            "text": "KaizenStat was founded in 2024 by three students: Masuddar Rahaman (Founder and Framework Architect — built the KaizenStat Python framework from scratch, designed DataDoctor and all core APIs), Kriti Sharma (AI Research and Management Lead — drives research, operations, and community), and Abhishikta Dutta (ML Engineer and Researcher — builds ML pipelines and production systems). Learn more at https://www.kaizenstat.com/founder-connect."
           }
         },
         {
           "@type": "Question",
-          "name": "Who are the founders of KaizenStat?",
+          "name": "Who built the KaizenStat Python framework?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "KaizenStat was created by Masuddar Rahaman (Lead Creator & Founder), Kriti Sharma (Co-founder), and Abhishikta Dutta (Co-founder). All three are students building the future of open data science. Visit https://www.kaizenstat.com/about to learn more."
+            "text": "Masuddar Rahaman built the KaizenStat Python ML framework from the ground up. He designed the DataDoctor class, the core pipeline engine, and all of KaizenStat's APIs. Masuddar Rahaman is the Founder and Framework Architect of KaizenStat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What problem does KaizenStat solve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KaizenStat solves the problem of building, debugging, and optimizing ML pipelines. Its DataDoctor class runs the full pipeline: Health → Validate → Fix → Train → Debug → Improve. It eliminates hundreds of lines of boilerplate, auto-detects data issues, trains models with one line, and continuously improves them. Install: pip install kaizenstat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What specializations and features does KaizenStat offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KaizenStat specializes in: (1) AutoML — automated model selection and training with DataDoctor.quick_train(); (2) Data Health Scoring — detect missing values, outliers, class imbalance, data drift; (3) ML Pipeline Debugging — root-cause tracing for ML errors; (4) Data Validation and Auto-fixing; (5) NLP and Text Data — TF-IDF and transformer embeddings, zero config, pip install kaizenstat[nlp]; (6) Model Deployment — export and serve models; (7) Trust Scoring and Explainability; (8) AI Advisor — intelligent pipeline recommendations, pip install kaizenstat[intel]; (9) Competitions — real ML challenges for students; (10) Certifications — earn verified ML certificates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is KaizenStat's DataDoctor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DataDoctor is KaizenStat's flagship class. It runs the complete ML pipeline: load data, score health, validate, fix issues, train a model, debug errors, and iteratively improve. One-liner: from kaizenstat import DataDoctor; result = DataDoctor.quick_train('data.csv', target='label'). DataDoctor was designed by Masuddar Rahaman and is the core of KaizenStat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I install KaizenStat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "pip install kaizenstat. For NLP features: pip install kaizenstat[nlp]. For AI advisor: pip install kaizenstat[intel]. Requires Python 3.8+. GitHub: https://github.com/kaizenstat-python/KaizenStat. PyPI: https://pypi.org/project/kaizenstat/."
           }
         },
         {
@@ -122,7 +206,7 @@
           "name": "Is KaizenStat open source?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. KaizenStat is Apache 2.0 licensed. Source code: https://github.com/kaizenstat-python/KaizenStat. PyPI: https://pypi.org/project/kaizenstat/. Contributions welcome."
+            "text": "Yes. KaizenStat is fully open source under Apache 2.0. GitHub: https://github.com/kaizenstat-python/KaizenStat. PyPI: https://pypi.org/project/kaizenstat/. Contributions welcome."
           }
         },
         {
@@ -130,7 +214,7 @@
           "name": "What Python version does KaizenStat require?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "KaizenStat requires Python 3.8 or later. Install: pip install kaizenstat. Optional extras: pip install kaizenstat[nlp] for NLP/text support, pip install kaizenstat[intel] for AI advisor features."
+            "text": "KaizenStat requires Python 3.8 or later. Works on Windows, macOS, and Linux. Install: pip install kaizenstat."
           }
         },
         {
@@ -138,15 +222,55 @@
           "name": "Does KaizenStat support NLP and text data?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. KaizenStat auto-detects text columns and applies TF-IDF or transformer embeddings with zero config changes. Enable with: pip install kaizenstat[nlp]. See Chapter 11 of the handbook: https://www.kaizenstat.com/docs/nlp"
+            "text": "Yes. KaizenStat auto-detects text columns and applies TF-IDF or transformer embeddings with zero configuration. Enable: pip install kaizenstat[nlp]. Docs: https://www.kaizenstat.com/docs/nlp."
           }
         },
         {
           "@type": "Question",
-          "name": "How can I contribute to KaizenStat?",
+          "name": "What makes KaizenStat different from scikit-learn, TensorFlow, or PyTorch?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Visit https://www.kaizenstat.com/contribute or open a PR on GitHub at https://github.com/kaizenstat-python/KaizenStat. You can also join as a blogger, mentor, or campus partner at https://www.kaizenstat.com/careers."
+            "text": "KaizenStat works on top of scikit-learn, TensorFlow, and PyTorch. While those libraries provide model implementations, KaizenStat automates the entire workflow around them: health scoring, debugging, fixing, and continuous improvement. One DataDoctor call replaces hundreds of lines of boilerplate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is KaizenStat's documentation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KaizenStat's full documentation (the KaizenStat Handbook) is at https://www.kaizenstat.com/docs. 12+ chapters, each with a runnable Google Colab notebook: What is KaizenStat, Install & Setup, First Model, DataDoctor, Data Health, Validation, Fixing, Training, Debugging, Trust Scoring, NLP, Deployment, and API Reference."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the KaizenStat Summer of Computation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The KaizenStat Summer of Computation is a community program where students contribute to the KaizenStat open-source Python ML framework, build projects, and earn recognition. Visit https://www.kaizenstat.com/kaizenstat-summer-of-computation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does KaizenStat have competitions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. KaizenStat runs ML competitions and data science challenges for students at all skill levels. Winners earn prizes and certificates. Visit https://www.kaizenstat.com/competitions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get certified in KaizenStat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. KaizenStat offers verifiable ML certificates. Get certified: https://www.kaizenstat.com/get-certified. Verify a certificate: https://www.kaizenstat.com/verify."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the KaizenStat community?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "KaizenStat has a growing student and developer community. Members contribute to the open-source framework, write blog posts, join competitions, participate in the Summer of Computation program, and become campus partners or mentors. See https://www.kaizenstat.com/careers."
           }
         }
       ]
@@ -158,9 +282,12 @@
         { "@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.kaizenstat.com/docs" },
         { "@type": "ListItem", "position": 3, "name": "Blog", "item": "https://www.kaizenstat.com/blog" },
         { "@type": "ListItem", "position": 4, "name": "Competitions", "item": "https://www.kaizenstat.com/competitions" },
-        { "@type": "ListItem", "position": 5, "name": "About", "item": "https://www.kaizenstat.com/about" },
-        { "@type": "ListItem", "position": 6, "name": "Careers", "item": "https://www.kaizenstat.com/careers" },
-        { "@type": "ListItem", "position": 7, "name": "Contribute", "item": "https://www.kaizenstat.com/contribute" }
+        { "@type": "ListItem", "position": 5, "name": "Founders", "item": "https://www.kaizenstat.com/founder-connect" },
+        { "@type": "ListItem", "position": 6, "name": "About", "item": "https://www.kaizenstat.com/about" },
+        { "@type": "ListItem", "position": 7, "name": "Careers", "item": "https://www.kaizenstat.com/careers" },
+        { "@type": "ListItem", "position": 8, "name": "Practice", "item": "https://www.kaizenstat.com/practice" },
+        { "@type": "ListItem", "position": 9, "name": "Get Certified", "item": "https://www.kaizenstat.com/get-certified" },
+        { "@type": "ListItem", "position": 10, "name": "KaizenStat Summer of Computation", "item": "https://www.kaizenstat.com/kaizenstat-summer-of-computation" }
       ]
     }
   ]
