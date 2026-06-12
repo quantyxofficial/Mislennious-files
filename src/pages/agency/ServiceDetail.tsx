@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { updateMetaTags } from '../../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SERVICES, SERVICE_DETAILS } from '../../data/siteConstants';
 import { Check, ArrowRight, Layers, ChevronRight, Minus } from 'lucide-react';
@@ -11,6 +12,19 @@ export const ServiceDetail: React.FC = () => {
 
     const basicInfo = SERVICES.find(s => s.id === serviceId);
     const detailedInfo = SERVICE_DETAILS.find(s => s.id === serviceId);
+
+    useEffect(() => {
+        if (!basicInfo) return;
+        const canonical = `https://www.kaizenstat.com/services/${serviceId}`;
+        updateMetaTags({
+            title: `${basicInfo.title} — KaizenStat Services`,
+            description: basicInfo.description || `${basicInfo.title} service by KaizenStat. Student-led data science and ML expertise.`,
+            keywords: ['kaizenstat services', basicInfo.title.toLowerCase(), 'data science services', 'ml consulting'],
+            canonical,
+            ogType: 'website',
+            ogImage: 'https://www.kaizenstat.com/logo.png',
+        });
+    }, [serviceId, basicInfo]);
 
     if (!basicInfo) {
         return <Navigate to="/" replace />;

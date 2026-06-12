@@ -509,11 +509,12 @@ export const OpenSourceLanding: React.FC = () => {
                 <GithubIcon size={14} />Start Contributing
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </motion.a>
-              <motion.a href="https://github.com/kaizenstat-python/KaizenStat" target="_blank" rel="noopener noreferrer"
-                whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 px-8 py-4 border border-lux-glassBorder bg-lux-glass text-lux-muted font-semibold text-xs tracking-[0.15em] uppercase hover:text-lux-text hover:border-lux-text/20 transition-colors rounded-full backdrop-blur-sm">
-                Star Our Repo
-              </motion.a>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <Link to="/events"
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-lux-glassBorder bg-lux-glass text-lux-muted font-semibold text-xs tracking-[0.15em] uppercase hover:text-lux-text hover:border-lux-text/20 transition-colors rounded-full backdrop-blur-sm">
+                  Explore Projects
+                </Link>
+              </motion.div>
             </motion.div>
 
             <motion.p className="text-[10px] text-lux-muted/40 uppercase tracking-widest font-mono"

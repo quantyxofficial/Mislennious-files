@@ -7,6 +7,22 @@ import { useAgencyAuth } from '../../context/AgencyAuthContext';
 import { AuthModal } from '../agency/AuthModal';
 import { AVATAR_COMPONENTS_MAP } from '../avatars/AvatarComponents';
 
+function NavLink({ to, label, active }: { to: string; label: string; active: boolean }) {
+  return (
+    <Link to={to} className={`relative py-2 transition-colors ${active ? 'text-white' : 'hover:text-white'}`}>
+      {label}
+      {active && (
+        <motion.div
+          layoutId="nav-indicator"
+          layout
+          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+        />
+      )}
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -18,18 +34,6 @@ export function Navbar() {
     if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
   };
-
-  const NavLink = ({ to, label }: { to: string; label: string }) => (
-    <Link to={to} className={`relative py-2 transition-colors ${isActive(to) ? 'text-white' : 'hover:text-white'}`}>
-      {label}
-      {isActive(to) && (
-        <motion.div layoutId="nav-indicator"
-          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent shadow-[0_0_8px_rgba(255,255,255,0.8)]"
-          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-        />
-      )}
-    </Link>
-  );
 
   return (
     <>
@@ -51,9 +55,9 @@ export function Navbar() {
 
         {/* Nav links */}
         <nav className="hidden lg:flex items-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
-          <NavLink to="/" label="Home" />
-          <NavLink to="/docs" label="Docs" />
-          <NavLink to="/founder-connect" label="Team" />
+          <NavLink to="/" label="Home" active={isActive('/')} />
+          <NavLink to="/docs" label="Docs" active={isActive('/docs')} />
+          <NavLink to="/founder-connect" label="Team" active={isActive('/founder-connect')} />
           <Link
             to="/contribute"
             className={`relative py-2 transition-colors ${isActive('/contribute') ? 'text-emerald-400' : 'text-slate-400 hover:text-emerald-400'}`}
@@ -102,35 +106,26 @@ export function Navbar() {
                   {/* UFO — fixed container so it never shifts siblings */}
                   <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
 
-                    {/* Flying motion: bob + tilt. On hover: whole UFO spins on Y axis (saucer spin) */}
+                    {/* Flying motion: gentle bob + slight banking tilt */}
                     <motion.div
                       animate={{
                         y: [0, -4, -1, -4, 0],
                         rotate: [-3, 3, -3],
-                      }}
-                      whileHover={{
-                        rotateY: [0, 360],
-                        scale: 1.12,
-                        transition: {
-                          rotateY: { duration: 0.7, ease: 'easeInOut', repeat: Infinity },
-                          scale: { duration: 0.2 },
-                        },
                       }}
                       transition={{
                         y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                         rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                       }}
                       className="relative flex flex-col items-center"
-                      style={{ willChange: 'transform', perspective: 400 }}
+                      style={{ willChange: 'transform' }}
                     >
-                      {/* Tractor beam — brightens on hover */}
+                      {/* Tractor beam — opacity only, no layout reflow */}
                       <motion.div
                         animate={{ opacity: [0.3, 0.8, 0.3] }}
-                        whileHover={{ opacity: 1, scaleX: 1.3 }}
                         transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
                         className="w-4 h-3 origin-top"
                         style={{
-                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.9), rgba(6,182,212,0.1))',
+                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
                           clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
                           marginBottom: -1,
                           willChange: 'opacity',
@@ -140,7 +135,7 @@ export function Navbar() {
                       {/* UFO saucer body */}
                       <div className="relative flex flex-col items-center">
                         {/* Dome / cockpit — avatar inside */}
-                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30 group-hover:border-cyan-300/90 group-hover:shadow-cyan-400/60 transition-all duration-300"
+                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
                           style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
                           <div className="w-full h-full">
                             {user.user_metadata?.avatar_url ? (
@@ -168,7 +163,7 @@ export function Navbar() {
                         </div>
 
                         {/* Saucer disc */}
-                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:border-cyan-300/80 transition-all duration-300"
+                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
                           style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
                           {/* Lights row — CSS pulse, no JS per-frame */}
                           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
@@ -186,22 +181,10 @@ export function Navbar() {
                         </div>
                       </div>
 
-                      {/* Hover glow underneath — expands on hover */}
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-14 transition-all duration-300 blur-sm"
-                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.8), transparent)' }} />
+                      {/* Hover glow underneath */}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
+                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
                     </motion.div>
-
-                    {/* Premium glow ring — only visible on hover */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.7 }}
-                      whileHover={{ opacity: 1, scale: 1 }}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-8 rounded-full pointer-events-none"
-                      style={{
-                        background: 'transparent',
-                        boxShadow: '0 0 16px 4px rgba(6,182,212,0.35), 0 0 32px 8px rgba(139,92,246,0.15)',
-                        willChange: 'transform, opacity',
-                      }}
-                    />
                   </div>
                 </Link>
                 <AnimatePresence>

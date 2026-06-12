@@ -27,10 +27,11 @@ import { updateMetaTags, SEO_CONFIG } from './utils/seo';
 
 // Only render heavy 3D on pages that actually use it
 const HEAVY_BG_PATHS = ['/', '/competitions', '/docs', '/simulation', '/dashboard'];
+const isDocsPath = (p: string) => p === '/docs' || p.startsWith('/docs/');
 
 function AppShell() {
   const location = useLocation();
-  const showBg = HEAVY_BG_PATHS.includes(location.pathname);
+  const showBg = HEAVY_BG_PATHS.includes(location.pathname) || isDocsPath(location.pathname);
 
   // Update SEO meta tags on route change
   useEffect(() => {
@@ -44,13 +45,16 @@ function AppShell() {
     };
 
     const pathname = location.pathname;
-    const seoConfig = routeMap[pathname];
 
-    if (seoConfig) {
-      updateMetaTags({
-        ...seoConfig,
-        canonical: `https://www.kaizenstat.com${pathname}`,
-      });
+    // Chapter pages are handled inside DocsPage via useEffect — skip here
+    if (!pathname.startsWith('/docs/')) {
+      const seoConfig = routeMap[pathname];
+      if (seoConfig) {
+        updateMetaTags({
+          ...seoConfig,
+          canonical: `https://www.kaizenstat.com${pathname}`,
+        });
+      }
     }
 
     // Scroll to top on route change
@@ -71,6 +75,7 @@ function AppShell() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/competitions" element={<CompetitionsPage />} />
           <Route path="/docs" element={<DocsPage />} />
+          <Route path="/docs/:chapterId" element={<DocsPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { updateMetaTags, SEO_CONFIG } from '../utils/seo';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   CheckCircle2, 
@@ -31,6 +32,14 @@ export function SimulationPage() {
     internshipProgram.tasks.map((_, i) => i === 0 ? 'unlocked' : 'locked')
   );
   const [feedback, setFeedback] = useState<string[]>(Array(5).fill(''));
+
+  useEffect(() => {
+    updateMetaTags({
+      ...SEO_CONFIG.simulation,
+      ogImage: 'https://www.kaizenstat.com/logo.png',
+      canonical: 'https://www.kaizenstat.com/simulation',
+    });
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);

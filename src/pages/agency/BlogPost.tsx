@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ChevronLeft, Clock, Calendar, User, Share2, Facebook, Twitter, Linkedin, Copy } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { updateMetaTags, createArticleSchema, createBreadcrumbs } from '../../utils/seo';
 
 export const BlogPost: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
@@ -18,6 +19,36 @@ export const BlogPost: React.FC = () => {
             if (postId) {
                 const data = await getBlogPost(postId);
                 setPost(data);
+
+                if (data) {
+                    const canonical = `https://www.kaizenstat.com/blog/${postId}`;
+                    updateMetaTags({
+                        title: `${data.title} — KaizenStat Blog`,
+                        description: data.description || `${data.title} — Read on the KaizenStat blog.`,
+                        keywords: ['kaizenstat blog', data.category?.toLowerCase() || 'data science', 'machine learning', 'python'],
+                        canonical,
+                        ogType: 'article',
+                        ogImage: data.image,
+                        twitterCard: 'summary_large_image',
+                        structuredData: {
+                            '@context': 'https://schema.org',
+                            '@graph': [
+                                createArticleSchema({
+                                    headline: data.title,
+                                    description: data.description || data.title,
+                                    image: data.image,
+                                    datePublished: data.date,
+                                    author: data.author,
+                                }),
+                                createBreadcrumbs([
+                                    { name: 'Home', url: 'https://www.kaizenstat.com' },
+                                    { name: 'Blog', url: 'https://www.kaizenstat.com/blog' },
+                                    { name: data.title, url: canonical },
+                                ]),
+                            ],
+                        },
+                    });
+                }
 
                 if (data?.content) {
                     const lines = data.content.split('\n');

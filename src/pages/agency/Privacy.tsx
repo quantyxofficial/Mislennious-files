@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, ChevronRight } from 'lucide-react';
+import { updateMetaTags } from '../../utils/seo';
 
 export const Privacy: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('');
     const [toc, setToc] = useState<{ id: string; text: string }[]>([]);
+
+    useEffect(() => {
+        updateMetaTags({
+            title: 'Privacy Policy — KaizenStat',
+            description: 'Read the KaizenStat privacy policy. Understand how we collect, use, and protect your data when using the KaizenStat platform and open source tools.',
+            keywords: ['kaizenstat privacy', 'kaizenstat privacy policy', 'data protection kaizenstat'],
+            canonical: 'https://www.kaizenstat.com/agency-privacy',
+            ogType: 'website',
+        });
+    }, []);
 
     useEffect(() => {
         const sections = [

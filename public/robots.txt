@@ -2,22 +2,34 @@
 User-agent: *
 Allow: /
 Allow: /docs
+Allow: /docs/
 Allow: /competitions
 Allow: /founder-connect
 Allow: /simulation
-Allow: /student
+Allow: /about
+Allow: /blog
+Allow: /blog/
+Allow: /events
+Allow: /careers
+Allow: /portfolio
+Allow: /contribute
+Allow: /kaizen-ai
+Allow: /practice
+Allow: /get-certified
+Allow: /verify
 Allow: /privacy
 Allow: /terms
 Allow: /ethics
 
 # Disallow private/admin routes
 Disallow: /admin
-Disallow: /dashboard/admin
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /mentor
+Disallow: /student
+Disallow: /login
 Disallow: /.env
 Disallow: /.git
-
-# Crawl delay to prevent overload
-Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://www.kaizenstat.com/sitemap.xml

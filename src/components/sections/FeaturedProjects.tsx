@@ -114,7 +114,7 @@ export function FeaturedProjects() {
           ))}
           <div 
             className="h-[280px] bg-white/[0.02] border border-white/5 border-dashed flex flex-col items-center justify-center p-6 text-center hover:bg-white/[0.04] transition-colors cursor-pointer"
-            onClick={() => window.open('https://github.com/kaizenstat', '_blank')}
+            onClick={() => window.open('https://github.com/kaizenstat-python', '_blank')}
           >
              <Search className="w-8 h-8 text-slate-500 mb-4" />
              <h3 className="text-xl font-medium text-white mb-2">Explore 50+ Real Projects</h3>

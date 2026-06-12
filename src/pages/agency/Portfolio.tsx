@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { EXTENDED_CASE_STUDIES } from '../../data/siteConstants';
 import { Filter } from 'lucide-react';
 import { ProjectForm } from '../../components/agency/ProjectForm';
+import { updateMetaTags } from '../../utils/seo';
 
 export const Portfolio: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -13,6 +14,17 @@ export const Portfolio: React.FC = () => {
     const excludedCategories = ['Web Development', 'Growth Marketing', 'AI & ML'];
     const categories = ['All', ...Array.from(new Set(EXTENDED_CASE_STUDIES.map(cs => cs.category)))]
         .filter(c => !excludedCategories.includes(c));
+
+    useEffect(() => {
+        updateMetaTags({
+            title: 'Portfolio — KaizenStat Projects & Case Studies | Data Science Impact',
+            description: 'Explore KaizenStat\'s portfolio of data science, machine learning, and open-source projects. Real case studies across healthcare AI, NLP, predictive analytics, and more.',
+            keywords: ['kaizenstat portfolio', 'data science projects', 'ml case studies', 'open source projects', 'kaizenstat work', 'ai projects'],
+            canonical: 'https://www.kaizenstat.com/portfolio',
+            ogType: 'website',
+            twitterCard: 'summary_large_image',
+        });
+    }, []);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);

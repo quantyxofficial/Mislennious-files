@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ChevronRight } from 'lucide-react';
+import { updateMetaTags } from '../../utils/seo';
 
 export const Terms: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('');
     const [toc, setToc] = useState<{ id: string; text: string }[]>([]);
+
+    useEffect(() => {
+        updateMetaTags({
+            title: 'Terms of Service — KaizenStat',
+            description: 'Read the KaizenStat terms of service. Terms governing use of the KaizenStat platform, open source library, competitions, and community resources.',
+            keywords: ['kaizenstat terms', 'kaizenstat terms of service', 'kaizenstat usage policy'],
+            canonical: 'https://www.kaizenstat.com/agency-terms',
+            ogType: 'website',
+        });
+    }, []);
 
     useEffect(() => {
         const sections = [

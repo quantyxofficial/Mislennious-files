@@ -16,7 +16,7 @@ export function KaizenFooter() {
           <div className="flex gap-8 text-sm text-slate-400">
             <Link to="/docs" className="hover:text-cyan-400 transition-colors">Documentation</Link>
             <Link to="/founder-connect" className="hover:text-cyan-400 transition-colors">Team</Link>
-            <a href="https://github.com/kaizenstat" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
+            <a href="https://github.com/kaizenstat-python" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
             <a href="https://pypi.org/project/kaizenstat/" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">PyPI</a>
           </div>
         </div>

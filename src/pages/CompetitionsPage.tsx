@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navbar } from '../components/sections/Navbar';
 import { SectionNavigator } from '../components/ui/SectionNavigator';
 import { Hero } from '../components/sections/Hero';
@@ -14,8 +15,17 @@ import { GlobalNetwork } from '../components/sections/GlobalNetwork';
 import { Rewards } from '../components/sections/Rewards';
 import { Sponsors } from '../components/sections/Sponsors';
 import { Footer } from '../components/sections/Footer';
+import { updateMetaTags, SEO_CONFIG } from '../utils/seo';
 
 export function CompetitionsPage() {
+  useEffect(() => {
+    updateMetaTags({
+      ...SEO_CONFIG.competitions,
+      ogImage: 'https://www.kaizenstat.com/logo.png',
+      canonical: 'https://www.kaizenstat.com/competitions',
+    });
+  }, []);
+
   return (
     <>
       <Navbar />

@@ -72,7 +72,7 @@ export function Footer() {
             </div>
 
             <div className="flex items-center gap-6 mb-8">
-              <a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <a href="https://github.com/kaizenstat-python" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
                 <Github className="w-5 h-5" />
               </a>
               <a href="https://www.linkedin.com/company/kaizenstat/about/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">

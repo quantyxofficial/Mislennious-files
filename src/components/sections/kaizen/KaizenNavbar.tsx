@@ -20,7 +20,7 @@ export function KaizenNavbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
           <a href="#features" className="hover:text-cyan-400 transition-colors">Features</a>
           <Link to="/docs" className="hover:text-cyan-400 transition-colors">Documentation</Link>
-          <a href="https://github.com/kaizenstat" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
+          <a href="https://github.com/kaizenstat-python" target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
         </div>
 
         <div className="flex items-center gap-4">

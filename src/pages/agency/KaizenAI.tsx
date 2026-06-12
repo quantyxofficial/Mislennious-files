@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { updateMetaTags } from '../../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Send, Trash2, ChevronDown, Menu, X,
@@ -27,6 +28,17 @@ export const KaizenAI: React.FC = () => {
         models, theme, toggleTheme,
         folders, createFolder, renameFolder, deleteFolder, moveSessionToFolder
     } = useAI();
+
+    useEffect(() => {
+        updateMetaTags({
+            title: 'Kaizen AI — Free AI Chat Assistant for Data Science & ML | KaizenStat',
+            description: 'Kaizen AI is KaizenStat\'s free AI chat assistant powered by multiple models. Get instant help with machine learning, data science, Python, and statistics — no signup required.',
+            keywords: ['kaizen ai', 'free ai chat', 'data science ai assistant', 'ml help', 'kaizenstat ai', 'free chatbot', 'ai tutor data science'],
+            canonical: 'https://www.kaizenstat.com/kaizen-ai',
+            ogType: 'website',
+            twitterCard: 'summary_large_image',
+        });
+    }, []);
 
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);

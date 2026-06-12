@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Linkedin, Mail, ChevronRight } from 'lucide-react';
+import { updateMetaTags } from '../../utils/seo';
 
 export const About: React.FC = () => {
     const [activeSection, setActiveSection] = useState<string>('');
     const [toc, setToc] = useState<{ id: string; text: string }[]>([]);
+
+    useEffect(() => {
+        updateMetaTags({
+            title: 'About KaizenStat — Student-Led ML Foundation | Masuddar Rahaman, Kriti Sharma, Abhishikta Dutta',
+            description: 'KaizenStat is a student-led open-source foundation building the future of data science. Meet the founders Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta — their story, values, and mission.',
+            keywords: ['kaizenstat team', 'about kaizenstat', 'masuddar rahaman', 'kriti sharma', 'abhishikta dutta', 'student-led data science', 'open source foundation'],
+            canonical: 'https://www.kaizenstat.com/about',
+            ogType: 'website',
+            twitterCard: 'summary_large_image',
+        });
+    }, []);
 
     useEffect(() => {
         const sections = [
