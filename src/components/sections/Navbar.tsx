@@ -43,15 +43,10 @@ export function Navbar() {
       >
         {/* Logo */}
         <div className="flex items-center gap-4">
-          <Link to="/" className="flex flex-col gap-0.5 group">
-            <div className="flex items-center gap-3">
-              <Logo className="w-9 h-9 text-white group-hover:rotate-[15deg] transition-transform duration-700 ease-out" />
-              <span className="text-xl font-bold tracking-tighter text-white">
-                KAIZEN<span className="font-light opacity-50">STAT</span>
-              </span>
-            </div>
-            <span className="text-[7px] font-mono uppercase tracking-widest text-white/25 px-0.5 pl-12">
-              Open Source · Python Framework
+          <Link to="/" className="flex items-center gap-3 group">
+            <Logo className="w-9 h-9 text-white group-hover:rotate-[15deg] transition-transform duration-700 ease-out" />
+            <span className="text-xl font-bold tracking-tighter text-white flex items-center gap-2">
+              KAIZEN<span className="font-light opacity-50">STAT</span>
             </span>
           </Link>
         </div>
