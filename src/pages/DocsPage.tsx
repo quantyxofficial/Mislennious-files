@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Terminal, Code, Cpu, Calendar, Clock, ChevronRight, Hash } from 'lucide-react';
+import { Navbar } from '../components/sections/Navbar';
 
 export function DocsPage() {
   const [docsList, setDocsList] = useState<BlogPostType[]>([]);
@@ -100,9 +101,11 @@ export function DocsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-slate-100 pt-28 pb-24">
-      {/* Background radial effects */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.02] via-transparent to-transparent z-0" />
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-black text-slate-100 pt-28 pb-24">
+        {/* Background radial effects */}
+        <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/[0.02] via-transparent to-transparent z-0" />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -254,7 +257,8 @@ export function DocsPage() {
           </aside>
 
         </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
