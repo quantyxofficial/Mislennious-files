@@ -557,33 +557,83 @@ export function StudentInfo() {
     setAvatarModal(false);
   };
 
-  const handleFileChosen = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Process image: resize to 100x100, crop center, convert to WebP, quality 60%
+  const processImage = (file: File): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 100;
+          canvas.height = 100;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) { reject(new Error('Canvas context failed')); return; }
+
+          // Calculate center crop
+          const size = Math.min(img.width, img.height);
+          const sx = (img.width - size) / 2;
+          const sy = (img.height - size) / 2;
+
+          // Draw cropped & resized image
+          ctx.drawImage(img, sx, sy, size, size, 0, 0, 100, 100);
+
+          // Convert to WebP with quality 60%
+          canvas.toBlob(blob => {
+            if (!blob) { reject(new Error('Canvas conversion failed')); return; }
+            resolve(blob);
+          }, 'image/webp', 0.6);
+        };
+        img.onerror = () => reject(new Error('Image load failed'));
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error('File read failed'));
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleFileChosen = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { setError('Image must be under 5 MB.'); return; }
-    const reader = new FileReader();
-    reader.onload = ev => setCropSrc(ev.target?.result as string);
-    reader.readAsDataURL(file);
+    setError(null);
+    try {
+      if (file.size > 50 * 1024 * 1024) { setError('Image must be under 50 MB.'); return; }
+      // Process image immediately
+      const processedBlob = await processImage(file);
+      // Create preview as data URL
+      const preview = URL.createObjectURL(processedBlob);
+      setCropSrc(preview);
+    } catch (err) {
+      setError(`Image processing failed: ${(err as Error).message}`);
+    }
     e.target.value = '';
   };
 
   const handleUploadConfirm = async () => {
     if (!cropSrc || !user?.id) return;
-    setAvatarUploading(true); setError(null);
+    setAvatarUploading(true);
+    setError(null);
     try {
+      // Fetch the processed blob from the preview URL
       const res = await fetch(cropSrc);
       const blob = await res.blob();
-      const ext = blob.type.split('/')[1] || 'jpg';
-      const path = `avatars/${user.id}.${ext}`;
-      const { error: upErr } = await supabase.storage.from('student-avatars').upload(path, blob, { upsert: true, contentType: blob.type });
+
+      // Upload as WebP
+      const path = `avatars/${user.id}.webp`;
+      const { error: upErr } = await supabase.storage.from('student-avatars').upload(path, blob, {
+        upsert: true,
+        contentType: 'image/webp',
+      });
       if (upErr) { setError(`Upload failed: ${upErr.message}`); return; }
+
       const { data: urlData } = supabase.storage.from('student-avatars').getPublicUrl(path);
       const avatarUrl = `${urlData.publicUrl}?t=${Date.now()}`;
       const newDraft = { ...draft, avatar_url: avatarUrl };
       setDraft(newDraft);
       await supabase.from('student_profiles').upsert({ user_id: user.id, ...newDraft }, { onConflict: 'user_id' });
       setSaved(newDraft);
-      setCropSrc(null); setAvatarModal(false);
+      setCropSrc(null);
+      setAvatarModal(false);
     } finally { setAvatarUploading(false); }
   };
 
