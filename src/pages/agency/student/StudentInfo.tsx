@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, MapPin, BookOpen, Calendar, AlertCircle, Github,
   Link as LinkIcon, Check, Mail, CheckCircle2, Linkedin,
-  FileText, ExternalLink as ExtIcon, Camera, Loader2, X, Upload,
+  FileText, ExternalLink as ExtIcon, Loader2, X,
 } from 'lucide-react';
 import { useAgencyAuth } from '../../../context/AgencyAuthContext';
 import { supabase } from '../../../lib/supabase';
@@ -79,15 +79,9 @@ export function StudentInfo() {
   const [error, setError]             = useState<string | null>(null);
   const [activeField, setActiveField] = useState<keyof StudentProfile | null>(null);
   const [avatarModal, setAvatarModal] = useState(false);
-  const [avatarUploading, setAvatarUploading] = useState(false);
-  const [cropSrc, setCropSrc]         = useState<string | null>(null);
   const [resendLoading, setResendLoading] = useState(false);
   const [resendSent, setResendSent]   = useState(false);
   const [magicEmail, setMagicEmail]   = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const isGoogleUser = user?.app_metadata?.provider === 'google'
-    || !!(user?.user_metadata?.avatar_url as string | undefined)?.includes('googleusercontent');
   const isDirty = JSON.stringify(draft) !== JSON.stringify(saved);
 
   useEffect(() => {
@@ -101,17 +95,25 @@ export function StudentInfo() {
     setIsLoading(true);
     try {
       const { data } = await supabase.from('student_profiles').select('*').eq('user_id', user.id).maybeSingle();
+      const unisexAvatars = ['robot', 'ninja', 'tech1', 'tech2', 'tech3'];
+      const randomAvatar = unisexAvatars[Math.floor(Math.random() * unisexAvatars.length)];
       const base: StudentProfile = data ? {
         full_name: data.full_name || user?.user_metadata?.full_name || '',
         university: data.university || '', major: data.major || '',
         graduation_year: data.graduation_year || '', bio: data.bio || '',
         github_url: data.github_url || '', portfolio_url: data.portfolio_url || '',
         linkedin_url: data.linkedin_url || '', resume_url: data.resume_url || '',
-        avatar_url: data.avatar_url || '',
-      } : { ...empty, full_name: user?.user_metadata?.full_name || '' };
+        avatar_url: data.avatar_url || `builtin:${randomAvatar}`,
+      } : { ...empty, full_name: user?.user_metadata?.full_name || '', avatar_url: `builtin:${randomAvatar}` };
       setSaved(base); setDraft(base);
+      if (user?.id && (!data || !data.avatar_url)) {
+        await supabase.from('student_profiles').upsert({ user_id: user.id, avatar_url: `builtin:${randomAvatar}` }, { onConflict: 'user_id' });
+        await supabase.auth.updateUser({ data: { avatar_url: `builtin:${randomAvatar}` } });
+      }
     } catch {
-      const fb = { ...empty, full_name: user?.user_metadata?.full_name || '' };
+      const unisexAvatars = ['robot', 'ninja', 'tech1', 'tech2', 'tech3'];
+      const randomAvatar = unisexAvatars[Math.floor(Math.random() * unisexAvatars.length)];
+      const fb = { ...empty, full_name: user?.user_metadata?.full_name || '', avatar_url: `builtin:${randomAvatar}` };
       setSaved(fb); setDraft(fb);
     } finally { setIsLoading(false); }
   };
@@ -142,87 +144,6 @@ export function StudentInfo() {
       setSaved(newDraft);
     }
     setAvatarModal(false);
-  };
-
-  // Process image: resize to 100x100, crop center, convert to WebP, quality 60%
-  const processImage = (file: File): Promise<Blob> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = 100;
-          canvas.height = 100;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) { reject(new Error('Canvas context failed')); return; }
-
-          // Calculate center crop
-          const size = Math.min(img.width, img.height);
-          const sx = (img.width - size) / 2;
-          const sy = (img.height - size) / 2;
-
-          // Draw cropped & resized image
-          ctx.drawImage(img, sx, sy, size, size, 0, 0, 100, 100);
-
-          // Convert to WebP with quality 60%
-          canvas.toBlob(blob => {
-            if (!blob) { reject(new Error('Canvas conversion failed')); return; }
-            resolve(blob);
-          }, 'image/webp', 0.6);
-        };
-        img.onerror = () => reject(new Error('Image load failed'));
-        img.src = e.target?.result as string;
-      };
-      reader.onerror = () => reject(new Error('File read failed'));
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const handleFileChosen = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setError(null);
-    try {
-      if (file.size > 50 * 1024 * 1024) { setError('Image must be under 50 MB.'); return; }
-      // Process image immediately
-      const processedBlob = await processImage(file);
-      // Create preview as data URL
-      const preview = URL.createObjectURL(processedBlob);
-      setCropSrc(preview);
-    } catch (err) {
-      setError(`Image processing failed: ${(err as Error).message}`);
-    }
-    e.target.value = '';
-  };
-
-  const handleUploadConfirm = async () => {
-    if (!cropSrc || !user?.id) return;
-    setAvatarUploading(true);
-    setError(null);
-    try {
-      // Fetch the processed blob from the preview URL
-      const res = await fetch(cropSrc);
-      const blob = await res.blob();
-
-      // Upload as WebP
-      const path = `avatars/${user.id}.webp`;
-      const { error: upErr } = await supabase.storage.from('student-avatars').upload(path, blob, {
-        upsert: true,
-        contentType: 'image/webp',
-      });
-      if (upErr) { setError(`Upload failed: ${upErr.message}`); return; }
-
-      const { data: urlData } = supabase.storage.from('student-avatars').getPublicUrl(path);
-      const avatarUrl = `${urlData.publicUrl}?t=${Date.now()}`;
-      const newDraft = { ...draft, avatar_url: avatarUrl };
-      setDraft(newDraft);
-      await supabase.from('student_profiles').upsert({ user_id: user.id, ...newDraft }, { onConflict: 'user_id' });
-      await supabase.auth.updateUser({ data: { avatar_url: avatarUrl } });
-      setSaved(newDraft);
-      setCropSrc(null);
-      setAvatarModal(false);
-    } finally { setAvatarUploading(false); }
   };
 
   const handleSendMagicLink = async (e: React.FormEvent) => {
@@ -462,10 +383,8 @@ export function StudentInfo() {
 
               {/* Header — fixed */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06] flex-shrink-0">
-                <h3 className="text-sm font-semibold text-white">
-                  {cropSrc ? 'Preview Photo' : 'Choose Avatar'}
-                </h3>
-                <button onClick={() => { setAvatarModal(false); setCropSrc(null); }}
+                <h3 className="text-sm font-semibold text-white">Choose Avatar</h3>
+                <button onClick={() => setAvatarModal(false)}
                   className="w-7 h-7 rounded-lg bg-white/[0.05] flex items-center justify-center text-slate-400 hover:text-white transition-colors">
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -473,46 +392,7 @@ export function StudentInfo() {
 
               {/* Scrollable body */}
               <div className="overflow-y-auto overscroll-contain flex-1 p-5 space-y-5">
-
-                {cropSrc ? (
-                  /* Crop preview */
-                  <div className="space-y-4">
-                    <p className="text-xs text-slate-400 text-center">Preview — will be cropped to square</p>
-                    <div className="w-28 h-28 mx-auto rounded-2xl overflow-hidden border border-white/10">
-                      <img src={cropSrc} alt="preview" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="flex gap-2">
-                      <button onClick={() => setCropSrc(null)}
-                        className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-xs text-slate-400 hover:text-white transition-colors">
-                        Back
-                      </button>
-                      <button onClick={handleUploadConfirm} disabled={avatarUploading}
-                        className="flex-1 py-2.5 rounded-xl bg-cyan-500 text-black text-xs font-bold hover:bg-cyan-400 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
-                        {avatarUploading ? <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Uploading…</> : <><Check className="w-3.5 h-3.5" /> Use this photo</>}
-                      </button>
-                    </div>
-                  </div>
-                ) : (
                   <>
-                    {/* Upload section */}
-                    <div>
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-2">Custom Photo</p>
-                      {isGoogleUser ? (
-                        <button onClick={() => fileInputRef.current?.click()}
-                          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-white/[0.12] bg-white/[0.02] text-sm text-slate-400 hover:border-cyan-500/40 hover:text-white transition-all">
-                          <Upload className="w-4 h-4" /> Upload your photo
-                        </button>
-                      ) : (
-                        <div className="w-full flex items-center gap-3 py-3 px-4 rounded-xl border border-white/[0.06] bg-white/[0.01]">
-                          <Camera className="w-4 h-4 text-slate-600 flex-shrink-0" />
-                          <div>
-                            <p className="text-xs text-slate-500">Custom photo requires Google sign-in.</p>
-                          </div>
-                        </div>
-                      )}
-                      <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChosen} />
-                    </div>
-
                     {/* Avatar grid */}
                     <div>
                       <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-3">Avatars</p>
@@ -536,7 +416,6 @@ export function StudentInfo() {
                       </div>
                     </div>
                   </>
-                )}
               </div>
             </motion.div>
           </motion.div>
