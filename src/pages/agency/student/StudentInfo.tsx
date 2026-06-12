@@ -371,44 +371,65 @@ export function StudentInfo() {
             style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)' }}
             onClick={() => setAvatarModal(false)}>
 
-            <motion.div initial={{ opacity: 0, scale: 0.95, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            <motion.div initial={{ opacity: 0, scale: 0.92, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 20 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               onClick={e => e.stopPropagation()}
-              className="w-full max-w-sm rounded-2xl border border-white/[0.08] flex flex-col"
-              style={{ background: 'rgba(9,9,11,0.98)', maxHeight: '85vh' }}>
+              className="w-full max-w-md rounded-3xl border border-cyan-500/30 flex flex-col shadow-2xl shadow-cyan-500/10"
+              style={{ background: 'linear-gradient(135deg, rgba(9,9,11,0.99) 0%, rgba(15,23,42,0.98) 100%)', maxHeight: '90vh' }}>
 
-              {/* Header — fixed */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06] flex-shrink-0">
-                <h3 className="text-sm font-semibold text-white">Choose Avatar</h3>
+              {/* Header — fixed with gradient */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-cyan-500/20 flex-shrink-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10">
+                <div>
+                  <h3 className="text-base font-bold text-white">Choose Your Avatar</h3>
+                  <p className="text-xs text-slate-400 mt-0.5">Pick a unique avatar for your profile</p>
+                </div>
                 <button onClick={() => setAvatarModal(false)}
-                  className="w-7 h-7 rounded-lg bg-white/[0.05] flex items-center justify-center text-slate-400 hover:text-white transition-colors">
-                  <X className="w-3.5 h-3.5" />
+                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-all">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Scrollable body */}
-              <div className="overflow-y-auto overscroll-contain flex-1 p-5 space-y-5">
+              <div className="overflow-y-auto flex-1 p-6 space-y-5">
                 <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-3">Avatars</p>
-                  <div className="grid grid-cols-4 gap-2">
+                  <p className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4">Available Avatars</p>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
                     {AVATAR_COMPONENTS.map(av => {
                       const isSelected = draft.avatar_url === `builtin:${av.id}`;
                       return (
-                        <button key={av.id} onClick={() => handleBuiltInAvatar(av.id)}
-                          className={`relative aspect-square rounded-xl overflow-hidden border transition-all ${
-                            isSelected ? 'border-cyan-400 ring-2 ring-cyan-400/30 scale-105' : 'border-white/[0.06] hover:border-white/20 hover:scale-105'
+                        <motion.button key={av.id}
+                          whileHover={{ scale: 1.08 }}
+                          whileTap={{ scale: 0.96 }}
+                          onClick={() => handleBuiltInAvatar(av.id)}
+                          className={`relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-200 flex items-center justify-center ${
+                            isSelected
+                              ? 'border-cyan-400 ring-2 ring-cyan-400/50 shadow-lg shadow-cyan-500/30 bg-cyan-500/10'
+                              : 'border-white/10 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10 bg-white/5 hover:bg-white/10'
                           }`}>
-                          <av.component />
+                          <div className="w-full h-full flex items-center justify-center">
+                            <av.component />
+                          </div>
                           {isSelected && (
-                            <div className="absolute top-1 right-1 w-4 h-4 rounded-full bg-cyan-400 flex items-center justify-center">
-                              <Check className="w-2.5 h-2.5 text-black" strokeWidth={3} />
-                            </div>
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center shadow-lg">
+                              <Check className="w-3 h-3 text-black font-bold" strokeWidth={4} />
+                            </motion.div>
                           )}
-                        </button>
+                          <div className="absolute bottom-0 left-0 right-0 text-xs font-semibold text-white text-center py-1.5 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity">
+                            {av.label}
+                          </div>
+                        </motion.button>
                       );
                     })}
                   </div>
                 </div>
+              </div>
+
+              {/* Footer hint */}
+              <div className="px-6 py-4 border-t border-cyan-500/20 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 flex-shrink-0">
+                <p className="text-xs text-slate-400 text-center">Click an avatar to select it for your profile</p>
               </div>
             </motion.div>
           </motion.div>
