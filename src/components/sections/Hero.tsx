@@ -34,6 +34,18 @@ export function Hero() {
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col items-center pointer-events-auto mt-auto">
 
 
+        {/* Framework tag */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-4"
+        >
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.05] text-[10px] font-mono uppercase tracking-widest text-white/50">
+            Next-Gen Python Framework
+          </span>
+        </motion.div>
+
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
