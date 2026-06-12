@@ -99,93 +99,91 @@ export function Navbar() {
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
                 <Link to="/student" className="relative group flex items-center transition-all duration-300">
-                  {/* UFO shape with floating motion */}
-                  <motion.div
-                    animate={{
-                      y: [0, -3, 0],
-                      rotateZ: [0, 1, -1, 0],
-                    }}
-                    transition={{
-                      y: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                      rotateZ: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                    }}
-                    className="relative flex flex-col items-center"
-                  >
+                  {/* UFO — isolated stacking context, fixed size so it never shifts siblings */}
+                  <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
 
-                    {/* Tractor beam — glows on hover */}
+                    {/* Float animation wraps only the visual, not the container */}
                     <motion.div
-                      animate={{
-                        opacity: [0.3, 0.9, 0.3],
-                        scaleY: [0.8, 1.2, 0.8],
-                        height: ['0.75rem', '1rem', '0.75rem']
-                      }}
-                      transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-4 origin-top"
-                      style={{
-                        background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
-                        clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
-                        marginBottom: -1,
-                      }}
-                    />
+                      animate={{ y: [0, -3, 0] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                      className="relative flex flex-col items-center"
+                      style={{ willChange: 'transform' }}
+                    >
+                      {/* Tractor beam — opacity only, fixed height, no layout reflow */}
+                      <motion.div
+                        animate={{ opacity: [0.3, 0.8, 0.3] }}
+                        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                        className="w-4 h-3 origin-top"
+                        style={{
+                          background: 'linear-gradient(to bottom, rgba(6,182,212,0.6), rgba(6,182,212,0.1))',
+                          clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
+                          marginBottom: -1,
+                          willChange: 'opacity',
+                        }}
+                      />
 
-                    {/* UFO saucer body */}
-                    <div className="relative flex flex-col items-center">
-                      {/* Dome / cockpit — avatar inside */}
-                      <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
-                        style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
-                        <div className="w-full h-full">
-                          {user.user_metadata?.avatar_url ? (
-                            (() => {
-                              const avatarUrl = user.user_metadata.avatar_url as string;
-                              if (avatarUrl.startsWith('builtin:')) {
-                                const avatarId = avatarUrl.replace('builtin:', '');
-                                const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
-                                return AvatarComponent ? (
-                                  <div className="w-full h-full scale-150 translate-y-1 overflow-hidden">
-                                    <AvatarComponent />
-                                  </div>
-                                ) : null;
-                              }
-                              return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover object-top" />;
-                            })()
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <UserIcon className="w-3 h-3 text-cyan-400" />
-                            </div>
-                          )}
+                      {/* UFO saucer body */}
+                      <div className="relative flex flex-col items-center">
+                        {/* Dome / cockpit — avatar inside */}
+                        <div className="relative z-10 w-8 h-5 rounded-t-full overflow-hidden border border-cyan-400/60 shadow-lg shadow-cyan-500/30"
+                          style={{ background: 'linear-gradient(135deg, rgba(6,182,212,0.25), rgba(139,92,246,0.15))' }}>
+                          <div className="w-full h-full">
+                            {user.user_metadata?.avatar_url ? (
+                              (() => {
+                                const avatarUrl = user.user_metadata.avatar_url as string;
+                                if (avatarUrl.startsWith('builtin:')) {
+                                  const avatarId = avatarUrl.replace('builtin:', '');
+                                  const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
+                                  return AvatarComponent ? (
+                                    <div className="w-full h-full scale-150 translate-y-1 overflow-hidden">
+                                      <AvatarComponent />
+                                    </div>
+                                  ) : null;
+                                }
+                                return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover object-top" />;
+                              })()
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <UserIcon className="w-3 h-3 text-cyan-400" />
+                              </div>
+                            )}
+                          </div>
+                          {/* Dome glare */}
+                          <div className="absolute top-0.5 left-1 w-2 h-1 rounded-full bg-white/20" />
                         </div>
-                        {/* Dome glare */}
-                        <div className="absolute top-0.5 left-1 w-2 h-1 rounded-full bg-white/20" />
+
+                        {/* Saucer disc */}
+                        <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
+                          style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
+                          {/* Lights row — CSS animation via keyframes, no JS per-frame */}
+                          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
+                            {[0,1,2,3].map(i => (
+                              <div key={i}
+                                className="w-1 h-1 rounded-full animate-pulse"
+                                style={{
+                                  background: i % 2 === 0 ? '#06b6d4' : '#a855f7',
+                                  animationDelay: `${i * 0.2}s`,
+                                  animationDuration: '1.2s',
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Saucer disc */}
-                      <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
-                        style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
-                        {/* Lights row */}
-                        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
-                          {[0,1,2,3].map(i => (
-                            <motion.div key={i}
-                              animate={{ opacity: [1, 0.2, 1] }}
-                              transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2, ease: 'easeInOut' }}
-                              className="w-1 h-1 rounded-full"
-                              style={{ background: i % 2 === 0 ? '#06b6d4' : '#a855f7' }}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                      {/* Hover glow underneath */}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
+                        style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
+                    </motion.div>
 
-                    {/* Hover glow underneath */}
-                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
-                      style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
-
-                    {/* Rotating ring around UFO */}
+                    {/* Rotating ring — absolutely positioned so it never affects layout */}
                     <motion.div
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                      className="absolute inset-x-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-6 border border-cyan-500/20 rounded-full pointer-events-none"
+                      transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-6 border border-cyan-500/20 rounded-full pointer-events-none"
+                      style={{ willChange: 'transform' }}
                     />
-                  </motion.div>
+                  </div>
                 </Link>
                 <AnimatePresence>
                   {isUserMenuOpen && (
