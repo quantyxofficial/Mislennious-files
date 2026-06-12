@@ -88,7 +88,7 @@ export function Navbar() {
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
-                <button className="flex items-center gap-2 p-1 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <Link to="/student" className="flex items-center gap-2 p-1 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300">
                   <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30">
                     {user.user_metadata?.avatar_url ? (
                       <img src={user.user_metadata.avatar_url} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />
@@ -98,7 +98,7 @@ export function Navbar() {
                       </div>
                     )}
                   </div>
-                </button>
+                </Link>
                 <AnimatePresence>
                   {isUserMenuOpen && (
                     <motion.div
