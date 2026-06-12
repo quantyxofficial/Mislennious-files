@@ -4,6 +4,7 @@
  */
 
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { LandingPage } from './pages/LandingPage';
 import { CompetitionsPage } from './pages/CompetitionsPage';
 import { DocsPage } from './pages/DocsPage';
@@ -22,6 +23,7 @@ import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AgencyRoutes } from './routes/AgencyRoutes';
 import { AgencyAuthProvider } from './context/AgencyAuthContext';
 import { AIProvider } from './context/AIContext';
+import { updateMetaTags, SEO_CONFIG } from './utils/seo';
 
 // Only render heavy 3D on pages that actually use it
 const HEAVY_BG_PATHS = ['/', '/competitions', '/docs', '/simulation', '/dashboard'];
@@ -29,6 +31,31 @@ const HEAVY_BG_PATHS = ['/', '/competitions', '/docs', '/simulation', '/dashboar
 function AppShell() {
   const location = useLocation();
   const showBg = HEAVY_BG_PATHS.includes(location.pathname);
+
+  // Update SEO meta tags on route change
+  useEffect(() => {
+    // Map routes to SEO configs
+    const routeMap: Record<string, SEOConfig> = {
+      '/': SEO_CONFIG.home,
+      '/docs': SEO_CONFIG.docs,
+      '/competitions': SEO_CONFIG.competitions,
+      '/founder-connect': SEO_CONFIG.team,
+      '/simulation': SEO_CONFIG.simulation,
+    };
+
+    const pathname = location.pathname;
+    const seoConfig = routeMap[pathname];
+
+    if (seoConfig) {
+      updateMetaTags({
+        ...seoConfig,
+        canonical: `https://www.kaizenstat.com${pathname}`,
+      });
+    }
+
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-cyan-500/30 relative">

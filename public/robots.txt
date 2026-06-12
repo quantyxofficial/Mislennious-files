@@ -1,0 +1,33 @@
+# KaizenStat SEO Configuration
+User-agent: *
+Allow: /
+Allow: /docs
+Allow: /competitions
+Allow: /founder-connect
+Allow: /simulation
+Allow: /student
+Allow: /privacy
+Allow: /terms
+Allow: /ethics
+
+# Disallow private/admin routes
+Disallow: /admin
+Disallow: /dashboard/admin
+Disallow: /.env
+Disallow: /.git
+
+# Crawl delay to prevent overload
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.kaizenstat.com/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
