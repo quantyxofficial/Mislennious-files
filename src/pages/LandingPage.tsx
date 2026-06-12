@@ -73,26 +73,82 @@ export function LandingPage() {
         <Navbar />
       </motion.div>
 
-      {/* Badge bar — rises from below navbar to fill its spot when navbar hides */}
+      {/* Sticky bar — premium letter-by-letter reveal with shimmer sweep */}
       <motion.div
-        animate={{ y: navHidden ? 0 : -50, opacity: navHidden ? 1 : 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center px-6 lg:px-12 backdrop-blur-xl bg-black/50 border-b border-white/[0.05]"
+        animate={{ y: navHidden ? 0 : -80 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center overflow-hidden"
         style={{ height: 70, pointerEvents: navHidden ? 'auto' : 'none' }}
       >
-        <span className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/50">
-          Next-Gen Python Framework
-        </span>
+        {/* Frosted glass background */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-2xl" />
+        {/* Ambient top glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)' }} />
+        {/* Bottom hairline */}
+        <div className="absolute bottom-0 inset-x-0 h-px"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06), rgba(255,255,255,0.06), transparent)' }} />
+
+        {/* Text rises bottom-to-top into position */}
+        <AnimatePresence>
+          {navHidden && (
+            <motion.div
+              key="tagline"
+              initial={{ y: 24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -24, opacity: 0 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex items-center gap-4"
+            >
+              {/* Left line extends after text settles */}
+              <motion.span
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                exit={{ scaleX: 0, opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="block w-10 h-px origin-left"
+                style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3))' }}
+              />
+
+              <span className="text-[11px] font-light tracking-[0.5em] uppercase text-white/45 font-mono whitespace-nowrap">
+                Next-Gen Python Framework
+              </span>
+
+              {/* Right line extends after text settles */}
+              <motion.span
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                exit={{ scaleX: 0, opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="block w-10 h-px origin-right"
+                style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.3), transparent)' }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
-      {/* Static badge below navbar when not scrolled */}
+      {/* Floating badge below navbar — vertical float only */}
       <div className="fixed top-[70px] left-0 right-0 z-30 flex items-center justify-center py-3"
         style={{ pointerEvents: 'none' }}>
         <motion.span
-          animate={{ opacity: navHidden ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
-          className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/40">
+          initial={{ opacity: 0, y: 6 }}
+          animate={navHidden
+            ? { opacity: 0, y: -6 }
+            : { opacity: 1, y: [0, -5, 0] }
+          }
+          transition={navHidden
+            ? { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+            : {
+                opacity: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                y: { duration: 3, repeat: Infinity, ease: 'easeInOut', repeatType: 'loop' }
+              }
+          }
+          style={{ x: 0 }}
+          className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full border border-white/[0.07] bg-white/[0.025] text-[9px] font-mono uppercase tracking-[0.35em] text-white/30">
+          <span className="w-[3px] h-[3px] rounded-full bg-white/30" />
           Next-Gen Python Framework
+          <span className="w-[3px] h-[3px] rounded-full bg-white/30" />
         </motion.span>
       </div>
 
