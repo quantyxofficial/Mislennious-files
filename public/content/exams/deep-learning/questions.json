@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1,
+        "question": "What is the 'Deep' in Deep Learning?",
+        "options": [
+            "Large datasets",
+            "Many hidden layers",
+            "High accuracy",
+            "Complex algorithms"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 2,
+        "question": "Which activation function is the default for hidden layers?",
+        "options": [
+            "Sigmoid",
+            "Tanh",
+            "ReLU",
+            "Softmax"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 3,
+        "question": "What is the purpose of Backpropagation?",
+        "options": [
+            "Forward data through the network",
+            "Calculate gradients for weight updates",
+            "Initialize weights",
+            "Normalize data"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 4,
+        "question": "Which optimizer is considered the 'gold standard'?",
+        "options": [
+            "SGD",
+            "RMSProp",
+            "Adam",
+            "Momentum"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 5,
+        "question": "What does CNN stand for?",
+        "options": [
+            "Calculated Neural Network",
+            "Convolutional Neural Network",
+            "Connected Neuron Nodes",
+            "Central Node Network"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 6,
+        "question": "Which layer in a CNN is used for downsampling?",
+        "options": [
+            "Convolution",
+            "Pooling",
+            "Fully Connected",
+            "Dropout"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 7,
+        "question": "What problem do LSTMs solve that basic RNNs cannot?",
+        "options": [
+            "Overfitting",
+            "Long-term dependencies",
+            "Underfitting",
+            "Feature extraction"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 8,
+        "question": "What is the main benefit of Transformers over RNNs?",
+        "options": [
+            "Simpler architecture",
+            "Parallel processing",
+            "Fewer parameters",
+            "Lower memory usage"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 9,
+        "question": "What is 'Dropout' used for?",
+        "options": [
+            "Data augmentation",
+            "Preventing overfitting",
+            "Faster training",
+            "Weight initialization"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 10,
+        "question": "Which loss function is used for binary classification?",
+        "options": [
+            "MSE",
+            "MAE",
+            "Binary Cross-Entropy",
+            "Categorical Cross-Entropy"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 11,
+        "question": "What does a 'Vanishing Gradient' cause?",
+        "options": [
+            "Weights explode",
+            "Weights stop updating",
+            "Model overfits",
+            "Training becomes faster"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 12,
+        "question": "Which architecture introduced 'Skip Connections'?",
+        "options": [
+            "VGGNet",
+            "AlexNet",
+            "ResNet",
+            "LeNet"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 13,
+        "question": "What is 'Transfer Learning'?",
+        "options": [
+            "Training from scratch",
+            "Using a pretrained model for a new task",
+            "Transferring data between servers",
+            "A type of data augmentation"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 14,
+        "question": "In a GAN, what does the Generator do?",
+        "options": [
+            "Classifies images",
+            "Creates fake data",
+            "Detects fakes",
+            "Compresses data"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 15,
+        "question": "What is 'Softmax' used for?",
+        "options": [
+            "Binary classification output",
+            "Regression output",
+            "Multi-class probability output",
+            "All of the above"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 16,
+        "question": "What is a 'Tensor'?",
+        "options": [
+            "A scalar value",
+            "A 1D array only",
+            "A multi-dimensional array",
+            "A type of neuron"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 17,
+        "question": "Which framework is preferred for research?",
+        "options": [
+            "TensorFlow",
+            "Keras",
+            "PyTorch",
+            "Scikit-learn"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 18,
+        "question": "What does 'Epoch' mean in training?",
+        "options": [
+            "One pass through a batch",
+            "One pass through the entire dataset",
+            "A type of learning rate",
+            "A checkpoint"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 19,
+        "question": "What is 'Data Augmentation'?",
+        "options": [
+            "Collecting more data",
+            "Artificially expanding the training set",
+            "Deleting bad data",
+            "Normalizing data"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 20,
+        "question": "What is the purpose of the 'Attention' mechanism?",
+        "options": [
+            "Speed up training",
+            "Allow the model to focus on relevant parts of the input",
+            "Reduce memory",
+            "Simplify the architecture"
+        ],
+        "answer": 1
+    }
+]

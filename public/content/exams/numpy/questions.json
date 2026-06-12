@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1,
+        "question": "What is the primary data structure in NumPy?",
+        "options": [
+            "List",
+            "Dictionary",
+            "ndarray",
+            "Set"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 2,
+        "question": "Which function creates an array of zeros?",
+        "options": [
+            "np.zeros()",
+            "np.empty()",
+            "np.null()",
+            "np.blank()"
+        ],
+        "answer": 0
+    },
+    {
+        "id": 3,
+        "question": "What does 'broadcasting' in NumPy enable?",
+        "options": [
+            "Sending arrays over the network",
+            "Operations on arrays of different shapes",
+            "Printing arrays",
+            "Sorting arrays"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 4,
+        "question": "Which attribute returns the number of dimensions of an array?",
+        "options": [
+            "shape",
+            "ndim",
+            "size",
+            "dtype"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 5,
+        "question": "What does np.arange(5) return?",
+        "options": [
+            "[1, 2, 3, 4, 5]",
+            "[0, 1, 2, 3, 4]",
+            "[5, 4, 3, 2, 1]",
+            "[0, 1, 2, 3, 4, 5]"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 6,
+        "question": "Which method reshapes an array without changing its data?",
+        "options": [
+            "resize()",
+            "reshape()",
+            "transform()",
+            "modify()"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 7,
+        "question": "What is the output dtype of np.array([1.0, 2, 3])?",
+        "options": [
+            "int32",
+            "float64",
+            "object",
+            "str"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 8,
+        "question": "Which function combines multiple arrays vertically?",
+        "options": [
+            "np.hstack()",
+            "np.vstack()",
+            "np.dstack()",
+            "np.concat()"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 9,
+        "question": "What does np.dot(A, B) compute?",
+        "options": [
+            "Element-wise product",
+            "Matrix multiplication",
+            "Cross product",
+            "Outer product"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 10,
+        "question": "Which function generates random numbers from a normal distribution?",
+        "options": [
+            "np.random.rand()",
+            "np.random.randn()",
+            "np.random.randint()",
+            "np.random.random()"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 11,
+        "question": "What does arr.flatten() do?",
+        "options": [
+            "Sorts the array",
+            "Converts a multi-dimensional array to 1D",
+            "Transposes the array",
+            "Deletes duplicates"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 12,
+        "question": "Which slicing syntax gets every other element from an array?",
+        "options": [
+            "arr[::2]",
+            "arr[2::]",
+            "arr[:2:]",
+            "arr[1::1]"
+        ],
+        "answer": 0
+    },
+    {
+        "id": 13,
+        "question": "What is the purpose of np.where()?",
+        "options": [
+            "Find indices where a condition is true",
+            "Search for a specific value",
+            "Sort an array",
+            "Delete elements"
+        ],
+        "answer": 0
+    },
+    {
+        "id": 14,
+        "question": "Which function calculates the mean along a specific axis?",
+        "options": [
+            "np.average()",
+            "np.mean()",
+            "np.median()",
+            "Both A and B"
+        ],
+        "answer": 3
+    },
+    {
+        "id": 15,
+        "question": "What does np.linspace(0, 10, 5) return?",
+        "options": [
+            "5 evenly spaced numbers from 0 to 10",
+            "Numbers 0, 2, 4, 6, 8, 10",
+            "5 random numbers",
+            "An error"
+        ],
+        "answer": 0
+    },
+    {
+        "id": 16,
+        "question": "Which operation is NOT element-wise?",
+        "options": [
+            "arr1 + arr2",
+            "arr1 * arr2",
+            "np.dot(arr1, arr2)",
+            "arr1 - arr2"
+        ],
+        "answer": 2
+    },
+    {
+        "id": 17,
+        "question": "What does np.save() do?",
+        "options": [
+            "Saves an array to a CSV file",
+            "Saves an array to a binary .npy file",
+            "Saves an array to a text file",
+            "Saves an array to memory"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 18,
+        "question": "Which function returns the indices that would sort an array?",
+        "options": [
+            "np.sort()",
+            "np.argsort()",
+            "np.order()",
+            "np.indices()"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 19,
+        "question": "What is the main advantage of NumPy over Python lists?",
+        "options": [
+            "Easier syntax",
+            "Faster numerical operations",
+            "More data types",
+            "Better error messages"
+        ],
+        "answer": 1
+    },
+    {
+        "id": 20,
+        "question": "Which function calculates the standard deviation?",
+        "options": [
+            "np.var()",
+            "np.std()",
+            "np.dev()",
+            "np.sigma()"
+        ],
+        "answer": 1
+    }
+]

@@ -19,6 +19,8 @@ coverage/
 !README.md
 !CHANGELOG.md
 !LICENSE.md
+!public/content/**/*.md
+!public/content/**/*.json
 
 # ========== CLAUDE CONFIGURATION FILES ==========
 .claude/
