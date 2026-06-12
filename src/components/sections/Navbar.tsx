@@ -89,27 +89,44 @@ export function Navbar() {
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
-                <Link to="/student" className="flex items-center gap-2 p-1 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all duration-300">
-                  <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30">
-                    {user.user_metadata?.avatar_url ? (
-                      (() => {
-                        const avatarUrl = user.user_metadata.avatar_url as string;
-                        if (avatarUrl.startsWith('builtin:')) {
-                          const avatarId = avatarUrl.replace('builtin:', '');
-                          const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
-                          return AvatarComponent ? <AvatarComponent /> : (
-                            <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                              <UserIcon className="w-4 h-4" />
-                            </div>
-                          );
-                        }
-                        return <img src={avatarUrl} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />;
-                      })()
-                    ) : (
-                      <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                        <UserIcon className="w-4 h-4" />
-                      </div>
-                    )}
+                <Link to="/student" className="relative group flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300">
+                  {/* Background glow */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/20 via-purple-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300" />
+
+                  {/* Avatar container */}
+                  <div className="relative">
+                    <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-cyan-400/60 flex items-center justify-center relative group/avatar shadow-lg shadow-cyan-500/20">
+                      {/* Glow ring */}
+                      <div className="absolute -inset-1.5 rounded-full border border-cyan-400/20 group-hover/avatar:border-cyan-400/40 transition-colors" />
+                      <div className="absolute -inset-1 rounded-full bg-cyan-500/5 group-hover/avatar:bg-cyan-500/10 transition-colors" />
+
+                      {user.user_metadata?.avatar_url ? (
+                        (() => {
+                          const avatarUrl = user.user_metadata.avatar_url as string;
+                          if (avatarUrl.startsWith('builtin:')) {
+                            const avatarId = avatarUrl.replace('builtin:', '');
+                            const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
+                            return AvatarComponent ? <AvatarComponent /> : (
+                              <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                                <UserIcon className="w-4 h-4" />
+                              </div>
+                            );
+                          }
+                          return <img src={avatarUrl} alt={user.user_metadata?.full_name || 'User'} className="w-full h-full object-cover" />;
+                        })()
+                      ) : (
+                        <div className="w-full h-full bg-cyan-500/20 flex items-center justify-center text-cyan-400">
+                          <UserIcon className="w-4 h-4" />
+                        </div>
+                      )}
+                    </div>
+                    {/* Animated pulse on avatar */}
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                      className="absolute -inset-1.5 rounded-full border border-cyan-400/30 pointer-events-none"
+                    />
                   </div>
                 </Link>
                 <AnimatePresence>
