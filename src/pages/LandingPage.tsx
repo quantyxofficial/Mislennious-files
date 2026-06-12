@@ -37,13 +37,13 @@ export function LandingPage() {
   return (
     <>
       <Navbar />
-      <div className="fixed top-[70px] left-0 right-0 z-40 flex items-center justify-center py-4 border-b border-white/[0.05] backdrop-blur-sm bg-black/20">
+      <div className="fixed top-[70px] left-0 right-0 z-40 flex items-center justify-center py-3">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.05] text-[9px] font-mono uppercase tracking-widest text-white/50">
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/40 hover:text-white/60 transition-colors">
             Next-Gen Python Framework
           </span>
         </motion.div>
