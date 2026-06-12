@@ -99,17 +99,23 @@ export function Navbar() {
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
                 <Link to="/student" className="relative group flex items-center transition-all duration-300">
-                  {/* UFO — isolated stacking context, fixed size so it never shifts siblings */}
+                  {/* UFO — fixed container so it never shifts siblings */}
                   <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
 
-                    {/* Float animation wraps only the visual, not the container */}
+                    {/* Flying motion: gentle bob + slight banking tilt */}
                     <motion.div
-                      animate={{ y: [0, -3, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                      animate={{
+                        y: [0, -4, -1, -4, 0],
+                        rotate: [-3, 3, -3],
+                      }}
+                      transition={{
+                        y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                        rotate: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                      }}
                       className="relative flex flex-col items-center"
                       style={{ willChange: 'transform' }}
                     >
-                      {/* Tractor beam — opacity only, fixed height, no layout reflow */}
+                      {/* Tractor beam — opacity only, no layout reflow */}
                       <motion.div
                         animate={{ opacity: [0.3, 0.8, 0.3] }}
                         transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -155,7 +161,7 @@ export function Navbar() {
                         {/* Saucer disc */}
                         <div className="relative -mt-0.5 w-12 h-3 rounded-full border border-cyan-400/50 shadow-[0_0_12px_rgba(6,182,212,0.4)]"
                           style={{ background: 'linear-gradient(to bottom, rgba(15,39,68,0.95), rgba(6,182,212,0.2))' }}>
-                          {/* Lights row — CSS animation via keyframes, no JS per-frame */}
+                          {/* Lights row — CSS pulse, no JS per-frame */}
                           <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-around px-2">
                             {[0,1,2,3].map(i => (
                               <div key={i}
@@ -175,14 +181,6 @@ export function Navbar() {
                       <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-10 h-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
                         style={{ background: 'radial-gradient(ellipse, rgba(6,182,212,0.6), transparent)' }} />
                     </motion.div>
-
-                    {/* Rotating ring — absolutely positioned so it never affects layout */}
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-6 border border-cyan-500/20 rounded-full pointer-events-none"
-                      style={{ willChange: 'transform' }}
-                    />
                   </div>
                 </Link>
                 <AnimatePresence>
