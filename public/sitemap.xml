@@ -167,10 +167,17 @@
   </url>
 
   <url>
+    <loc>https://www.kaizenstat.com/kaizenstat-summer-of-computation</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
     <loc>https://www.kaizenstat.com/contribute</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.70</priority>
   </url>
 
   <url>

@@ -78,6 +78,7 @@ export const AgencyRoutes = () => {
                 <Route path="careers" element={<Careers />} />
                 <Route path="agency-privacy" element={<Privacy />} />
                 <Route path="agency-terms" element={<Terms />} />
+                <Route path="kaizenstat-summer-of-computation" element={<OpenSourceLanding />} />
                 <Route path="contribute" element={<OpenSourceLanding />} />
                 <Route path="admin/login" element={<AdminLogin />} />
                 <Route path="admin/students" element={<StudentAnalytics />} />

@@ -59,11 +59,11 @@ export function Navbar() {
           <NavLink to="/docs" label="Docs" active={isActive('/docs')} />
           <NavLink to="/founder-connect" label="Team" active={isActive('/founder-connect')} />
           <Link
-            to="/contribute"
-            className={`relative py-2 transition-colors ${isActive('/contribute') ? 'text-emerald-400' : 'text-slate-400 hover:text-emerald-400'}`}
+            to="/kaizenstat-summer-of-computation"
+            className={`relative py-2 transition-colors ${isActive('/kaizenstat-summer-of-computation') ? 'text-emerald-400' : 'text-slate-400 hover:text-emerald-400'}`}
           >
             KSoC
-            {isActive('/contribute') && (
+            {isActive('/kaizenstat-summer-of-computation') && (
               <motion.div layoutId="nav-indicator"
                 className="absolute -bottom-1 left-0 right-0 h-0.5 bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.8)]"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}

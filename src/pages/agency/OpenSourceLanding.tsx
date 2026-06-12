@@ -417,11 +417,12 @@ export const OpenSourceLanding: React.FC = () => {
 
   useEffect(() => {
     updateMetaTags({
-      title: 'Contribute to KaizenStat — Open Source Python ML Library | GitHub',
-      description: 'Help build KaizenStat, the open-source Python machine learning library. Contribute code, docs, or ideas on GitHub. Apache 2.0 licensed. All skill levels welcome.',
-      keywords: ['kaizenstat open source', 'contribute kaizenstat', 'ml open source', 'python library contribution', 'github open source', 'kaizenstat github'],
-      canonical: 'https://www.kaizenstat.com/contribute',
+      title: 'KaizenStat Summer of Computation (KSoC) — Open Source Python ML Program',
+      description: 'Join KaizenStat Summer of Computation (KSoC) — contribute to the open-source Python machine learning library. Apache 2.0 licensed. 228+ students from 138+ institutions worldwide.',
+      keywords: ['kaizenstat summer of computation', 'ksoc', 'kaizenstat open source', 'contribute kaizenstat', 'ml open source', 'python library contribution', 'github open source', 'kaizenstat github'],
+      canonical: 'https://www.kaizenstat.com/kaizenstat-summer-of-computation',
       ogType: 'website',
+      ogImage: 'https://www.kaizenstat.com/logo.png',
       twitterCard: 'summary_large_image',
     });
   }, []);
@@ -510,10 +511,10 @@ export const OpenSourceLanding: React.FC = () => {
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </motion.a>
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link to="/events"
+                <a href="https://github.com/kaizenstat-python/KaizenStat" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-8 py-4 border border-lux-glassBorder bg-lux-glass text-lux-muted font-semibold text-xs tracking-[0.15em] uppercase hover:text-lux-text hover:border-lux-text/20 transition-colors rounded-full backdrop-blur-sm">
-                  Explore Projects
-                </Link>
+                  <GithubIcon size={14} />Star Our Repo
+                </a>
               </motion.div>
             </motion.div>
 
