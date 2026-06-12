@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Navbar }               from '../components/sections/Navbar';
 import { Footer }               from '../components/sections/Footer';
 import { Hero }                 from '../components/sections/Hero';
@@ -34,20 +35,67 @@ function SectionDivider({ label, sub }: { label: string; sub: string }) {
 }
 
 export function LandingPage() {
+  // scrolled: navbar hidden, badge expanded
+  // scrollingUp: navbar briefly visible again
+  const [navHidden, setNavHidden] = useState(false);
+  const lastY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y > lastY.current && y > 60) {
+          // scrolling down — hide navbar
+          setNavHidden(true);
+        } else if (y < lastY.current) {
+          // scrolling up — show navbar
+          setNavHidden(false);
+        }
+        lastY.current = y;
+        ticking.current = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <>
-      <Navbar />
-      <div className="fixed top-[70px] left-0 right-0 z-40 flex items-center justify-center py-3">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/40 hover:text-white/60 transition-colors">
-            Next-Gen Python Framework
-          </span>
-        </motion.div>
+      {/* Navbar slides up on scroll down, returns on scroll up */}
+      <motion.div
+        animate={{ y: navHidden ? -80 : 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50"
+      >
+        <Navbar />
+      </motion.div>
+
+      {/* Badge bar — rises from below navbar to fill its spot when navbar hides */}
+      <motion.div
+        animate={{ y: navHidden ? 0 : -50, opacity: navHidden ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-center px-6 lg:px-12 backdrop-blur-xl bg-black/50 border-b border-white/[0.05]"
+        style={{ height: 70, pointerEvents: navHidden ? 'auto' : 'none' }}
+      >
+        <span className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/50">
+          Next-Gen Python Framework
+        </span>
+      </motion.div>
+
+      {/* Static badge below navbar when not scrolled */}
+      <div className="fixed top-[70px] left-0 right-0 z-30 flex items-center justify-center py-3"
+        style={{ pointerEvents: 'none' }}>
+        <motion.span
+          animate={{ opacity: navHidden ? 0 : 1 }}
+          transition={{ duration: 0.3 }}
+          className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-[9px] font-mono uppercase tracking-widest text-white/40">
+          Next-Gen Python Framework
+        </motion.span>
       </div>
+
       <main className="pt-[120px]">
         <Hero />
         <KaizenQuickStart />
@@ -78,4 +126,3 @@ export function LandingPage() {
     </>
   );
 }
-
