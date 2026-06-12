@@ -6,3 +6,62 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# ========== SQL FILES ==========
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+*.backup
+
+# ========== MARKDOWN DOCUMENTATION ==========
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE.md
+
+# ========== CLAUDE CONFIGURATION FILES ==========
+.claude/
+.claudeignore
+CLAUDE.md
+claude.json
+
+# ========== SENSITIVE DOCUMENTATION ==========
+**/docs/**/*.md
+docs/*.md
+*.secret.md
+*credentials*.md
+*API*.md
+*config*.md
+
+# ========== IDE & EDITOR FILES ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.classpath
+
+# ========== OS FILES ==========
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ========== BUILD ARTIFACTS ==========
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.bin
+
+# ========== TEMPORARY FILES ==========
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
