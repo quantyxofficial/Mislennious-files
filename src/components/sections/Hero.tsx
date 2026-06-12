@@ -31,7 +31,7 @@ export function Hero() {
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]/40 -z-10 pointer-events-none" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col items-center pointer-events-auto mt-auto">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl flex flex-col items-center pointer-events-auto pt-12">
 
 
         {/* Headline */}
@@ -39,10 +39,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-6"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tighter text-center mb-4"
         >
           <span className="text-white">Continuous improvement</span>
-          <span className="text-cyan-400/80"> for ML pipelines.</span>
+          <span className="text-slate-400"> for ML pipelines.</span>
         </motion.h1>
 
         {/* Hook line */}
@@ -50,10 +50,10 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base md:text-lg text-slate-300 font-light text-center mb-10 max-w-2xl"
+          className="text-sm md:text-base text-slate-400 font-light text-center mb-6 max-w-lg"
         >
-          Your model says <span className="text-white font-semibold">94% accuracy</span>. KaizenStat tells you{' '}
-          <span className="text-white font-medium">if it's lying.</span>
+          Your model says <span className="text-white font-semibold">94% accuracy</span>.{' '}
+          <span className="text-white font-medium">KaizenStat tells you if it's lying.</span>
         </motion.p>
 
         {/* Pillars — dot-separated */}
@@ -103,16 +103,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-12 px-4"
+          className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 mb-8"
         >
           {[
             '760 tests · 100% coverage',
             'Production-ready pipelines',
             'Open source (MIT)',
           ].map(item => (
-            <div key={item} className="flex items-center gap-2">
-              <span className="text-emerald-400 text-sm">✓</span>
-              <span className="text-sm text-slate-400 font-light">{item}</span>
+            <div key={item} className="flex items-center gap-1.5">
+              <span className="text-emerald-400 text-xs">✔</span>
+              <span className="text-xs text-slate-400 font-light">{item}</span>
             </div>
           ))}
         </motion.div>
@@ -122,17 +122,16 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-3"
         >
-          {/* Installation options */}
-          <div className="flex flex-wrap gap-2 p-1 bg-white/[0.02] border border-white/5 rounded-full text-[11px] font-bold uppercase tracking-wider backdrop-blur-md justify-center">
+          <div className="flex gap-1 p-0.5 bg-white/[0.02] border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
             {installOptions.map(opt => (
               <button
                 key={opt.id}
                 onClick={() => { setSelectedOpt(opt.id); setCopied(false); }}
-                className={`px-4 py-1.5 rounded-full transition-all cursor-pointer text-xs ${
+                className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                   selectedOpt === opt.id
-                    ? 'bg-white text-black font-extrabold shadow-lg'
+                    ? 'bg-white text-black font-extrabold shadow'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -141,17 +140,16 @@ export function Hero() {
             ))}
           </div>
 
-          {/* Copy to clipboard command */}
           <button
             onClick={handleCopy}
-            className="text-sm text-slate-400 font-mono tracking-wide flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.07] px-6 py-3 rounded-full border border-white/10 shadow-lg backdrop-blur-sm cursor-pointer select-none transition-colors active:scale-95"
+            className="text-xs text-slate-400 font-mono tracking-wide flex items-center gap-2 bg-white/[0.03] hover:bg-white/[0.07] px-5 py-2.5 rounded-full border border-white/10 shadow-lg backdrop-blur-sm cursor-pointer select-none transition-colors active:scale-95"
           >
-            <Terminal className="w-4 h-4 text-white/60" />
-            <span className="text-white/80">{activeCmd}</span>
-            <span className="w-px h-4 bg-white/10" />
+            <Terminal className="w-3.5 h-3.5 text-white/60" />
+            <span>{activeCmd}</span>
+            <span className="w-px h-3 bg-white/10 mx-1" />
             {copied
-              ? <Check className="w-4 h-4 text-emerald-400" />
-              : <Copy className="w-4 h-4 text-slate-500" />}
+              ? <Check className="w-3.5 h-3.5 text-emerald-400" />
+              : <Copy  className="w-3.5 h-3.5 text-slate-500" />}
           </button>
         </motion.div>
 
