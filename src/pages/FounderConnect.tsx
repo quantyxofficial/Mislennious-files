@@ -11,7 +11,10 @@ const FOUNDERS = [
     id: 'masuddar',
     name: 'Masuddar Rahaman',
     role: 'Founder • Framework Architect',
-    bio: 'Creator of KaizenStat and the mind behind its core philosophy — making machine learning easy to learn, debug, and understand. Masuddar built the Python framework from scratch with a single ideology: that every student deserves tools that explain themselves. From pipeline design to the learning ecosystem, he architected KaizenStat to grow alongside the people who use it.',
+    bio: [
+      'Creator of KaizenStat and the architect of its core philosophy: making machine learning easy to learn, debug, and understand.',
+      'Masuddar built the Python framework from scratch with a single belief — that every student deserves tools that explain themselves. From pipeline design to the learning ecosystem, he built KaizenStat to grow alongside the people who use it.',
+    ],
     image: 'https://i.postimg.cc/02cvHZ2Y/IMG-4853.avif',
     colors: {
       primary: 'cyan',
@@ -34,7 +37,10 @@ const FOUNDERS = [
     id: 'kriti',
     name: 'Kriti Sharma',
     role: 'AI Research & Management Lead',
-    bio: 'AI Research & Management Lead driving KaizenStat\'s market intelligence and operational growth. Kriti bridges the gap between AI research trends and community strategy — studying how models are evolving in the real world and steering KaizenStat\'s direction to stay ahead. She oversees the organization\'s research roadmap and manages day-to-day operations that keep KaizenStat running at scale.',
+    bio: [
+      'AI Research and Management Lead driving KaizenStat\'s market intelligence and operational growth.',
+      'Kriti bridges the gap between AI research trends and community strategy, studying how models are evolving in the real world and steering KaizenStat\'s direction to stay ahead. She oversees the research roadmap and manages the day-to-day operations that keep KaizenStat running at scale.',
+    ],
     image: 'https://i.postimg.cc/mZ9PZg1k/IMG-3848.avif',
     colors: {
       primary: 'purple',
@@ -57,7 +63,10 @@ const FOUNDERS = [
     id: 'abhishikta',
     name: 'Abhishikta Dutta',
     role: 'ML Engineer & Researcher',
-    bio: 'ML Engineer & Researcher working across KaizenStat\'s data and intelligence layer — from building Python-based pipelines and models to translating research into production-ready tools. Abhishikta combines hands-on engineering with a research mindset, turning raw data into systems that learn, adapt, and scale.',
+    bio: [
+      'ML Engineer and Researcher working across KaizenStat\'s data and intelligence layer.',
+      'Abhishikta combines hands-on engineering with a research mindset, building Python-based pipelines and models and translating research into production-ready tools. She turns raw data into systems that learn, adapt, and scale.',
+    ],
     image: 'https://github.com/abhishiktadutta.png',
     colors: {
       primary: 'emerald',
@@ -390,9 +399,13 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
                 </h2>
               </div>
               
-              <p className="text-base md:text-xl font-light text-slate-300 max-w-md leading-relaxed mb-10">
-                {founder.bio}
-              </p>
+              <div className="mb-10 space-y-4 max-w-xl">
+                {(founder.bio as string[]).map((para, i) => (
+                  <p key={i} className={`leading-relaxed ${i === 0 ? 'text-lg md:text-xl font-semibold text-white' : 'text-base md:text-lg font-light text-slate-400'}`}>
+                    {para}
+                  </p>
+                ))}
+              </div>
             </div>
 
             {/* Premium Quote Spread */}
