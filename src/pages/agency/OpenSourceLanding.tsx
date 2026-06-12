@@ -5,6 +5,7 @@ import {
 } from 'framer-motion';
 import { Github as GithubIcon, ArrowRight, ExternalLink, Users, TrendingUp, Globe, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { updateMetaTags } from '../../utils/seo';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
@@ -414,6 +415,17 @@ const institutes = [
 export const OpenSourceLanding: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    updateMetaTags({
+      title: 'Contribute to KaizenStat — Open Source Python ML Library | GitHub',
+      description: 'Help build KaizenStat, the open-source Python machine learning library. Contribute code, docs, or ideas on GitHub. Apache 2.0 licensed. All skill levels welcome.',
+      keywords: ['kaizenstat open source', 'contribute kaizenstat', 'ml open source', 'python library contribution', 'github open source', 'kaizenstat github'],
+      canonical: 'https://www.kaizenstat.com/contribute',
+      ogType: 'website',
+      twitterCard: 'summary_large_image',
+    });
+  }, []);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
@@ -490,19 +502,18 @@ export const OpenSourceLanding: React.FC = () => {
             <motion.div className="flex flex-col sm:flex-row gap-3"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.62 }}>
-              <motion.a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer"
+              <motion.a href="https://github.com/kaizenstat-python" target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(120,80,255,0.35)' }}
                 whileTap={{ scale: 0.97 }}
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-lux-text text-lux-cream font-semibold text-xs tracking-[0.15em] uppercase rounded-full transition-shadow">
                 <GithubIcon size={14} />Start Contributing
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </motion.a>
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                <Link to="/events"
-                  className="inline-flex items-center gap-3 px-8 py-4 border border-lux-glassBorder bg-lux-glass text-lux-muted font-semibold text-xs tracking-[0.15em] uppercase hover:text-lux-text hover:border-lux-text/20 transition-colors rounded-full backdrop-blur-sm">
-                  Explore Projects
-                </Link>
-              </motion.div>
+              <motion.a href="https://github.com/kaizenstat-python/KaizenStat" target="_blank" rel="noopener noreferrer"
+                whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-3 px-8 py-4 border border-lux-glassBorder bg-lux-glass text-lux-muted font-semibold text-xs tracking-[0.15em] uppercase hover:text-lux-text hover:border-lux-text/20 transition-colors rounded-full backdrop-blur-sm">
+                Star Our Repo
+              </motion.a>
             </motion.div>
 
             <motion.p className="text-[10px] text-lux-muted/40 uppercase tracking-widest font-mono"
@@ -681,7 +692,7 @@ export const OpenSourceLanding: React.FC = () => {
                 viewport={{ once: true }} transition={{ delay: 0.4, duration: 0.7 }}>
                 Join 228+ students already contributing to real ML repositories from 138+ institutions worldwide.
               </motion.p>
-              <motion.a href="https://github.com/Kaizenstat" target="_blank" rel="noopener noreferrer"
+              <motion.a href="https://github.com/kaizenstat-python" target="_blank" rel="noopener noreferrer"
                 whileHover={{ scale: 1.07, boxShadow: '0 0 50px rgba(255,255,255,0.15)' }}
                 whileTap={{ scale: 0.96 }}
                 className="group inline-flex items-center gap-3 px-12 py-5 bg-lux-text text-lux-cream font-semibold text-xs tracking-[0.15em] uppercase rounded-full transition-all">
