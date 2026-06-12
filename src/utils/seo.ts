@@ -162,12 +162,12 @@ export const SEO_CONFIG = {
   },
   team: {
     title: 'KaizenStat Founders — Masuddar Rahaman, Kriti Sharma & Abhishikta Dutta',
-    description: 'Meet the founders of KaizenStat: Masuddar Rahaman (Lead Creator & ML Engineer), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer & Researcher). Student-led team building the future of open source ML.',
+    description: 'Meet the founders of KaizenStat: Masuddar Rahaman (Founder & Framework Architect), Kriti Sharma (AI Research & Management Lead), and Abhishikta Dutta (ML Engineer & Researcher). Student-led team building the future of open source ML.',
     keywords: [
       'masuddar rahaman', 'kriti sharma', 'abhishikta dutta',
       'kaizenstat team', 'kaizenstat founders', 'masuddar rahaman kaizenstat',
-      'masuddar rahaman ml engineer', 'kriti sharma ai', 'abhishikta dutta ml engineer',
-      'kaizenstat open source founders', 'student ml founders', 'python ml pipelines',
+      'masuddar rahaman framework architect', 'kriti sharma ai research management', 'abhishikta dutta ml engineer',
+      'kaizenstat open source founders', 'student ml founders', 'python ml framework',
     ],
     canonical: 'https://www.kaizenstat.com/founder-connect',
     ogType: 'website',

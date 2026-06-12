@@ -5,7 +5,7 @@ import { Github, Twitter, Linkedin, Network, CheckCircle2 } from 'lucide-react';
 const TEAM = [
   { 
     name: 'Masuddar Rahaman', 
-    role: 'Founder • Lead Architect', 
+    role: 'Founder • Framework Architect',
     hue: 'from-cyan-400 to-blue-500', 
     img: 'https://github.com/Masuddar.png',
     links: {
@@ -15,7 +15,7 @@ const TEAM = [
   },
   { 
     name: 'Kriti Sharma', 
-    role: 'AI Research Lead', 
+    role: 'AI Research & Management Lead',
     hue: 'from-purple-400 to-pink-500', 
     img: 'https://github.com/kriti-sharma-ai.png',
     links: {

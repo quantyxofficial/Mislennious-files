@@ -10,8 +10,8 @@ const FOUNDERS = [
   {
     id: 'masuddar',
     name: 'Masuddar Rahaman',
-    role: 'Founder • Lead Architect',
-    bio: 'Founder and lead architect of KaizenStat. Masuddar built the community from the ground up — from the Python framework to the learning ecosystem — with a mission to make ML infrastructure accessible to every student.',
+    role: 'Founder • Framework Architect',
+    bio: 'Creator of KaizenStat and the mind behind its core philosophy — making machine learning easy to learn, debug, and understand. Masuddar built the Python framework from scratch with a single ideology: that every student deserves tools that explain themselves. From pipeline design to the learning ecosystem, he architected KaizenStat to grow alongside the people who use it.',
     image: 'https://i.postimg.cc/02cvHZ2Y/IMG-4853.avif',
     colors: {
       primary: 'cyan',
@@ -26,15 +26,15 @@ const FOUNDERS = [
       mail: 'mailto:masuddar@kaizenstat.org'
     },
     pageNo: '01',
-    expertise: ['System Architecture', 'Core Infrastructure', 'Strategic Intelligence'],
-    quote: "Engineering is the art of organizing chaos into intelligence.",
+    expertise: ['Framework Design', 'ML Pipeline Architecture', 'Open Source Leadership'],
+    quote: "If your model can't explain itself, neither can you.",
     icon: <Cpu className="w-4 h-4" />
   },
   {
     id: 'kriti',
     name: 'Kriti Sharma',
-    role: 'AI Research Lead',
-    bio: 'AI Research Lead driving KaizenStat\'s learning curriculum and open-source contributions. Kriti shapes how students engage with deep learning and predictive modeling through hands-on community challenges.',
+    role: 'AI Research & Management Lead',
+    bio: 'AI Research & Management Lead driving KaizenStat\'s market intelligence and operational growth. Kriti bridges the gap between AI research trends and community strategy — studying how models are evolving in the real world and steering KaizenStat\'s direction to stay ahead. She oversees the organization\'s research roadmap and manages day-to-day operations that keep KaizenStat running at scale.',
     image: 'https://i.postimg.cc/mZ9PZg1k/IMG-3848.avif',
     colors: {
       primary: 'purple',
@@ -49,8 +49,8 @@ const FOUNDERS = [
       mail: 'mailto:kriti@kaizenstat.org'
     },
     pageNo: '02',
-    expertise: ['Neural Dynamics', 'Predictive Modeling', 'Ethics in AI'],
-    quote: "Intelligence is not just about speed, it's about the precision of vision.",
+    expertise: ['AI Market Research', 'Operations Management', 'Research Strategy'],
+    quote: "Research without direction is just curiosity. Management turns it into momentum.",
     icon: <Zap className="w-4 h-4" />
   },
   {
