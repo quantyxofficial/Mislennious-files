@@ -102,52 +102,32 @@ export function Navbar() {
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
-                <Link to="/student" className="relative group flex items-center transition-all duration-300">
-                  {/* Professional Avatar Profile Container */}
-                  <div className="relative flex flex-col items-center" style={{ width: 56, height: 52, isolation: 'isolate' }}>
-                    <motion.div
-                      animate={{ y: [0, -2, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                      className="relative flex flex-col items-center"
-                      style={{ willChange: 'transform' }}
-                    >
-                      {/* Profile card container */}
-                      <div className="relative flex flex-col items-center">
-                        {/* Avatar circle — solid professional design */}
-                        <div className="relative z-10 w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/40 bg-slate-900">
-                          <div className="w-full h-full">
-                            {user.user_metadata?.avatar_url ? (
-                              (() => {
-                                const avatarUrl = user.user_metadata.avatar_url as string;
-                                if (avatarUrl.startsWith('builtin:')) {
-                                  const avatarId = avatarUrl.replace('builtin:', '');
-                                  const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
-                                  return AvatarComponent ? (
-                                    <div className="w-full h-full scale-150 translate-y-1 overflow-hidden">
-                                      <AvatarComponent />
-                                    </div>
-                                  ) : null;
-                                }
-                                return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />;
-                              })()
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-600 to-blue-600">
-                                <UserIcon className="w-5 h-5 text-white" />
+                <Link to="/student" className="relative group flex items-center">
+                  {/* Professional avatar */}
+                  <div className="relative w-9 h-9">
+                    <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-white/15 group-hover:ring-white/40 transition-all duration-200 bg-slate-800">
+                      {user.user_metadata?.avatar_url ? (
+                        (() => {
+                          const avatarUrl = user.user_metadata.avatar_url as string;
+                          if (avatarUrl.startsWith('builtin:')) {
+                            const avatarId = avatarUrl.replace('builtin:', '');
+                            const AvatarComponent = AVATAR_COMPONENTS_MAP[avatarId];
+                            return AvatarComponent ? (
+                              <div className="w-full h-full scale-150 translate-y-1 overflow-hidden">
+                                <AvatarComponent />
                               </div>
-                            )}
-                          </div>
-                          {/* Subtle inner ring */}
-                          <div className="absolute inset-1 rounded-full border border-white/20 pointer-events-none" />
+                            ) : null;
+                          }
+                          return <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />;
+                        })()
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-slate-700">
+                          <UserIcon className="w-4 h-4 text-slate-300" />
                         </div>
-
-                        {/* Status indicator dot */}
-                        <div className="absolute bottom-0 right-0 z-20 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white/30 shadow-lg shadow-emerald-500/50" />
-                      </div>
-
-                      {/* Hover glow */}
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"
-                        style={{ background: 'radial-gradient(ellipse, #06b6d4, transparent)' }} />
-                    </motion.div>
+                      )}
+                    </div>
+                    {/* Online status dot */}
+                    <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-black" />
                   </div>
                 </Link>
                 <AnimatePresence>
