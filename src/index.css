@@ -19,6 +19,9 @@
   :root {
     color-scheme: dark;
   }
+  *, *::before, *::after {
+    cursor: none !important;
+  }
   body {
     background-color: #000000; /* Pure black for ultra-premium feel */
     color: #f8fafc;
