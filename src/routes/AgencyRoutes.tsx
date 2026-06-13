@@ -20,6 +20,7 @@ const BlogPost = lazy(() => import('../pages/agency/BlogPost').then(m => ({ defa
 const Careers = lazy(() => import('../pages/agency/Careers').then(m => ({ default: m.Careers })));
 const Privacy = lazy(() => import('../pages/agency/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('../pages/agency/Terms').then(m => ({ default: m.Terms })));
+const Ethics = lazy(() => import('../pages/agency/Ethics').then(m => ({ default: m.Ethics })));
 const NotFound = lazy(() => import('../pages/agency/NotFound').then(m => ({ default: m.NotFound })));
 const KaizenAI = lazy(() => import('../pages/agency/KaizenAI').then(m => ({ default: m.KaizenAI })));
 const AdminDashboard = lazy(() => import('../pages/agency/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
@@ -76,6 +77,10 @@ export const AgencyRoutes = () => {
                 <Route path="blog" element={<BlogListing />} />
                 <Route path="blog/:postId" element={<BlogPost />} />
                 <Route path="careers" element={<Careers />} />
+                <Route path="privacy" element={<Privacy />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="ethics" element={<Ethics />} />
+                {/* Legacy aliases */}
                 <Route path="agency-privacy" element={<Privacy />} />
                 <Route path="agency-terms" element={<Terms />} />
                 <Route path="kaizenstat-summer-of-computation" element={<OpenSourceLanding />} />

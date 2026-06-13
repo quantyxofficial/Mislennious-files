@@ -12,7 +12,7 @@ export const Privacy: React.FC = () => {
             title: 'Privacy Policy — KaizenStat',
             description: 'Read the KaizenStat privacy policy. Understand how we collect, use, and protect your data when using the KaizenStat platform and open source tools.',
             keywords: ['kaizenstat privacy', 'kaizenstat privacy policy', 'data protection kaizenstat'],
-            canonical: 'https://www.kaizenstat.com/agency-privacy',
+            canonical: 'https://www.kaizenstat.com/privacy',
             ogType: 'website',
         });
     }, []);
@@ -114,10 +114,13 @@ export const Privacy: React.FC = () => {
                         <div id="introduction" className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl scroll-mt-32 transition-all duration-500">
                             <h2 className="font-serif text-3xl text-lux-text mb-6">Introduction</h2>
                             <p className="text-lux-muted leading-relaxed mb-4">
-                                At KaizenStat ("we", "our", or "us"), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                                KaizenStat ("we", "our", or "us") is a student-led, non-profit open-source project that builds a Python machine learning framework and runs a learning community of documentation, practice problems, competitions, and certifications. This Privacy Policy explains how we collect, use, store, and safeguard your information when you visit www.kaizenstat.com (and related subdomains), create a member account, participate in competitions or certifications, or engage with our community programs. This policy complies with global privacy standards including GDPR (EU), CCPA (California), PIPEDA (Canada), and India's Digital Personal Data Protection Act (DPDPA).
+                            </p>
+                            <p className="text-lux-muted leading-relaxed mb-4">
+                                The KaizenStat Python library itself (installed via <span className="font-mono text-sm">pip install kaizenstat</span>) runs entirely on your own machine. It does not transmit your datasets, code, model outputs, or any personal data to us. The library is data-local and privacy-first by design.
                             </p>
                             <p className="text-lux-muted leading-relaxed">
-                                By using our services, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use our services.
+                                This policy covers only our website, community platform, competitions, and services. By creating an account or using our services, you agree to the collection and use of information described here. If you disagree with any part of this policy, please do not use our services.
                             </p>
                         </div>
 
@@ -127,11 +130,11 @@ export const Privacy: React.FC = () => {
                                 We collect several types of information to provide and improve our services:
                             </p>
                             <ul className="space-y-3 text-lux-muted">
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Personal Information:</strong> Name, email address, phone number, and other contact details you provide when filling out forms or contacting us.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Usage Data:</strong> Information about how you access and use our website, including your IP address, browser type, pages visited, and time spent on pages.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Cookies and Tracking:</strong> We use cookies and similar tracking technologies to track activity on our website and store certain information.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Business Information:</strong> Details about your company, project requirements, and business needs when requesting our services.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Third-Party Authentication Data:</strong> If you choose to log in via Google, we collect your Google profile information (name, email address, and profile picture) as permitted by your Google account settings.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Account Information:</strong> Your name, email address, and chosen avatar when you create a KaizenStat member account to access the dashboard, competitions, and ID card.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Learning &amp; Program Activity:</strong> Practice attempts, competition entries and submissions, certification exam results, and progress through the handbook, used to show your dashboard, issue certificates, and rank competitions.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Usage Data:</strong> Information about how you access the website, such as IP address, browser type, pages visited, and time spent, collected to understand and improve the platform.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Cookies and Tracking:</strong> We use cookies and similar technologies to keep you signed in and to understand site usage. See the Cookies section below.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Third-Party Authentication Data:</strong> If you sign in with Google, we receive your Google profile information (name, email address, and profile picture) as permitted by your Google account settings.</span></li>
                             </ul>
                         </div>
 
@@ -141,7 +144,7 @@ export const Privacy: React.FC = () => {
                                 We use the collected information for various purposes:
                             </p>
                             <ul className="space-y-3 text-lux-muted">
-                                {['To provide and maintain our services', 'To notify you about changes to our services', 'To provide customer support and respond to inquiries', 'To gather analysis or valuable information to improve our services', 'To monitor the usage of our services', 'To detect, prevent, and address technical issues', 'To send you newsletters, marketing communications, and other information (with your consent)'].map((item, i) => (
+                                {['To create and maintain your member account and dashboard', 'To run competitions, score submissions, and publish leaderboards', 'To issue and verify certificates and member ID cards', 'To track your learning progress through the handbook and practice problems', 'To respond to questions, support requests, and contributions', 'To understand usage and improve the framework, docs, and platform', 'To detect, prevent, and address abuse or technical issues', 'To send announcements and community updates (with your consent)'].map((item, i) => (
                                     <li key={i} className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span>{item}</span></li>
                                 ))}
                             </ul>
@@ -149,8 +152,17 @@ export const Privacy: React.FC = () => {
 
                         <div id="data-security" className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl scroll-mt-32 transition-all duration-500">
                             <h2 className="font-serif text-3xl text-lux-text mb-6">Data Security</h2>
+                            <p className="text-lux-muted leading-relaxed mb-4">
+                                The security of your data is important to us. We implement industry-standard technical and organizational measures to protect your personal information:
+                            </p>
+                            <ul className="space-y-3 text-lux-muted mb-4">
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Encryption:</strong> Data in transit uses HTTPS/TLS encryption. Sensitive data at rest is encrypted using industry-standard algorithms.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Access Control:</strong> Access to personal data is restricted to authorized personnel and systems that have a legitimate need to access it.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Regular Audits:</strong> We maintain and regularly test our security infrastructure to detect and address vulnerabilities.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Breach Notification:</strong> In the unlikely event of a data breach, we will notify affected individuals as required by applicable law, typically within 30–72 hours.</span></li>
+                            </ul>
                             <p className="text-lux-muted leading-relaxed">
-                                The security of your data is important to us. We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+                                However, no method of transmission over the Internet or electronic storage is 100% secure. While we use appropriate safeguards, we cannot guarantee absolute security. You use our services at your own risk, though we maintain security practices consistent with legal and industry standards.
                             </p>
                         </div>
 
@@ -160,28 +172,42 @@ export const Privacy: React.FC = () => {
                                 We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
                             </p>
                             <ul className="space-y-3 text-lux-muted">
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Service Providers:</strong> With trusted third-party service providers who assist us in operating our website and services.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Legal Requirements:</strong> When required by law or to protect our rights, property, or safety.</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Infrastructure Providers:</strong> With trusted services that host and run the platform (such as our database, authentication, and hosting providers) strictly to operate KaizenStat.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Public Community Activity:</strong> Information you choose to make public, such as a competition leaderboard ranking, a published certificate, or open-source contributions on GitHub.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Legal Requirements:</strong> When required by law or to protect the rights, property, or safety of KaizenStat and its community.</span></li>
                             </ul>
                         </div>
 
                         <div id="your-rights" className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl scroll-mt-32 transition-all duration-500">
-                            <h2 className="font-serif text-3xl text-lux-text mb-6">Your Rights</h2>
+                            <h2 className="font-serif text-3xl text-lux-text mb-6">Your Privacy Rights</h2>
                             <p className="text-lux-muted leading-relaxed mb-4">
-                                You have certain rights regarding your personal information:
+                                Under applicable privacy laws worldwide, you have the following rights regarding your personal information. To exercise any of these rights, contact us at <span className="font-semibold">founders@kaizenstat.com</span> with clear details of your request. We will respond within 30 days (or as required by local law).
                             </p>
                             <ul className="space-y-3 text-lux-muted">
-                                {['The right to access and receive a copy of your personal data', 'The right to request correction of inaccurate data', 'The right to request deletion of your data', 'The right to object to processing of your data', 'The right to data portability', 'The right to withdraw consent at any time'].map((item, i) => (
-                                    <li key={i} className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span>{item}</span></li>
-                                ))}
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Access:</strong> You can request a copy of all personal data we hold about you in a structured, machine-readable format.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Correction:</strong> You can ask us to correct inaccurate or incomplete data.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Erasure:</strong> You can request deletion of your personal data, subject to certain exceptions (e.g., if data is needed to complete a competition or issue a certificate).</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Object:</strong> You can object to processing of your data for marketing, analytics, or other purposes.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Data Portability:</strong> You can request your data in a portable format to transfer to another service.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Restrict Processing:</strong> You can ask us to limit processing of your data while we address your concern.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Withdraw Consent:</strong> If you consented to processing, you can withdraw that consent at any time. This does not affect past processing.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Right to Lodge a Complaint:</strong> You have the right to file a complaint with your local data protection authority if you believe we've violated your privacy rights.</span></li>
                             </ul>
                         </div>
 
                         <div id="cookies" className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl scroll-mt-32 transition-all duration-500">
-                            <h2 className="font-serif text-3xl text-lux-text mb-6">Cookies Policy</h2>
+                            <h2 className="font-serif text-3xl text-lux-text mb-6">Cookies &amp; Tracking Technologies</h2>
+                            <p className="text-lux-muted leading-relaxed mb-4">
+                                We use cookies and similar technologies (pixels, web beacons, local storage) to enhance your experience and understand how you use our site:
+                            </p>
+                            <ul className="space-y-3 text-lux-muted mb-4">
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Essential Cookies:</strong> Required for authentication, security, and basic site function (e.g., login session tokens). These cannot be disabled.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Preference Cookies:</strong> Remember your settings and choices (e.g., language, theme).</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Analytics Cookies:</strong> Help us understand site usage, popular pages, and user behavior. We use privacy-respecting analytics tools.</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>No Third-Party Tracking:</strong> We do not use third-party advertising networks or behavioral tracking services.</span></li>
+                            </ul>
                             <p className="text-lux-muted leading-relaxed">
-                                We use cookies to enhance your experience on our website. Cookies are small files stored on your device that help us understand how you use our site. You can control cookies through your browser settings, though disabling cookies may affect website functionality.
+                                <strong>Your Control:</strong> Most browsers allow you to refuse cookies or alert you when a site attempts to use them. You can control cookies in your browser settings. However, disabling essential cookies may limit site functionality. For non-essential cookies, you can opt out at any time by updating your preferences.
                             </p>
                         </div>
 
@@ -193,14 +219,23 @@ export const Privacy: React.FC = () => {
                         </div>
 
                         <div id="contact" className="p-8 rounded-3xl bg-white/50 border border-white/60 backdrop-blur-xl scroll-mt-32 transition-all duration-500">
-                            <h2 className="font-serif text-3xl text-lux-text mb-6">Contact Us</h2>
+                            <h2 className="font-serif text-3xl text-lux-text mb-6">Contact &amp; Legal Information</h2>
                             <p className="text-lux-muted leading-relaxed mb-4">
-                                If you have any questions about this Privacy Policy, please contact us:
+                                For questions, concerns, privacy requests, or to exercise your rights under this policy, contact us:
                             </p>
-                            <ul className="space-y-2 text-lux-muted">
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span>Email: privacy@kaizenstat.com</span></li>
-                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span>Phone: +91 98765 43210</span></li>
+                            <ul className="space-y-2 text-lux-muted mb-6">
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Email (Privacy):</strong> founders@kaizenstat.com</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>Mail:</strong> Park Street, Kolkata, WB 700016, India</span></li>
+                                <li className="flex gap-3"><ChevronRight className="w-4 h-4 mt-1 text-lux-text/20 shrink-0" /> <span><strong>GitHub:</strong> github.com/kaizenstat-python/KaizenStat</span></li>
                             </ul>
+                            <div className="p-4 rounded-lg bg-lux-glass/30 border border-lux-glassBorder">
+                                <p className="text-xs text-lux-muted mb-2">
+                                    <strong>Last Updated:</strong> June 13, 2026
+                                </p>
+                                <p className="text-xs text-lux-muted">
+                                    <strong>Effective Date:</strong> June 13, 2026. This policy applies globally to all users. We comply with GDPR, CCPA, PIPEDA, DPDPA, and other applicable privacy laws.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

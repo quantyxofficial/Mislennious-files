@@ -48,45 +48,16 @@ const FOUNDERS = [
   { name: "Abhishikta Dutta", role: "ML Engineer & Researcher", href: "https://www.linkedin.com/in/abhishikta-dutta1" },
 ];
 
-// Shared viewport config — animate once when 25% in view
-const viewport = { once: true, amount: 0.25 } as const;
-const ease = [0.22, 1, 0.36, 1] as const;
-
-// Container that staggers its children
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-};
-
-// Each item rises and fades in
-const item = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
-};
-
-// Wordmark letters
-const WORD = [
-  { ch: "K", dim: false }, { ch: "A", dim: false }, { ch: "I", dim: false },
-  { ch: "Z", dim: false }, { ch: "E", dim: false }, { ch: "N", dim: false },
-  { ch: "S", dim: true }, { ch: "T", dim: true }, { ch: "A", dim: true }, { ch: "T", dim: true },
-];
-
 export function Footer() {
   return (
     <footer className="relative w-full z-20 overflow-hidden bg-black border-t border-white/[0.06]" id="footer">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
 
         {/* ── Main grid ── */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-12 pt-20 pb-16">
 
           {/* Brand */}
-          <motion.div variants={item} className="lg:col-span-4 flex flex-col">
+          <div className="lg:col-span-4 flex flex-col">
             <Link to="/" className="flex items-center gap-2.5 w-fit mb-6 group">
               <motion.span whileHover={{ rotate: 12 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}>
                 <Logo className="w-8 h-8 text-white" />
@@ -123,12 +94,12 @@ export function Footer() {
               <MessageSquare className="w-4 h-4" />
               Join the Community
             </motion.a>
-          </motion.div>
+          </div>
 
           {/* Nav columns */}
           <div className="lg:col-span-5 grid grid-cols-3 gap-8">
             {NAV_COLUMNS.map((col) => (
-              <motion.nav variants={item} key={col.heading} aria-label={col.heading}>
+              <nav key={col.heading} aria-label={col.heading}>
                 <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-5">{col.heading}</h3>
                 <ul className="space-y-3">
                   {col.links.map((link) => (
@@ -140,12 +111,12 @@ export function Footer() {
                     </li>
                   ))}
                 </ul>
-              </motion.nav>
+              </nav>
             ))}
           </div>
 
           {/* Founders */}
-          <motion.div variants={item} className="lg:col-span-3">
+          <div className="lg:col-span-3">
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500 mb-5">Founders</h3>
             <ul className="space-y-4">
               {FOUNDERS.map((f) => (
@@ -157,45 +128,23 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ── Wordmark ── */}
-        <div className="relative border-t border-white/[0.06] pt-10 select-none">
-          <motion.h2
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } } }}
-            className="font-bold leading-[0.85] tracking-tight text-center flex justify-center"
+        <div className="relative border-t border-white/[0.06] pt-10 overflow-hidden select-none pointer-events-none">
+          <h2
+            className="font-bold leading-[0.85] tracking-tight text-center"
             style={{ fontSize: "clamp(3.5rem, 14vw, 12rem)" }}
             aria-label="KaizenStat"
           >
-            {WORD.map((l, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 40, rotateX: -40 },
-                  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease } },
-                }}
-                className={l.dim ? "text-white/15 font-light inline-block" : "text-white inline-block"}
-                style={{ transformOrigin: "bottom" }}
-                aria-hidden="true"
-              >
-                {l.ch}
-              </motion.span>
-            ))}
-          </motion.h2>
+            <span className="text-white">KAIZEN</span>
+            <span className="text-white/15 font-light">STAT</span>
+          </h2>
         </div>
 
         {/* ── Bottom bar ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.6, ease, delay: 0.1 }}
-          className="flex flex-col sm:flex-row justify-between items-center gap-5 py-6"
-        >
+        <div className="relative z-10 flex flex-col sm:flex-row justify-between items-center gap-5 py-6">
           <p className="text-xs text-slate-600">
             &copy; {new Date().getFullYear()} KaizenStat. Apache 2.0 licensed.
           </p>
@@ -223,7 +172,7 @@ export function Footer() {
               </motion.a>
             ))}
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </footer>
