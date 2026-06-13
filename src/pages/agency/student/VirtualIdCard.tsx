@@ -570,7 +570,6 @@ export function VirtualIdCard() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [downloading, setDownloading] = useState<null | 'front' | 'back'>(null);
   const [downloadError, setDownloadError] = useState<string | null>(null);
-  const [frontDownloaded, setFrontDownloaded] = useState(false);
   const frontRef = useRef<HTMLDivElement>(null);
   const backRef = useRef<HTMLDivElement>(null);
 
@@ -661,7 +660,6 @@ export function VirtualIdCard() {
     try {
       const dataUrl = await captureToPng(node);
       triggerDownload(dataUrl, `kaizenstat-id-${shortId}-${side}.png`);
-      if (side === 'front') setFrontDownloaded(true);
     } catch (e) {
       console.error(`ID card ${side} download failed:`, e);
       setDownloadError('Download failed. Please try again.');
@@ -669,9 +667,6 @@ export function VirtualIdCard() {
       setDownloading(null);
     }
   };
-
-  const handleDownloadFront = () => downloadSide('front');
-  const handleDownloadBack = () => downloadSide('back');
 
   // Not signed in — show sign-in gate
   if (!user) {
@@ -784,33 +779,16 @@ export function VirtualIdCard() {
 
           {/* Actions */}
           <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
-            {/* Download front — primary action */}
-            <button onClick={handleDownloadFront} disabled={downloading !== null}
+            {/* Download — always targets the side currently showing */}
+            <button onClick={() => downloadSide(isFlipped ? 'back' : 'front')} disabled={downloading !== null}
               className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed">
-              {downloading === 'front' ? (
+              {downloading !== null ? (
                 <div className="w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-              ) : frontDownloaded ? (
-                <CheckCircle2 className="w-3.5 h-3.5" />
               ) : (
                 <Download className="w-3.5 h-3.5" />
               )}
-              {downloading === 'front' ? 'Generating…' : frontDownloaded ? 'Front Saved' : 'Download Front'}
+              {downloading !== null ? 'Generating…' : isFlipped ? 'Download Back' : 'Download Front'}
             </button>
-
-            {/* Download back — appears once the front has been saved */}
-            {frontDownloaded && (
-              <motion.button
-                initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-                onClick={handleDownloadBack} disabled={downloading !== null}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/15 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed">
-                {downloading === 'back' ? (
-                  <div className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <Download className="w-3.5 h-3.5" />
-                )}
-                {downloading === 'back' ? 'Generating…' : 'Download Back'}
-              </motion.button>
-            )}
 
             <button onClick={() => setIsFlipped(f => !f)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/60 text-xs font-bold uppercase tracking-widest hover:text-white hover:border-white/25 transition-all">
@@ -821,11 +799,11 @@ export function VirtualIdCard() {
           {/* Helper / error line under the actions */}
           {downloadError ? (
             <p className="text-[11px] text-red-400 mt-3">{downloadError}</p>
-          ) : frontDownloaded ? (
+          ) : (
             <p className="text-[11px] text-slate-500 mt-3">
-              Front saved. Want the back too? Tap <span className="text-slate-300 font-semibold">Download Back</span>.
+              Flip the card with <span className="text-slate-300 font-semibold">Show Back</span> to download the other side.
             </p>
-          ) : null}
+          )}
 
           {/* Email verification banner */}
           {!isEmailVerified && (
