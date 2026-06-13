@@ -1,76 +1,118 @@
 {
-  "topic": "Machine-learning",
-  "description": "machine-learning Study Material",
+  "topic": "Machine Learning",
+  "description": "A complete, hands-on path to mastering machine learning with KaizenStat — from intuition to production-grade pipelines.",
   "chapters": [
     {
       "id": "intro",
       "title": "What is Machine Learning?",
-      "description": "Supervised, Unsupervised, and Reinforcement Learning explained.",
+      "description": "The mental model: learning from data, the three paradigms, and where KaizenStat fits.",
       "file": "01-intro.md",
       "order": 1
     },
     {
-      "id": "preprocessing",
-      "title": "Data Preprocessing",
-      "description": "Garbage in, Garbage out. Scaling, Splitting, and Encoding.",
-      "file": "02-preprocessing.md",
+      "id": "first-model",
+      "title": "Your First Model in 3 Lines",
+      "description": "Install KaizenStat and train a real, production-ready model before you learn the theory.",
+      "file": "02-first-model.md",
       "order": 2
+    },
+    {
+      "id": "data-quality",
+      "title": "Data Quality & Leakage",
+      "description": "Why 80% of ML is data. Health scores, leakage detection, and the trap of fake accuracy.",
+      "file": "03-data-quality.md",
+      "order": 3
+    },
+    {
+      "id": "preprocessing",
+      "title": "Preprocessing & Feature Engineering",
+      "description": "Scaling, encoding, missing values, splitting — and letting KaizenStat fix() do the heavy lifting.",
+      "file": "04-preprocessing.md",
+      "order": 4
     },
     {
       "id": "linear-regression",
       "title": "Linear Regression",
-      "description": "Predicting the future (numbers). The Hello World of ML.",
-      "file": "03-linear.md",
-      "order": 3
+      "description": "Predicting numbers. Gradient descent, the loss surface, and reading the residuals.",
+      "file": "05-linear.md",
+      "order": 5
     },
     {
       "id": "logistic-regression",
       "title": "Logistic Regression",
-      "description": "Classification - Is it a Cat or a Dog?",
-      "file": "04-logistic.md",
-      "order": 4
+      "description": "The workhorse of classification — sigmoid, decision boundaries, and probabilities.",
+      "file": "06-logistic.md",
+      "order": 6
     },
     {
       "id": "trees",
       "title": "Decision Trees",
-      "description": "White-box models that mimic human decision making.",
-      "file": "05-trees.md",
-      "order": 5
-    },
-    {
-      "id": "forests",
-      "title": "Random Forests",
-      "description": "Ensemble Learning - Why 100 trees are better than 1.",
-      "file": "06-forests.md",
-      "order": 6
-    },
-    {
-      "id": "clustering",
-      "title": "K-Means Clustering",
-      "description": "Unsupervised Learning - Finding hidden groups in data.",
-      "file": "07-clustering.md",
+      "description": "White-box models that split the world with yes/no questions.",
+      "file": "07-trees.md",
       "order": 7
     },
     {
-      "id": "evaluation",
-      "title": "Model Evaluation",
-      "description": "Beyond Accuracy - Precision, Recall, and F1-Score.",
-      "file": "08-evaluation.md",
+      "id": "ensembles",
+      "title": "Ensembles: Forests & Boosting",
+      "description": "Random Forests, Gradient Boosting, XGBoost, LightGBM — and why ensembles win.",
+      "file": "08-ensembles.md",
       "order": 8
     },
     {
-      "id": "tuning",
-      "title": "Hyperparameter Tuning",
-      "description": "GridSearch and RandomSearch to optimize your model.",
-      "file": "09-tuning.md",
+      "id": "clustering",
+      "title": "Unsupervised Learning",
+      "description": "K-Means, finding hidden structure, and choosing k without labels.",
+      "file": "09-clustering.md",
       "order": 9
     },
     {
-      "id": "capstone",
-      "title": "Capstone: Titanic",
-      "description": "Predicting survival on the Titanic - A complete project.",
-      "file": "10-capstone.md",
+      "id": "evaluation",
+      "title": "Model Evaluation Done Right",
+      "description": "Beyond accuracy: precision, recall, F1, ROC-AUC, and the confusion matrix.",
+      "file": "10-evaluation.md",
       "order": 10
+    },
+    {
+      "id": "overfitting",
+      "title": "Overfitting & the Bias-Variance Tradeoff",
+      "description": "The central tension of ML, cross-validation, and how to detect overfitting automatically.",
+      "file": "11-overfitting.md",
+      "order": 11
+    },
+    {
+      "id": "tuning",
+      "title": "Hyperparameter Tuning & AutoML",
+      "description": "GridSearch, RandomSearch, progressive tuning, and KaizenStat's stacking AutoML engine.",
+      "file": "12-tuning.md",
+      "order": 12
+    },
+    {
+      "id": "debugging",
+      "title": "Debugging a Failing Model",
+      "description": "Root-cause analysis: failure slices, data-vs-model blame, and what to fix next.",
+      "file": "13-debugging.md",
+      "order": 13
+    },
+    {
+      "id": "trust",
+      "title": "Trust, Calibration & Production-Readiness",
+      "description": "Is your model safe to ship? Calibration, drift, and the 0–100 Trust Score.",
+      "file": "14-trust.md",
+      "order": 14
+    },
+    {
+      "id": "nlp",
+      "title": "Text & NLP (Bonus)",
+      "description": "The exact same pipeline on text data — TF-IDF, embeddings, and self-healing.",
+      "file": "15-nlp.md",
+      "order": 15
+    },
+    {
+      "id": "capstone",
+      "title": "Capstone: Customer Churn End-to-End",
+      "description": "Ship a real model from raw CSV to deployable .joblib — the full KaizenStat workflow.",
+      "file": "16-capstone.md",
+      "order": 16
     }
   ]
 }

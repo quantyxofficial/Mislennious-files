@@ -126,6 +126,66 @@
       "file": "20-cv.md",
       "difficulty": "Hard",
       "title": "Cross Validation"
+    },
+    {
+      "id": "ml-22",
+      "file": "22-ks-pipeline.md",
+      "difficulty": "Basic",
+      "title": "The DataDoctor Pipeline"
+    },
+    {
+      "id": "ml-27",
+      "file": "27-ks-fix-safe.md",
+      "difficulty": "Basic",
+      "title": "Safe Fixes Never Mutate"
+    },
+    {
+      "id": "ml-21",
+      "file": "21-ks-leakage.md",
+      "difficulty": "Medium",
+      "title": "Catching Data Leakage"
+    },
+    {
+      "id": "ml-23",
+      "file": "23-ks-predict-raw.md",
+      "difficulty": "Medium",
+      "title": "Predicting on Raw Data"
+    },
+    {
+      "id": "ml-26",
+      "file": "26-ks-trust.md",
+      "difficulty": "Medium",
+      "title": "Reading the Trust Score"
+    },
+    {
+      "id": "ml-29",
+      "file": "29-ks-improve.md",
+      "difficulty": "Medium",
+      "title": "From Diagnosis to Action"
+    },
+    {
+      "id": "ml-30",
+      "file": "30-ks-text-mode.md",
+      "difficulty": "Medium",
+      "title": "Same Pipeline, Text Data"
+    },
+    {
+      "id": "ml-24",
+      "file": "24-ks-imbalance.md",
+      "difficulty": "Hard",
+      "title": "The 98% Accuracy Trap"
+    },
+    {
+      "id": "ml-25",
+      "file": "25-ks-blame.md",
+      "difficulty": "Hard",
+      "title": "Data Problem or Model Problem?"
+    },
+    {
+      "id": "ml-28",
+      "file": "28-ks-cv-stability.md",
+      "difficulty": "Hard",
+      "title": "Reading Cross-Validation Spread"
     }
   ]
 }
