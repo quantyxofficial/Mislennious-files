@@ -739,7 +739,7 @@ export function VirtualIdCard() {
               <span className="text-red-400 font-semibold">required fields</span>{' '}
               (Name <span className="text-red-400">*</span>, University <span className="text-red-400">*</span>, Major <span className="text-red-400">*</span>)
               and verify your email in the{' '}
-              <a href="/student" className="text-slate-300 hover:text-white underline">Member Info</a> tab.
+              <a href="/member" className="text-slate-300 hover:text-white underline">Member Info</a> tab.
               Add LinkedIn, Resume, GitHub & Portfolio to unlock the{' '}
               <button onClick={() => setIsFlipped(true)} className="text-slate-300 hover:text-white underline">back of the card</button>.
             </p>

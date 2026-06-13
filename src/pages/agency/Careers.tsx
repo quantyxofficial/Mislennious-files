@@ -150,11 +150,11 @@ export const Careers: React.FC = () => {
 
           <div className="space-y-4">
             <Link
-              to="/student"
+              to="/member"
               className="group flex items-center justify-between w-full p-5 rounded-2xl bg-lux-glass border border-lux-glassBorder hover:border-white/20 transition-colors"
             >
               <div>
-                <p className="text-sm font-semibold text-lux-text">Student Portal</p>
+                <p className="text-sm font-semibold text-lux-text">Member Portal</p>
                 <p className="text-[10px] text-lux-muted mt-0.5">Sign in to your member dashboard</p>
               </div>
               <ArrowRight size={14} className="text-lux-muted group-hover:translate-x-1 transition-transform" />

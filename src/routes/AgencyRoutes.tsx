@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout as AgencyLayout } from '../AgencyLayout';
 
 // Lazy load all route components
@@ -54,13 +54,18 @@ export const AgencyRoutes = () => {
                 <Route path="practice" element={<PracticeHome />} />
                 <Route path="kaizen-ai" element={<KaizenAI />} />
 
-                {/* Student Dashboard */}
-                <Route path="student" element={<StudentLayout />}>
+                {/* Member Dashboard */}
+                <Route path="member" element={<StudentLayout />}>
                     <Route index element={<StudentInfo />} />
                     <Route path="competitions" element={<UpcomingCompetitions />} />
                     <Route path="id-card" element={<VirtualIdCard />} />
                     <Route path="announcements" element={<Announcements />} />
                 </Route>
+                {/* Legacy /student aliases — redirect to /member */}
+                <Route path="student" element={<Navigate to="/member" replace />} />
+                <Route path="student/competitions" element={<Navigate to="/member/competitions" replace />} />
+                <Route path="student/id-card" element={<Navigate to="/member/id-card" replace />} />
+                <Route path="student/announcements" element={<Navigate to="/member/announcements" replace />} />
 
                 <Route path="practice/:topic" element={<PracticeList />} />
                 <Route path="practice/:topic/:problemId" element={<PracticeShell />}>

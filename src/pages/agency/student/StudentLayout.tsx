@@ -1,13 +1,14 @@
 import { Suspense } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, Trophy, CreditCard, Bell } from 'lucide-react';
+import { User, Trophy, CreditCard, Bell, BookOpen } from 'lucide-react';
 
 const tabs = [
-  { path: '/student', name: 'Member Info', icon: User },
-  { path: '/student/competitions', name: 'Competitions', icon: Trophy },
-  { path: '/student/id-card', name: 'Member ID Card', icon: CreditCard },
-  { path: '/student/announcements', name: 'Announcements', icon: Bell },
+  { path: '/member', name: 'Member Info', icon: User },
+  { path: '/practice', name: 'Learn Free', icon: BookOpen },
+  { path: '/member/competitions', name: 'Competitions', icon: Trophy },
+  { path: '/member/id-card', name: 'Member ID Card', icon: CreditCard },
+  { path: '/member/announcements', name: 'Announcements', icon: Bell },
 ];
 
 export function StudentLayout() {

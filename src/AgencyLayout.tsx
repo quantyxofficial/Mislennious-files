@@ -24,7 +24,7 @@ export const Layout: React.FC = () => {
                 </div>
 
                 {/* Global Footer */}
-                {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && location.pathname !== '/kaizen-ai' && !location.pathname.startsWith('/student') && <Footer />}
+                {!/^\/(study|practice)\/[^/]+\/.+/.test(location.pathname) && location.pathname !== '/kaizen-ai' && !location.pathname.startsWith('/member') && !location.pathname.startsWith('/student') && <Footer />}
 
                 {/* Persistent Scroll Manager */}
                 <ScrollManager />

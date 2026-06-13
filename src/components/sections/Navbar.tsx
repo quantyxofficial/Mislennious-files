@@ -102,7 +102,7 @@ export function Navbar() {
           <div className="relative">
             {user ? (
               <div className="relative" onMouseEnter={() => setIsUserMenuOpen(true)} onMouseLeave={() => setIsUserMenuOpen(false)}>
-                <Link to="/student" className="relative group flex items-center">
+                <Link to="/member" className="relative group flex items-center">
                   {/* Professional avatar */}
                   <div className="relative w-9 h-9">
                     <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-white/15 group-hover:ring-white/40 transition-all duration-200 bg-slate-800">
@@ -143,10 +143,10 @@ export function Navbar() {
                       </div>
                       <div className="py-2 border-b border-white/10">
                         {[
-                          { to: '/student', label: 'Member Info', color: 'bg-cyan-500/40' },
-                          { to: '/student/competitions', label: 'Competitions', color: 'bg-emerald-500/40' },
-                          { to: '/student/id-card', label: 'Member ID Card', color: 'bg-purple-500/40' },
-                          { to: '/student/announcements', label: 'Announcements', color: 'bg-amber-500/40' },
+                          { to: '/member', label: 'Member Info', color: 'bg-cyan-500/40' },
+                          { to: '/member/competitions', label: 'Competitions', color: 'bg-emerald-500/40' },
+                          { to: '/member/id-card', label: 'Member ID Card', color: 'bg-purple-500/40' },
+                          { to: '/member/announcements', label: 'Announcements', color: 'bg-amber-500/40' },
                         ].map(({ to, label, color }) => (
                           <Link key={to} to={to}
                             className="flex items-center gap-2 px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-white hover:bg-white/5 transition-colors">
@@ -164,7 +164,7 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <Link to="/student"
+              <Link to="/member"
                 className="px-5 py-2 rounded-full bg-white text-black text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-all duration-300 shadow-xl shadow-white/5 active:scale-95 flex items-center gap-2">
                 <UserIcon className="w-3.5 h-3.5" />Dashboard
               </Link>
@@ -185,10 +185,10 @@ export function Navbar() {
           >
             <div className="px-4 py-3 space-y-2">
               {[
-                { to: '/student', label: 'Member Info' },
-                { to: '/student/competitions', label: 'Competitions' },
-                { to: '/student/id-card', label: 'Member ID Card' },
-                { to: '/student/announcements', label: 'Announcements' },
+                { to: '/member', label: 'Member Info' },
+                { to: '/member/competitions', label: 'Competitions' },
+                { to: '/member/id-card', label: 'Member ID Card' },
+                { to: '/member/announcements', label: 'Announcements' },
               ].map(({ to, label }) => (
                 <Link key={to} to={to}
                   onClick={() => setIsMobileMenuOpen(false)}

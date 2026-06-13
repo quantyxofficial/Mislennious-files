@@ -28,10 +28,10 @@ const NAV_COLUMNS = [
   {
     heading: "Members",
     links: [
-      { label: "Dashboard", to: "/student" },
-      { label: "Competitions", to: "/student/competitions" },
-      { label: "ID Card", to: "/student/id-card" },
-      { label: "Announcements", to: "/student/announcements" },
+      { label: "Dashboard", to: "/member" },
+      { label: "Competitions", to: "/member/competitions" },
+      { label: "ID Card", to: "/member/id-card" },
+      { label: "Announcements", to: "/member/announcements" },
     ],
   },
 ];
