@@ -13,7 +13,7 @@
         "width": 512,
         "height": 512
       },
-      "description": "KaizenStat is a student-led open-source Python machine learning framework for debugging, testing, and optimizing ML pipelines with continuous improvement. Founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0 licensed. pip install kaizenstat.",
+      "description": "KaizenStat is an open-source Python library that diagnoses ML models and data. Your model says 96% accuracy — KaizenStat tells you, still why it's failing and what the real accuracy is. Detects data leakage, class imbalance, and pipeline flaws that make models lie — then fixes those internal problems and helps you build the best, most efficient model. Founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0 licensed. pip install kaizenstat.",
       "foundingDate": "2024",
       "foundingLocation": "India",
       "knowsAbout": [

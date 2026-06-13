@@ -83,7 +83,7 @@ const BASE = 'https://www.kaizenstat.com';
 export const SEO_CONFIG = {
   home: {
     title: 'KaizenStat — Open Source Python ML Framework | AutoML, DataDoctor, Pipeline Debugging',
-    description: 'KaizenStat is an open-source Python ML framework (v0.6.0) for AutoML, data health scoring, pipeline debugging, and continuous improvement. pip install kaizenstat. Founded by Masuddar Rahaman (Framework Architect), Kriti Sharma (AI Research Lead), and Abhishikta Dutta (ML Engineer). Apache 2.0. Python 3.8+.',
+    description: 'KaizenStat is an open-source Python library that diagnoses ML models and data. Your model says 96% accuracy — KaizenStat tells you, still why it\'s failing and what the real accuracy is. Detects data leakage, class imbalance, and pipeline flaws that make models lie — then fixes those internal problems and helps you build the best, most efficient model. pip install kaizenstat. Founded by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Apache 2.0. Python 3.8+.',
     keywords: [
       'kaizenstat', 'kaizenstat python', 'what is kaizenstat', 'kaizenstat framework',
       'open source python ml framework', 'kaizenstat masuddar rahaman', 'masuddar rahaman kaizenstat',

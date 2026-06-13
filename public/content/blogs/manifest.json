@@ -27,7 +27,7 @@
     "id": "docs-api-reference",
     "file": "docs-api-reference.md",
     "title": "Python SDK Reference",
-    "description": "The complete KaizenStat Python API (v0.6.0): the DataDoctor class, every pipeline method, the zero-friction API, module-level functions, result types, the Trust Layer, the AI advisor, and the engines behind the scenes.",
+    "description": "Complete Python SDK reference for the KaizenStat ML framework (v0.6.0): the DataDoctor class, every pipeline method, module-level functions, result types, the Trust Layer, the AI advisor, and the engines behind the scenes.",
     "category": "Documentation",
     "date": "2026-06-06",
     "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",

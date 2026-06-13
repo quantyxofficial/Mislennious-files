@@ -86,93 +86,224 @@ const ParticleField = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current; if (!canvas) return;
-    const ctx = canvas.getContext('2d')!;
-    let raf: number;
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-    resize();
-    window.addEventListener('resize', resize);
+    const ctx = canvas.getContext('2d'); if (!ctx) return;
 
-    const count = 80;
-    const particles = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.3,
-      alpha: Math.random() * 0.4 + 0.1,
-    }));
+    // Respect reduced-motion: draw a static frame, no animation loop.
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    let raf = 0;
+    let w = 0, h = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let running = true;
+
+    type P = { x: number; y: number; vx: number; vy: number; r: number; alpha: number };
+    let particles: P[] = [];
+
+    const CONNECT = 120;        // max link distance (CSS px)
+    const CONNECT_SQ = CONNECT * CONNECT;
+
+    const seed = () => {
+      // Density scales with area so it isn't sparse on wide screens / dense on phones.
+      const count = Math.max(28, Math.min(80, Math.round((w * h) / 16000)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.4 + 0.1,
+      }));
+    };
+
+    const resize = () => {
+      const nw = canvas.offsetWidth, nh = canvas.offsetHeight;
+      if (nw === 0 || nh === 0) return;          // hidden — skip, avoids blank/flicker
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = nw; h = nh;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);    // draw in CSS px, crisp on retina
+      if (!particles.length) seed();
+    };
 
     const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
+      ctx.clearRect(0, 0, w, h);
+      const n = particles.length;
+      for (let i = 0; i < n; i++) {
+        const p = particles[i];
         p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
+        if (p.x < 0) p.x += w; else if (p.x > w) p.x -= w;
+        if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(120,200,255,${p.alpha})`;
         ctx.fill();
-      });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
+      }
+      for (let i = 0; i < n; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j < n; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          if (dx > CONNECT || dx < -CONNECT) continue;   // cheap reject before sqrt
+          const dy = a.y - b.y;
+          if (dy > CONNECT || dy < -CONNECT) continue;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < CONNECT_SQ) {
             ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(100,180,255,${0.08 * (1 - dist / 120)})`;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(100,180,255,${0.08 * (1 - Math.sqrt(d2) / CONNECT)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
-      raf = requestAnimationFrame(draw);
+      if (running) raf = requestAnimationFrame(draw);
     };
-    draw();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+
+    resize();
+    if (reduceMotion) {
+      draw();                                    // single static frame
+    } else {
+      raf = requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+
+    // Pause the loop when the hero scrolls out of view.
+    const io = new IntersectionObserver(([entry]) => {
+      if (reduceMotion) return;
+      if (entry.isIntersecting && !running) {
+        running = true;
+        raf = requestAnimationFrame(draw);
+      } else if (!entry.isIntersecting && running) {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+    }, { threshold: 0 });
+    io.observe(canvas);
+
+    return () => {
+      running = false;
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      io.disconnect();
+    };
   }, []);
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 };
 
 // ─── 3D Wireframe Sphere ─────────────────────────────────────────────────────
+// A real projected-sphere wireframe: points are rotated in 3D and projected to 2D,
+// so latitude rings stay round and longitude lines bow correctly. Rotation is a
+// smooth continuous spin (rAF) — independent of page scroll, so it never janks.
 const WireSphere = () => {
-  const { scrollYProgress } = useScroll();
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  const rotateX = useTransform(scrollYProgress, [0, 1], [20, -20]);
-  const rings = 7;
-  const lines = 8;
+  const groupRef = useRef<SVGGElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  // Section-scoped scroll just adds a gentle parallax fade, not the rotation.
+  const { scrollYProgress } = useScroll({ target: wrapRef, offset: ['start end', 'end start'] });
+  const driftY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  const R = 100;
+  const RINGS = 7;
+  const LINES = 8;
+  const SEG = 48; // samples per curve — smooth ellipse projection
+
+  // Pre-compute 3D points for each curve once.
+  const { latRings, lonLines } = React.useMemo(() => {
+    const latRings: number[][][] = [];
+    for (let i = 1; i <= RINGS; i++) {
+      const lat = -Math.PI / 2 + (Math.PI / (RINGS + 1)) * i;
+      const ring: number[][] = [];
+      for (let s = 0; s <= SEG; s++) {
+        const t = (s / SEG) * Math.PI * 2;
+        ring.push([Math.cos(lat) * Math.cos(t) * R, Math.sin(lat) * R, Math.cos(lat) * Math.sin(t) * R]);
+      }
+      latRings.push(ring);
+    }
+    const lonLines: number[][][] = [];
+    for (let i = 0; i < LINES; i++) {
+      const lon = (Math.PI * 2 / LINES) * i;
+      const line: number[][] = [];
+      for (let s = 0; s <= SEG; s++) {
+        const lat = -Math.PI / 2 + (Math.PI * s) / SEG;
+        line.push([Math.cos(lat) * Math.cos(lon) * R, Math.sin(lat) * R, Math.cos(lat) * Math.sin(lon) * R]);
+      }
+      lonLines.push(line);
+    }
+    return { latRings, lonLines };
+  }, []);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const group = groupRef.current; if (!group) return;
+    let raf = 0;
+    let running = true;
+    let angY = 0.4;
+    const angX = 0.35;            // fixed tilt
+    let last = performance.now();
+
+    const project = (pts: number[][]) => {
+      const cy = Math.cos(angY), sy = Math.sin(angY);
+      const cx = Math.cos(angX), sx = Math.sin(angX);
+      let d = '';
+      for (let i = 0; i < pts.length; i++) {
+        let [x, y, z] = pts[i];
+        // rotate Y then X
+        const x1 = x * cy + z * sy;
+        const z1 = -x * sy + z * cy;
+        const y1 = y * cx - z1 * sx;
+        d += (i === 0 ? 'M' : 'L') + x1.toFixed(1) + ' ' + y1.toFixed(1);
+      }
+      return d;
+    };
+
+    const render = () => {
+      const paths = group.querySelectorAll('path[data-w]');
+      let idx = 0;
+      latRings.forEach((r) => paths[idx++]?.setAttribute('d', project(r)));
+      lonLines.forEach((l) => paths[idx++]?.setAttribute('d', project(l)));
+    };
+
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 64); last = now;
+      angY += dt * 0.00018;       // ~slow, steady spin
+      render();
+      if (running) raf = requestAnimationFrame(tick);
+    };
+
+    render();
+    if (!reduceMotion) raf = requestAnimationFrame(tick);
+
+    const io = new IntersectionObserver(([e]) => {
+      if (reduceMotion) return;
+      if (e.isIntersecting && !running) { running = true; last = performance.now(); raf = requestAnimationFrame(tick); }
+      else if (!e.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
+    }, { threshold: 0 });
+    io.observe(group);
+
+    return () => { running = false; cancelAnimationFrame(raf); io.disconnect(); };
+  }, [latRings, lonLines]);
+
+  const paths = latRings.length + lonLines.length;
 
   return (
-    <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[480px] h-[480px] pointer-events-none opacity-20 hidden lg:block">
-      <motion.div className="w-full h-full" style={{ rotateY, rotateX, transformPerspective: 900 }}>
-        <svg viewBox="-120 -120 240 240" className="w-full h-full">
-          {Array.from({ length: rings }).map((_, i) => {
-            const lat = -90 + (180 / (rings + 1)) * (i + 1);
-            const r = Math.cos((lat * Math.PI) / 180) * 100;
-            const y = Math.sin((lat * Math.PI) / 180) * 100;
-            return (
-              <ellipse key={`h${i}`} cx={0} cy={y} rx={r} ry={r * 0.25}
-                fill="none" stroke="rgba(34,211,238,0.6)" strokeWidth="0.6" />
-            );
-          })}
-          {Array.from({ length: lines }).map((_, i) => {
-            const lng = (360 / lines) * i;
-            const rad = (lng * Math.PI) / 180;
-            return (
-              <ellipse key={`v${i}`} cx={0} cy={0}
-                rx={Math.abs(Math.cos(rad)) * 100 || 10} ry={100}
-                fill="none" stroke="rgba(34,211,238,0.4)" strokeWidth="0.5"
-                transform={`rotate(${lng})`} />
-            );
-          })}
-          <circle cx={0} cy={0} r={100} fill="none" stroke="rgba(34,211,238,0.3)" strokeWidth="0.8" />
-        </svg>
-      </motion.div>
-    </div>
+    <motion.div
+      ref={wrapRef}
+      style={{ y: driftY, willChange: 'transform' }}
+      className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[480px] h-[480px] pointer-events-none opacity-20 hidden lg:block">
+      <svg viewBox="-120 -120 240 240" className="w-full h-full">
+        <g ref={groupRef}>
+          {Array.from({ length: paths }).map((_, i) => (
+            <path key={i} data-w="" d="" fill="none"
+              stroke={i < latRings.length ? 'rgba(34,211,238,0.55)' : 'rgba(34,211,238,0.38)'}
+              strokeWidth={i < latRings.length ? 0.6 : 0.5} />
+          ))}
+          <circle cx={0} cy={0} r={R} fill="none" stroke="rgba(34,211,238,0.3)" strokeWidth="0.8" />
+        </g>
+      </svg>
+    </motion.div>
   );
 };
 

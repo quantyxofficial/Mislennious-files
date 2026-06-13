@@ -152,7 +152,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 'about-kaizenstat-foundation',
     title: 'KaizenStat: The Student-Led Foundation Empowering the Next Gen of Data Scientists',
-    excerpt: 'Discover KaizenStat, a student-led collective dedicated to data science excellence, hackathons, and competitive learning. Meet the founders: Masuddar Rahaman, Abhishikta Dutta, and Kriti Sharma.',
+    excerpt: 'Discover KaizenStat, a student-led collective dedicated to data science excellence, hackathons, and competitive learning. Meet the founders: Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta.',
     content: 'Full article content would go here...',
     author: 'KaizenStat Editorial',
     authorRole: 'KaizenStat Team',

@@ -6,11 +6,11 @@ import { ModelType, ChatMessage } from '../context/AIContext';
 
 const SMART_RESPONSES: Record<string, string> = {
     // 1. Library & Community Basics
-    'what is kaizenstat': 'An intelligent AutoML and data diagnostics Python library built by our student community.',
+    'what is kaizenstat': 'KaizenStat is an open-source Python library that diagnoses ML models and data. Your model says 96% accuracy — KaizenStat tells you, still why it\'s failing and what the real accuracy is. It detects data leakage, class imbalance, and pipeline flaws that make models lie — then fixes those internal problems and helps you build the best, most efficient model. pip install kaizenstat.',
     'what is kaizenstat collective': 'Our student community building open-source data science tools and libraries.',
     'what do i gain from kaizenstat collective': 'Experience in building package ecosystems, data science, and library contributions.',
     'who are you': 'I am KaizenStat AI, representing a student community making data science and AutoML libraries easier for developers.',
-    'what do you do': 'I help developers and students understand and build Python libraries for AutoML and data diagnostics.',
+    'what do you do': 'I help developers and students use the KaizenStat Python ML framework for AutoML, model debugging, and data health scoring.',
     
     // 2. Getting Started
     'how do i start': 'Install our library via "pip install kaizenstat" and check out our quickstart docs.',
