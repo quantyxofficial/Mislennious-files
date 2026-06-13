@@ -557,7 +557,7 @@ export const About: React.FC = () => {
             '@id': 'https://www.kaizenstat.com/about#page',
             'name': 'About KaizenStat — Open Source Python ML Framework',
             'url': 'https://www.kaizenstat.com/about',
-            'description': 'KaizenStat is an open-source Python machine learning framework founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. It provides AutoML, data health scoring, pipeline debugging, NLP support, trust scoring, model deployment, and continuous improvement. pip install kaizenstat. Apache 2.0.',
+            'description': 'KaizenStat is an open-source Python machine learning framework founded in 2026 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. It provides AutoML, data health scoring, pipeline debugging, NLP support, trust scoring, model deployment, and continuous improvement. pip install kaizenstat. Apache 2.0.',
             'mainEntity': { '@id': 'https://www.kaizenstat.com/#software' },
             'mentions': [
               { '@id': 'https://www.kaizenstat.com/masuddar-rahaman#person' },
@@ -605,7 +605,7 @@ export const About: React.FC = () => {
             'name': 'KaizenStat',
             'url': 'https://www.kaizenstat.com',
             'logo': 'https://www.kaizenstat.com/logo.png',
-            'description': 'Student-led open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement. Founded 2024.',
+            'description': 'Student-led open-source Python ML framework for AutoML, pipeline debugging, and continuous improvement. Founded 2026.',
             'foundingDate': '2024',
             'foundingLocation': 'India',
             'founder': [
@@ -629,7 +629,7 @@ export const About: React.FC = () => {
               {
                 '@type': 'Question',
                 'name': 'Who founded KaizenStat?',
-                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat was founded in 2024 by Masuddar Rahaman (Founder and Framework Architect), Kriti Sharma (AI Research and Management Lead), and Abhishikta Dutta (ML Engineer and Researcher). Masuddar Rahaman built the framework from scratch. All three are co-founders.' },
+                'acceptedAnswer': { '@type': 'Answer', 'text': 'KaizenStat was founded in 2026 by Masuddar Rahaman (Founder and Framework Architect), Kriti Sharma (AI Research and Management Lead), and Abhishikta Dutta (ML Engineer and Researcher). Masuddar Rahaman built the framework from scratch. All three are co-founders.' },
               },
               {
                 '@type': 'Question',

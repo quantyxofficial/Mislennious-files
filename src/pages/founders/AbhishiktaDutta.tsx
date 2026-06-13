@@ -27,7 +27,7 @@ const STRUCTURED_DATA = {
         'Abhishikta Dutta Co-Founder',
       ],
       'jobTitle': 'ML Engineer and Researcher, Co-Founder',
-      'description': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems at KaizenStat, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat in 2024 with Masuddar Rahaman and Kriti Sharma.',
+      'description': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems at KaizenStat, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat in 2026 with Masuddar Rahaman and Kriti Sharma.',
       'url': 'https://www.kaizenstat.com/abhishikta-dutta',
       'image': 'https://github.com/abhishiktadutta.png',
       'sameAs': [
@@ -75,7 +75,7 @@ const STRUCTURED_DATA = {
           'name': 'Who is Abhishikta Dutta?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She builds Python-based ML pipelines and production systems at KaizenStat. Abhishikta Dutta co-founded KaizenStat in 2024 with Masuddar Rahaman and Kriti Sharma.',
+            'text': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She builds Python-based ML pipelines and production systems at KaizenStat. Abhishikta Dutta co-founded KaizenStat in 2026 with Masuddar Rahaman and Kriti Sharma.',
           },
         },
         {
@@ -103,7 +103,7 @@ export default function AbhishiktaDutta() {
   useEffect(() => {
     updateMetaTags({
       title: 'Abhishikta Dutta — Co-Founder & ML Engineer of KaizenStat | Open Source Python ML Library',
-      description: 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She builds Python ML pipelines and production systems at KaizenStat. Co-founded KaizenStat in 2024 with Masuddar Rahaman and Kriti Sharma.',
+      description: 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She builds Python ML pipelines and production systems at KaizenStat. Co-founded KaizenStat in 2026 with Masuddar Rahaman and Kriti Sharma.',
       keywords: [
         'abhishikta dutta', 'abhishikta dutta kaizenstat', 'abhishikta dutta co-founder',
         'abhishikta dutta ml engineer', 'abhishikta dutta researcher',
@@ -146,7 +146,7 @@ export default function AbhishiktaDutta() {
             production systems at KaizenStat, translating research into tools that learn, adapt, and scale.
           </p>
           <p>
-            Abhishikta Dutta co-founded KaizenStat in 2024 with{' '}
+            Abhishikta Dutta co-founded KaizenStat in 2026 with{' '}
             <Link to="/masuddar-rahaman" className="text-cyan-400 hover:underline">Masuddar Rahaman</Link> and{' '}
             <Link to="/kriti-sharma" className="text-purple-400 hover:underline">Kriti Sharma</Link>.
             She combines hands-on engineering with a research mindset, turning raw data into systems

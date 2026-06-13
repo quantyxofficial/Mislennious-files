@@ -27,7 +27,7 @@ const STRUCTURED_DATA = {
         'Kriti Sharma Co-Founder',
       ],
       'jobTitle': 'AI Research and Management Lead, Co-Founder',
-      'description': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the KaizenStat research roadmap, manages day-to-day operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat in 2024 with Masuddar Rahaman and Abhishikta Dutta.',
+      'description': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the KaizenStat research roadmap, manages day-to-day operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat in 2026 with Masuddar Rahaman and Abhishikta Dutta.',
       'url': 'https://www.kaizenstat.com/kriti-sharma',
       'image': 'https://i.postimg.cc/mZ9PZg1k/IMG-3848.avif',
       'sameAs': [
@@ -76,7 +76,7 @@ const STRUCTURED_DATA = {
           'name': 'Who is Kriti Sharma?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She drives AI market intelligence, oversees the research roadmap, manages operations, and actively implements AI with the team. Kriti Sharma co-founded KaizenStat in 2024 with Masuddar Rahaman and Abhishikta Dutta.',
+            'text': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She drives AI market intelligence, oversees the research roadmap, manages operations, and actively implements AI with the team. Kriti Sharma co-founded KaizenStat in 2026 with Masuddar Rahaman and Abhishikta Dutta.',
           },
         },
         {
@@ -104,7 +104,7 @@ export default function KritiSharma() {
   useEffect(() => {
     updateMetaTags({
       title: 'Kriti Sharma — Co-Founder & AI Research Lead of KaizenStat | Open Source Python ML Library',
-      description: 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She drives AI market intelligence, research roadmap, and operations. Co-founded KaizenStat in 2024 with Masuddar Rahaman and Abhishikta Dutta.',
+      description: 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). She drives AI market intelligence, research roadmap, and operations. Co-founded KaizenStat in 2026 with Masuddar Rahaman and Abhishikta Dutta.',
       keywords: [
         'kriti sharma', 'kriti sharma kaizenstat', 'kriti sharma co-founder',
         'kriti sharma ai research', 'kriti sharma management lead',
@@ -148,7 +148,7 @@ export default function KritiSharma() {
             alongside the team.
           </p>
           <p>
-            Kriti Sharma co-founded KaizenStat in 2024 with{' '}
+            Kriti Sharma co-founded KaizenStat in 2026 with{' '}
             <Link to="/masuddar-rahaman" className="text-cyan-400 hover:underline">Masuddar Rahaman</Link> and{' '}
             <Link to="/abhishikta-dutta" className="text-emerald-400 hover:underline">Abhishikta Dutta</Link>.
             She turns market intelligence into real direction and direction into shipped work.

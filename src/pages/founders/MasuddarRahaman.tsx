@@ -27,7 +27,7 @@ const STRUCTURED_DATA = {
         'Masuddar Rahaman Framework Architect',
       ],
       'jobTitle': 'Founder and Framework Architect',
-      'description': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library. He built KaizenStat from the ground up — designing the DataDoctor AutoML engine, the data health scoring system, the pipeline debugging tools, and all KaizenStat Python APIs. Masuddar Rahaman co-founded KaizenStat in 2024 with Kriti Sharma and Abhishikta Dutta with the goal of making machine learning easy to build, debug, and understand for every student and developer.',
+      'description': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library. He built KaizenStat from the ground up — designing the DataDoctor AutoML engine, the data health scoring system, the pipeline debugging tools, and all KaizenStat Python APIs. Masuddar Rahaman co-founded KaizenStat in 2026 with Kriti Sharma and Abhishikta Dutta with the goal of making machine learning easy to build, debug, and understand for every student and developer.',
       'url': 'https://www.kaizenstat.com/masuddar-rahaman',
       'image': 'https://i.postimg.cc/02cvHZ2Y/IMG-4853.avif',
       'sameAs': [
@@ -76,7 +76,7 @@ const STRUCTURED_DATA = {
           'name': 'Who is Masuddar Rahaman?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up, designed the DataDoctor AutoML class, the data health scoring engine, and all core Python APIs. He co-founded KaizenStat in 2024 with Kriti Sharma and Abhishikta Dutta.',
+            'text': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up, designed the DataDoctor AutoML class, the data health scoring engine, and all core Python APIs. He co-founded KaizenStat in 2026 with Kriti Sharma and Abhishikta Dutta.',
           },
         },
         {
@@ -100,7 +100,7 @@ const STRUCTURED_DATA = {
           'name': 'Is Masuddar Rahaman a machine learning engineer?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Yes. Masuddar Rahaman is a machine learning engineer and framework architect. He founded and built KaizenStat, an open-source Python ML library (pip install kaizenstat), from scratch in 2024. He specializes in ML framework design, pipeline architecture, AutoML, and open source software.',
+            'text': 'Yes. Masuddar Rahaman is a machine learning engineer and framework architect. He founded and built KaizenStat, an open-source Python ML library (pip install kaizenstat), from scratch in 2026. He specializes in ML framework design, pipeline architecture, AutoML, and open source software.',
           },
         },
       ],
@@ -112,7 +112,7 @@ export default function MasuddarRahaman() {
   useEffect(() => {
     updateMetaTags({
       title: 'Masuddar Rahaman — Founder & Framework Architect of KaizenStat | Open Source Python ML Library',
-      description: 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up — designing the DataDoctor AutoML engine, data health scoring, and all KaizenStat Python APIs. Co-founded KaizenStat in 2024 with Kriti Sharma and Abhishikta Dutta.',
+      description: 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up — designing the DataDoctor AutoML engine, data health scoring, and all KaizenStat Python APIs. Co-founded KaizenStat in 2026 with Kriti Sharma and Abhishikta Dutta.',
       keywords: [
         'masuddar rahaman', 'masuddar rahaman kaizenstat', 'masuddar rahaman founder',
         'masuddar rahaman framework architect', 'masuddar rahaman ml engineer',
@@ -156,7 +156,7 @@ export default function MasuddarRahaman() {
             scoring engine, pipeline debugging tools, NLP support, trust scoring, and all KaizenStat Python APIs.
           </p>
           <p>
-            Masuddar Rahaman co-founded KaizenStat in 2024 with{' '}
+            Masuddar Rahaman co-founded KaizenStat in 2026 with{' '}
             <Link to="/kriti-sharma" className="text-purple-400 hover:underline">Kriti Sharma</Link> and{' '}
             <Link to="/abhishikta-dutta" className="text-emerald-400 hover:underline">Abhishikta Dutta</Link>.
             His mission: make machine learning easy to build, debug, and understand for every student and developer.

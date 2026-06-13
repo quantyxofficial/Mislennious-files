@@ -80,8 +80,8 @@ const LANDING_STRUCTURED_DATA = {
       'name': 'KaizenStat',
       'url': 'https://www.kaizenstat.com',
       'logo': 'https://www.kaizenstat.com/logo.png',
-      'description': 'KaizenStat is a student-led open-source Python machine learning framework founded in 2024. pip install kaizenstat. Apache 2.0.',
-      'foundingDate': '2024',
+      'description': 'KaizenStat is a student-led open-source Python machine learning framework founded in 2026. pip install kaizenstat. Apache 2.0.',
+      'foundingDate': '2026',
       'founder': [
         { '@id': 'https://www.kaizenstat.com/masuddar-rahaman#person' },
         { '@id': 'https://www.kaizenstat.com/kriti-sharma#person' },

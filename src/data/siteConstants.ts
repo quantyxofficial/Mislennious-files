@@ -338,7 +338,7 @@ export const EXTENDED_CASE_STUDIES: ExtendedCaseStudy[] = [
     ...CASE_STUDIES[2],
     category: 'AI & ML',
     tags: ['Machine Learning', 'Predictive Analytics'],
-    year: '2024',
+    year: '2026',
     description: 'Nebula SaaS needed to reduce churn. We built a custom ML model that predicts churn risk with high accuracy, enabling proactive customer success interventions.'
   },
   {
@@ -350,7 +350,7 @@ export const EXTENDED_CASE_STUDIES: ExtendedCaseStudy[] = [
     image: 'https://images.unsplash.com/photo-1543286386-2e659306cd6c?q=80&w=2070&auto=format&fit=crop',
     category: 'Data & Analytics',
     tags: ['Excel', 'VBA', 'Automation'],
-    year: '2024',
+    year: '2026',
     description: 'We automated complex financial reporting workflows using advanced Excel models and VBA macros, saving the finance team hundreds of hours annually.'
   },
   {
@@ -362,7 +362,7 @@ export const EXTENDED_CASE_STUDIES: ExtendedCaseStudy[] = [
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop',
     category: 'Data & Analytics',
     tags: ['Power BI', 'Visualization', 'EDA'],
-    year: '2024',
+    year: '2026',
     description: 'Developed a comprehensive Power BI dashboard suite that visualized real-time supply chain data, allowing management to instantly identify and resolve bottlenecks.'
   },
   {

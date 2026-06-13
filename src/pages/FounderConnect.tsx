@@ -246,7 +246,7 @@ const FOUNDERS_STRUCTURED_DATA = {
           'name': 'Who is Masuddar Rahaman?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up — designing the DataDoctor class, the AutoML pipeline engine, and all core APIs. Masuddar Rahaman founded KaizenStat in 2024 with the goal of making ML easy to build, debug, and understand. GitHub: https://github.com/Masuddar. LinkedIn: https://www.linkedin.com/in/masuddar-rahaman/',
+            'text': 'Masuddar Rahaman is the Founder and Framework Architect of KaizenStat, an open-source Python machine learning library (pip install kaizenstat). He built KaizenStat from the ground up — designing the DataDoctor class, the AutoML pipeline engine, and all core APIs. Masuddar Rahaman founded KaizenStat in 2026 with the goal of making ML easy to build, debug, and understand. GitHub: https://github.com/Masuddar. LinkedIn: https://www.linkedin.com/in/masuddar-rahaman/',
           },
         },
         {
@@ -262,7 +262,7 @@ const FOUNDERS_STRUCTURED_DATA = {
           'name': 'Who is Kriti Sharma?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the KaizenStat research roadmap, manages operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat in 2024 with Masuddar Rahaman and Abhishikta Dutta. GitHub: https://github.com/kriti-sharma-ai. LinkedIn: https://www.linkedin.com/in/kriti-sharma-795116377/',
+            'text': 'Kriti Sharma is the AI Research and Management Lead and co-founder of KaizenStat, an open-source Python machine learning library. She drives AI market intelligence, oversees the KaizenStat research roadmap, manages operations, and actively implements AI alongside the team. Kriti Sharma co-founded KaizenStat in 2026 with Masuddar Rahaman and Abhishikta Dutta. GitHub: https://github.com/kriti-sharma-ai. LinkedIn: https://www.linkedin.com/in/kriti-sharma-795116377/',
           },
         },
         {
@@ -270,7 +270,7 @@ const FOUNDERS_STRUCTURED_DATA = {
           'name': 'Who is Abhishikta Dutta?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems at KaizenStat, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat in 2024 with Masuddar Rahaman and Kriti Sharma. GitHub: https://github.com/abhishiktadutta. LinkedIn: https://www.linkedin.com/in/abhishikta-dutta1',
+            'text': 'Abhishikta Dutta is an ML Engineer and Researcher and co-founder of KaizenStat, an open-source Python machine learning library. She builds Python-based ML pipelines and production systems at KaizenStat, translating research into tools that learn, adapt, and scale. Abhishikta Dutta co-founded KaizenStat in 2026 with Masuddar Rahaman and Kriti Sharma. GitHub: https://github.com/abhishiktadutta. LinkedIn: https://www.linkedin.com/in/abhishikta-dutta1',
           },
         },
         {

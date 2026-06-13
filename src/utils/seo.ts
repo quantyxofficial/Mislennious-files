@@ -94,7 +94,7 @@ export const SEO_CONFIG = {
       'kaizenstat v0.6', 'kaizenstat apache 2.0', 'kaizen machine learning',
       'kaizen data science', 'ml pipeline debugger python', 'automl python library',
       'data health score python', 'continuous improvement machine learning',
-      'open source ml framework 2024', 'student ml framework india',
+      'open source ml framework 2026', 'student ml framework india',
     ],
     canonical: `${BASE}/`,
     ogType: 'website',
@@ -174,10 +174,10 @@ export const SEO_CONFIG = {
   },
   about: {
     title: 'About KaizenStat — Open Source Python ML Framework Founded by Masuddar Rahaman',
-    description: 'KaizenStat is an open-source Python machine learning framework founded in 2024 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Our mission: make ML easy to build, debug, and continuously improve. Apache 2.0. pip install kaizenstat.',
+    description: 'KaizenStat is an open-source Python machine learning framework founded in 2026 by Masuddar Rahaman, Kriti Sharma, and Abhishikta Dutta. Our mission: make ML easy to build, debug, and continuously improve. Apache 2.0. pip install kaizenstat.',
     keywords: [
       'about kaizenstat', 'kaizenstat mission', 'kaizenstat story', 'kaizenstat history',
-      'kaizenstat founded 2024', 'masuddar rahaman kaizenstat about',
+      'kaizenstat founded 2026', 'masuddar rahaman kaizenstat about',
       'open source ml framework about', 'kaizen philosophy ml', 'kaizenstat values',
       'kaizenstat india', 'student open source ml project',
     ],
