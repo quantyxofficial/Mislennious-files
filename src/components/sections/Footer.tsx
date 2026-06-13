@@ -79,7 +79,7 @@ export function Footer() {
               </a>
               <div className="flex items-center gap-2.5 text-slate-400 text-sm">
                 <MapPin className="w-4 h-4 flex-shrink-0 text-slate-500" />
-                Park Street, Kolkata, WB 700016
+                West Bengal, India
               </div>
             </div>
 

@@ -247,7 +247,7 @@ export const Ethics: React.FC = () => {
                                                 { label: 'Ethics & Conduct', text: 'founders@kaizenstat.com' },
                                                 { label: 'Security Vulnerability', text: 'founders@kaizenstat.com (subject: "Security Report")' },
                                                 { label: 'Technical Issue', text: 'github.com/kaizenstat-python/KaizenStat/issues' },
-                                                { label: 'Postal Mail', text: 'Park Street, Kolkata, WB 700016, India' },
+                                                { label: 'Postal Mail', text: 'West Bengal, India' },
                                             ].map(({ label, text }) => (
                                                 <li key={label} className="flex gap-3">
                                                     <ChevronRight className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />

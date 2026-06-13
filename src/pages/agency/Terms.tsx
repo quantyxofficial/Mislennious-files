@@ -329,7 +329,7 @@ export const Terms: React.FC = () => {
                                         <ul className="space-y-3 mb-6">
                                             {[
                                                 { label: 'Email', text: 'founders@kaizenstat.com' },
-                                                { label: 'Postal', text: 'Park Street, Kolkata, WB 700016, India' },
+                                                { label: 'Postal', text: 'West Bengal, India' },
                                                 { label: 'GitHub', text: 'github.com/kaizenstat-python/KaizenStat/issues' },
                                             ].map(({ label, text }) => (
                                                 <li key={label} className="flex gap-3">
