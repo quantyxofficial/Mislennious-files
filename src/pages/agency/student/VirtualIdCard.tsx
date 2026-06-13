@@ -409,22 +409,10 @@ export function VirtualIdCard() {
     if (!node) return;
     setIsDownloading(true);
     try {
-      const scale = 3;
-      const width = node.offsetWidth;
-      const height = node.offsetHeight;
-
       const domtoimage = await import('dom-to-image-more');
       const dataUrl = await domtoimage.default.toPng(node, {
-        width: width * scale,
-        height: height * scale,
         bgcolor: 'transparent',
-        style: {
-          transform: `scale(${scale})`,
-          transformOrigin: 'top left',
-        },
-        // Capture every layer at full fidelity
-        cacheBust: true,
-      });
+      } as any);
 
       const a = document.createElement('a');
       a.href = dataUrl;
@@ -520,11 +508,11 @@ export function VirtualIdCard() {
             </motion.div>
           </div>
 
-          {/* Off-screen clean render used only for download capture.
-              Kept outside the 3D flip + scale context so dom-to-image
-              gets a pristine, fully-laid-out node (no clipping/duplication). */}
+          {/* Off-screen render for download—rendered at triple size (1440×908)
+              directly with no scale transform, so dom-to-image captures cleanly. */}
           <div
             aria-hidden
+            ref={captureRef}
             style={{
               position: 'fixed',
               top: 0,
@@ -532,10 +520,145 @@ export function VirtualIdCard() {
               zIndex: -1,
               opacity: 0,
               pointerEvents: 'none',
+              width: 1440,
+              height: 908,
+              overflow: 'hidden',
             }}
           >
-            <div ref={captureRef} style={{ width: 480, aspectRatio: '1.586' }}>
-              <IdCard user={user} profile={profile} shortId={shortId} isEmailVerified={isEmailVerified} />
+            {/* Render IdCard at 3× actual size */}
+            <div
+              style={{
+                width: 1440,
+                height: 908,
+                aspectRatio: '1.586',
+                borderRadius: 60,
+                background: 'linear-gradient(140deg, #111111 0%, #0a0a0a 40%, #141414 100%)',
+                boxShadow: [
+                  '0 50px 120px rgba(0,0,0,0.95)',
+                  '0 20px 60px rgba(0,0,0,0.7)',
+                  '0 0 0 1px rgba(255,255,255,0.08)',
+                  'inset 0 1px 0 rgba(255,255,255,0.1)',
+                  'inset 0 -1px 0 rgba(255,255,255,0.03)',
+                ].join(', '),
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Brushed texture */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  pointerEvents: 'none',
+                  opacity: 0.025,
+                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,1) 1px, rgba(255,255,255,1) 2px)',
+                  backgroundSize: '100% 3px',
+                }}
+              />
+              {/* Top-right radial light */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: -240,
+                  right: -240,
+                  width: 960,
+                  height: 960,
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 65%)',
+                  pointerEvents: 'none',
+                }}
+              />
+              {/* Top shine */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 3,
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.18) 30%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.18) 70%, transparent)',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', padding: '72px 100.8px 57.6px 100.8px' }}>
+                {/* HEADER */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7.5 }}>
+                    <Logo className="w-[18px] h-[18px] text-white" />
+                    <div>
+                      <div style={{ fontSize: 36, fontWeight: 900, letterSpacing: '0.16em', color: 'white', lineHeight: 'normal' }}>
+                        KAIZEN<span style={{ fontWeight: 200, opacity: 0.35 }}>STAT</span>
+                      </div>
+                      <div style={{ fontSize: 27, letterSpacing: '0.22em', textTransform: 'uppercase', fontFamily: 'monospace', marginTop: 6, color: 'rgba(255,255,255,0.45)' }}>Member Identity Card</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4.5, paddingLeft: 7.5, paddingRight: 7.5, paddingTop: 3, paddingBottom: 3, borderRadius: '9999px', flexShrink: 0, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <span style={{ width: 15, height: 15, borderRadius: '50%', backgroundColor: 'white', flexShrink: 0, boxShadow: '0 0 6px rgba(255,255,255,0.9)' }} />
+                    <span style={{ fontSize: 27, fontWeight: 'bold', letterSpacing: '0.15em', color: 'white', textTransform: 'uppercase' }}>Active</span>
+                  </div>
+                </div>
+
+                {/* NAME */}
+                <div style={{ flexShrink: 0, marginTop: '72px' }}>
+                  <div style={{ fontSize: 27, letterSpacing: '0.22em', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: 3, color: 'rgba(255,255,255,0.45)' }}>Member Name</div>
+                  <div style={{ fontWeight: 'bold', color: 'white', lineHeight: 'normal', fontSize: 60, letterSpacing: '0.05em', textShadow: '0 2px 20px rgba(255,255,255,0.12)' }}>
+                    {(profile?.full_name || user?.user_metadata?.full_name || 'Member').toUpperCase()}
+                  </div>
+                </div>
+
+                {/* INSTITUTION + PROGRAMME */}
+                <div style={{ display: 'flex', gap: 18, flexShrink: 0, marginTop: '57.6px' }}>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ fontSize: 27, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: 1.5, color: 'rgba(255,255,255,0.4)' }}>Institution</div>
+                    <div style={{ fontSize: 33, fontWeight: 500, lineHeight: 1.33, color: 'rgba(255,255,255,0.75)' }}>{profile?.university || '—'}</div>
+                  </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ fontSize: 27, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: 1.5, color: 'rgba(255,255,255,0.4)' }}>Programme</div>
+                    <div style={{ fontSize: 33, fontWeight: 500, lineHeight: 1.33, color: 'rgba(255,255,255,0.75)' }}>{profile?.major || '—'}</div>
+                  </div>
+                </div>
+
+                {/* CHIP + QR */}
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexShrink: 0, marginTop: '57.6px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <Chip />
+                    <div>
+                      <div style={{ fontSize: 27, letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: 1.5, color: 'rgba(255,255,255,0.4)' }}>Member ID</div>
+                      <div style={{ fontSize: 39, fontWeight: 'bold', fontFamily: 'monospace', letterSpacing: '0.08em', color: 'white' }}>{shortId}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, flexShrink: 0 }}>
+                    {isEmailVerified ? (
+                      <>
+                        <div style={{ paddingLeft: 4.5, paddingRight: 4.5, paddingTop: 4.5, paddingBottom: 4.5, borderRadius: '0.5rem', background: '#fff', boxShadow: '0 4px 16px rgba(0,0,0,0.5)' }}>
+                          <QRCodeSVG value={`${window.location.origin}/verify/${shortId}`} size={162} bgColor="#ffffff" fgColor="#0a0a0a" level="M" />
+                        </div>
+                        <div style={{ fontSize: 27, fontFamily: 'monospace', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>Scan to Verify</div>
+                      </>
+                    ) : (
+                      <>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: '0.5rem', gap: 1.5, width: 192, height: 192, background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.15)' } as React.CSSProperties}>
+                          <ShieldCheck style={{ width: 12, height: 12, color: 'rgba(255,255,255,0.25)' }} />
+                          <span style={{ fontSize: '21px', fontFamily: 'monospace', letterSpacing: '0.1em', textTransform: 'uppercase', textAlign: 'center', paddingLeft: 3, paddingRight: 3, lineHeight: 1, color: 'rgba(255,255,255,0.35)' }}>Verify Email</span>
+                        </div>
+                        <div style={{ fontSize: 24, fontFamily: 'monospace', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)' }}>Pending</div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* DIVIDER */}
+                <div style={{ flexShrink: 0, marginTop: 'auto', height: 3, background: 'rgba(255,255,255,0.08)', marginBottom: '43.2px' }} />
+
+                {/* FOOTER */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                  <div style={{ fontSize: 27, fontFamily: 'monospace', letterSpacing: '0.1em', fontStyle: 'italic', color: 'rgba(255,255,255,0.28)' }}>Continuous improvement for ML pipelines.</div>
+                  <Barcode value={shortId} />
+                </div>
+              </div>
+
+              {/* Bottom shine */}
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)', pointerEvents: 'none' }} />
             </div>
           </div>
 
