@@ -411,7 +411,7 @@ export function VirtualIdCard() {
     try {
       const domtoimage = await import('dom-to-image-more');
       const dataUrl = await domtoimage.default.toPng(node, {
-        bgcolor: 'transparent',
+        bgcolor: '#0a0a0a',
       } as any);
 
       const a = document.createElement('a');
@@ -515,10 +515,9 @@ export function VirtualIdCard() {
             ref={captureRef}
             style={{
               position: 'fixed',
-              top: 0,
+              top: -2000,
               left: 0,
               zIndex: -1,
-              opacity: 0,
               pointerEvents: 'none',
               width: 1440,
               height: 908,
