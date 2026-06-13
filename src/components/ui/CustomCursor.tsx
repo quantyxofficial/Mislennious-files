@@ -150,41 +150,41 @@ export function CustomCursor() {
   }, []);
 
   useEffect(() => {
+    // Skip entirely on touch / no-hover devices — the rAF loop is pure cost there.
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
+
     const dot   = dotRef.current;
     const ring  = ringRef.current;
     const glow  = glowRef.current;
     const label = labelRef.current;
     if (!dot || !ring || !glow || !label) return;
 
-    const loop = () => {
-      const { tx, ty } = pos.current;
-      const lerpFactor = state.current === 'text' ? 0.25 : 0.09;
-      pos.current.rx = lerp(pos.current.rx, tx, lerpFactor);
-      pos.current.ry = lerp(pos.current.ry, ty, lerpFactor);
-      const { rx, ry } = pos.current;
+    // ── Apply the per-state appearance ONCE when state/down/hidden change.
+    // These are expensive writes (border, background, backdrop-filter) and the
+    // values don't change frame-to-frame, so they must not live in the rAF loop.
+    let lastState: CursorState | null = null;
+    let lastDown = false;
+    let lastHidden = false;
 
+    const applyConfig = () => {
       const cfg = STATES[state.current];
-      const s = down.current ? 0.88 : 1;
+      const isText = state.current === 'text';
 
       // Dot
       const ds = cfg.dotSize;
-      dot.style.width   = `${ds}px`;
-      dot.style.height  = `${ds}px`;
-      dot.style.opacity = hidden.current ? '0' : String(cfg.dotOpacity * (down.current ? 0.6 : 1));
-      dot.style.transform = `translate(${tx - ds / 2}px, ${ty - ds / 2}px)`;
-      dot.style.borderRadius = state.current === 'text' ? '1px' : '50%';
-      dot.style.height = state.current === 'text' ? '18px' : `${ds}px`;
+      dot.style.width        = `${ds}px`;
+      dot.style.height       = isText ? '18px' : `${ds}px`;
+      dot.style.borderRadius = isText ? '1px' : '50%';
+      dot.style.opacity      = hidden.current ? '0' : String(cfg.dotOpacity * (down.current ? 0.6 : 1));
 
       // Ring
-      const rs = cfg.ringSize;
-      ring.style.width        = `${rs}px`;
-      ring.style.height       = state.current === 'text' ? '24px' : `${rs}px`;
-      ring.style.borderRadius = state.current === 'text' ? '3px' : '50%';
-      ring.style.border       = cfg.ringBorder;
-      ring.style.background   = cfg.ringBg;
+      ring.style.width          = `${cfg.ringSize}px`;
+      ring.style.height         = isText ? '24px' : `${cfg.ringSize}px`;
+      ring.style.borderRadius   = isText ? '3px' : '50%';
+      ring.style.border         = cfg.ringBorder;
+      ring.style.background     = cfg.ringBg;
       ring.style.backdropFilter = cfg.ringBlur;
-      ring.style.opacity      = hidden.current ? '0' : String(down.current ? 0.75 : 1);
-      ring.style.transform    = `translate(${rx - rs / 2}px, ${ry - (state.current === 'text' ? 12 : rs / 2)}px) scale(${s})`;
+      ring.style.opacity        = hidden.current ? '0' : String(down.current ? 0.75 : 1);
 
       // Glow
       const glowOpacity =
@@ -192,12 +192,37 @@ export function CustomCursor() {
         state.current === 'link'   ? 0.14 :
         state.current === 'grab'   ? 0.10 :
         0.06;
-      glow.style.transform = `translate(${rx - 50}px, ${ry - 50}px)`;
-      glow.style.opacity   = hidden.current ? '0' : String(glowOpacity * (down.current ? 1.4 : 1));
+      glow.style.opacity = hidden.current ? '0' : String(glowOpacity * (down.current ? 1.4 : 1));
 
       // Label
-      label.textContent = cfg.label;
+      label.textContent   = cfg.label;
       label.style.opacity = cfg.label ? '1' : '0';
+    };
+
+    const loop = () => {
+      // Only write the cheap transform (compositor-only) every frame.
+      const { tx, ty } = pos.current;
+      const lerpFactor = state.current === 'text' ? 0.25 : 0.09;
+      pos.current.rx = lerp(pos.current.rx, tx, lerpFactor);
+      pos.current.ry = lerp(pos.current.ry, ty, lerpFactor);
+      const { rx, ry } = pos.current;
+
+      // Re-apply the static config only when something actually changed.
+      if (state.current !== lastState || down.current !== lastDown || hidden.current !== lastHidden) {
+        applyConfig();
+        lastState = state.current;
+        lastDown = down.current;
+        lastHidden = hidden.current;
+      }
+
+      const isText = state.current === 'text';
+      const ds = STATES[state.current].dotSize;
+      const rs = STATES[state.current].ringSize;
+      const s  = down.current ? 0.88 : 1;
+
+      dot.style.transform  = `translate(${tx - ds / 2}px, ${ty - ds / 2}px)`;
+      ring.style.transform = `translate(${rx - rs / 2}px, ${ry - (isText ? 12 : rs / 2)}px) scale(${s})`;
+      glow.style.transform = `translate(${rx - 50}px, ${ry - 50}px)`;
 
       raf.current = requestAnimationFrame(loop);
     };

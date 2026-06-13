@@ -169,8 +169,21 @@ const ParticleField = () => {
       }
       raf = requestAnimationFrame(draw);
     };
-    draw();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+
+    // Only run the O(n²) particle loop while the canvas is on screen. Once the
+    // hero scrolls out of view we cancel the rAF so it stops competing with
+    // scroll on the main thread, and resume when it comes back.
+    let running = false;
+    const start = () => { if (!running) { running = true; draw(); } };
+    const stop = () => { if (running) { running = false; cancelAnimationFrame(raf); } };
+
+    const io = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? start() : stop(); },
+      { threshold: 0 }
+    );
+    io.observe(canvas);
+
+    return () => { io.disconnect(); cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
   }, []);
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 };

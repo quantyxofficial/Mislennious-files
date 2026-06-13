@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useInView, useSpring } from 'motion/react';
+import { motion, useScroll, useTransform, useInView } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '../components/sections/Navbar';
 import { Footer } from '../components/sections/Footer';
@@ -341,9 +341,9 @@ export default function FounderConnect() {
       <Navbar />
 
       {/* Performance Optimized Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-black" style={{ transform: 'translateZ(0)' }}>
         <div className="absolute inset-0 noise-bg opacity-[0.05]" />
-        
+
         {/* Simplified Static Glows (Lower Performance Cost) */}
         <div className="absolute -top-1/4 -left-1/4 w-full h-full bg-cyan-500/10 blur-[120px] rounded-full" />
         <div className="absolute -bottom-1/4 -right-1/4 w-full h-full bg-purple-500/10 blur-[120px] rounded-full" />
@@ -545,22 +545,24 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
     offset: ["start end", "end start"]
   });
 
-  // Balanced Spring for smooth but lightweight motion
-  const springScroll = useSpring(scrollYProgress, { stiffness: 60, damping: 25, mass: 0.5 });
-
-  const imageY = useTransform(springScroll, [0, 1], [-60, 60]);
-  const contentY = useTransform(springScroll, [0, 1], [30, -30]);
-  const bgTextY = useTransform(springScroll, [0, 1], [80, -80]);
+  // Drive parallax directly from scroll progress (no spring) so motion values
+  // only update while the page is actually scrolling. A spring keeps ticking
+  // every frame as it settles, which is the main source of scroll jank here.
+  const imageY = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [25, -25]);
+  const bgTextY = useTransform(scrollYProgress, [0, 1], [70, -70]);
 
   return (
     <section
       id={founder.id}
       ref={spreadRef}
-      className={`min-h-screen flex items-center relative overflow-hidden ${index === 0 ? 'pt-20 pb-24 md:pt-20 md:pb-16' : 'py-24 md:py-16'} will-change-transform`}
+      className={`min-h-screen flex items-center relative overflow-hidden ${index === 0 ? 'pt-20 pb-24 md:pt-20 md:pb-16' : 'py-24 md:py-16'}`}
     >
-      {/* Optimized Background Aura (Reduced Blur) */}
-      <div className={`absolute ${isEven ? 'right-0' : 'left-0'} top-1/4 w-[500px] h-[500px] blur-[100px] rounded-full opacity-15 pointer-events-none`} 
-           style={{ background: `radial-gradient(circle, ${founder.colors.glow}, transparent)` }} />
+      {/* Optimized Background Aura (Reduced Blur) — isolated onto its own
+          compositor layer so the expensive blur is painted once, not on every
+          parallax frame. */}
+      <div className={`absolute ${isEven ? 'right-0' : 'left-0'} top-1/4 w-[500px] h-[500px] blur-[100px] rounded-full opacity-15 pointer-events-none`}
+           style={{ background: `radial-gradient(circle, ${founder.colors.glow}, transparent)`, transform: 'translateZ(0)' }} />
 
       {/* Background Text - Optimized for Visibility */}
       <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? 'right-0' : 'left-0'} w-full pointer-events-none select-none z-0 overflow-hidden`}>
@@ -576,14 +578,14 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
         <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-16 lg:gap-24`}>
           
           {/* Visual Component */}
-          <div className="flex-1 relative w-full lg:max-w-md group will-change-transform">
+          <div className="flex-1 relative w-full lg:max-w-md group">
             {/* Vertical Name Overlay - Balanced Opacity */}
             <div className={`absolute ${isEven ? '-left-12 lg:-left-20' : '-right-12 lg:-right-20'} top-1/2 -translate-y-1/2 z-30 pointer-events-none`}>
               <motion.h3 
                 initial={{ opacity: 0, x: isEven ? -30 : 30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className={`text-7xl lg:text-9xl font-black tracking-tighter uppercase whitespace-nowrap opacity-25 ${founder.colors.text} will-change-transform`}
+                className={`text-7xl lg:text-9xl font-black tracking-tighter uppercase whitespace-nowrap opacity-25 ${founder.colors.text}`}
                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
               >
                 {founder.name}
@@ -645,7 +647,7 @@ function EditorialSpread({ founder, index }: { founder: typeof FOUNDERS[0], inde
             </div>
 
             {/* Premium Quote Spread */}
-            <div className="relative pl-10 py-4 mb-12 border-l border-white/20 group/quote text-left will-change-transform">
+            <div className="relative pl-10 py-4 mb-12 border-l border-white/20 group/quote text-left">
                <Quote className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-10 h-10 text-white/5" />
                <p className="text-xl md:text-3xl font-serif italic text-white/95 leading-snug mb-6">
                  "{founder.quote}"
