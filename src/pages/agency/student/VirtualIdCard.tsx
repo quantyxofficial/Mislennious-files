@@ -351,7 +351,8 @@ export function VirtualIdCard() {
   const [resendLoading, setResendLoading] = useState(false);
   const [resendSent, setResendSent] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const captureRef = useRef<HTMLDivElement>(null);
 
   const shortId = user ? generateShortId(user.id) : 'KS-PREVIEW0';
   const isEmailVerified = !!(user?.email_confirmed_at);
@@ -404,24 +405,36 @@ export function VirtualIdCard() {
   };
 
   const handleDownload = async () => {
-    if (!cardRef.current) return;
+    const node = captureRef.current;
+    if (!node) return;
+    setIsDownloading(true);
     try {
+      const scale = 3;
+      const width = node.offsetWidth;
+      const height = node.offsetHeight;
+
       const domtoimage = await import('dom-to-image-more');
-      const dataUrl = await domtoimage.default.toPng(cardRef.current, {
-        width: cardRef.current.offsetWidth * 3,
-        height: cardRef.current.offsetHeight * 3,
+      const dataUrl = await domtoimage.default.toPng(node, {
+        width: width * scale,
+        height: height * scale,
+        bgcolor: 'transparent',
         style: {
-          transform: 'scale(3)',
+          transform: `scale(${scale})`,
           transformOrigin: 'top left',
-          borderRadius: '20px',
         },
-        bgcolor: '#0a0a0a',
+        // Capture every layer at full fidelity
+        cacheBust: true,
       });
+
       const a = document.createElement('a');
       a.href = dataUrl;
       a.download = `kaizenstat-id-${shortId}.png`;
       a.click();
-    } catch (e) { console.error('Download failed:', e); }
+    } catch (e) {
+      console.error('Download failed:', e);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   // Not signed in — show sign-in gate
@@ -497,7 +510,7 @@ export function VirtualIdCard() {
               style={{ transformStyle: 'preserve-3d', position: 'relative', width: 480, aspectRatio: '1.586' }}
             >
               {/* FRONT */}
-              <div ref={cardRef} style={{ backfaceVisibility: 'hidden', position: 'absolute', inset: 0 }}>
+              <div style={{ backfaceVisibility: 'hidden', position: 'absolute', inset: 0 }}>
                 <IdCard user={user} profile={profile} shortId={shortId} isEmailVerified={isEmailVerified} />
               </div>
               {/* BACK */}
@@ -507,6 +520,25 @@ export function VirtualIdCard() {
             </motion.div>
           </div>
 
+          {/* Off-screen clean render used only for download capture.
+              Kept outside the 3D flip + scale context so dom-to-image
+              gets a pristine, fully-laid-out node (no clipping/duplication). */}
+          <div
+            aria-hidden
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              zIndex: -1,
+              opacity: 0,
+              pointerEvents: 'none',
+            }}
+          >
+            <div ref={captureRef} style={{ width: 480, aspectRatio: '1.586' }}>
+              <IdCard user={user} profile={profile} shortId={shortId} isEmailVerified={isEmailVerified} />
+            </div>
+          </div>
+
           {/* Flip hint */}
           <p className="text-[10px] text-slate-600 mt-3 tracking-widest uppercase font-mono">
             {isFlipped ? '← Front — Member ID' : 'Back — Connect links →'}
@@ -514,9 +546,14 @@ export function VirtualIdCard() {
 
           {/* Actions */}
           <div className="flex items-center gap-3 mt-4">
-            <button onClick={handleDownload}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all active:scale-95">
-              <Download className="w-3.5 h-3.5" /> Download Card
+            <button onClick={handleDownload} disabled={isDownloading}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed">
+              {isDownloading ? (
+                <div className="w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+              ) : (
+                <Download className="w-3.5 h-3.5" />
+              )}
+              {isDownloading ? 'Generating…' : 'Download Card'}
             </button>
             <button onClick={() => setIsFlipped(f => !f)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/60 text-xs font-bold uppercase tracking-widest hover:text-white hover:border-white/25 transition-all">
