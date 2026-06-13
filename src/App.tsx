@@ -10,9 +10,6 @@ import { CompetitionsPage } from './pages/CompetitionsPage';
 import { DocsPage } from './pages/DocsPage';
 import { Dashboard } from './pages/Dashboard';
 import { SimulationPage } from './pages/SimulationPage';
-import Privacy from './pages/legal/Privacy';
-import Terms from './pages/legal/Terms';
-import Ethics from './pages/legal/Ethics';
 import Login from './pages/Login';
 import FounderConnect from './pages/FounderConnect';
 import MasuddarRahaman from './pages/founders/MasuddarRahaman';
@@ -80,9 +77,6 @@ function AppShell() {
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/docs/:chapterId" element={<DocsPage />} />
           <Route path="/simulation" element={<SimulationPage />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/ethics" element={<Ethics />} />
           <Route path="/login" element={<Login />} />
           <Route path="/founder-connect" element={<FounderConnect />} />
           <Route path="/masuddar-rahaman" element={<MasuddarRahaman />} />
